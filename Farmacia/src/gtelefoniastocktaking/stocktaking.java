@@ -33,7 +33,7 @@ public class stocktaking extends javax.swing.JFrame {
 
      private int x;
 private int y;
-public static String sql = "SELECT *FROM producto where Unidades>0";
+public static String sql = "SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, ubicacion, unidades, alerta_unidades, fecha_vencimiento, precio_venta, precio_mayoreo, precio_oro, descuento from producto where Unidades>0";
 public static String url = "jdbc:mysql://localhost:3306/bd_farm";
 public static String user = "root";
 public static String pass = "";
@@ -637,7 +637,8 @@ DefaultTableModel dm;
         jButton1.setBorder(thickBorde);
         jLabel2.setForeground(ColorFont);
         jLabel3.setForeground(Color.WHITE);
-jLabel3.setToolTipText(null);
+        jLabel3.setToolTipText(null);
+        LlenarTabla(sql);
 // TODO add your handling code here:
     }//GEN-LAST:event_jLabel3MouseMoved
 
@@ -727,12 +728,12 @@ this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + e
 
     private void jLabel9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MousePressed
 x = evt.getX();
-                y = evt.getY();         // TODO add your handling code here:
+y = evt.getY();         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel9MousePressed
 
     private void jLabel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MousePressed
 x = evt.getX();
-                y = evt.getY();         // TODO add your handling code here:
+y = evt.getY();         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel8MousePressed
 
     private void jLabel24MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MousePressed
@@ -740,7 +741,7 @@ x = evt.getX();
     }//GEN-LAST:event_jLabel24MousePressed
 
     private void jLabel24MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseReleased
-      LlenarTabla(sql);  
+LlenarTabla(sql);  
 jTextField1.setText("");// TODO add your handling code here:
     }//GEN-LAST:event_jLabel24MouseReleased
 
@@ -1053,7 +1054,7 @@ searc= jTextField1.getText();
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-           ;
+           
              Statement st = cnx.prepareStatement(Query);
              ResultSet res = st.executeQuery(Query);
              ResultSetMetaData rsMd = res.getMetaData();

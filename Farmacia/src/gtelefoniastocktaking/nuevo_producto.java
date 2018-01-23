@@ -6,15 +6,23 @@
 package gtelefoniastocktaking;
 
 import gtelefoniastocktaking.mensajesSYS.datosAlmacenados;
+import static gtelefoniastocktaking.stocktaking.pass;
+import static gtelefoniastocktaking.stocktaking.url;
+import static gtelefoniastocktaking.stocktaking.user;
 import java.awt.Color;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 /**
  *
  * @author Vinicio
@@ -22,12 +30,12 @@ import javax.swing.border.LineBorder;
 public class nuevo_producto extends javax.swing.JFrame {
 private int x;
 private int y;
-String url = "jdbc:mysql://localhost:3306/inventario";
+String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
-String pass = "Disatel88";
+String pass = "";
 int unids;
-String codP, nameP,modP, provP, unidP;
-Double precCP, preVP, preGP;
+String codB, codP, catP,nameP, provP, unidP, ubicaProd, descrip, alert, fecha;
+Double precCP, preVP, preMP, preORO, preET, descuento;
 Color grisMoved =new Color(180,180,180);
 Color grisborde =new Color(224,224,224);
 Color grisPress =new Color(179,179,179);
@@ -35,14 +43,16 @@ Color ColorFont =new Color(123,123,123);
 Color ColorSalida =new Color(0,102,204);
 Color ColorSalida2 =new Color(2,72,142);
 Border thickBorde = new LineBorder(Color.WHITE, 4);
-      
+Connection cnx = null;
+
     public nuevo_producto() {
         initComponents();
         jTextField1.requestFocus();
          setLocationRelativeTo(null);
-       jButton1.setBorder(thickBorde);
+         jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
-        
+        llenar_combo_Categoria();
+        llenar_combo_Proveedor();
     }
 
     /**
@@ -79,12 +89,12 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         jLabel17 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jTextField54 = new javax.swing.JTextField();
+        jTextField7 = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        jTextField11 = new javax.swing.JTextField();
+        jTextField10 = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
@@ -92,7 +102,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         jTextField4 = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
-        jTextField116 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
@@ -105,7 +115,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         jLabel19 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
-        jTextField14 = new javax.swing.JTextField();
+        jTextField12 = new javax.swing.JTextField();
         jLabel35 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -349,19 +359,19 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         });
         getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 360, 60));
 
-        jTextField54.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField54.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
-        jTextField54.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField54.setBorder(null);
-        jTextField54.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextField7.setBackground(new java.awt.Color(153, 153, 153));
+        jTextField7.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
+        jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField7.setBorder(null);
+        jTextField7.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField54KeyPressed(evt);
+                jTextField7KeyPressed(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField54KeyTyped(evt);
+                jTextField7KeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField54, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 280, 340, 60));
+        getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 280, 340, 60));
 
         jLabel23.setFont(new java.awt.Font("Microsoft Tai Le", 0, 10)); // NOI18N
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -387,30 +397,30 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         jLabel25.setText("PROVEEDOR");
         getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, 350, -1));
 
-        jTextField6.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField6.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
-        jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField6.setBorder(null);
-        jTextField6.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextField11.setBackground(new java.awt.Color(153, 153, 153));
+        jTextField11.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
+        jTextField11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField11.setBorder(null);
+        jTextField11.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField6KeyPressed(evt);
+                jTextField11KeyPressed(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField6KeyTyped(evt);
+                jTextField11KeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, 360, 60));
+        getContentPane().add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, 360, 60));
 
-        jTextField7.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField7.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
-        jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField7.setBorder(null);
-        jTextField7.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextField10.setBackground(new java.awt.Color(153, 153, 153));
+        jTextField10.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
+        jTextField10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField10.setBorder(null);
+        jTextField10.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField7KeyTyped(evt);
+                jTextField10KeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 380, 340, 60));
+        getContentPane().add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 380, 340, 60));
 
         jLabel26.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(82, 82, 82));
@@ -477,16 +487,16 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         });
         getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, 360, 60));
 
-        jTextField116.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField116.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
-        jTextField116.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField116.setBorder(null);
-        jTextField116.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextField6.setBackground(new java.awt.Color(153, 153, 153));
+        jTextField6.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
+        jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField6.setBorder(null);
+        jTextField6.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField116KeyTyped(evt);
+                jTextField6KeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField116, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 280, 350, 60));
+        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 280, 350, 60));
 
         jLabel31.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(82, 82, 82));
@@ -593,19 +603,24 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         });
         getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 180, 350, 60));
 
-        jTextField14.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField14.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
-        jTextField14.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField14.setBorder(null);
-        jTextField14.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField14KeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField14KeyTyped(evt);
+        jTextField12.setBackground(new java.awt.Color(153, 153, 153));
+        jTextField12.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
+        jTextField12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField12.setBorder(null);
+        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField12ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 580, 360, 60));
+        jTextField12.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField12KeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField12KeyTyped(evt);
+            }
+        });
+        getContentPane().add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 580, 360, 60));
 
         jLabel35.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(82, 82, 82));
@@ -709,18 +724,49 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
     }//GEN-LAST:event_jLabel5KeyPressed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-if(jTextField1.getText().length()!=0 && jTextField2.getText().length()!=0 && jTextField3.getText().length()!=0 && jTextField54.getText().length()!=0 && jTextField6.getText().length()!=0&& jTextField7.getText().length()!=0){
-    codP = jTextField1.getText();
-        nameP = jTextField2.getText();
-        precCP = Double.parseDouble(jTextField54.getText());
-        preVP = Double.parseDouble(jTextField6.getText());
-        preGP = Double.parseDouble(jTextField7.getText());
-        unidP = jTextField3.getText();
+if(jTextField1.getText().length()!=0 && jTextField2.getText().length()!=0 && jTextField3.getText().length()!=0 && jTextField4.getText().length()!=0 && jTextField5.getText().length()!=0&& jTextField6.getText().length()!=0&& jTextField7.getText().length()!=0&& jTextField8.getText().length()!=0&& jTextField9.getText().length()!=0&& jTextField10.getText().length()!=0&& jTextField11.getText().length()!=0&& jTextField12.getText().length()!=0 ){
+   
+        codB = jTextField1.getText();
+        codP = jTextField2.getText();
+        catP = String.valueOf(jComboBox1.getSelectedItem());
+        nameP = jTextField3.getText();
+        provP = String.valueOf(jComboBox2.getSelectedItem());
+        precCP = Double.parseDouble(jTextField4.getText());
+        preVP = Double.parseDouble(jTextField5.getText());
+        preMP = Double.parseDouble(jTextField6.getText());
+        preORO = Double.parseDouble(jTextField7.getText());
+        preET = Double.parseDouble(jTextField8.getText());
+        unidP = jTextField9.getText();
         unids = Integer.parseInt(unidP);
-        prodProducto(codP, nameP, modP, unids, provP, precCP, preVP, preGP);
+        ubicaProd = jTextField10.getText();
+        alert = jTextField12.getText();
+        int alte = Integer.parseInt(alert);
+        descuento = Double.parseDouble(jTextField11.getText());
+        descrip = jTextArea1.getText();
+   try {
+String formato = jDateChooser1.getDateFormatString();
+Date date = jDateChooser1.getDate();
+SimpleDateFormat sdf = new SimpleDateFormat(formato);
+fecha = String.valueOf(sdf.format(date));
+
+} catch (Exception e) {
+JOptionPane.showMessageDialog(null, "Al menos elija una FECHA DE NACIMIENTO VALIDA ", "Error..!!", JOptionPane.ERROR_MESSAGE);
+
+}     prodProducto(codB,codP,catP,nameP,provP, precCP, preVP, preMP, preORO, preET, unids, ubicaProd, descuento,descrip, fecha, alte);
        stocktaking.test=1;
        ventas.test2=1;
-       
+jTextField1.setText("");
+jTextField2.setText("");
+jTextField3.setText("");
+jTextField4.setText("");
+jTextField5.setText("");
+jTextField6.setText("");
+jTextField7.setText("");
+jTextField8.setText("");
+jTextField9.setText("");
+jTextField10.setText("");
+jTextField11.setText("");
+jTextField12.setText("");
 }
 else 
 JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
@@ -739,17 +785,27 @@ x = evt.getX();
           // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3KeyTyped
 
-    private void jTextField54KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField54KeyTyped
-          // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField54KeyTyped
-
-    private void jTextField6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyTyped
-         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6KeyTyped
-
     private void jTextField7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyTyped
-           // TODO add your handling code here:
+char c=evt.getKeyChar(); 
+          if(Character.isLetter(c)) { 
+              getToolkit().beep();               
+              evt.consume();              
+              JOptionPane.showMessageDialog(this,"Ingrese solo números");
+          }          // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7KeyTyped
+
+    private void jTextField11KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField11KeyTyped
+char c=evt.getKeyChar(); 
+          if(Character.isLetter(c)) { 
+              getToolkit().beep();               
+              evt.consume();              
+              JOptionPane.showMessageDialog(this,"Ingrese solo números");
+          }         // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField11KeyTyped
+
+    private void jTextField10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField10KeyTyped
+           // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField10KeyTyped
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
 if(evt.getKeyCode()==10){
@@ -763,17 +819,17 @@ if(evt.getKeyCode()==10){
 }        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2KeyPressed
 
-    private void jTextField54KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField54KeyPressed
+    private void jTextField7KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyPressed
 if(evt.getKeyCode()==10){
-jTextField6.requestFocus();
+jTextField11.requestFocus();
 }        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField54KeyPressed
+    }//GEN-LAST:event_jTextField7KeyPressed
 
-    private void jTextField6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyPressed
+    private void jTextField11KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField11KeyPressed
 if(evt.getKeyCode()==10){
-jTextField7.requestFocus();
+jTextField10.requestFocus();
 }        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6KeyPressed
+    }//GEN-LAST:event_jTextField11KeyPressed
 
     private void jTextField3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyPressed
 if(evt.getKeyCode()==10){
@@ -794,7 +850,12 @@ if(evt.getKeyCode()==10){
     }//GEN-LAST:event_jTextField4KeyPressed
 
     private void jTextField4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyTyped
-        // TODO add your handling code here:
+char c=evt.getKeyChar(); 
+          if(Character.isLetter(c)) { 
+              getToolkit().beep();               
+              evt.consume();              
+              JOptionPane.showMessageDialog(this,"Ingrese solo números");
+          }        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4KeyTyped
 
     private void jTextField5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyPressed
@@ -802,15 +863,30 @@ if(evt.getKeyCode()==10){
     }//GEN-LAST:event_jTextField5KeyPressed
 
     private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyTyped
-        // TODO add your handling code here:
+char c=evt.getKeyChar(); 
+          if(Character.isLetter(c)) { 
+              getToolkit().beep();               
+              evt.consume();              
+              JOptionPane.showMessageDialog(this,"Ingrese solo números");
+          }        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5KeyTyped
 
-    private void jTextField116KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField116KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField116KeyTyped
+    private void jTextField6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyTyped
+char c=evt.getKeyChar(); 
+          if(Character.isLetter(c)) { 
+              getToolkit().beep();               
+              evt.consume();              
+              JOptionPane.showMessageDialog(this,"Ingrese solo números");
+          }        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6KeyTyped
 
     private void jTextField8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField8KeyTyped
-        // TODO add your handling code here:
+char c=evt.getKeyChar(); 
+          if(Character.isLetter(c)) { 
+              getToolkit().beep();               
+              evt.consume();              
+              JOptionPane.showMessageDialog(this,"Ingrese solo números");
+          }        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField8KeyTyped
 
     private void jTextField9KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField9KeyTyped
@@ -860,13 +936,17 @@ if(evt.getKeyCode()==10){
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2KeyReleased
 
-    private void jTextField14KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField14KeyPressed
+    private void jTextField12KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField12KeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField14KeyPressed
+    }//GEN-LAST:event_jTextField12KeyPressed
 
-    private void jTextField14KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField14KeyTyped
+    private void jTextField12KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField12KeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField14KeyTyped
+    }//GEN-LAST:event_jTextField12KeyTyped
+
+    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField12ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -950,13 +1030,13 @@ if(evt.getKeyCode()==10){
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     public static final javax.swing.JTextField jTextField1 = new javax.swing.JTextField();
-    private javax.swing.JTextField jTextField116;
-    private javax.swing.JTextField jTextField14;
+    private javax.swing.JTextField jTextField10;
+    private javax.swing.JTextField jTextField11;
+    private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField54;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
@@ -965,29 +1045,37 @@ if(evt.getKeyCode()==10){
 
    
     
-     public void prodProducto(String idProducto,String  Marca,String  Modelo,int Unidades,String  Proveedor,Double  PrecioCompra,Double PrecioVenta,Double PrecioGold)
+     public void prodProducto(String codBarr, String codProd, String categor, String  producto,String  Proveedor,Double  PrecioCompra,Double PrecioVenta,Double PrecioMayo,Double PrecioGold, Double PrecioEtiq, int unid, String ubi, Double descc, String descrip, String fechas, int alerta)
    {    
        
        try {            
        Connection conn = DriverManager.getConnection(url, user, pass);
-       CallableStatement proc = conn.prepareCall(" CALL registrar_producto(?, ?, ?, ?, ?, ?, ?, ?) ");
+       CallableStatement proc = conn.prepareCall(" CALL registrar_producto(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
             //se cargan los parametros de entrada
-            proc.setString("idProducto", idProducto);
-            proc.setString("Marca", Marca);
-            proc.setString("Modelo", Modelo);
-            proc.setInt("Unidades", Unidades);
-            proc.setString("Proveedor", Proveedor);
-            proc.setDouble("PrecioCompra", PrecioCompra);
-            proc.setDouble("PrecioPlata", PrecioVenta);
-            proc.setDouble("PrecioOro", PrecioGold);
+            proc.setString("codigo_producto", codBarr);
+            proc.setString("codigo_barra", codProd);
+            proc.setString("categoria", categor);
+            proc.setString("producto", producto);
+            proc.setString("proveedor", Proveedor);
+            proc.setString("descripcion", descrip);
+            proc.setString("ubicacion", ubi);
+            proc.setInt("unidades", unid);
+            proc.setInt("alerta_unidades", alerta);
+            proc.setString("fecha_vencimiento", fechas);            
+            proc.setDouble("precio_compra", PrecioCompra);
+            proc.setDouble("precio_venta", PrecioVenta);
+            proc.setDouble("precio_mayoreo", PrecioMayo);
+            proc.setDouble("precio_oro", PrecioGold);
+            proc.setDouble("precio_etiqueta", PrecioEtiq);
+            proc.setDouble("descuento", descc);
             // Se ejecuta el procedimiento almacenado
             proc.execute();  
               jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
-        jTextField54.setText("");
-        jTextField6.setText("");
         jTextField7.setText("");
+        jTextField11.setText("");
+        jTextField10.setText("");
         jTextField1.requestFocus();
         datosAlmacenados v = new datosAlmacenados();
         v.setVisible(true);
@@ -998,6 +1086,48 @@ if(evt.getKeyCode()==10){
     } 
        
    }
-//___________________________________________________________________________________ Soy una barra separadora :) 
 
+public void llenar_combo_Proveedor() {
+        try {
+            DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel();
+            Class.forName("com.mysql.jdbc.Driver");
+            cnx = DriverManager.getConnection(url, user,pass);
+            Statement st = (Statement) cnx.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = st.executeQuery("SELECT * FROM proveedor");
+            modeloCombo.addElement("                                ");//es el primer registro q mostrara el combo
+            jComboBox2.setModel(modeloCombo);//con esto lo agregamos al objeto al jcombobox
+            while (rs.next()) {
+                modeloCombo.addElement(rs.getObject("proveedor"));
+                jComboBox2.setModel(modeloCombo);
+            }
+ 
+            st.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,ex);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this,ex);
+        }
+    }
+
+public void llenar_combo_Categoria() {
+        try {
+            DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel();
+            Class.forName("com.mysql.jdbc.Driver");
+            cnx = DriverManager.getConnection(url, user,pass);
+            Statement st = (Statement) cnx.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = st.executeQuery("SELECT * FROM categoria");
+            modeloCombo.addElement("                                ");//es el primer registro q mostrara el combo
+            jComboBox1.setModel(modeloCombo);//con esto lo agregamos al objeto al jcombobox
+            while (rs.next()) {
+                modeloCombo.addElement(rs.getObject("categoria"));
+                jComboBox1.setModel(modeloCombo);
+            }
+ 
+            st.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,ex);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this,ex);
+        }
+    }
 }
