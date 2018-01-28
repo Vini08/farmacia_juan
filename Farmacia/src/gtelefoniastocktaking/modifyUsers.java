@@ -26,9 +26,9 @@ public class modifyUsers extends javax.swing.JFrame {
 
 public static Double sumaT;
 Connection cnx = null;
-String url = "jdbc:mysql://localhost:3306/inventario";
+String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
-String pass = "Disatel88";
+String pass = "";
 String nomb, contra;
 Color grisMoved =new Color(180,180,180);
 Color grisborde =new Color(224,224,224);
@@ -243,7 +243,7 @@ private int y;
         jLabel1.setText(".");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 580, 10, -1));
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/GteleXela.png"))); // NOI18N
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/indicac.png"))); // NOI18N
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
@@ -656,14 +656,14 @@ Connection cnx = null;
  try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "Select *from usuarios";
+             String sql = "Select *from usuario";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              
             while (res.next()){
-            n = res.getString(1);
-            p = res.getString(2);
-            nvl  = res.getInt(3);
+            n = res.getString(2);
+            p = res.getString(3);
+            nvl  = res.getInt(4);
             if (n.equals(nomb) ){
    
             if (p.equals(contra)&&opciox==1){

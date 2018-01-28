@@ -68,14 +68,11 @@ Connection cnx = null;
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -216,9 +213,6 @@ Connection cnx = null;
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1324, 0, 41, 40));
 
-        jLabel1.setText(".");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 710, 10, -1));
-
         jLabel4.setBackground(new java.awt.Color(153, 153, 153));
         jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(231, 231, 231));
@@ -244,21 +238,13 @@ Connection cnx = null;
 
         jLabel22.setFont(new java.awt.Font("Microsoft Tai Le", 0, 10)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel22.setText("presione INGRESAR y los datos serán");
-        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 190, -1));
+        jLabel22.setText("presione REGISTRAR y los datos serán");
+        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 247, 230, 20));
 
         jLabel24.setFont(new java.awt.Font("Microsoft Tai Le", 0, 10)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel24.setText("presione INGRESAR y los datos serán");
-        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 190, -1));
-
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/barraGTgris.png"))); // NOI18N
-        jLabel20.setPreferredSize(new java.awt.Dimension(367, 70));
-        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 660, 590, 70));
-
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/barraGTgris.png"))); // NOI18N
-        jLabel18.setPreferredSize(new java.awt.Dimension(367, 70));
-        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 660, 780, 70));
+        jLabel24.setText("presione REGISTRAR y los datos serán");
+        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 230, -1));
 
         jLabel7.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(82, 82, 82));
@@ -309,7 +295,7 @@ Connection cnx = null;
                 jLabel5KeyPressed(evt);
             }
         });
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 230, 620));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 230, 690));
 
         jLabel15.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(82, 82, 82));
@@ -381,7 +367,7 @@ Connection cnx = null;
         jButton5.setBackground(new java.awt.Color(0, 153, 153));
         jButton5.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("INGRESAR");
+        jButton5.setText("REGISTRAR");
         jButton5.setBorder(null);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -750,11 +736,9 @@ SimpleDateFormat sdf = new SimpleDateFormat(formato);
 fecha = String.valueOf(sdf.format(date));
 
 } catch (Exception e) {
-JOptionPane.showMessageDialog(null, "Al menos elija una FECHA DE NACIMIENTO VALIDA ", "Error..!!", JOptionPane.ERROR_MESSAGE);
-
 }     prodProducto(codB,codP,catP,nameP,provP, precCP, preVP, preMP, preORO, preET, unids, ubicaProd, descuento,descrip, fecha, alte);
        stocktaking.test=1;
-       ventas.test2=1;
+       hacer_ventas.test2=1;
 jTextField1.setText("");
 jTextField2.setText("");
 jTextField3.setText("");
@@ -993,7 +977,6 @@ char c=evt.getKeyChar();
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1002,10 +985,8 @@ char c=evt.getKeyChar();
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;

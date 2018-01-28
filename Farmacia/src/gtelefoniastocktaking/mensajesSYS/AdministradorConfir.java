@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,18 +27,18 @@ import java.util.logging.Logger;
 public class AdministradorConfir extends javax.swing.JFrame {
 
 String nombre, contraseña , n, p;
-String url = "jdbc:mysql://localhost:3306/inventario";
+String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
-String pass = "Disatel88";
+String pass = "";
 int nvl;
-public static String us;
+public static String usus;
 public static String code, mark, model, provv, usua;
-public static BigDecimal price1,price2,price3;   
-    public AdministradorConfir(String n,String codes,String marks,String models,int unitss,String provvs,BigDecimal price1s,BigDecimal price2s,BigDecimal price3s) {
+public static BigDecimal price1,price2,price3,descc;   
+    public AdministradorConfir(String n,String codes,String marks,String models,int unitss,String provvs,BigDecimal price1s,BigDecimal price2s,BigDecimal price3s,BigDecimal desc) {
         initComponents();
         setLocationRelativeTo(null);
         AWTUtilities.setWindowOpaque(this, false);
-    us=n;
+    usus=n;
      code=codes;
         mark=marks;
         model=models;
@@ -46,6 +47,7 @@ public static BigDecimal price1,price2,price3;
         price1=price1s;
         price2=price2s;
         price3=price3s;
+        descc= desc;
     }
 
     /**
@@ -145,7 +147,7 @@ public static BigDecimal price1,price2,price3;
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/barraMensajes.png"))); // NOI18N
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 520, 140));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/barraGTgris.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/grisFondo.jpg"))); // NOI18N
         jLabel2.setMinimumSize(new java.awt.Dimension(519, 608));
         jLabel2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -225,7 +227,7 @@ inicia();     // TODO add your handling code here:
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdministradorConfir(us,code, mark, model, units, provv, price1,price2,price3).setVisible(true);
+                new AdministradorConfir(usus,code, mark, model, units, provv, price1,price2,price3,descc).setVisible(true);
             }
         });
     }
@@ -248,20 +250,20 @@ Connection cnx = null;
  try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "Select *from usuarios";
+             String sql = "Select *from usuario";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
-             
-            while (res.next()){
-            n = res.getString(1);
-            p = res.getString(2);
-            nvl  = res.getInt(3);
-            if (n.equals(us) ){
+            
+             while (res.next()){
+            n = res.getString(2);
+            p = res.getString(3);
+            nvl  = res.getInt(4);
+            if (n.equals(usus) ){
    
             if (p.equals(contraseña)&&nvl==0){
-            AdminEditarProdcut mn = new AdminEditarProdcut(usua,code, mark, model, units, provv, price1,price2,price3);
-            mn.setVisible(true);
-            mn.setLocationRelativeTo(null);
+//            AdminEditarProdcut mn = new AdminEditarProdcut(usua,code, mark, model, units, provv,price price1,price2,price3,descc);
+  //          mn.setVisible(true);
+    //        mn.setLocationRelativeTo(null);
              this.dispose();
             }
             else 
@@ -271,9 +273,9 @@ Connection cnx = null;
                this.dispose();
             }
                 } catch (ClassNotFoundException ex) {
-                throw new ClassCastException(ex.getMessage());
+   JOptionPane.showMessageDialog(this, ex);
                 } catch (SQLException ex) {
-                Logger.getLogger(LoginGT.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, ex);
                 }
 
 

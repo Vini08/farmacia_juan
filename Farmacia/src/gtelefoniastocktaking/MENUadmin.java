@@ -26,7 +26,7 @@ import javax.swing.border.LineBorder;
  *
  * @author Vinicio
  */
-public class MENU extends javax.swing.JFrame {
+public class MENUadmin extends javax.swing.JFrame {
 Connection cnx,conI = null;
 String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
@@ -45,12 +45,12 @@ private int x;
 private int y;
 public static String nombr; 
 
-public static stocktaking S = new stocktaking(nombr);
+public static inventario S = new inventario(nombr);
 public static VentasRealizadas VS = new VentasRealizadas();
 public static hacer_ventas Vn = new hacer_ventas(nombr);
 public static boolean controlVentana=true,controlVentana1=true,controlVentana2=true,controlVentana3=true,controlVentana4=true,controlVentana5=true; 
 
-public MENU(String Name) {
+public MENUadmin(String Name) {
         initComponents();
          setLocationRelativeTo(null);
         nombr=Name;
@@ -115,7 +115,6 @@ public MENU(String Name) {
         setTitle("menú");
         setMinimumSize(new java.awt.Dimension(810, 600));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1366, 728));
         setResizable(false);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -1084,20 +1083,21 @@ this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + e
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MENU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MENUadmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MENU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MENUadmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MENU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MENUadmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MENU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MENUadmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MENU(nombr).setVisible(true);
+                new MENUadmin(nombr).setVisible(true);
             }
         });
     }

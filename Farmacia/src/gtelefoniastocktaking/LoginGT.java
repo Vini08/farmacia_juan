@@ -328,7 +328,7 @@ public LoginGT() {
         ms.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(ms, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 260, 30));
 
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/BarraGT.png"))); // NOI18N
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/azulBarra.jpg"))); // NOI18N
         jLabel18.setPreferredSize(new java.awt.Dimension(367, 70));
         getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 370, 80));
 
@@ -589,11 +589,20 @@ Connection cnx = null;
             if (n.equals(nombre) ){
    
             if (p.equals(contraseña)){
-            MENU menu = new MENU(n);
-            menu.setVisible(true);
-            menu.setLocationRelativeTo(null);
-             this.dispose();
-            }     
+                
+                if (nvl==0){
+                MENUadmin menu = new MENUadmin(n);
+                menu.setVisible(true);
+                menu.setLocationRelativeTo(null);
+                this.dispose();
+                }
+                if (nvl==1){
+                MENU menu = new MENU(n);
+                menu.setVisible(true);
+                menu.setLocationRelativeTo(null);
+                this.dispose();
+                }
+            }
             }
             else 
                 ms.setText("Usuario o Contraseña incorrectos");

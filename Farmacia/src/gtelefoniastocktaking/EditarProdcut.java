@@ -249,7 +249,7 @@ public static int unit;
         jLabel7.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(82, 82, 82));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("PRECIO DE COMPRA");
+        jLabel7.setText("PRECIO DE VENTA");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 170, 230, -1));
 
         jLabel9.setFont(new java.awt.Font("Microsoft Tai Le", 0, 10)); // NOI18N
@@ -280,13 +280,13 @@ public static int unit;
         jLabel13.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(82, 82, 82));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("ID PRODUCTO");
+        jLabel13.setText("CODIGO PRODUCTO");
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 230, -1));
 
         jLabel14.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(82, 82, 82));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("MARCA");
+        jLabel14.setText("CATEGORIA");
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 230, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blancoE2.jpg"))); // NOI18N
@@ -300,7 +300,7 @@ public static int unit;
         jLabel15.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(82, 82, 82));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("PRECIO DE PLATA");
+        jLabel15.setText("PRECIO DE MAYOREO");
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 230, 230, -1));
 
         jLabel17.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
@@ -391,7 +391,7 @@ public static int unit;
         jLabel27.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(82, 82, 82));
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel27.setText("MODELO");
+        jLabel27.setText("PRODUCTO");
         getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 230, -1));
 
         pack();
@@ -501,7 +501,7 @@ public static int unit;
         unids = Integer.parseInt(unidP);
         ModificarProd(unids, provP, precCP, preVP, preGP,codP,nameP,modP);
         stocktaking.test=1;
-       ventas.test2=1;
+       hacer_ventas.test2=1;
        stocktaking.LlenarTabla(g);
        // insertProd();
         

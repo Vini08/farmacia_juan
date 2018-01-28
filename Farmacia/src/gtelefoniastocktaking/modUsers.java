@@ -22,9 +22,9 @@ import javax.swing.border.LineBorder;
 public class modUsers extends javax.swing.JFrame {
 
 Connection cnx = null;
-String url = "jdbc:mysql://localhost:3306/inventario";
+String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
-String pass = "Disatel88";
+String pass = "";
 String nombre, contraseña;
 public static String  usuar;
 Color grisMoved =new Color(180,180,180);
@@ -65,9 +65,6 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         jLabel17 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ventas");
@@ -117,7 +114,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         jLabel4.setForeground(new java.awt.Color(231, 231, 231));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("EDITAR INFORMACIÓN");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 40));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 40));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setForeground(new java.awt.Color(102, 102, 102));
@@ -243,17 +240,8 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         jLabel19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 22), new java.awt.Color(102, 102, 102))); // NOI18N
         getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 300, 300));
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/GteleXela.png"))); // NOI18N
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 40));
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/GteleXela.png"))); // NOI18N
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 80, 40));
-
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/GteleXela.png"))); // NOI18N
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 80, 40));
-
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 420, 40));
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/AZUL.png"))); // NOI18N
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -484,10 +472,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;

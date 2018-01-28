@@ -22,9 +22,9 @@ import javax.swing.border.LineBorder;
 public class UserNew extends javax.swing.JFrame {
 
 Connection cnx = null;
-String url = "jdbc:mysql://localhost:3306/inventario";
+String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
-String pass = "Disatel88";
+String pass = "";
 String nm = null,p = null,n = null;
 
 Color grisMoved =new Color(180,180,180);
@@ -40,7 +40,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
          setLocationRelativeTo(null);
         jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
-  
+  jTextField1.requestFocus();
     }
 
     /**
@@ -59,9 +59,6 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -75,6 +72,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         setTitle("Ventas");
         setMinimumSize(new java.awt.Dimension(359, 401));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(360, 401));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -118,10 +116,10 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         jLabel4.setForeground(new java.awt.Color(231, 231, 231));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("CREAR USUARIO");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 40));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 40));
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/GteleXela.png"))); // NOI18N
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 40));
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/AZUL.png"))); // NOI18N
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 40));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setForeground(new java.awt.Color(102, 102, 102));
@@ -193,15 +191,6 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         jLabel1.setText(".");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 580, 10, -1));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, 420, 40));
-
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/GteleXela.png"))); // NOI18N
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 80, 40));
-
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 420, 40));
-
         jTextField1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.setBorder(null);
@@ -213,7 +202,6 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 180, 30));
 
         jLabel7.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Nivel");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 180, 30));
@@ -461,8 +449,6 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -471,7 +457,6 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JPasswordField passw;
@@ -484,9 +469,9 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
        Connection conn = DriverManager.getConnection(url, user, pass);
        CallableStatement proc = conn.prepareCall(" CALL registrar_usuario(?, ?, ?) ");
             //se cargan los parametros de entrada
-            proc.setString("nombre", nombre);
+            proc.setString("user", nombre);
             proc.setString("password", password);
-            proc.setString("nivel", nivel);
+            proc.setString("level", nivel);
             // Se ejecuta el procedimiento almacenado
             proc.execute();  
               jTextField1.setText("");

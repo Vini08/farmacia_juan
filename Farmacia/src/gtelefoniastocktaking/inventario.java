@@ -5,9 +5,7 @@
  */
 package gtelefoniastocktaking;
 
-import gtelefoniastocktaking.mensajesSYS.AdministradorConfir;
 import java.awt.Color;
-import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,22 +16,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.RowFilter;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author Vinicio
  */
-public class stocktaking extends javax.swing.JFrame {
+public class inventario extends javax.swing.JFrame {
 
      private int x;
 private int y;
-public static String sql = "SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, ubicacion, unidades, alerta_unidades, fecha_vencimiento, precio_venta, precio_mayoreo, precio_oro, descuento from producto where Unidades>0";
+public static String sql = "SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, ubicacion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, precio_oro, descuento from producto where Unidades>0";
 public static String url = "jdbc:mysql://localhost:3306/bd_farm";
 public static String user = "root";
 public static String pass = "";
@@ -47,7 +42,7 @@ Color ColorSalida2 =new Color(2,72,142);
 public String auxUser, searc;
 Border thickBorde = new LineBorder(Color.WHITE, 4);
 public static String code, mark, model, provv, usua;
-public static BigDecimal price1,price2,price3, descu;      
+public static BigDecimal price0,price1,price2,price3, descu;      
 public static int units, test=0;
 Color CBTNmenu =new Color(39,39,39);
 Color cleaan =new Color(0,0,255);
@@ -59,7 +54,7 @@ DefaultTableModel dm;
 
 
 
-    public stocktaking(String n) {
+    public inventario(String n) {
         initComponents();
          setLocationRelativeTo(null);
        jButton1.setBorder(thickBorde);
@@ -78,6 +73,9 @@ DefaultTableModel dm;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -100,10 +98,26 @@ DefaultTableModel dm;
         jLabel28 = new javax.swing.JLabel();
         jButton13 = new javax.swing.JButton();
 
+        jMenuItem1.setText("Actualizar Datos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Eliminar Producto");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem2);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inventario");
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1366, 728));
+        setPreferredSize(new java.awt.Dimension(1365, 729));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 formMouseEntered(evt);
@@ -241,15 +255,16 @@ DefaultTableModel dm;
         jTable1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID Producto", "Nombre", "Modelo", "Unidades", "Proveedor", "Precio de Compra", "Precio de Venta", "Precio Premiun"
+                "ID Producto", "Nombre", "Modelo", "Unidades", "Proveedor", "Precio de Compra", "Precio de Venta", "Precio Premiun", "Precio Mayoreo"
             }
         ));
+        jTable1.setComponentPopupMenu(jPopupMenu1);
         jTable1.setRowHeight(20);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -590,7 +605,7 @@ DefaultTableModel dm;
         Border thickBorder = new LineBorder(ColorSalida2, 54);
         jButton3.setBorder(thickBorder);
         jLabel3.setForeground(Color.gray);
-        MENU.controlVentana2=true;
+        MENUadmin.controlVentana2=true;
         Border thickBorderX = new LineBorder(Color.WHITE, 5);
         jButton3.setBorder(thickBorderX);
         this.dispose();
@@ -660,6 +675,32 @@ DefaultTableModel dm;
 
 // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+
+units = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 6);
+code =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+mark =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 2);
+model =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 3);
+provv =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 4);
+
+price0 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 9);
+price1 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 10);
+price2 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 11);
+price3 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 12);
+descu =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 13);
+
+if(units==0){        
+EditarProdcut ed = new EditarProdcut(code, mark, model, units, provv, price1,price2,price3);
+ed.setVisible(true);
+ed.setLocationRelativeTo(null);
+}
+    else if(units!=0){
+         AdminEditarProdcut ad = new AdminEditarProdcut(usua,code, mark, model, units, provv, price0,price1,price2,price3,descu);
+       ad.setVisible(true);
+    ad.setLocationRelativeTo(null);
+    }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jLabel9MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseDragged
 this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);        // TODO add your handling code here:
@@ -884,6 +925,30 @@ jLabel3.setForeground(Color.gray);        // TODO add your handling code here:
          // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseEntered
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+Connection cnx = null;
+try
+    {
+        Class.forName("com.mysql.jdbc.Driver");
+            cnx = DriverManager.getConnection(url, user,pass); 
+      String query = "delete from producto where codigo_producto= ? && categoria = ? && producto= ?";
+      PreparedStatement preparedStmt = cnx.prepareStatement(query);
+      preparedStmt.setString(1,(String) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+      preparedStmt.setString(2,(String) jTable1.getValueAt(jTable1.getSelectedRow(), 2));
+      preparedStmt.setString(3, (String) jTable1.getValueAt(jTable1.getSelectedRow(), 3));
+
+      preparedStmt.execute();
+      cnx.close();
+      LlenarTabla(sql);  
+    }
+    catch (Exception e)
+    {
+      System.err.println("Got an exception! ");
+      System.err.println(e.getMessage());
+    } 
+           // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     private void jTextField1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextField1InputMethodTextChanged
       // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1InputMethodTextChanged
@@ -910,14 +975,22 @@ searc= jTextField1.getText();
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(stocktaking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(inventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(stocktaking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(inventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(stocktaking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(inventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(stocktaking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(inventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -930,7 +1003,7 @@ searc= jTextField1.getText();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new stocktaking(usua).setVisible(true);
+                new inventario(usua).setVisible(true);
             }
         });
     }
@@ -954,6 +1027,9 @@ searc= jTextField1.getText();
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
