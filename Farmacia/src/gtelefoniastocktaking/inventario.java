@@ -98,6 +98,12 @@ DefaultTableModel dm;
         jLabel28 = new javax.swing.JLabel();
         jButton13 = new javax.swing.JButton();
 
+        jPopupMenu1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jPopupMenu1PropertyChange(evt);
+            }
+        });
+
         jMenuItem1.setText("Actualizar Datos");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,11 +194,6 @@ DefaultTableModel dm;
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("<<");
         jLabel3.setToolTipText("");
-        jLabel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel3MouseMoved(evt);
-            }
-        });
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jLabel3MouseExited(evt);
@@ -202,6 +203,11 @@ DefaultTableModel dm;
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jLabel3MouseReleased(evt);
+            }
+        });
+        jLabel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel3MouseMoved(evt);
             }
         });
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1324, 0, 40, 40));
@@ -957,6 +963,10 @@ try
 searc= jTextField1.getText();
         buscarT(searc);       // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void jPopupMenu1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jPopupMenu1PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPopupMenu1PropertyChange
 
     /**
      * @param args the command line arguments
