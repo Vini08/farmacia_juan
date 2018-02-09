@@ -6,6 +6,7 @@
 package gtelefoniastocktaking;
 
 import gtelefoniastocktaking.mensajesSYS.datosAlmacenados;
+import gtelefoniastocktaking.mensajesSYS.errorDatos;
 import static gtelefoniastocktaking.stocktaking.pass;
 import static gtelefoniastocktaking.stocktaking.url;
 import static gtelefoniastocktaking.stocktaking.user;
@@ -35,6 +36,7 @@ String user = "root";
 String pass = "";
 int unids;
 String codB, codP, catP,nameP, provP, unidP, ubicaProd, descrip, alert, fecha;
+String autSY;
 Double precCP, preVP, preMP, preORO, preET, descuento;
 Color grisMoved =new Color(180,180,180);
 Color grisborde =new Color(224,224,224);
@@ -114,6 +116,9 @@ Connection cnx = null;
         jComboBox2 = new javax.swing.JComboBox<>();
         jTextField12 = new javax.swing.JTextField();
         jLabel35 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nuevo Producto");
@@ -301,7 +306,7 @@ Connection cnx = null;
         jLabel15.setForeground(new java.awt.Color(82, 82, 82));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("DESCRIPCION");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 460, 350, -1));
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 450, 340, -1));
 
         jLabel17.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(82, 82, 82));
@@ -375,7 +380,7 @@ Connection cnx = null;
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 570, 340, 70));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 650, 340, 70));
 
         jLabel25.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(82, 82, 82));
@@ -412,7 +417,7 @@ Connection cnx = null;
         jLabel26.setForeground(new java.awt.Color(82, 82, 82));
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel26.setText("FECHA DE VENCIMIENTO");
-        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 460, 330, -1));
+        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 560, 360, -1));
 
         jLabel27.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(82, 82, 82));
@@ -525,7 +530,7 @@ Connection cnx = null;
         getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 380, 350, 60));
 
         jDateChooser1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 480, 330, 60));
+        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 580, 360, 60));
 
         jLabel34.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(82, 82, 82));
@@ -537,13 +542,13 @@ Connection cnx = null;
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 480, 350, 160));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 470, 340, 170));
 
         jLabel19.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(82, 82, 82));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("DESCUENTO");
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 460, 360, -1));
+        jLabel19.setText("presione \"SI\" para AUTORIZAR el descuento al producto");
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 580, 360, 30));
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-----------" }));
@@ -606,13 +611,31 @@ Connection cnx = null;
                 jTextField12KeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 580, 360, 60));
+        getContentPane().add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 480, 360, 60));
 
         jLabel35.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(82, 82, 82));
         jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel35.setText("ALERTA DE UNIDADES");
-        getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 560, 360, -1));
+        getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 460, 360, -1));
+
+        jLabel20.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("DESCUENTO");
+        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 460, 360, -1));
+
+        jCheckBox1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jCheckBox1.setText("SI < - - - - - - - - - - - - - - - - - - - - - - - ");
+        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 600, 320, 40));
+
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 680, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -710,8 +733,14 @@ Connection cnx = null;
     }//GEN-LAST:event_jLabel5KeyPressed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-if(jTextField1.getText().length()!=0 && jTextField2.getText().length()!=0 && jTextField3.getText().length()!=0 && jTextField4.getText().length()!=0 && jTextField5.getText().length()!=0&& jTextField6.getText().length()!=0&& jTextField7.getText().length()!=0&& jTextField8.getText().length()!=0&& jTextField9.getText().length()!=0&& jTextField10.getText().length()!=0&& jTextField11.getText().length()!=0&& jTextField12.getText().length()!=0 ){
-   
+errorDatos err1 = new errorDatos();
+
+        if(jTextField1.getText().length()!=0 && jTextField2.getText().length()!=0 && jTextField3.getText().length()!=0 && jTextField4.getText().length()!=0 && jTextField5.getText().length()!=0&& jTextField6.getText().length()!=0&& jTextField7.getText().length()!=0&& jTextField8.getText().length()!=0&& jTextField9.getText().length()!=0&& jTextField10.getText().length()!=0&& jTextField11.getText().length()!=0&& jTextField12.getText().length()!=0 ){
+        if(jCheckBox1.isSelected()){
+        autSY="-";
+        }     
+        else 
+        autSY=".";
         codB = jTextField1.getText();
         codP = jTextField2.getText();
         catP = String.valueOf(jComboBox1.getSelectedItem());
@@ -736,7 +765,9 @@ SimpleDateFormat sdf = new SimpleDateFormat(formato);
 fecha = String.valueOf(sdf.format(date));
 
 } catch (Exception e) {
-}     prodProducto(codB,codP,catP,nameP,provP, precCP, preVP, preMP, preORO, preET, unids, ubicaProd, descuento,descrip, fecha, alte);
+} 
+   
+   prodProducto(codB,codP,catP,nameP,provP, precCP, preVP, preMP, preORO, preET, unids, ubicaProd, descuento,descrip, fecha, alte);
        stocktaking.test=1;
        hacer_ventas.test2=1;
 jTextField1.setText("");
@@ -753,7 +784,8 @@ jTextField11.setText("");
 jTextField12.setText("");
 }
 else 
-JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
+err1.setVisible(true);
+err1.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jLabel8MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseDragged
@@ -932,6 +964,10 @@ char c=evt.getKeyChar();
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField12ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+JOptionPane.showMessageDialog(this,jCheckBox1.isSelected());        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -972,8 +1008,10 @@ char c=evt.getKeyChar();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
@@ -987,6 +1025,7 @@ char c=evt.getKeyChar();
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -1031,24 +1070,25 @@ char c=evt.getKeyChar();
        
        try {            
        Connection conn = DriverManager.getConnection(url, user, pass);
-       CallableStatement proc = conn.prepareCall(" CALL registrar_producto(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
+       CallableStatement proc = conn.prepareCall(" CALL registrar_producto(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
             //se cargan los parametros de entrada
-            proc.setString("codigo_producto", codBarr);
-            proc.setString("codigo_barra", codProd);
-            proc.setString("categoria", categor);
-            proc.setString("producto", producto);
-            proc.setString("proveedor", Proveedor);
-            proc.setString("descripcion", descrip);
-            proc.setString("ubicacion", ubi);
-            proc.setInt("unidades", unid);
-            proc.setInt("alerta_unidades", alerta);
-            proc.setString("fecha_vencimiento", fechas);            
-            proc.setDouble("precio_compra", PrecioCompra);
-            proc.setDouble("precio_venta", PrecioVenta);
-            proc.setDouble("precio_mayoreo", PrecioMayo);
-            proc.setDouble("precio_oro", PrecioGold);
-            proc.setDouble("precio_etiqueta", PrecioEtiq);
-            proc.setDouble("descuento", descc);
+            proc.setString(1, codBarr);
+            proc.setString(2, codProd);
+            proc.setString(3, categor);
+            proc.setString(4, producto);
+            proc.setString(5, Proveedor);
+            proc.setString(6, descrip);
+            proc.setString(7, ubi);
+            proc.setInt(8, unid);
+            proc.setInt(9, alerta);
+            proc.setString(10, fechas);            
+            proc.setDouble(11, PrecioCompra);
+            proc.setDouble(12, PrecioVenta);
+            proc.setDouble(13, PrecioMayo);
+            proc.setDouble(14, PrecioGold);
+            proc.setDouble(15, PrecioEtiq);
+            proc.setDouble(16, descc);
+            proc.setString(17, autSY);
             // Se ejecuta el procedimiento almacenado
             proc.execute();  
               jTextField1.setText("");

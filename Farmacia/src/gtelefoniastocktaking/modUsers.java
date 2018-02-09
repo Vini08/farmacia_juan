@@ -5,15 +5,26 @@
  */
 package gtelefoniastocktaking;
 
+import static gtelefoniastocktaking.inventario.jTable1;
+import static gtelefoniastocktaking.inventario.pass;
+import static gtelefoniastocktaking.inventario.url;
+import static gtelefoniastocktaking.inventario.user;
+import gtelefoniastocktaking.mensajesSYS.UserNew;
 import gtelefoniastocktaking.mensajesSYS.datosAlmacenados;
 import java.awt.Color;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,8 +36,8 @@ Connection cnx = null;
 String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
 String pass = "";
+public static int cod, lv;
 String nombre, contraseña;
-public static String  usuar;
 Color grisMoved =new Color(180,180,180);
 Color grisborde =new Color(224,224,224);
 Color grisPress =new Color(179,179,179);
@@ -34,13 +45,14 @@ Color ColorFont =new Color(123,123,123);
 Color ColorSalida =new Color(0,102,204);
 Color ColorSalida2 =new Color(2,72,142);
 Border thickBorde = new LineBorder(Color.WHITE, 4);
-
-    public modUsers(String us) {
+String nm, ps;
+    public modUsers() {
         initComponents();
          setLocationRelativeTo(null);
         jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
-  usuar=us;
+        LlenarTabla();
+  
     }
 
     /**
@@ -52,14 +64,18 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        leve = new javax.swing.JTextField();
+        psswd = new javax.swing.JTextField();
         name = new javax.swing.JTextField();
-        pssw = new javax.swing.JPasswordField();
         jButton2 = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -68,9 +84,10 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ventas");
+        setBackground(new java.awt.Color(153, 153, 153));
         setMinimumSize(new java.awt.Dimension(449, 401));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(449, 401));
+        setPreferredSize(new java.awt.Dimension(678, 458));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -90,31 +107,12 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Microsoft Tai Le", 0, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(123, 123, 123));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("IR A MENU");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel2MousePressed(evt);
-            }
-        });
-        jLabel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel2MouseMoved(evt);
-            }
-        });
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 90, 40));
-
         jLabel4.setBackground(new java.awt.Color(153, 153, 153));
         jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(231, 231, 231));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("EDITAR INFORMACIÓN");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 40));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 40));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setForeground(new java.awt.Color(102, 102, 102));
@@ -138,7 +136,48 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 90, 40));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 380, 40));
+
+        jTable1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nombre", "Contraseña"
+            }
+        ));
+        jTable1.setRowHeight(20);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jTable1MouseEntered(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable1MouseReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 640, 230));
+
+        jButton4.setBackground(new java.awt.Color(3, 64, 124));
+        jButton4.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("Nuevo Usuario");
+        jButton4.setBorder(null);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, 180, 130));
 
         jLabel3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(123, 123, 123));
@@ -158,7 +197,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
                 jLabel3MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 40, 40));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 0, 40, 40));
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -181,10 +220,36 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 41, 40));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 0, 41, 40));
 
         jLabel1.setText(".");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 580, 10, -1));
+
+        jLabel20.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(52, 52, 52));
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("Nivel");
+        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 60, 30));
+
+        leve.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        leve.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        leve.setBorder(null);
+        leve.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                leveActionPerformed(evt);
+            }
+        });
+        getContentPane().add(leve, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, 180, 30));
+
+        psswd.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        psswd.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        psswd.setBorder(null);
+        psswd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                psswdActionPerformed(evt);
+            }
+        });
+        getContentPane().add(psswd, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, 180, 30));
 
         name.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         name.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -194,23 +259,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
                 nameActionPerformed(evt);
             }
         });
-        getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 180, 30));
-
-        pssw.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        pssw.setForeground(new java.awt.Color(102, 102, 102));
-        pssw.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        pssw.setBorder(null);
-        pssw.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                psswFocusGained(evt);
-            }
-        });
-        pssw.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                psswKeyPressed(evt);
-            }
-        });
-        getContentPane().add(pssw, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 180, 30));
+        getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 180, 30));
 
         jButton2.setBackground(new java.awt.Color(3, 64, 124));
         jButton2.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
@@ -223,48 +272,35 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 180, 60));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, 180, 130));
 
         jLabel18.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(52, 52, 52));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("Nombre");
-        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 230, 30));
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 80, 30));
 
         jLabel17.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(52, 52, 52));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("Contraseña");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 230, 30));
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 100, 30));
 
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blancoE2.jpg"))); // NOI18N
         jLabel19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 22), new java.awt.Color(102, 102, 102))); // NOI18N
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 300, 300));
+        jLabel19.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel19MouseMoved(evt);
+            }
+        });
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 680, 420));
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/AZUL.png"))); // NOI18N
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 40));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        LoginGT G = new LoginGT();
-        G.setVisible(true);
-        G.setLocationRelativeTo(null);
-        this.dispose();
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel2MouseClicked
-
-    private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
-        Border thickBorder = new LineBorder(grisPress, 54);
-        jButton1.setBorder(thickBorder);         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel2MousePressed
-
-    private void jLabel2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseMoved
-        Border thickBorder = new LineBorder(grisborde, 54);
-        jButton1.setBorder(thickBorder);
-        jButton3.setBorder(thickBorde);
-        jLabel3.setForeground(ColorFont);// TODO add your handling code here:
-    }//GEN-LAST:event_jLabel2MouseMoved
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         Border thickBorder = new LineBorder(grisPress, 54);
@@ -281,7 +317,6 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         Border thickBorder = new LineBorder(grisborde, 54);
         jButton1.setBorder(thickBorder);
         jButton3.setBorder(thickBorde);
-        jLabel2.setForeground(Color.BLACK);
         jLabel3.setForeground(ColorFont);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseMoved
@@ -306,7 +341,6 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         Border thickBorder = new LineBorder(ColorSalida, 54);
         jButton3.setBorder(thickBorder);
         jButton1.setBorder(thickBorde);
-        jLabel2.setForeground(ColorFont);
         jLabel3.setForeground(Color.WHITE);
     
        
@@ -337,7 +371,6 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         Border thickBorder = new LineBorder(Color.WHITE, 5);
         jButton1.setBorder(thickBorder);
         jButton3.setBorder(thickBorder);
-        jLabel2.setForeground(ColorFont);
         jLabel3.setForeground(ColorFont);
    
     }//GEN-LAST:event_formMouseMoved
@@ -354,20 +387,49 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         // TODO add your handling code here:
     }//GEN-LAST:event_nameActionPerformed
 
-    private void psswFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_psswFocusGained
-              // TODO add your handling code here:
-    }//GEN-LAST:event_psswFocusGained
-
-    private void psswKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_psswKeyPressed
-        
-        // TODO add your handling code here:
-    }//GEN-LAST:event_psswKeyPressed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     nombre= name.getText();
-  contraseña=pssw.getText();
-        ModificarDatos(nombre, contraseña, usuar);
+nm = name.getText();
+ps = psswd.getText();
+lv = Integer.parseInt(leve.getText());
+        ModificarDatos(nm, ps,lv,cod);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseEntered
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+UserNew nw = new UserNew();
+nw.setVisible(true);
+nw.setLocationRelativeTo(null);
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jLabel19MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseMoved
+LlenarTabla();        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel19MouseMoved
+
+    private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
+ // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseReleased
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+nm = ((String) jTable1.getValueAt(jTable1.getSelectedRow(), 1));        // TODO add your handling code here:
+ps = ((String)jTable1.getValueAt(jTable1.getSelectedRow(), 2));
+lv = ((int)jTable1.getValueAt(jTable1.getSelectedRow(), 3));
+cod = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+name.setText(nm);
+psswd.setText(ps);
+leve.setText(String.valueOf(lv));
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void psswdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_psswdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_psswdActionPerformed
+
+    private void leveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_leveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -462,7 +524,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new modUsers(usuar).setVisible(true);
+                new modUsers().setVisible(true);
             }
         });
     }
@@ -471,46 +533,82 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JTable jTable1;
+    private javax.swing.JTextField leve;
     private javax.swing.JTextField name;
-    private javax.swing.JPasswordField pssw;
+    private javax.swing.JTextField psswd;
     // End of variables declaration//GEN-END:variables
 
-public void ModificarDatos(String nombre, String pss, String parm){
+public void ModificarDatos(String nombre, String pss, int lev, int code){
           
         try{
             Connection conn = DriverManager.getConnection(url, user, pass);
-           CallableStatement cmst= conn.prepareCall("call ModificarDatos (?,?,?)");
+           CallableStatement cmst= conn.prepareCall("call ModificarDatos (?,?,?,?)");
+           cmst.setInt(1,cod);
+           cmst.setString(2,nombre);
+           cmst.setString(3,pss);
+           cmst.setInt(4,lev);
            
-           cmst.setString(1,nombre);
-           cmst.setString(2,pss);
-           cmst.setString(3,parm);
            cmst.execute();            
        
         conn.close();
         name.setText("");
-        pssw.setText("");
+        psswd.setText("");
         name.requestFocus();
-        this.dispose();
-        LoginGT G = new LoginGT();
-        G.setVisible(true);
-        G.setLocationRelativeTo(null);
+        leve.setText("");
+        
         datosAlmacenados v = new datosAlmacenados();
         v.setVisible(true);
         v.setLocationRelativeTo(null);
         
-        }catch(SQLException sqlex){System.out.println(sqlex.getMessage());
+        }catch(SQLException sqlex){
          JOptionPane.showMessageDialog(this,sqlex);
-        }catch(Exception ex){System.out.println(ex.getMessage());
+        }catch(Exception ex){
            JOptionPane.showMessageDialog(this,ex);
         }
     }
 
+public void LlenarTabla(){
+    String Query = "SELECT *from usuario";
+   
+        DefaultTableModel modelo = new DefaultTableModel();
+        jTable1.setModel(modelo);
+        Connection cnx = null;
+        if (cnx == null) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            cnx = DriverManager.getConnection(url, user,pass);
+           
+             Statement st = cnx.prepareStatement(Query);
+             ResultSet res = st.executeQuery(Query);
+             ResultSetMetaData rsMd = res.getMetaData();
+             int cantidadColumnas = rsMd.getColumnCount();
+             for (int i = 1; i <= cantidadColumnas; i++) {
+            modelo.addColumn(rsMd.getColumnLabel(i));
+         }
+         while (res.next()){
+         Object[] fila = new Object[cantidadColumnas];
+         for (int i = 0; i < cantidadColumnas; i++) {
+         fila[i]=res.getObject(i+1);
+         }
+              modelo.addRow(fila);
+             
+             }
+             } catch (ClassNotFoundException ex) {
+             throw new ClassCastException(ex.getMessage());
+             } catch (SQLException ex) { 
+                Logger.getLogger(LoginGT.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+            }   
+    }
 }

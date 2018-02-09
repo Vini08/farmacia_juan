@@ -6,6 +6,7 @@
 package gtelefoniastocktaking.mensajesSYS;
 
 import gtelefoniastocktaking.LoginGT;
+import gtelefoniastocktaking.modUsers;
 import java.awt.Color;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -252,8 +253,9 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         jLabel17.setText("Contraseña");
         getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 230, 30));
 
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blancoE.jpg"))); // NOI18N
         jLabel19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 22), new java.awt.Color(102, 102, 102))); // NOI18N
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 300, 320));
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 360, 340));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -478,14 +480,11 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         jTextField2.setText("");
         passw.setText("");
         jTextField1.requestFocus();
-        this.dispose();
-            LoginGT G = new LoginGT();
-        G.setVisible(true);
-        G.setLocationRelativeTo(null);
         datosAlmacenados v = new datosAlmacenados();
         v.setVisible(true);
         v.setLocationRelativeTo(null);
-
+        this.dispose();
+    
         } catch (SQLException ex) { 
         JOptionPane.showMessageDialog(this,ex);
     } 

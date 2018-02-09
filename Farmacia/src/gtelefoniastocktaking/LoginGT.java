@@ -31,7 +31,7 @@ Color ColorSalida =new Color(0,102,204);
 Color ColorSalida2 =new Color(2,72,142);
 Border thickBorde = new LineBorder(Color.WHITE, 4);
 String nombre, contraseña , n, p;
-int nvl;
+public static int nvl, boot;
 private int x;
 private int y;
       
@@ -55,7 +55,6 @@ public LoginGT() {
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -208,22 +207,6 @@ public LoginGT() {
             }
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 0, 40, 40));
-
-        jLabel10.setFont(new java.awt.Font("Microsoft Tai Le", 1, 24)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(123, 123, 123));
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/conT.png"))); // NOI18N
-        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel10MousePressed(evt);
-            }
-        });
-        jLabel10.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel10MouseMoved(evt);
-            }
-        });
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 40, 40));
 
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -446,20 +429,6 @@ jLabel3.setForeground(Color.WHITE);// TODO add your handling code here:
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jLabel10MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseMoved
-Border thickBorder = new LineBorder(grisborde, 54);
-        jButton6.setBorder(thickBorder);         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel10MouseMoved
-
-    private void jLabel10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MousePressed
-Border thickBorder = new LineBorder(grisPress, 54);
-        jButton6.setBorder(thickBorder); 
-        modifyUsers mod = new modifyUsers();
-mod.setVisible(true);
-mod.setLocationRelativeTo(null);
-this.dispose();// TODO add your handling code here:
-    }//GEN-LAST:event_jLabel10MousePressed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 inicia();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -555,7 +524,6 @@ passw.requestFocus();
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -591,13 +559,15 @@ Connection cnx = null;
             if (p.equals(contraseña)){
                 
                 if (nvl==0){
+                    boot=0;
                 MENUadmin menu = new MENUadmin(n);
                 menu.setVisible(true);
                 menu.setLocationRelativeTo(null);
                 this.dispose();
                 }
                 if (nvl==1){
-                MENU menu = new MENU(n);
+                    boot=1;
+                MENUusuario menu = new MENUusuario(n);
                 menu.setVisible(true);
                 menu.setLocationRelativeTo(null);
                 this.dispose();

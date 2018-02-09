@@ -482,7 +482,7 @@ Connection cnx = null;
             if (n.equals(nombre) ){
    
             if (p.equals(contraseña)){
-            MENU menu = new MENU(n);
+            MENUusuario menu = new MENUusuario(n);
             menu.setVisible(true);
             menu.setLocationRelativeTo(null);
              this.dispose();

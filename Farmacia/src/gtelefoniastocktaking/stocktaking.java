@@ -95,10 +95,6 @@ DefaultTableModel dm;
         jButton10 = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
-        jLabel27 = new javax.swing.JLabel();
-        jButton12 = new javax.swing.JButton();
-        jLabel28 = new javax.swing.JLabel();
-        jButton13 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inventario");
@@ -315,11 +311,6 @@ DefaultTableModel dm;
         jLabel24.setToolTipText("");
         jLabel24.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel24.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel24.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel24MouseMoved(evt);
-            }
-        });
         jLabel24.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel24MousePressed(evt);
@@ -328,17 +319,17 @@ DefaultTableModel dm;
                 jLabel24MouseReleased(evt);
             }
         });
-        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 590, 250, 120));
+        jLabel24.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel24MouseMoved(evt);
+            }
+        });
+        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 250, 120));
 
         jButton9.setBackground(new java.awt.Color(0, 0, 255));
         jButton9.setForeground(new java.awt.Color(3, 64, 124));
         jButton9.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton9.setFocusPainted(false);
-        jButton9.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton9MouseMoved(evt);
-            }
-        });
         jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton9MousePressed(evt);
@@ -347,12 +338,17 @@ DefaultTableModel dm;
                 jButton9MouseReleased(evt);
             }
         });
+        jButton9.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jButton9MouseMoved(evt);
+            }
+        });
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 590, 250, 120));
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 250, 120));
 
         jLabel25.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
@@ -446,98 +442,6 @@ DefaultTableModel dm;
         });
         getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 590, 400, 60));
 
-        jLabel27.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel27.setText("Nuevo producto");
-        jLabel27.setToolTipText("");
-        jLabel27.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel27.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel27MouseMoved(evt);
-            }
-        });
-        jLabel27.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel27MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jLabel27MouseReleased(evt);
-            }
-        });
-        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 310, 120));
-
-        jButton12.setBackground(new java.awt.Color(3, 64, 124));
-        jButton12.setForeground(new java.awt.Color(3, 64, 124));
-        jButton12.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton12.setFocusPainted(false);
-        jButton12.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton12MouseMoved(evt);
-            }
-        });
-        jButton12.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton12MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton12MouseReleased(evt);
-            }
-        });
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 310, 120));
-
-        jLabel28.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
-        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel28.setText("Nuevo Proveedor/Categoria");
-        jLabel28.setToolTipText("");
-        jLabel28.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabel28.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel28.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel28MouseMoved(evt);
-            }
-        });
-        jLabel28.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel28MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jLabel28MouseReleased(evt);
-            }
-        });
-        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 590, 310, 120));
-
-        jButton13.setBackground(new java.awt.Color(26, 44, 61));
-        jButton13.setForeground(new java.awt.Color(3, 64, 124));
-        jButton13.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton13.setFocusPainted(false);
-        jButton13.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton13MouseMoved(evt);
-            }
-        });
-        jButton13.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton13MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton13MouseReleased(evt);
-            }
-        });
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 590, 310, 120));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -590,7 +494,7 @@ DefaultTableModel dm;
         Border thickBorder = new LineBorder(ColorSalida2, 54);
         jButton3.setBorder(thickBorder);
         jLabel3.setForeground(Color.gray);
-        MENU.controlVentana2=true;
+        MENUusuario.controlVentana2=true;
         Border thickBorderX = new LineBorder(Color.WHITE, 5);
         jButton3.setBorder(thickBorderX);
         this.dispose();
@@ -640,11 +544,7 @@ DefaultTableModel dm;
             jLabel25.setForeground(Color.WHITE); 
             jButton11.setBorder(thickBorder3);
             jLabel26.setForeground(Color.WHITE); 
-            jButton12.setBorder(thickBorder4);
-            jLabel27.setForeground(Color.WHITE); 
-            jButton13.setBorder(thickBorder5);
-            jLabel28.setForeground(Color.WHITE);
-            jButton1.setBorder(thickBorde);
+             jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
     }//GEN-LAST:event_formMouseMoved
 
@@ -724,11 +624,7 @@ jLabel24.setToolTipText(null);
             jLabel25.setForeground(Color.WHITE); 
             jButton11.setBorder(thickBorder3);
             jLabel26.setForeground(Color.WHITE); 
-            jButton12.setBorder(thickBorder4);
-            jLabel27.setForeground(Color.WHITE);
-            jButton13.setBorder(thickBorder5);
-            jLabel28.setForeground(Color.WHITE);
-            // TODO add your handling code here:
+             // TODO add your handling code here:
     }//GEN-LAST:event_formWindowActivated
 
     private void jLabel25MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MousePressed
@@ -796,39 +692,6 @@ jLabel26.setToolTipText(null);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton11ActionPerformed
 
-    private void jLabel27MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel27MousePressed
-
-    private void jLabel27MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseReleased
-nuevo_producto C = new nuevo_producto();
-        C.setVisible(true);
-        C.setLocationRelativeTo(null);        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel27MouseReleased
-
-    private void jLabel27MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseMoved
-Color X1 =new Color(3,83,162);
-Border thickBorder = new LineBorder(X1, 86);
-jLabel27.setToolTipText(null); 
-        jButton12.setBorder(thickBorder);        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel27MouseMoved
-
-    private void jButton12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12MousePressed
-
-    private void jButton12MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12MouseReleased
-
-    private void jButton12MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12MouseMoved
-
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12ActionPerformed
-
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
         // TODO add your handling code here:
     }//GEN-LAST:event_formComponentHidden
@@ -836,39 +699,6 @@ jLabel27.setToolTipText(null);
     private void jTextField1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseMoved
 jTextField1.setToolTipText(null);        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1MouseMoved
-
-    private void jLabel28MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel28MousePressed
-
-    private void jLabel28MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseReleased
-proveedor C = new proveedor();
-        C.setVisible(true);
-        C.setLocationRelativeTo(null);        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel28MouseReleased
-
-    private void jLabel28MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseMoved
-Color X1 =new Color(55,74,92);
-Border thickBorder = new LineBorder(X1, 86);
-jLabel28.setToolTipText(null); 
-        jButton13.setBorder(thickBorder);            // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel28MouseMoved
-
-    private void jButton13MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton13MousePressed
-
-    private void jButton13MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton13MouseReleased
-
-    private void jButton13MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton13MouseMoved
-
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton13ActionPerformed
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
 jLabel3.setForeground(Color.gray);
@@ -939,8 +769,6 @@ searc= jTextField1.getText();
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel11;
@@ -948,8 +776,6 @@ searc= jTextField1.getText();
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;

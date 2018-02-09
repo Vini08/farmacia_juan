@@ -818,7 +818,12 @@ public void insertProd(){
                 stmt.setDouble(3, efectivo);
                 stmt.setDouble(4, operacion);
                 stmt.setString(5,año+"-"+(mes+1)+"-"+dia);
-                stmt.setString(6,MENUadmin.horaMenu);
+                if(LoginGT.boot==0){
+                 stmt.setString(6,MENUadmin.horaMenu);
+                }
+                if(LoginGT.boot==1){
+                stmt.setString(6,MENUusuario.horaMenu);}
+                
                 
                 stmt.executeUpdate();
                 stocktaking.test=1;       
@@ -846,7 +851,7 @@ public void insertProd(){
            try{
                 for(int i=0; i<destino.getRowCount();i++){
              Connection conex = DriverManager.getConnection(url, user, pass);
-               String sql = "INSERT INTO Detalle_factura (codigo_detalle_factura, codigo_factura,codigo_producto, producto,categoria, unidades,precio_venta,descuento,precio_total,tipo_cliente) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+               String sql = "INSERT INTO Detalle_factura (codigo_detalle_factura, codigo_factura,codigo_producto, producto,categoria, unidades,precio_venta,descuento,precio_total,tipo_cliente,fecha) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
             PreparedStatement stmt = conex.prepareStatement(sql);
             
             stmt.setInt(1,lastID);          
@@ -858,7 +863,7 @@ public void insertProd(){
             stmt.setDouble(7,(Double) destino.getValueAt(i,4));
             stmt.setDouble(8,(Double) destino.getValueAt(i,6));
             stmt.setString(9,(String) destino.getValueAt(i,7));
-            
+            stmt.setString(10,año+"-"+(mes+1)+"-"+dia);
             stmt.executeUpdate();
             
            }
@@ -915,7 +920,7 @@ public void insertProd(){
        //---------------------------------------------------------------------------------------------------
             //-------------- Truncate tablaux ------------------------------------------------------------------
       try{
-             Connection conex = DriverManager.getConnection(url, user, pass);
+        Connection conex = DriverManager.getConnection(url, user, pass);
         String Qury = "TRUNCATE tabla_aux";
         Statement sts =  conex.createStatement();
         sts.executeUpdate(Qury);

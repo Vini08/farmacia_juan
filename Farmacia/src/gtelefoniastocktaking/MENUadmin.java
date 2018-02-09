@@ -46,18 +46,20 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
 Border focus = new LineBorder(CBTNFocus, 96);
 private int x;
 private int y;
-public static String nombr, horaMenu; 
+public static String nombr, horaMenu,level="1"; 
 String hora,minutos,segundos,ampm;
 Calendar calendario;    
 Thread h1;
 public static inventario S = new inventario(nombr);
 public static VentasRealizadas VS = new VentasRealizadas();
 public static hacer_ventas Vn = new hacer_ventas(nombr);
+public static reportes rept = new reportes();
 public static boolean controlVentana=true,controlVentana1=true,controlVentana2=true,controlVentana3=true,controlVentana4=true,controlVentana5=true; 
 
 public MENUadmin(String Name) {
         initComponents();
          setLocationRelativeTo(null);
+      
          h1 = new Thread(this);
         h1.start();
         nombr=Name;
@@ -243,7 +245,7 @@ public MENUadmin(String Name) {
 
         jLabel6.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 17)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel6.setText("F2   =   ORDEN DE TRABAJO");
+        jLabel6.setText("F2   =   INVENTARIO");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 230, -1));
 
         jLabel7.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
@@ -264,7 +266,7 @@ public MENUadmin(String Name) {
 
         jLabel13.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 17)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel13.setText("F3   =   INVENTARIO");
+        jLabel13.setText("F3   =   REPORTES");
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 200, -1));
 
         jLabel28.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 27)); // NOI18N
@@ -448,7 +450,7 @@ public MENUadmin(String Name) {
         jLabel25.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel25.setText("REPARACIONES");
+        jLabel25.setText("USUARIOS");
         jLabel25.setToolTipText("");
         jLabel25.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -494,17 +496,17 @@ public MENUadmin(String Name) {
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel26.setText("INVENTARIO");
         jLabel26.setToolTipText("");
-        jLabel26.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel26MouseMoved(evt);
-            }
-        });
         jLabel26.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel26MousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jLabel26MouseReleased(evt);
+            }
+        });
+        jLabel26.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel26MouseMoved(evt);
             }
         });
         getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 330, 330, 140));
@@ -587,17 +589,17 @@ public MENUadmin(String Name) {
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel30.setText("REPORTES");
         jLabel30.setToolTipText("");
-        jLabel30.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel30MouseMoved(evt);
-            }
-        });
         jLabel30.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel30MousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jLabel30MouseReleased(evt);
+            }
+        });
+        jLabel30.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel30MouseMoved(evt);
             }
         });
         getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 500, 330, 120));
@@ -705,8 +707,8 @@ public void run(){
     }//GEN-LAST:event_jLabel2MousePressed
 
     private void jLabel2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseMoved
-jLabel12.setToolTipText(null);  
-Border thickBorder = new LineBorder(grisborde, 54);
+        jLabel12.setToolTipText(null);  
+        Border thickBorder = new LineBorder(grisborde, 54);
         jButton1.setBorder(thickBorder);
         jButton3.setBorder(thickBorde);
         jLabel3.setForeground(ColorFont);// TODO add your handling code here:
@@ -824,6 +826,7 @@ Vn.cdp=nombr;
 hacer_ventas.test2=1;
 Vn.setVisible(true);
 Vn.setLocationRelativeTo(null);
+hacer_ventas.find.requestFocus();
 controlVentana1=false;
 }
 else if(controlVentana1==false){
@@ -914,7 +917,9 @@ Vn.toFront();
     }//GEN-LAST:event_jLabel25MousePressed
 
     private void jLabel25MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseReleased
-
+modUsers mod = new modUsers();
+mod.setVisible(true);
+mod.setLocationRelativeTo(null);
 // TODO add your handling code here:
     }//GEN-LAST:event_jLabel25MouseReleased
 
@@ -1069,7 +1074,16 @@ this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + e
     }//GEN-LAST:event_jLabel30MousePressed
 
     private void jLabel30MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel30MouseReleased
-      // TODO add your handling code here:
+if(controlVentana3==true){
+rept.check=true;    
+reportes rep = new reportes();
+rep.setVisible(true);
+rep.setLocationRelativeTo(null);
+controlVentana3=false;
+}
+else if(controlVentana3==false){
+VS.toFront();
+}// TODO add your handling code here:
     }//GEN-LAST:event_jLabel30MouseReleased
 
     private void jLabel30MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel30MouseMoved
@@ -1202,13 +1216,21 @@ this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + e
     public void atajos(int numAtajo){
 
 if( numAtajo==KeyEvent.VK_F1 && controlVentana1==true){
-    hacer_ventas C = new hacer_ventas(nombr);
-C.setVisible(true);
-C.setLocationRelativeTo(null);
+Vn.cdp=nombr;
+Vn.setVisible(true);
+Vn.setLocationRelativeTo(null);
+hacer_ventas.test2=1;
+hacer_ventas.find.requestFocus();
 controlVentana1=false;
 }
-if( numAtajo==KeyEvent.VK_F3 && controlVentana2==true){
-    stocktaking C = new stocktaking(nombr);
+if( numAtajo==KeyEvent.VK_F3 && controlVentana3==true){
+reportes C = new reportes();
+C.setVisible(true);
+C.setLocationRelativeTo(null);
+controlVentana3=false;
+}
+if( numAtajo==KeyEvent.VK_F2 && controlVentana2==true){
+inventario C = new inventario(nombr);
 C.setVisible(true);
 C.setLocationRelativeTo(null);
 controlVentana2=false;
@@ -1288,11 +1310,9 @@ controlVentana4=false;
         }
        }
     
-    public void calcula () {        
+public void calcula () {        
 Calendar calendario = new GregorianCalendar();
 Date fechaHoraActual = new Date();
-
-
 calendario.setTime(fechaHoraActual);
 ampm = calendario.get(Calendar.AM_PM)==Calendar.AM?"AM":"PM";
 

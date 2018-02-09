@@ -5,40 +5,49 @@
  */
 package gtelefoniastocktaking;
 
+import static gtelefoniastocktaking.hacer_ventas.jTable2;
 import static gtelefoniastocktaking.inventario.jTable1;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
 /**
  *
  * @author Vinicio
  */
-public class VentasRealizadas extends javax.swing.JFrame {
+public class reportes extends javax.swing.JFrame {
 
 private int x;
 private int y;
-static int w=0; 
-public boolean check=true;
+static int w=0,z=0,d=0; 
 static String inv[]=new String[5000];
-static String GN[]=new String[5000];
+ArrayList<Double> prec_venta=new ArrayList<Double>();
+static String code[]=new String[5000];
+ArrayList<Double>  prec_compra=new ArrayList<Double>();
+ArrayList<Double> realGanan=new ArrayList<Double>();
+ArrayList<Double>  desc=new ArrayList<Double>();
+    ArrayList<Integer> canti = new ArrayList<>();
+ ArrayList<String> ls = new ArrayList<String>();
 String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
 String pass = "";
@@ -53,17 +62,14 @@ Color CBTNmenu =new Color(39,39,39);
 Color cleaan =new Color(0,0,255);
 Color vver =new Color(102,102,102);
 Border thickBorde = new LineBorder(Color.WHITE, 4);
+static double gainT=0, auxRG;
 static float invT=0;
-      
-    public VentasRealizadas() {
+public boolean check=true;      
+    public reportes() {
         initComponents();
          setLocationRelativeTo(null);
        jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
-     JTableHeader th1;
-     th1 = tablaVentas.getTableHeader();
-      Font fuente1 = new Font("Microsoft Yi Baiti", Font.PLAIN, 22); 
-        th1.setFont(fuente1); 
         LlenarTabla();
         jLabel2.setToolTipText(null);
         jLabel3.setToolTipText(null);
@@ -88,7 +94,7 @@ static float invT=0;
         jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaVentas = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
         jLabel20 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -233,7 +239,7 @@ static float invT=0;
         jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(231, 231, 231));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("VENTAS REALIZADAS");
+        jLabel4.setText("REPORTES");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 40));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/solid-orange-background.jpg"))); // NOI18N
@@ -242,49 +248,57 @@ static float invT=0;
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 480, 40));
 
-        tablaVentas.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        tablaVentas.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID Factura", "Usuario", "Total Factura", "Fecha"
+                "codigo_detalle", "codigo_factura", "categoria", "producto", "unidades", "precio_venta", "descuento", "precio_total", "tipo", "fecha", "Ganancia"
             }
-        ));
-        tablaVentas.setComponentPopupMenu(jPopupMenu1);
-        tablaVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        tablaVentas.setIntercellSpacing(new java.awt.Dimension(2, 2));
-        tablaVentas.setRowHeight(19);
-        tablaVentas.addMouseListener(new java.awt.event.MouseAdapter() {
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable1.setComponentPopupMenu(jPopupMenu1);
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable1.setIntercellSpacing(new java.awt.Dimension(2, 2));
+        jTable1.setRowHeight(19);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                tablaVentasMouseEntered(evt);
+                jTable1MouseEntered(evt);
             }
         });
-        tablaVentas.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        jTable1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                tablaVentasMouseMoved(evt);
+                jTable1MouseMoved(evt);
             }
         });
-        jScrollPane1.setViewportView(tablaVentas);
+        jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 1320, 380));
 
@@ -567,12 +581,8 @@ static float invT=0;
         Border thickBorder = new LineBorder(ColorSalida2, 54);
         jButton3.setBorder(thickBorder);
         jLabel3.setForeground(Color.gray);
-     if(LoginGT.boot==0){
-        MENUadmin.controlVentana4=true;
-        }
-        if(LoginGT.boot==1){
-                MENUusuario.controlVentana4=true;
-        }   Border thickBorderX = new LineBorder(Color.WHITE, 5);
+        MENUadmin.controlVentana3=true;
+                Border thickBorderX = new LineBorder(Color.WHITE, 5);
         jButton3.setBorder(thickBorderX);
 
         this.dispose();
@@ -744,26 +754,21 @@ LLenarDELAL(delDia,alDia);        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel28MouseExited
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
-if(check==true){
-    LlenarTabla();
-    check=false;
-}// TODO add your handling code here:
+
+// TODO add your handling code here:
     }//GEN-LAST:event_formMouseEntered
 
-    private void tablaVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVentasMouseEntered
+    private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_tablaVentasMouseEntered
+    }//GEN-LAST:event_jTable1MouseEntered
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
 
-    private void tablaVentasMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVentasMouseMoved
-if(check==true){
-    LlenarTabla();
-    check=false;
-}        // TODO add your handling code here:
-    }//GEN-LAST:event_tablaVentasMouseMoved
+    private void jTable1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseMoved
+       // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseMoved
 
     private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
         // TODO add your handling code here:
@@ -774,7 +779,7 @@ if(check==true){
     }//GEN-LAST:event_jLabel12MouseDragged
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-busqueda= (Integer) tablaVentas.getValueAt(tablaVentas.getSelectedRow(), 0);   
+busqueda= (Integer) jTable1.getValueAt(jTable1.getSelectedRow(), 0);   
   buscarT(busqueda);       // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -787,7 +792,7 @@ busqueda= (Integer) tablaVentas.getValueAt(tablaVentas.getSelectedRow(), 0);
     }//GEN-LAST:event_jLabel27MouseMoved
 
     private void jLabel27MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseReleased
-        LlenarTabla();       // TODO add your handling code here:
+LlenarTabla();      // TODO add your handling code here:
     }//GEN-LAST:event_jLabel27MouseReleased
 
     private void jLabel27MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MousePressed
@@ -816,14 +821,30 @@ busqueda= (Integer) tablaVentas.getValueAt(tablaVentas.getSelectedRow(), 0);
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentasRealizadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(reportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentasRealizadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(reportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentasRealizadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(reportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentasRealizadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(reportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -844,7 +865,7 @@ busqueda= (Integer) tablaVentas.getValueAt(tablaVentas.getSelectedRow(), 0);
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentasRealizadas().setVisible(true);
+                new reportes().setVisible(true);
             }
         });
     }
@@ -880,51 +901,81 @@ busqueda= (Integer) tablaVentas.getValueAt(tablaVentas.getSelectedRow(), 0);
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
-    private static javax.swing.JTable tablaVentas;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
- public void LlenarTabla(){
+ public void LlenarTabla(){  
+     z=0;
+     w=0;
+     prec_venta.clear();
+     prec_compra.clear();
+     desc.clear();
+     realGanan.clear();
+     
         DefaultTableModel modelo = new DefaultTableModel();
-        tablaVentas.setModel(modelo);
+        jTable1.setModel(modelo);
         Connection cnx = null;
-        if (cnx == null) {
+       
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "Select *from factura";
+             String sql = "Select *from detalle_factura";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
-             int cantidadColumnas = rsMd.getColumnCount();
-             for (int i = 1; i <= cantidadColumnas; i++) {
-            modelo.addColumn(rsMd.getColumnLabel(i));
-         }
-         while (res.next()){
-             inv[w] = res.getString(3);
+             int cantidadColumnas = rsMd.getColumnCount()+1;
+             
+             for (int i = 1; i < cantidadColumnas; i++) {
+             modelo.addColumn(rsMd.getColumnLabel(i));}
+                    while (res.next()){
+                    code[z] = res.getString(3);  
+                    canti.add(res.getInt(6));
+                    prec_venta.add(res.getDouble(7));
+                    Double gainAux =(prec_venta.get(z));
+                    gainT = gainT + gainAux;
+                    z++;
+                    desc.add(res.getDouble(8));
+                    inv[w] = res.getString(9);
                     Float auxo = Float.parseFloat(inv[w]);
                     invT = invT + auxo;
                     w++;
-         Object[] fila = new Object[cantidadColumnas];
-         for (int i = 0; i < cantidadColumnas; i++) {
-         fila[i]=res.getObject(i+1);
-         }
-              modelo.addRow(fila);
-             
-             }
-         
-         jLabel13.setText(""+invT);
-         invT = 0;
-             } catch (ClassNotFoundException ex) {
-             throw new ClassCastException(ex.getMessage());
+                    
+                    Object[] fila = new Object[cantidadColumnas]; 
+                    for (int i = 0; i < cantidadColumnas-1; i++) {
+                    fila[i]=res.getObject(i+1);
+                    }
+                    modelo.addRow(fila);
+                    }
              } catch (SQLException ex) { 
                 Logger.getLogger(LoginGT.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-            }   
+            } catch (ClassNotFoundException ex) { 
+             Logger.getLogger(reportes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try{
+              for (int i = 0; i < code.length; i++) {
+                String query = "SELECT precio_compra from producto where codigo_producto='"+code[i]+"'";
+                Statement sts = cnx.prepareStatement(query);
+                ResultSet rest = sts.executeQuery(query);
+                while (rest.next()){
+                 prec_compra.add(rest.getDouble(1));
+                 }
+              }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this,ex);
+            }
+            for (int i = 0; i < prec_compra.size(); i++) {
+             realGanan.add(((prec_venta.get(i)*canti.get(i))-desc.get(i))-(prec_compra.get(i)*canti.get(i)));    
+            }
+            Vector<Double> v = new Vector<Double>();
+            v.addAll(realGanan);
+         modelo.addColumn("Ganancia", v);
+         jLabel13.setText(""+invT);
+         invT = 0;
     }
  
  public void buscarT(int busq){
          DefaultTableModel modelo = new DefaultTableModel();
-        tablaVentas.setModel(modelo);
+        jTable1.setModel(modelo);
         Connection cnx = null;
         if (cnx == null) {
         try {
@@ -959,11 +1010,11 @@ busqueda= (Integer) tablaVentas.getValueAt(tablaVentas.getSelectedRow(), 0);
  
  public void sumaT(){
      double sumatoria1=0.0;
-        int totalRow= tablaVentas.getRowCount();
+        int totalRow= jTable1.getRowCount();
         totalRow-=1;
         for(int i=0;i<=(totalRow);i++)
         {
-             double sumatoria= Double.parseDouble(String.valueOf(tablaVentas.getValueAt(i,8)));
+             double sumatoria= Double.parseDouble(String.valueOf(jTable1.getValueAt(i,8)));
              sumatoria1+=sumatoria;
  }
    jLabel13.setText(Double.toString(sumatoria1));
@@ -971,42 +1022,41 @@ busqueda= (Integer) tablaVentas.getValueAt(tablaVentas.getSelectedRow(), 0);
  }
  
   public void LLenarDELAL(String delDia,String alDia){
-     tablaVentas.getColumnModel().getColumn(0).setPreferredWidth(90);
-tablaVentas.getColumnModel().getColumn(1).setPreferredWidth(100);
-tablaVentas.getColumnModel().getColumn(2).setPreferredWidth(150);
-tablaVentas.getColumnModel().getColumn(3).setPreferredWidth(200);
-tablaVentas.setAutoResizeMode(tablaVentas.AUTO_RESIZE_LAST_COLUMN);
+     jTable1.getColumnModel().getColumn(0).setPreferredWidth(90);
+jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
+jTable1.getColumnModel().getColumn(2).setPreferredWidth(150);
+jTable1.getColumnModel().getColumn(3).setPreferredWidth(200);
+jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_LAST_COLUMN);
 jLabel13.setText("");
 invT=0;
 w=0;
 
 
 DefaultTableModel modelo = new DefaultTableModel();
-        tablaVentas.setModel(modelo);
+        jTable1.setModel(modelo);
         Connection cnx = null;
         if (cnx == null) {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            cnx = DriverManager.getConnection(url, user,pass);
+             try {
+             Class.forName("com.mysql.jdbc.Driver");
+             cnx = DriverManager.getConnection(url, user,pass);
              String sql = "SELECT * FROM factura  where DATE(fecha) BETWEEN '"+delDia+"' AND '"+alDia+"'";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
              int cantidadColumnas = rsMd.getColumnCount();
              for (int i = 1; i <= cantidadColumnas; i++) {
-            modelo.addColumn(rsMd.getColumnLabel(i));
-         }
-         while (res.next()){
-             inv[w] = res.getString(3);
+             modelo.addColumn(rsMd.getColumnLabel(i));
+            }
+                while (res.next()){
+                inv[w] = res.getString(3);
                     Float auxo = Float.parseFloat(inv[w]);
                     invT = invT + auxo;
                     w++;
-         Object[] fila = new Object[cantidadColumnas];
-         for (int i = 0; i < cantidadColumnas; i++) {
-         fila[i]=res.getObject(i+1);
-         }
+                    Object[] fila = new Object[cantidadColumnas];
+                    for (int i = 0; i < cantidadColumnas; i++) {
+                    fila[i]=res.getObject(i+1);
+                    }
               modelo.addRow(fila);
-             
              }
          jLabel13.setText(""+invT);
          invT = 0;
@@ -1017,6 +1067,40 @@ DefaultTableModel modelo = new DefaultTableModel();
             } 
             }   
     }
+  
+  public void limpiar(){
+          String Query = "Select *from detalle_factura";
+           DefaultTableModel modelo = new DefaultTableModel();
+        jTable1.setModel(modelo);
+        Connection cnx = null;
+        if (cnx == null) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            cnx = DriverManager.getConnection(url, user,pass);
+           
+             Statement st = cnx.prepareStatement(Query);
+             ResultSet res = st.executeQuery(Query);
+             ResultSetMetaData rsMd = res.getMetaData();
+             int cantidadColumnas = rsMd.getColumnCount();
+             for (int i = 1; i <= cantidadColumnas; i++) {
+            modelo.addColumn(rsMd.getColumnLabel(i));
+         }
+         while (res.next()){
+         Object[] fila = new Object[cantidadColumnas];
+         for (int i = 0; i < cantidadColumnas; i++) {
+         fila[i]=res.getObject(i+1);
+         }
+              modelo.addRow(fila);
+             
+             }
+             } catch (ClassNotFoundException ex) {
+             throw new ClassCastException(ex.getMessage());
+             } catch (SQLException ex) { 
+                Logger.getLogger(LoginGT.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+            }  
+     
+  }
 }
 
 

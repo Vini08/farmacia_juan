@@ -91,23 +91,6 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel22">
-      <Properties>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder>
-              <Font PropertyName="font" name="Microsoft Yi Baiti" size="22" style="0"/>
-              <Color PropertyName="color" blue="8e" green="8e" red="8e" type="rgb"/>
-            </TitledBorder>
-          </Border>
-        </Property>
-      </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="130" y="320" width="550" height="70"/>
-        </Constraint>
-      </Constraints>
-    </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -134,6 +117,23 @@
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="350" y="340" width="145" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel22">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder>
+              <Font PropertyName="font" name="Microsoft Yi Baiti" size="22" style="0"/>
+              <Color PropertyName="color" blue="8e" green="8e" red="8e" type="rgb"/>
+            </TitledBorder>
+          </Border>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="130" y="320" width="550" height="70"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -434,9 +434,9 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseMoved"/>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseEntered"/>
+            <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseMoved"/>
             <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jTable1PropertyChange"/>
           </Events>
           <AuxValues>
@@ -460,7 +460,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="310" y="630" width="210" height="80"/>
+          <AbsoluteConstraints x="310" y="630" width="320" height="80"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -731,17 +731,23 @@
         <Component class="javax.swing.JTable" name="jTable2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Microsoft Yi Baiti" size="18" style="1"/>
+              <Font name="Microsoft Yi Baiti" size="20" style="1"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="7" rowCount="0">
-                <Column editable="true" title="Tipo" type="java.lang.Object"/>
-                <Column editable="true" title="Marca" type="java.lang.Object"/>
-                <Column editable="true" title="Modelo" type="java.lang.Object"/>
+              <Table columnCount="13" rowCount="0">
+                <Column editable="true" title="codigo" type="java.lang.Object"/>
+                <Column editable="true" title="categoria" type="java.lang.Object"/>
+                <Column editable="true" title="producto" type="java.lang.Object"/>
+                <Column editable="true" title="proveedor" type="java.lang.Object"/>
                 <Column editable="true" title="Precio" type="java.lang.Object"/>
-                <Column editable="true" title="Unidades" type="java.lang.Object"/>
-                <Column editable="true" title="Total" type="java.lang.Object"/>
-                <Column editable="true" title="Tipo Cliente" type="java.lang.Object"/>
+                <Column editable="true" title="ubicacion" type="java.lang.Object"/>
+                <Column editable="true" title="unidades" type="java.lang.Object"/>
+                <Column editable="true" title="fecha" type="java.lang.Object"/>
+                <Column editable="true" title="precio_venta" type="java.lang.Object"/>
+                <Column editable="true" title="precio_mayoreo" type="java.lang.Object"/>
+                <Column editable="true" title="precio_oro" type="java.lang.Object"/>
+                <Column editable="true" title="descuento" type="java.lang.Object"/>
+                <Column editable="true" title="lll" type="java.lang.Object"/>
               </Table>
             </Property>
           </Properties>
