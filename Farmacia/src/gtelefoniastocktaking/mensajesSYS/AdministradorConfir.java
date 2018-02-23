@@ -6,10 +6,10 @@
 package gtelefoniastocktaking.mensajesSYS;
 
 import com.sun.awt.AWTUtilities;
-import gtelefoniastocktaking.AdminEditarProdcut;
-import gtelefoniastocktaking.LoginGT;
-import static gtelefoniastocktaking.AdminEditarProdcut.unit;
-import static gtelefoniastocktaking.stocktaking.units;
+import System_Farmacia.AdminEditarProdcut;
+import System_Farmacia.LoginGT;
+import static System_Farmacia.AdminEditarProdcut.unit;
+import static System_Farmacia.stocktaking.units;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
