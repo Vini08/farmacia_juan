@@ -1280,20 +1280,18 @@ controlVentana4=false;
              
             while (res.next()){
             ID = res.getString(1);
-            MK = res.getString(2);
-            MD = res.getString(3);
-            UD  = res.getInt(4);
-            PRD = res.getString(5);
-            PC = res.getDouble(6);
-            PV = res.getDouble(7);
-            PG = res.getDouble(8);
+            MK = res.getString(3);
+            MD = res.getString(4);
+            UD  = res.getInt(8);
             
       Class.forName("com.mysql.jdbc.Driver");         
       conI = DriverManager.getConnection(url, user,pass);
-      String query = "update producto set Unidades = ? where idProducto = ?";
+       String query = "update producto set Unidades = ? where codigo_producto = ? && categoria = ? && producto = ?";
       PreparedStatement preparedStmt = conI.prepareStatement(query);
       preparedStmt.setInt   (1, UD);
       preparedStmt.setString   (2, ID);
+      preparedStmt.setString   (3, MK);
+      preparedStmt.setString   (4, MD);
       preparedStmt.executeUpdate();
       
       

@@ -36,10 +36,10 @@ Color ColorFont =new Color(123,123,123);
 Color ColorSalida =new Color(0,102,204);
 Color ColorSalida2 =new Color(2,72,142);
 Border thickBorde = new LineBorder(Color.WHITE, 4);
- public static String code, mark, model, provv;
-public static BigDecimal price1,price2,price3;   
+ public static String code, mark, model, provv, porcs;
+public static BigDecimal price1,price2;   
 public static int unit; 
-    public EditarProdcut(String codes,String marks,String models,int unitss,String provvs,BigDecimal price1s,BigDecimal price2s,BigDecimal price3s   ) {
+    public EditarProdcut(String codes,String marks,String models,int unitss,String provvs,BigDecimal price1s,BigDecimal price2s,String porciones   ) {
         initComponents();
         jTextField1.requestFocus();
          setLocationRelativeTo(null);
@@ -52,7 +52,7 @@ public static int unit;
         provv=provvs;
         price1=price1s;
         price2=price2s;
-        price3=price3s;
+        porcs=porciones;
         
         jTextField1.setText(code);
         jTextField2.setText(mark);
@@ -61,7 +61,7 @@ public static int unit;
         jTextField4.setText(provv);
         jTextField5.setText(String.valueOf(price1));
         jTextField6.setText(String.valueOf(price2));
-        jTextField7.setText(String.valueOf(price3));
+        jTextField7.setText(String.valueOf(porcs));
     }
 
     /**
@@ -540,7 +540,7 @@ public static int unit;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditarProdcut(code, mark, model, unit, provv, price1,price2,price3).setVisible(true);
+                new EditarProdcut(code, mark, model, unit, provv, price1,price2,porcs).setVisible(true);
             }
         });
     }

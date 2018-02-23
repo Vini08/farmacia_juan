@@ -27,19 +27,19 @@ String user = "root";
 String pass = "";
 int unids;
 String codP,nameP,catP, provP, unidP;
-Double preC, precV, preM, preO,Descuento;
+Double preC, precV, preM, preO;
 Color grisborde =new Color(224,224,224);
 Color grisPress =new Color(179,179,179);
 Color ColorFont =new Color(123,123,123);
 Color ColorSalida =new Color(0,102,204);
 Color ColorSalida2 =new Color(2,72,142);
 Border thickBorde = new LineBorder(Color.WHITE, 4);
- public static String us, code, mark, model, provv;
-public static BigDecimal price0,price1,price2,price3,desc;   
+ public static String us, code, mark, model, provv, porcions,Descuento;
+public static BigDecimal price0,price1,price2;   
 public static int unit; 
 private int x;
 private int y;
-    public AdminEditarProdcut(String u, String codes,String marks,String models,int unitss,String provvs,BigDecimal price10s, BigDecimal price1s,BigDecimal price2s,BigDecimal price3s,BigDecimal descu   ) {
+    public AdminEditarProdcut(String u, String codes,String marks,String models,int unitss,String provvs,BigDecimal price10s, BigDecimal price1s,BigDecimal price2s,String pors,String descu   ) {
         initComponents();
         jTextField1.requestFocus();
          setLocationRelativeTo(null);
@@ -53,8 +53,8 @@ private int y;
         price0=price10s;
         price1=price1s;
         price2=price2s;
-        price3=price3s;
-        desc=descu;
+        porcions=pors;
+        Descuento=descu;
         jTextField1.setText(code);
         jTextField2.setText(mark);
         jTextField8.setText(model);
@@ -63,8 +63,8 @@ private int y;
         jTextField10.setText(String.valueOf(price0));
         jTextField5.setText(String.valueOf(price1));
         jTextField6.setText(String.valueOf(price2));
-        jTextField7.setText(String.valueOf(price3));
-        jTextField9.setText(String.valueOf(desc));
+        jTextField9.setText(String.valueOf(Descuento));
+        jTextField11.setText(String.valueOf(porcions));
     }
 
     /**
@@ -106,8 +106,6 @@ private int y;
         jButton5 = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jLabel26 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
@@ -115,6 +113,8 @@ private int y;
         jTextField9 = new javax.swing.JTextField();
         jTextField10 = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jTextField11 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nuevo Producto");
@@ -383,18 +383,6 @@ private int y;
         jTextField6.setBorder(null);
         getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 300, 370, 40));
 
-        jTextField7.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField7.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
-        jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField7.setBorder(null);
-        getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 380, 370, 40));
-
-        jLabel26.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(82, 82, 82));
-        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel26.setText("PRECIO ORO");
-        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 350, 370, 30));
-
         jTextField8.setEditable(false);
         jTextField8.setBackground(new java.awt.Color(153, 153, 153));
         jTextField8.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
@@ -414,8 +402,8 @@ private int y;
         jLabel30.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(82, 82, 82));
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel30.setText("DESCUENTO");
-        getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 440, 370, 30));
+        jLabel30.setText("CANTIDADES QUE SE DESCONTARAN");
+        getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 350, 370, 30));
 
         jTextField9.setBackground(new java.awt.Color(153, 153, 153));
         jTextField9.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
@@ -426,7 +414,7 @@ private int y;
                 jTextField9ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 470, 370, 40));
+        getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 380, 370, 40));
 
         jTextField10.setBackground(new java.awt.Color(153, 153, 153));
         jTextField10.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
@@ -439,6 +427,23 @@ private int y;
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel31.setText("PRECIO COMPRA");
         getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 440, 370, 30));
+
+        jLabel32.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel32.setText("¿CUANDO SE HARAN LOS DESCUENTOS?");
+        getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 440, 370, 30));
+
+        jTextField11.setBackground(new java.awt.Color(153, 153, 153));
+        jTextField11.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
+        jTextField11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField11.setBorder(null);
+        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField11ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 470, 370, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -543,12 +548,11 @@ private int y;
         preC=Double.parseDouble(jTextField10.getText());
         precV = Double.parseDouble(jTextField5.getText());
         preM = Double.parseDouble(jTextField6.getText());
-        preO = Double.parseDouble(jTextField7.getText());
-        unidP = jTextField3.getText();
+         unidP = jTextField3.getText();
         unids = Integer.parseInt(unidP);
-        Descuento = Double.parseDouble(jTextField9.getText());
+        Descuento = jTextField9.getText();
         
-        ModificarProd(unids, provP, preC, precV, preM, preO,codP,catP,nameP,Descuento);
+        ModificarProd(unids, provP, preC, precV, preM,codP,catP,nameP,Descuento);
         inventario.test=1;
        hacer_ventas.test2=1;
         inventario.LlenarTabla(sql);
@@ -567,6 +571,10 @@ x = evt.getX();
     private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField9ActionPerformed
+
+    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -605,7 +613,7 @@ x = evt.getX();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminEditarProdcut(us,code, mark, model, unit, provv,price0, price1,price2,price3,desc).setVisible(true);
+                new AdminEditarProdcut(us,code, mark, model, unit, provv,price0, price1,price2,porcions,Descuento).setVisible(true);
             }
         });
     }
@@ -629,13 +637,13 @@ x = evt.getX();
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
@@ -643,34 +651,33 @@ x = evt.getX();
     private javax.swing.JLabel jLabel9;
     public static final javax.swing.JTextField jTextField1 = new javax.swing.JTextField();
     private javax.swing.JTextField jTextField10;
+    private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 
    
     
-  public void ModificarProd(int unid, String prov, Double pp, Double p1,Double p2,Double p3,String codd,String nam, String cate, Double des){
+  public void ModificarProd(int unid, String prov, Double pp, Double p1,Double p2,String codd,String nam, String cate, String des){
           
         try{
             Connection conn = DriverManager.getConnection(url, user, pass);
-           CallableStatement cmst= conn.prepareCall("call ModificarProducto (?,?,?,?,?,?,?,?,?,?)");
+           CallableStatement cmst= conn.prepareCall("call ModificarProducto (?,?,?,?,?,?,?,?,?)");
            
            cmst.setInt(1,unid);
            cmst.setString(2,prov);
            cmst.setDouble(3,pp);
            cmst.setDouble(4,p1);
            cmst.setDouble(5,p2);
-           cmst.setDouble(6,p3);
-           cmst.setString(7,codd);
-           cmst.setString(8,cate);
-           cmst.setString(9,nam);
-           cmst.setDouble(10,des);
+           cmst.setString(6,codd);
+           cmst.setString(7,cate);
+           cmst.setString(8,nam);
+           cmst.setString(9,des);
            cmst.execute();            
        
         conn.close();

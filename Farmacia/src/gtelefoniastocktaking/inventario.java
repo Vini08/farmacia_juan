@@ -28,7 +28,7 @@ public class inventario extends javax.swing.JFrame {
 
      private int x;
 private int y;
-public static String sql = "SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, ubicacion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, precio_oro, descuento from producto where Unidades>0";
+public static String sql = "SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades>0";
 public static String url = "jdbc:mysql://localhost:3306/bd_farm";
 public static String user = "root";
 public static String pass = "";
@@ -41,8 +41,8 @@ Color ColorSalida =new Color(0,102,204);
 Color ColorSalida2 =new Color(2,72,142);
 public String auxUser, searc;
 Border thickBorde = new LineBorder(Color.WHITE, 4);
-public static String code, mark, model, provv, usua;
-public static BigDecimal price0,price1,price2,price3, descu;      
+public static String code, mark, model, provv, usua, porcions, descu;
+public static BigDecimal price0,price1,price2;      
 public static int units, test=0;
 Color CBTNmenu =new Color(39,39,39);
 Color cleaan =new Color(0,0,255);
@@ -123,7 +123,7 @@ DefaultTableModel dm;
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inventario");
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1365, 729));
+        setPreferredSize(new java.awt.Dimension(1366, 729));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 formMouseEntered(evt);
@@ -279,7 +279,7 @@ DefaultTableModel dm;
         });
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1330, 510));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1350, 530));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -693,16 +693,16 @@ provv =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 4);
 price0 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 9);
 price1 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 10);
 price2 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 11);
-price3 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 12);
-descu =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 13);
+descu =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 12);
+porcions=  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 13);
 
 if(units==0){        
-EditarProdcut ed = new EditarProdcut(code, mark, model, units, provv, price1,price2,price3);
+EditarProdcut ed = new EditarProdcut(code, mark, model, units, provv, price1,price2,porcions);
 ed.setVisible(true);
 ed.setLocationRelativeTo(null);
 }
     else if(units!=0){
-         AdminEditarProdcut ad = new AdminEditarProdcut(usua,code, mark, model, units, provv, price0,price1,price2,price3,descu);
+         AdminEditarProdcut ad = new AdminEditarProdcut(usua,code, mark, model, units, provv, price0,price1,price2,porcions,descu);
        ad.setVisible(true);
     ad.setLocationRelativeTo(null);
     }

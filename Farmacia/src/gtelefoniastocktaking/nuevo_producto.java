@@ -35,9 +35,9 @@ String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
 String pass = "";
 int unids;
-String codB, codP, catP,nameP, provP, unidP, ubicaProd, descrip, alert, fecha;
+String codB, codP, catP,nameP, provP, unidP, ubicaProd, descrip, alert, fecha,descuento, porcions;
 String autSY;
-Double precCP, preVP, preMP, preORO, preET, descuento;
+Double precCP, preVP, preMP,preET;
 Color grisMoved =new Color(180,180,180);
 Color grisborde =new Color(224,224,224);
 Color grisPress =new Color(179,179,179);
@@ -75,7 +75,6 @@ Connection cnx = null;
         jLabel8 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -88,7 +87,6 @@ Connection cnx = null;
         jLabel17 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
@@ -116,9 +114,10 @@ Connection cnx = null;
         jComboBox2 = new javax.swing.JComboBox<>();
         jTextField12 = new javax.swing.JTextField();
         jLabel35 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
-        jButton2 = new javax.swing.JButton();
+        jTextField13 = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nuevo Producto");
@@ -251,12 +250,6 @@ Connection cnx = null;
         jLabel24.setText("presione REGISTRAR y los datos serán");
         getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 230, -1));
 
-        jLabel7.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(82, 82, 82));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("PRECIO ORO");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, 340, -1));
-
         jLabel9.setFont(new java.awt.Font("Microsoft Tai Le", 0, 10)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Ingrese valores para cada una de");
@@ -306,7 +299,7 @@ Connection cnx = null;
         jLabel15.setForeground(new java.awt.Color(82, 82, 82));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("DESCRIPCION");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 450, 340, -1));
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 460, 340, -1));
 
         jLabel17.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(82, 82, 82));
@@ -350,20 +343,6 @@ Connection cnx = null;
         });
         getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 360, 60));
 
-        jTextField7.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField7.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
-        jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField7.setBorder(null);
-        jTextField7.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField7KeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField7KeyTyped(evt);
-            }
-        });
-        getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 280, 340, 60));
-
         jLabel23.setFont(new java.awt.Font("Microsoft Tai Le", 0, 10)); // NOI18N
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setText("presione 'Ingresar' y los datos ");
@@ -380,7 +359,7 @@ Connection cnx = null;
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 650, 340, 70));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 660, 360, 60));
 
         jLabel25.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(82, 82, 82));
@@ -400,7 +379,7 @@ Connection cnx = null;
                 jTextField11KeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, 360, 60));
+        getContentPane().add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 380, 350, 60));
 
         jTextField10.setBackground(new java.awt.Color(153, 153, 153));
         jTextField10.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
@@ -417,7 +396,7 @@ Connection cnx = null;
         jLabel26.setForeground(new java.awt.Color(82, 82, 82));
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel26.setText("FECHA DE VENCIMIENTO");
-        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 560, 360, -1));
+        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 550, 350, -1));
 
         jLabel27.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(82, 82, 82));
@@ -504,19 +483,19 @@ Connection cnx = null;
                 jTextField8KeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 360, 60));
+        getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 280, 340, 60));
 
         jLabel32.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(82, 82, 82));
         jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel32.setText("PRECIO ETIQUETA");
-        getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 360, -1));
+        getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, 340, -1));
 
         jLabel33.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(82, 82, 82));
         jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel33.setText("UNIDADES");
-        getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 360, 350, -1));
+        getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 360, -1));
 
         jTextField9.setBackground(new java.awt.Color(153, 153, 153));
         jTextField9.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
@@ -527,10 +506,10 @@ Connection cnx = null;
                 jTextField9KeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 380, 350, 60));
+        getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 360, 60));
 
         jDateChooser1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 580, 360, 60));
+        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 570, 350, 60));
 
         jLabel34.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(82, 82, 82));
@@ -542,13 +521,13 @@ Connection cnx = null;
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 470, 340, 170));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 480, 340, 220));
 
         jLabel19.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(82, 82, 82));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("presione \"SI\" para AUTORIZAR el descuento al producto");
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 580, 360, 30));
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 580, 360, 30));
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-----------" }));
@@ -611,31 +590,43 @@ Connection cnx = null;
                 jTextField12KeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 480, 360, 60));
+        getContentPane().add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, 360, 60));
 
         jLabel35.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(82, 82, 82));
         jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel35.setText("ALERTA DE UNIDADES");
-        getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 460, 360, -1));
-
-        jLabel20.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(82, 82, 82));
-        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setText("DESCUENTO");
-        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 460, 360, -1));
+        getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 460, 360, -1));
 
         jCheckBox1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jCheckBox1.setText("SI < - - - - - - - - - - - - - - - - - - - - - - - ");
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 600, 320, 40));
+        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 600, 320, 40));
 
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        jTextField13.setBackground(new java.awt.Color(153, 153, 153));
+        jTextField13.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
+        jTextField13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField13.setBorder(null);
+        jTextField13.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField13KeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField13KeyTyped(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 680, -1, -1));
+        getContentPane().add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 480, 350, 60));
+
+        jLabel36.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel36.setText("¿CUALES SERAN LOS DESCUENTOS?");
+        getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 360, 350, -1));
+
+        jLabel37.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel37.setText("¿CUANDO HARA DESCUENTOS?");
+        getContentPane().add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 460, 350, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -735,7 +726,7 @@ Connection cnx = null;
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 errorDatos err1 = new errorDatos();
 
-        if(jTextField1.getText().length()!=0 && jTextField2.getText().length()!=0 && jTextField3.getText().length()!=0 && jTextField4.getText().length()!=0 && jTextField5.getText().length()!=0&& jTextField6.getText().length()!=0&& jTextField7.getText().length()!=0&& jTextField8.getText().length()!=0&& jTextField9.getText().length()!=0&& jTextField10.getText().length()!=0&& jTextField11.getText().length()!=0&& jTextField12.getText().length()!=0 ){
+        if(jTextField1.getText().length()!=0 && jTextField2.getText().length()!=0 && jTextField3.getText().length()!=0 && jTextField4.getText().length()!=0 && jTextField5.getText().length()!=0&& jTextField6.getText().length()!=0&& jTextField8.getText().length()!=0&& jTextField9.getText().length()!=0&& jTextField10.getText().length()!=0&& jTextField11.getText().length()!=0&& jTextField12.getText().length()!=0 ){
         if(jCheckBox1.isSelected()){
         autSY="-";
         }     
@@ -749,14 +740,14 @@ errorDatos err1 = new errorDatos();
         precCP = Double.parseDouble(jTextField4.getText());
         preVP = Double.parseDouble(jTextField5.getText());
         preMP = Double.parseDouble(jTextField6.getText());
-        preORO = Double.parseDouble(jTextField7.getText());
         preET = Double.parseDouble(jTextField8.getText());
         unidP = jTextField9.getText();
         unids = Integer.parseInt(unidP);
         ubicaProd = jTextField10.getText();
         alert = jTextField12.getText();
         int alte = Integer.parseInt(alert);
-        descuento = Double.parseDouble(jTextField11.getText());
+        descuento = jTextField11.getText();
+        porcions= jTextField13.getText();
         descrip = jTextArea1.getText();
    try {
 String formato = jDateChooser1.getDateFormatString();
@@ -767,7 +758,7 @@ fecha = String.valueOf(sdf.format(date));
 } catch (Exception e) {
 } 
    
-   prodProducto(codB,codP,catP,nameP,provP, precCP, preVP, preMP, preORO, preET, unids, ubicaProd, descuento,descrip, fecha, alte);
+   prodProducto(codB,codP,catP,nameP,provP, precCP, preVP, preMP, preET, unids, ubicaProd, descuento,descrip, fecha, alte, porcions);
        stocktaking.test=1;
        hacer_ventas.test2=1;
 jTextField1.setText("");
@@ -776,7 +767,6 @@ jTextField3.setText("");
 jTextField4.setText("");
 jTextField5.setText("");
 jTextField6.setText("");
-jTextField7.setText("");
 jTextField8.setText("");
 jTextField9.setText("");
 jTextField10.setText("");
@@ -800,15 +790,6 @@ x = evt.getX();
     private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
           // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3KeyTyped
-
-    private void jTextField7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyTyped
-char c=evt.getKeyChar(); 
-          if(Character.isLetter(c)) { 
-              getToolkit().beep();               
-              evt.consume();              
-              JOptionPane.showMessageDialog(this,"Ingrese solo números");
-          }          // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7KeyTyped
 
     private void jTextField11KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField11KeyTyped
 char c=evt.getKeyChar(); 
@@ -834,12 +815,6 @@ if(evt.getKeyCode()==10){
 //jTextField8.requestFocus();
 }        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2KeyPressed
-
-    private void jTextField7KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyPressed
-if(evt.getKeyCode()==10){
-jTextField11.requestFocus();
-}        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7KeyPressed
 
     private void jTextField11KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField11KeyPressed
 if(evt.getKeyCode()==10){
@@ -964,9 +939,13 @@ char c=evt.getKeyChar();
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField12ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-JOptionPane.showMessageDialog(this,jCheckBox1.isSelected());        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jTextField13KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField13KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField13KeyPressed
+
+    private void jTextField13KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField13KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField13KeyTyped
 
     /**
      * @param args the command line arguments
@@ -1008,7 +987,6 @@ JOptionPane.showMessageDialog(this,jCheckBox1.isSelected());        // TODO add 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox1;
@@ -1025,7 +1003,6 @@ JOptionPane.showMessageDialog(this,jCheckBox1.isSelected());        // TODO add 
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -1042,9 +1019,10 @@ JOptionPane.showMessageDialog(this,jCheckBox1.isSelected());        // TODO add 
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1053,19 +1031,19 @@ JOptionPane.showMessageDialog(this,jCheckBox1.isSelected());        // TODO add 
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 
    
     
-     public void prodProducto(String codBarr, String codProd, String categor, String  producto,String  Proveedor,Double  PrecioCompra,Double PrecioVenta,Double PrecioMayo,Double PrecioGold, Double PrecioEtiq, int unid, String ubi, Double descc, String descrip, String fechas, int alerta)
+     public void prodProducto(String codBarr, String codProd, String categor, String  producto,String  Proveedor,Double  PrecioCompra,Double PrecioVenta,Double PrecioMayo, Double PrecioEtiq, int unid, String ubi, String descc, String descrip, String fechas, int alerta, String pocs)
    {    
        
        try {            
@@ -1085,16 +1063,15 @@ JOptionPane.showMessageDialog(this,jCheckBox1.isSelected());        // TODO add 
             proc.setDouble(11, PrecioCompra);
             proc.setDouble(12, PrecioVenta);
             proc.setDouble(13, PrecioMayo);
-            proc.setDouble(14, PrecioGold);
-            proc.setDouble(15, PrecioEtiq);
-            proc.setDouble(16, descc);
-            proc.setString(17, autSY);
+            proc.setDouble(14, PrecioEtiq);
+            proc.setString(15, descc);
+            proc.setString(16, autSY);
+            proc.setString(17, pocs);
             // Se ejecuta el procedimiento almacenado
             proc.execute();  
               jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
-        jTextField7.setText("");
         jTextField11.setText("");
         jTextField10.setText("");
         jTextField1.requestFocus();

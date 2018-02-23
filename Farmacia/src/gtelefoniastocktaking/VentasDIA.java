@@ -278,7 +278,7 @@ static float invT=0;
         });
         jScrollPane1.setViewportView(tablaVentas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 1320, 380));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 1320, 440));
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/barraMensajes.png"))); // NOI18N
         jLabel20.setPreferredSize(new java.awt.Dimension(367, 70));
@@ -720,6 +720,7 @@ invT=0;
 w=0;
 
 DefaultTableModel modelo = new DefaultTableModel();
+tablaVentas.setRowHeight(25);
         tablaVentas.setModel(modelo);
         Connection cnx = null;
         if (cnx == null) {

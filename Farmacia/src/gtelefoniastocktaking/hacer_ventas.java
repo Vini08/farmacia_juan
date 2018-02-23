@@ -5,6 +5,7 @@
  */
 package gtelefoniastocktaking;
 
+import static gtelefoniastocktaking.MENUadmin.controlVentana1;
 import static gtelefoniastocktaking.inventario.jTable1;
 import static gtelefoniastocktaking.inventario.pass;
 import static gtelefoniastocktaking.inventario.url;
@@ -12,6 +13,7 @@ import static gtelefoniastocktaking.inventario.user;
 import gtelefoniastocktaking.mensajesSYS.cantidadMAyor;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,6 +23,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -44,25 +47,30 @@ String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
 String pass = "";
 int cant,operacion1, aux;
-public static int count;
-String ID, MK, MD, PRD, search, auty;
-ArrayList<String> permissio = new ArrayList<>();
+public static int count, cantT1;
+String ID, MK, MD, PRD, search, auty,DescuentoAUX, PorcionesAUX;
+ArrayList<String> descuentos = new ArrayList<>();
+ArrayList<String> porciones = new ArrayList<>();
+ArrayList<String> Auxiliar = new ArrayList<>();
 int UD;
 String auxST,autr ;
 public String cdp, Cliente;
 private int x;
 private int y;
 public static String cod_prod,categor,product, tipoVent;
-Double PreV, PreMay, PreOro, descu,totalVenta,descuentoPersn;
+Double PreV, PreMay, descu,totalVenta,descuentoPersn;
 int cantidad, unidadesDeseadas = 0, auxBT=0,auxBTNar=0;
 String totalV, unit;
 Color CBTNFocus =new Color(243,98,1);
 Color focusAdd =new Color(0,120,240);
 Color focusDel =new Color(198,17,17);
+Color focusMay =new Color(51,255,153);
 Border focus = new LineBorder(CBTNFocus, 86);
 Border focusA = new LineBorder(focusAdd, 86);
 Border focusD = new LineBorder(focusDel, 86);
+Border focusF = new LineBorder(focusMay, 86);
 Color CBTNmenu =new Color(241,118,36);
+Color BTNMayoris =new Color(80,191,136);
 Color add =new Color(0,102,204);
 Color delete =new Color(172,26,26);
 Color Nums =new Color(153,153,153);
@@ -115,12 +123,11 @@ ArrayList<Integer> units = new ArrayList<>();
 
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jLabel22 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jLabel41 = new javax.swing.JLabel();
+        jButton12 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -131,7 +138,6 @@ ArrayList<Integer> units = new ArrayList<>();
         jLabel21 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -237,22 +243,6 @@ ArrayList<Integer> units = new ArrayList<>();
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1284, 0, 40, 40));
 
-        jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jCheckBox2.setText("Precio Mayoreo");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, -1, -1));
-
-        jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jCheckBox3.setText("Precio Oro");
-        getContentPane().add(jCheckBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, 145, -1));
-
-        jLabel22.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 22), new java.awt.Color(142, 142, 142))); // NOI18N
-        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 550, 70));
-
         jLabel3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(123, 123, 123));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -298,6 +288,51 @@ ArrayList<Integer> units = new ArrayList<>();
             }
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1324, 0, 41, 40));
+
+        jLabel41.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel41.setText("Mayoritas");
+        jLabel41.setToolTipText("");
+        jLabel41.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel41.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel41.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel41MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel41MouseReleased(evt);
+            }
+        });
+        jLabel41.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel41MouseMoved(evt);
+            }
+        });
+        getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 320, 210, 70));
+
+        jButton12.setBackground(new java.awt.Color(80, 191, 136));
+        jButton12.setForeground(new java.awt.Color(3, 64, 124));
+        jButton12.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton12.setFocusPainted(false);
+        jButton12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton12MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton12MouseReleased(evt);
+            }
+        });
+        jButton12.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jButton12MouseMoved(evt);
+            }
+        });
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 320, 210, 70));
 
         jLabel1.setText(".");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 750, 10, -1));
@@ -352,7 +387,7 @@ ArrayList<Integer> units = new ArrayList<>();
                 jLabel20MouseReleased(evt);
             }
         });
-        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 320, 70, 70));
+        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, 70, 70));
 
         jLabel21.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -368,7 +403,7 @@ ArrayList<Integer> units = new ArrayList<>();
                 jLabel21MouseReleased(evt);
             }
         });
-        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 320, 70, 70));
+        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 70, 70));
 
         jButton4.setBackground(new java.awt.Color(153, 153, 153));
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
@@ -378,7 +413,7 @@ ArrayList<Integer> units = new ArrayList<>();
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 320, 70, 70));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 70, 70));
 
         jButton5.setBackground(new java.awt.Color(153, 153, 153));
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
@@ -388,17 +423,13 @@ ArrayList<Integer> units = new ArrayList<>();
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 320, 70, 70));
-
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jCheckBox1.setText("Descuento");
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 340, 145, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, 70, 70));
 
         jLabel12.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 22)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(38, 38, 38));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Número de unidades");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 290, 200, 30));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, 200, 30));
 
         jTable1.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 18)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -406,7 +437,7 @@ ArrayList<Integer> units = new ArrayList<>();
 
             },
             new String [] {
-                "Codigo", "Categoria", "Producto", "Precio", "Descuento", "Unidades", "Total", "Tipo Cliente"
+                "Codigo", "Categoria", "Producto", "Precio", "Descuento", "Unidades", "Total", "Tipo Cliente", "#"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -460,7 +491,7 @@ ArrayList<Integer> units = new ArrayList<>();
                 lcdKeyReleased(evt);
             }
         });
-        getContentPane().add(lcd, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 320, 60, 70));
+        getContentPane().add(lcd, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 320, 60, 70));
 
         jLabel14.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 54)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(243, 93, 14));
@@ -557,7 +588,7 @@ ArrayList<Integer> units = new ArrayList<>();
                 jLabel39MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 320, 210, 70));
+        getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 320, 210, 70));
 
         jButton10.setBackground(new java.awt.Color(172, 26, 26));
         jButton10.setForeground(new java.awt.Color(3, 64, 124));
@@ -581,7 +612,7 @@ ArrayList<Integer> units = new ArrayList<>();
                 jButton10ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 320, 210, 70));
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 320, 210, 70));
 
         jLabel40.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -602,7 +633,7 @@ ArrayList<Integer> units = new ArrayList<>();
                 jLabel40MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 320, 210, 70));
+        getContentPane().add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 320, 210, 70));
 
         jButton11.setBackground(new java.awt.Color(0, 102, 204));
         jButton11.setForeground(new java.awt.Color(3, 64, 124));
@@ -626,7 +657,7 @@ ArrayList<Integer> units = new ArrayList<>();
                 jButton11ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 320, 210, 70));
+        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 320, 210, 70));
 
         jTable2.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -653,6 +684,11 @@ ArrayList<Integer> units = new ArrayList<>();
         jTable2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jTable2PropertyChange(evt);
+            }
+        });
+        jTable2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable2KeyPressed(evt);
             }
         });
         jScrollPane2.setViewportView(jTable2);
@@ -756,6 +792,7 @@ if(LoginGT.boot==1){
         Border thickBorderX = new LineBorder(Color.WHITE, 5);
         jButton3.setBorder(thickBorderX);
         find.setText("");
+        cantT1=0;
         this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel3MouseReleased
@@ -835,9 +872,11 @@ if(LoginGT.boot==1){
         Border thickBorder = new LineBorder(delete, 60);
 Border thickBorder2 = new LineBorder(add, 60);
 Border thickBorder3 = new LineBorder(CBTNmenu, 60);
+Border thickBorder4 = new LineBorder(BTNMayoris, 60);
 jButton10.setBorder(thickBorder);
 jButton11.setBorder(thickBorder2);
 jButton9.setBorder(thickBorder3);
+jButton12.setBorder(thickBorder4);
 
 // TODO add your handling code here:
     }//GEN-LAST:event_jLabel17MouseMoved
@@ -908,7 +947,9 @@ Border thickBorder = new LineBorder(delete, 60);
 Border thickBorder2 = new LineBorder(add, 60);
 Border thickBorder3 = new LineBorder(CBTNmenu, 60);
 Border thickBorder4 = new LineBorder(Nums, 60);
+Border thickBorder5 = new LineBorder(BTNMayoris, 60);
 jButton10.setBorder(thickBorder);
+jButton12.setBorder(thickBorder5);
 jButton11.setBorder(thickBorder2);
 jButton9.setBorder(thickBorder3);
 jButton4.setBorder(thickBorder4);
@@ -977,321 +1018,7 @@ jButton10.setBorder(focusD);        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel40MousePressed
 
     private void jLabel40MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel40MouseReleased
-int row = jTable2.getSelectedRow();
- int totalRow=0;
-if(row != -1)
-{
-cod_prod = jTable2.getModel().getValueAt(row, 0).toString();
-categor = jTable2.getModel().getValueAt(row, 1).toString();
-product = jTable2.getModel().getValueAt(row, 2).toString();
-PreV = Double.parseDouble(jTable2.getModel().getValueAt(row, 7).toString());
-PreMay = Double.parseDouble(jTable2.getModel().getValueAt(row, 8).toString());
-PreOro = Double.parseDouble(jTable2.getModel().getValueAt(row, 9).toString());
-descu = Double.parseDouble(jTable2.getModel().getValueAt(row, 10).toString());
-int cantidadTablaBusqueda = Integer.parseInt(jTable2.getModel().getValueAt(row, 5).toString());
-autr = jTable2.getModel().getValueAt(row, 11).toString();
-DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-Object [] fila=new Object[8]; 
-cantidadMAyor m= new cantidadMAyor();
-unit = lcd.getText();
-cantidad = cantidadTablaBusqueda;
-                 MSGUnidadesStock menUnid = new MSGUnidadesStock(unit, Integer.toString(cantidad));
-                 unidadesDeseadas = Integer.valueOf(lcd.getText()); 
-                 
-                 //if para veridifcar que unidades deseadas sean mayor a cero
-                 if(unidadesDeseadas!= 0){
-                     
-                 //if para verificar que hayan existencias en bodega    
-                 if(cantidad>= unidadesDeseadas ){
-                     
-                 //verificar que ningun checbox este seleccionado y verifica si tiene autorizado descuento pero si las unidades deseadas son 4,10,12
-                    if(!jCheckBox1.isSelected()&&!jCheckBox2.isSelected()&&!jCheckBox3.isSelected() && autr.equals("-") &&  (lcd.getText().equals("4") || lcd.getText().equals("10"))){
-                        tipoVent = "Normal";
-                        descuentoPersn=(descu*unidadesDeseadas);
-                        totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV) - descuentoPersn);
-                       operacion1 = cantidad - unidadesDeseadas;
-                       units.add(operacion1);
-                        jTable1.setRowHeight(25);
-                        fila = new Object[8];
-                        fila[0]=cod_prod;
-                        fila[1]=categor; 
-                        fila[2]=product; 
-                        fila[3]=Double.valueOf(PreV);
-                        fila[4]=Double.valueOf(descuentoPersn); 
-                        fila[5]=Double.valueOf(unidadesDeseadas); 
-                        fila[6]=totalVenta; 
-                        fila[7]=tipoVent;  
-                         sumaT = 0.0;
-                        try{
-                        Connection conex = DriverManager.getConnection(url, user, pass);
-                        String Qury = "INSERT INTO tabla_aux SELECT *from producto where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        Statement sts =  conex.createStatement();
-                        sts.executeUpdate(Qury);
-                        String query = "update producto set unidades ='"+operacion1+"' where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        PreparedStatement preparedStmt = conex.prepareStatement(query);
-                        preparedStmt.executeUpdate();
-                        modelo.addRow(fila); 
-                                 jTable1.setModel(modelo);
-                                 lcd.setText("0");
-                                totalRow= jTable1.getRowCount();
-                                    for(int i=0;i<totalRow;i++)
-                                    {
-                                    double sumatoria= Double.parseDouble(String.valueOf(jTable1.getValueAt(i,6)));
-                                    sumaT= sumaT + sumatoria;
-                                    auxST = Double.toString(sumaT);
-                                    jLabel14.setVisible(true);
-                                    jLabel6.setVisible(true);
-                                    jLabel5.setVisible(true); 
-                                    jLabel5.setText(auxST);
-                                    }
-                                    cant=0;
-                        }catch(SQLException es){
-                        JOptionPane.showMessageDialog(this, es);
-                        }  
-                 }
-
-                //verifica si tiene autorizado descuento y si es diferente de 4,10,12 no hace descuento
-                 if(!jCheckBox1.isSelected()&&!jCheckBox2.isSelected()&&!jCheckBox3.isSelected() && (autr.equals("-") && unidadesDeseadas!=4) && (autr.equals("-") && unidadesDeseadas!=10)){
-                        tipoVent = "Normal";
-                        totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV));
-                       operacion1 = cantidad - unidadesDeseadas;
-                       units.add(operacion1);
-                        jTable1.setRowHeight(25);
-                        fila = new Object[8];
-                        fila[0]=cod_prod;
-                        fila[1]=categor; 
-                        fila[2]=product; 
-                        fila[3]=Double.valueOf(PreV);
-                        fila[4]=Double.valueOf(0.0); 
-                        fila[5]=Double.valueOf(unidadesDeseadas); 
-                        fila[6]=totalVenta; 
-                        fila[7]=tipoVent;  
-                         sumaT = 0.0;
-                        try{
-                        Connection conex = DriverManager.getConnection(url, user, pass);
-                        String Qury = "INSERT INTO tabla_aux SELECT *from producto where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        Statement sts =  conex.createStatement();
-                        sts.executeUpdate(Qury);
-                        String query = "update producto set unidades ='"+operacion1+"' where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        PreparedStatement preparedStmt = conex.prepareStatement(query);
-                        preparedStmt.executeUpdate();
-                        modelo.addRow(fila); 
-                                 jTable1.setModel(modelo);
-                                 lcd.setText("0");
-                                totalRow= jTable1.getRowCount();
-                                    for(int i=0;i<totalRow;i++)
-                                    {
-                                    double sumatoria= Double.parseDouble(String.valueOf(jTable1.getValueAt(i,6)));
-                                    sumaT= sumaT + sumatoria;
-                                    auxST = Double.toString(sumaT);
-                                    jLabel14.setVisible(true);
-                                    jLabel6.setVisible(true);
-                                    jLabel5.setVisible(true); 
-                                    jLabel5.setText(auxST);
-                                    }
-                                    cant=0;
-                        }catch(SQLException es){
-                        JOptionPane.showMessageDialog(this, es);
-                        }   
-                 }
-
-                  //verifica si tiene autorizado descuento si no tiene no hace descuento aunque sea 4,10,12
-                  if(!jCheckBox1.isSelected()&&!jCheckBox2.isSelected()&&!jCheckBox3.isSelected()&&autr.equals(".")){
-                        tipoVent = "Normal";
-                        totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV));
-                       operacion1 = cantidad - unidadesDeseadas;
-                       units.add(operacion1);
-                        jTable1.setRowHeight(25);
-                        fila = new Object[8];
-                        fila[0]=cod_prod;
-                        fila[1]=categor; 
-                        fila[2]=product; 
-                        fila[3]=Double.valueOf(PreV);
-                        fila[4]=Double.valueOf(0.0); 
-                        fila[5]=Double.valueOf(unidadesDeseadas); 
-                        fila[6]=totalVenta; 
-                        fila[7]=tipoVent;  
-                         sumaT = 0.0;
-                        try{
-                        Connection conex = DriverManager.getConnection(url, user, pass);
-                        String Qury = "INSERT INTO tabla_aux SELECT *from producto where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        Statement sts =  conex.createStatement();
-                        sts.executeUpdate(Qury);
-                        String query = "update producto set unidades ='"+operacion1+"' where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        PreparedStatement preparedStmt = conex.prepareStatement(query);
-                        preparedStmt.executeUpdate();
-                        modelo.addRow(fila); 
-                                 jTable1.setModel(modelo);
-                                 lcd.setText("0");
-                                totalRow= jTable1.getRowCount();
-                                    for(int i=0;i<totalRow;i++)
-                                    {
-                                    double sumatoria= Double.parseDouble(String.valueOf(jTable1.getValueAt(i,6)));
-                                    sumaT= sumaT + sumatoria;
-                                    auxST = Double.toString(sumaT);
-                                    jLabel14.setVisible(true);
-                                    jLabel6.setVisible(true);
-                                    jLabel5.setVisible(true); 
-                                    jLabel5.setText(auxST);
-                                    }
-                                    cant=0;
-                        }catch(SQLException es){
-                        JOptionPane.showMessageDialog(this, es);
-                        }
-                 }
-                 //if para ver que tipo de checkbox descuento esta seleccionó    
-                     if(jCheckBox1.isSelected()&&!jCheckBox2.isSelected()&&!jCheckBox3.isSelected()){
-                     tipoVent = "Normal";
-                     totalVenta = Double.valueOf(unidadesDeseadas) * PreV - descu;
-                       operacion1 = cantidad - unidadesDeseadas;
-                       units.add(operacion1);
-                        jTable1.setRowHeight(25);
-                        fila = new Object[8];
-                        fila[0]=cod_prod;
-                        fila[1]=categor; 
-                        fila[2]=product; 
-                        fila[3]=Double.valueOf(PreV);
-                        fila[4]=Double.valueOf(descu); 
-                        fila[5]=Double.valueOf(unidadesDeseadas); 
-                        fila[6]=totalVenta; 
-                        fila[7]=tipoVent;  
-                         sumaT = 0.0;
-                        try{
-                        Connection conex = DriverManager.getConnection(url, user, pass);
-                        String Qury = "INSERT INTO tabla_aux SELECT *from producto where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        Statement sts =  conex.createStatement();
-                        sts.executeUpdate(Qury);
-                        String query = "update producto set unidades ='"+operacion1+"' where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        PreparedStatement preparedStmt = conex.prepareStatement(query);
-                        preparedStmt.executeUpdate();
-                        modelo.addRow(fila); 
-                                 jTable1.setModel(modelo);
-                                 lcd.setText("0");
-                                 totalRow= jTable1.getRowCount();
-                                    for(int i=0;i<(totalRow);i++)
-                                    {
-                                    double sumatoria= Double.parseDouble(String.valueOf(jTable1.getValueAt(i,6)));
-                                    sumaT= sumaT + sumatoria;
-                                    auxST = Double.toString(sumaT);
-                                    jLabel14.setVisible(true);
-                                    jLabel6.setVisible(true);
-                                    jLabel5.setVisible(true); 
-                                    jLabel5.setText(auxST);
-                                    }
-                                    cant=0;
-                        }catch(SQLException es){
-                        JOptionPane.showMessageDialog(this, es);
-                        }
-                      }
-                     
-                     //if para ver que tipo de checkbox MAYOREO esta seleccionó    
-                     if(jCheckBox2.isSelected()&&!jCheckBox1.isSelected()&&!jCheckBox3.isSelected()){
-                       tipoVent = "Mayorista";
-                       totalVenta = Double.valueOf(unidadesDeseadas) * PreMay;
-                       operacion1 = cantidad - unidadesDeseadas;
-                       units.add(operacion1);
-                        jTable1.setRowHeight(25);
-                        fila = new Object[8];
-                        fila[0]=cod_prod;
-                        fila[1]=categor; 
-                        fila[2]=product; 
-                        fila[3]=Double.valueOf(PreMay);
-                        fila[4]=Double.valueOf(0.0); 
-                        fila[5]=Double.valueOf(unidadesDeseadas); 
-                        fila[6]=totalVenta; 
-                        fila[7]=tipoVent;  
-                         sumaT = 0.0;
-                        try{
-                        Connection conex = DriverManager.getConnection(url, user, pass);
-                        String Qury = "INSERT INTO tabla_aux SELECT *from producto where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        Statement sts =  conex.createStatement();
-                        sts.executeUpdate(Qury);
-                        String query = "update producto set unidades ='"+operacion1+"' where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        PreparedStatement preparedStmt = conex.prepareStatement(query);
-                        preparedStmt.executeUpdate();
-                        modelo.addRow(fila); 
-                                 jTable1.setModel(modelo);
-                                 lcd.setText("0");
-                                    totalRow= jTable1.getRowCount();
-                                    for(int i=0;i<(totalRow);i++)
-                                    {
-                                    double sumatoria= Double.parseDouble(String.valueOf(jTable1.getValueAt(i,6)));
-                                    sumaT= sumaT + sumatoria;
-                                    auxST = Double.toString(sumaT);
-                                    jLabel14.setVisible(true);
-                                    jLabel6.setVisible(true);
-                                    jLabel5.setVisible(true); 
-                                    jLabel5.setText(auxST);
-                                    }
-                                    cant=0;
-        
-                        }catch(SQLException es){
-                        JOptionPane.showMessageDialog(this, es);
-                        }
-                      }
-                     //if para ver que tipo de checkbox ORO esta seleccionó    
-                     if(jCheckBox3.isSelected()&&!jCheckBox1.isSelected()&&!jCheckBox2.isSelected()){
-                       tipoVent = "Oro";
-                       totalVenta = Double.valueOf(unidadesDeseadas) * PreOro;
-                       operacion1 = cantidad - unidadesDeseadas;
-                       units.add(operacion1);
-                        jTable1.setRowHeight(25);
-                        fila = new Object[8];
-                        fila[0]=cod_prod;
-                        fila[1]=categor; 
-                        fila[2]=product; 
-                        fila[3]=Double.valueOf(PreOro);
-                        fila[4]=Double.valueOf(0.0); 
-                        fila[5]=Double.valueOf(unidadesDeseadas); 
-                        fila[6]=totalVenta; 
-                        fila[7]=tipoVent;  
-                         sumaT = 0.0;
-                        try{
-                        Connection conex = DriverManager.getConnection(url, user, pass);
-                        String Qury = "INSERT INTO tabla_aux SELECT *from producto where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        Statement sts =  conex.createStatement();
-                        sts.executeUpdate(Qury);
-                        String query = "update producto set unidades ='"+operacion1+"' where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        PreparedStatement preparedStmt = conex.prepareStatement(query);
-                        preparedStmt.executeUpdate();
-                        modelo.addRow(fila); 
-                                 jTable1.setModel(modelo);
-                                 lcd.setText("0");
-                                 totalRow= jTable1.getRowCount();
-                                    for(int i=0;i<(totalRow);i++)
-                                    {
-                                    double sumatoria= Double.parseDouble(String.valueOf(jTable1.getValueAt(i,6)));
-                                    sumaT= sumaT + sumatoria;
-                                    auxST = Double.toString(sumaT);
-                                    jLabel14.setVisible(true);
-                                    jLabel6.setVisible(true);
-                                    jLabel5.setVisible(true); 
-                                    jLabel5.setText(auxST);
-                                    }
-                                    cant=0;
-                        }catch(SQLException es){
-                        JOptionPane.showMessageDialog(this, es);
-                        }
-                      } 
-                     
-                     //limpia y pone foco a label para buscar de nuevo y recarga la tabla de bsuqueda
-                     search= find.getText();
-                     buscarT(search);
-                     find.setText("");
-                     find.requestFocus();
-        }
-        else 
-            menUnid.setVisible(true);
-            menUnid.setLocationRelativeTo(null);
-        }
-        else 
-           m.setVisible(true);
-           m.setLocationRelativeTo(null);
-
-
-   }
-else
-    JOptionPane.showMessageDialog(this,"No seleccionó ningun artículo");
+AddMatte();
 // TODO add your handling code here:
     }//GEN-LAST:event_jLabel40MouseReleased
 
@@ -1435,9 +1162,41 @@ search= find.getText();
         // TODO add your handling code here:
     }//GEN-LAST:event_lcdKeyReleased
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+    private void jLabel41MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel41MousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+    }//GEN-LAST:event_jLabel41MousePressed
+
+    private void jLabel41MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel41MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel41MouseReleased
+
+    private void jLabel41MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel41MouseMoved
+//boton mayorita puntero arriba
+        jButton12.setBorder(focusF);         // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel41MouseMoved
+
+    private void jButton12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton12MousePressed
+
+    private void jButton12MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton12MouseReleased
+
+    private void jButton12MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton12MouseMoved
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jTable2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyPressed
+int pressEnter = evt.getKeyCode();
+if(pressEnter==KeyEvent.VK_ENTER){
+JOptionPane.showMessageDialog(this,"hola vini");
+}// TODO add your handling code here:
+    }//GEN-LAST:event_jTable2KeyPressed
 
     /**
      * @param args the command line arguments
@@ -1486,13 +1245,11 @@ search= find.getText();
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton9;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1504,12 +1261,12 @@ search= find.getText();
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
     public static javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1521,10 +1278,6 @@ search= find.getText();
     public static javax.swing.JTable jTable2;
     private javax.swing.JTextField lcd;
     // End of variables declaration//GEN-END:variables
-
-
-
-
 
 
 public void reback(){
@@ -1593,7 +1346,7 @@ public void rebackUnid(){
             }
     try{
       conI = DriverManager.getConnection(url, user,pass);
-        String Qury = "Delete from tabla_aux where codigo_producto='"+String.valueOf(jTable1.getValueAt(rw,0))+"' && categoria='"+String.valueOf(jTable1.getValueAt(rw,1))+"'"+"&& producto='"+String.valueOf(jTable1.getValueAt(rw,2))+"'";
+        String Qury = "Delete from tabla_aux where codigo_producto='"+String.valueOf(jTable1.getValueAt(rw,0))+"' && categoria='"+String.valueOf(jTable1.getValueAt(rw,1))+"'"+"&& producto='"+String.valueOf(jTable1.getValueAt(rw,2))+"' && cant='"+jTable1.getValueAt(rw,8)+"'";
         Statement sts =  conI.createStatement();
         sts.executeUpdate(Qury);
         }
@@ -1612,7 +1365,7 @@ public void buscarT(String search){
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "SELECT codigo_producto, categoria, producto, proveedor, ubicacion, unidades, fecha_vencimiento, precio_venta, precio_mayoreo, precio_oro, descuento,lll from producto where codigo_producto like '"+busq+"%' or "+"producto like '"+busq+"%'"+" or "+"categoria like '"+busq+"%'";
+             String sql = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento,descripcion, precio_venta, lll from producto where codigo_producto like '"+busq+"%' or "+"producto like '"+busq+"%'"+" or "+"categoria like '"+busq+"%' or descripcion like '"+busq+"%'";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
@@ -1640,7 +1393,7 @@ public void buscarT(String search){
 public void LlenarTabla(){
         
     
-    String Query = "SELECT codigo_producto, categoria, producto, proveedor, ubicacion, unidades, fecha_vencimiento, precio_venta, precio_mayoreo, precio_oro, descuento, lll from producto";
+    String Query = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento, descripcion, precio_venta, lll from producto";
         DefaultTableModel modelo = new DefaultTableModel();
         jTable2.setModel(modelo);
         Connection cnx = null;
@@ -1673,19 +1426,237 @@ public void LlenarTabla(){
        
     }
 
-public void columnas(){
-jTable2.getColumnModel().getColumn(0).setPreferredWidth(110);
-jTable2.getColumnModel().getColumn(1).setPreferredWidth(140);
-jTable2.getColumnModel().getColumn(2).setPreferredWidth(160);
-jTable2.getColumnModel().getColumn(3).setPreferredWidth(100);
-jTable2.getColumnModel().getColumn(4).setPreferredWidth(50);
-jTable2.getColumnModel().getColumn(5).setPreferredWidth(50);
-jTable2.getColumnModel().getColumn(6).setPreferredWidth(110);
-jTable2.getColumnModel().getColumn(7).setPreferredWidth(90);
-jTable2.getColumnModel().getColumn(8).setPreferredWidth(90);
-jTable2.getColumnModel().getColumn(9).setPreferredWidth(90);
-jTable2.getColumnModel().getColumn(10).setPreferredWidth(60);
-jTable2.getColumnModel().getColumn(11).setPreferredWidth(1);
-jTable2.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+
+public void AddMatte(){
+    int row = jTable2.getSelectedRow();
+ int totalRow=0;
+ int h=0,j=0;
+ cantT1++;
+ Auxiliar.clear();
+ porciones.clear();
+ descuentos.clear();
+if(row != -1)
+{
+cod_prod = jTable2.getModel().getValueAt(row, 0).toString();
+categor = jTable2.getModel().getValueAt(row, 1).toString();
+product = jTable2.getModel().getValueAt(row, 2).toString();
+PreV = Double.parseDouble(jTable2.getModel().getValueAt(row, 7).toString());
+int cantidadTablaBusqueda = Integer.parseInt(jTable2.getModel().getValueAt(row, 4).toString());
+autr = jTable2.getModel().getValueAt(row, 8).toString();
+DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+Object [] fila=new Object[9]; 
+cantidadMAyor m= new cantidadMAyor();
+unit = lcd.getText();
+cantidad = cantidadTablaBusqueda;
+//consulta para obtener porciones y descuentos
+if(autr.equals("-")){
+try{    
+            cnx = DriverManager.getConnection(url, user,pass);
+             String sql = "Select descuento, porciones from producto where codigo_producto='"+cod_prod+"' && producto='"+product+"' && categoria='"+categor+"'";
+             Statement st = cnx.prepareStatement(sql);
+             ResultSet res = st.executeQuery(sql);
+             
+            while (res.next()){
+            DescuentoAUX= (res.getString(1));
+            PorcionesAUX= (res.getString(2));
+            }
+            }
+            catch(SQLException ex)
+            {JOptionPane.showMessageDialog(this,ex);}
+            StringTokenizer tokensDescuento=new StringTokenizer(DescuentoAUX,",");
+            while(tokensDescuento.hasMoreTokens()){
+            descuentos.add(tokensDescuento.nextToken());
+            }
+            StringTokenizer tokensPorcns=new StringTokenizer(PorcionesAUX,",");
+            while(tokensPorcns.hasMoreTokens()){
+            porciones.add(tokensPorcns.nextToken());
+            }
 }
+                 MSGUnidadesStock menUnid = new MSGUnidadesStock(unit, Integer.toString(cantidad));
+                 unidadesDeseadas = Integer.valueOf(lcd.getText()); 
+                 
+                 //if para veridifcar que unidades deseadas sean mayor a cero
+                 if(unidadesDeseadas!= 0){
+                     
+                 //if para verificar que hayan existencias en bodega    
+                 if(cantidad>= unidadesDeseadas ){
+                  
+                 //si tiene autorizado descuento
+                   while(h<porciones.size()){
+                    if(autr.equals("-") &&  porciones.get(h).equals(unit)){
+                        Auxiliar.add(porciones.get(h));
+                        tipoVent = "Normal";
+                        descuentoPersn=(Double.parseDouble(descuentos.get(h)));
+                        totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV) - descuentoPersn);
+                       operacion1 = cantidad - unidadesDeseadas;
+                       units.add(operacion1);
+                        jTable1.setRowHeight(25);
+                        fila = new Object[9];
+                        fila[0]=cod_prod;
+                        fila[1]=categor; 
+                        fila[2]=product; 
+                        fila[3]=Double.valueOf(PreV);
+                        fila[4]=Double.valueOf(descuentoPersn); 
+                        fila[5]=Double.valueOf(unidadesDeseadas); 
+                        fila[6]=totalVenta; 
+                        fila[7]=tipoVent;  
+                        fila[8]=cantT1; 
+                         sumaT = 0.0;
+                        try{
+                        Connection conex = DriverManager.getConnection(url, user, pass);
+                        String Qury = "INSERT INTO tabla_aux(codigo_producto,codigo_barra,categoria,producto,proveedor,descripcion,ubicacion,unidades, alerta_unidades,fecha_vencimiento,precio_compra,precio_venta,precio_mayoreo,precio_etiqueta,descuento,autorizy,porciones,cant) SELECT codigo_producto,codigo_barra,categoria,producto,proveedor,descripcion,ubicacion,unidades, alerta_unidades,fecha_vencimiento,precio_compra,precio_venta,precio_mayoreo,precio_etiqueta,descuento,lll,porciones,"+cantT1+" from producto where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
+                        Statement sts =  conex.createStatement();
+                        sts.executeUpdate(Qury);
+                        String query = "update producto set unidades ='"+operacion1+"' where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
+                        PreparedStatement preparedStmt = conex.prepareStatement(query);
+                        preparedStmt.executeUpdate();
+                        modelo.addRow(fila); 
+                                 jTable1.setModel(modelo);
+                                 lcd.setText("0");
+                                totalRow= jTable1.getRowCount();
+                                    for(int ii=0;ii<totalRow;ii++)
+                                    {
+                                    double sumatoria= Double.parseDouble(String.valueOf(jTable1.getValueAt(ii,6)));
+                                    sumaT= sumaT + sumatoria;
+                                    auxST = Double.toString(sumaT);
+                                    jLabel14.setVisible(true);
+                                    jLabel6.setVisible(true);
+                                    jLabel5.setVisible(true); 
+                                    jLabel5.setText(auxST);
+                                    }
+                                    cant=0;
+                        }catch(SQLException es){
+                        JOptionPane.showMessageDialog(this, es);
+                        } 
+                        h=porciones.size();
+                 }
+                 h++;
+                }
+                          //verifica si tiene autorizado descuento y si es diferente de 4,10,12 no hace descuento
+                  if( (autr.equals("-") &&  Auxiliar.size()==0)){
+                        tipoVent = "Normal";
+                        totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV));
+                       operacion1 = cantidad - unidadesDeseadas;
+                       units.add(operacion1);
+                        jTable1.setRowHeight(25);
+                        fila = new Object[9];
+                        fila[0]=cod_prod;
+                        fila[1]=categor; 
+                        fila[2]=product; 
+                        fila[3]=Double.valueOf(PreV);
+                        fila[4]=Double.valueOf(0.0); 
+                        fila[5]=Double.valueOf(unidadesDeseadas); 
+                        fila[6]=totalVenta; 
+                        fila[7]=tipoVent;  
+                        fila[8]=cantT1;
+                         sumaT = 0.0;
+                        try{
+                        Connection conex = DriverManager.getConnection(url, user, pass);
+                        String Qury = "INSERT INTO tabla_aux(codigo_producto,codigo_barra,categoria,producto,proveedor,descripcion,ubicacion,unidades, alerta_unidades,fecha_vencimiento,precio_compra,precio_venta,precio_mayoreo,precio_etiqueta,descuento,autorizy,porciones,cant) SELECT codigo_producto,codigo_barra,categoria,producto,proveedor,descripcion,ubicacion,unidades, alerta_unidades,fecha_vencimiento,precio_compra,precio_venta,precio_mayoreo,precio_etiqueta,descuento,lll,porciones,"+cantT1+" from producto where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
+                        Statement sts =  conex.createStatement();
+                        sts.executeUpdate(Qury);
+                        String query = "update producto set unidades ='"+operacion1+"' where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
+                        PreparedStatement preparedStmt = conex.prepareStatement(query);
+                        preparedStmt.executeUpdate();
+                        modelo.addRow(fila); 
+                                 jTable1.setModel(modelo);
+                                 lcd.setText("0");
+                                totalRow= jTable1.getRowCount();
+                                    for(int ii=0;ii<totalRow;ii++)
+                                    {
+                                    double sumatoria= Double.parseDouble(String.valueOf(jTable1.getValueAt(ii,6)));
+                                    sumaT= sumaT + sumatoria;
+                                    auxST = Double.toString(sumaT);
+                                    jLabel14.setVisible(true);
+                                    jLabel6.setVisible(true);
+                                    jLabel5.setVisible(true); 
+                                    jLabel5.setText(auxST);
+                                    }
+                                    cant=0;
+                        }catch(SQLException es){
+                        JOptionPane.showMessageDialog(this, es);
+                        }   
+                  j=Auxiliar.size();
+                  
+                 }
+                 
+                  //verifica si tiene autorizado descuento si no tiene no hace descuento aunque sea 4,10,12
+                  if(autr.equals(".")){
+                        tipoVent = "Normal";
+                        totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV));
+                       operacion1 = cantidad - unidadesDeseadas;
+                       units.add(operacion1);
+                        jTable1.setRowHeight(25);
+                        fila = new Object[8];
+                        fila[0]=cod_prod;
+                        fila[1]=categor; 
+                        fila[2]=product; 
+                        fila[3]=Double.valueOf(PreV);
+                        fila[4]=Double.valueOf(0.0); 
+                        fila[5]=Double.valueOf(unidadesDeseadas); 
+                        fila[6]=totalVenta; 
+                        fila[7]=tipoVent;  
+                         sumaT = 0.0;
+                        try{
+                        Connection conex = DriverManager.getConnection(url, user, pass);
+                        String Qury = "INSERT INTO tabla_aux(codigo_producto,codigo_barra,categoria,producto,proveedor,descripcion,ubicacion,unidades, alerta_unidades,fecha_vencimiento,precio_compra,precio_venta,precio_mayoreo,precio_etiqueta,descuento,autorizy,porciones,cant) SELECT codigo_producto,codigo_barra,categoria,producto,proveedor,descripcion,ubicacion,unidades, alerta_unidades,fecha_vencimiento,precio_compra,precio_venta,precio_mayoreo,precio_etiqueta,descuento,lll,porciones,"+cantT1+" from producto where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
+                        Statement sts =  conex.createStatement();
+                        sts.executeUpdate(Qury);
+                        String query = "update producto set unidades ='"+operacion1+"' where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
+                        PreparedStatement preparedStmt = conex.prepareStatement(query);
+                        preparedStmt.executeUpdate();
+                        modelo.addRow(fila); 
+                                 jTable1.setModel(modelo);
+                                 lcd.setText("0");
+                                totalRow= jTable1.getRowCount();
+                                    for(int i=0;i<totalRow;i++)
+                                    {
+                                    double sumatoria= Double.parseDouble(String.valueOf(jTable1.getValueAt(i,6)));
+                                    sumaT= sumaT + sumatoria;
+                                    auxST = Double.toString(sumaT);
+                                    jLabel14.setVisible(true);
+                                    jLabel6.setVisible(true);
+                                    jLabel5.setVisible(true); 
+                                    jLabel5.setText(auxST);
+                                    }
+                                    cant=0;
+                        }catch(SQLException es){
+                        JOptionPane.showMessageDialog(this, es);
+                        }
+                 }
+                  
+      
+                     //limpia y pone foco a label para buscar de nuevo y recarga la tabla de bsuqueda
+                     search= find.getText();
+                     buscarT(search);
+                     find.setText("");
+                     find.requestFocus();
+        }
+        else 
+            menUnid.setVisible(true);
+            menUnid.setLocationRelativeTo(null);
+        }
+        else 
+           m.setVisible(true);
+           m.setLocationRelativeTo(null);
+
+
+   }
+else
+    JOptionPane.showMessageDialog(this,"No seleccionó ningun artículo");
+// TODO add your handling 
+}
+
+    public void columnas(){
+    jTable2.getColumnModel().getColumn(0).setPreferredWidth(140);
+    jTable2.getColumnModel().getColumn(1).setPreferredWidth(200);
+    jTable2.getColumnModel().getColumn(2).setPreferredWidth(450);
+    jTable2.getColumnModel().getColumn(3).setPreferredWidth(60);
+    jTable2.getColumnModel().getColumn(4).setPreferredWidth(80);
+    jTable2.getColumnModel().getColumn(5).setPreferredWidth(150);
+    jTable2.getColumnModel().getColumn(6).setPreferredWidth(1);
+    jTable2.getColumnModel().getColumn(7).setPreferredWidth(110);
+    jTable2.getColumnModel().getColumn(8).setPreferredWidth(20);
+    jTable2.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+    }
 }
