@@ -5,8 +5,8 @@
  */
 package System_Farmacia;
 
-import gtelefoniastocktaking.mensajesSYS.datosAlmacenados;
-import gtelefoniastocktaking.mensajesSYS.errorDatos;
+import FARM.mensajesSYS.datosAlmacenados;
+import FARM.mensajesSYS.errorDatos;
 import static System_Farmacia.stocktaking.pass;
 import static System_Farmacia.stocktaking.url;
 import static System_Farmacia.stocktaking.user;
@@ -1073,6 +1073,7 @@ char c=evt.getKeyChar();
         jTextField3.setText("");
         jTextField11.setText("");
         jTextField10.setText("");
+        jTextField13.setText("");
         jTextField1.requestFocus();
         datosAlmacenados v = new datosAlmacenados();
         v.setVisible(true);

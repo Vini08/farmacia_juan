@@ -5,7 +5,6 @@
  */
 package System_Farmacia;
 
-import static System_Farmacia.hacer_ventas.jTable2;
 import static System_Farmacia.inventario.jTable1;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -30,6 +29,7 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import static System_Farmacia.hacer_ventas.tablaPRODUCTOS;
 
 /**
  *

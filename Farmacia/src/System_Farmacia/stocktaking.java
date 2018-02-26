@@ -5,7 +5,7 @@
  */
 package System_Farmacia;
 
-import gtelefoniastocktaking.mensajesSYS.AdministradorConfir;
+import FARM.mensajesSYS.AdministradorConfir;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;

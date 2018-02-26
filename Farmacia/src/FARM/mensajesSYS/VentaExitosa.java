@@ -3,19 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gtelefoniastocktaking.mensajesSYS;
+package FARM.mensajesSYS;
 
 import com.sun.awt.AWTUtilities;
-import java.awt.event.KeyEvent;
 
 /**
  *
  * @author Vinicio
  */
-public class errorDatos extends javax.swing.JFrame {
+public class VentaExitosa extends javax.swing.JFrame {
 
 
-    public errorDatos() {
+    public VentaExitosa() {
         initComponents();
         setLocationRelativeTo(null);
         AWTUtilities.setWindowOpaque(this, false);
@@ -32,7 +31,6 @@ public class errorDatos extends javax.swing.JFrame {
 
         jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -66,18 +64,11 @@ public class errorDatos extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 26)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(231, 231, 231));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Verificar que los tipos de datos sean los correctos. ");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 500, 40));
-
-        jLabel5.setBackground(new java.awt.Color(153, 153, 153));
-        jLabel5.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 26)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(231, 231, 231));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Debe llenar todos los campos y ");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 517, 40));
+        jLabel4.setText("La venta se realizó con éxito.");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 517, 40));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/barraMensajes.png"))); // NOI18N
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 520, 70));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 520, 50));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/grisFondo.jpg"))); // NOI18N
         jLabel2.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -95,12 +86,16 @@ public class errorDatos extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseMoved
 
     private void jLabel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel2KeyPressed
-// TODO add your handling code here:
+if (evt.getKeyCode()==10){
+this.dispose();
+
+}// TODO add your handling code here:
     }//GEN-LAST:event_jLabel2KeyPressed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-if (evt.getKeyCode()==KeyEvent.VK_ENTER){
+if (evt.getKeyCode()==10){
 this.dispose();
+
 }        // TODO add your handling code here:
     }//GEN-LAST:event_formKeyPressed
 
@@ -123,13 +118,13 @@ this.dispose();
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(errorDatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentaExitosa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(errorDatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentaExitosa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(errorDatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentaExitosa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(errorDatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentaExitosa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -143,7 +138,7 @@ this.dispose();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new errorDatos().setVisible(true);
+                new VentaExitosa().setVisible(true);
             }
         });
     }
@@ -152,7 +147,6 @@ this.dispose();
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }

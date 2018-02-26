@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gtelefoniastocktaking.mensajesSYS;
+package FARM.mensajesSYS;
 
 import System_Farmacia.LoginGT;
 import System_Farmacia.modUsers;
@@ -73,7 +73,6 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         setTitle("Ventas");
         setMinimumSize(new java.awt.Dimension(359, 401));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(360, 401));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);

@@ -5,7 +5,7 @@
  */
 package System_Farmacia;
 
-import gtelefoniastocktaking.mensajesSYS.datosAlmacenados;
+import FARM.mensajesSYS.datosAlmacenados;
 import java.awt.Color;
 import java.math.BigDecimal;
 import java.sql.CallableStatement;

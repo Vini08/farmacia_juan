@@ -24,7 +24,7 @@ import javax.swing.table.JTableHeader;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import static System_Farmacia.hacer_ventas.count;
-import gtelefoniastocktaking.mensajesSYS.VentaExitosa;
+import FARM.mensajesSYS.VentaExitosa;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -891,8 +891,8 @@ public void insertProd(){
       hacer_ventas.count=2;
   
             this.dispose();
-          DefaultTableModel dm = (DefaultTableModel)hacer_ventas.jTable1.getModel();
-          DefaultTableModel origin = (DefaultTableModel)hacer_ventas.jTable2.getModel();
+          DefaultTableModel dm = (DefaultTableModel)hacer_ventas.tablaADD.getModel();
+          DefaultTableModel origin = (DefaultTableModel)hacer_ventas.tablaPRODUCTOS.getModel();
      while(dm.getRowCount() > 0)
      {
         dm.removeRow(0);

@@ -1,12 +1,8 @@
 
 package System_Farmacia;
 
-import static System_Farmacia.MENUadmin.controlVentana1;
-import static System_Farmacia.inventario.jTable1;
-import static System_Farmacia.inventario.pass;
-import static System_Farmacia.inventario.url;
-import static System_Farmacia.inventario.user;
-import gtelefoniastocktaking.mensajesSYS.cantidadMAyor;
+import FARM.mensajesSYS.ShowDescription;
+import FARM.mensajesSYS.cantidadMAyor;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
@@ -18,7 +14,6 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +23,6 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
 
 /**
  *
@@ -53,7 +47,7 @@ String auxST,autr ;
 public String cdp, Cliente;
 private int x;
 private int y;
-public static String cod_prod,categor,product, tipoVent;
+public static String DESCRPart,cod_prod,categor,product, tipoVent;
 Double PreV, PreMay, descu,totalVenta,descuentoPersn;
 int cantidad, unidadesDeseadas = 0, auxBT=0,auxBTNar=0;
 String totalV, unit;
@@ -84,7 +78,9 @@ public static String[][] array_Tipo;
 public static String NN;
 public static Double[][] array_Double; 
 ArrayList<Integer> units = new ArrayList<>();
-    public hacer_ventas(String N) {
+   
+
+public hacer_ventas(String N) {
         initComponents();
          setLocationRelativeTo(null);
         find.requestFocus();
@@ -92,10 +88,10 @@ ArrayList<Integer> units = new ArrayList<>();
         jButton3.setBorder(thickBorde);
         NN=cdp;
         JTableHeader th1,th2; 
-        th1 = jTable1.getTableHeader(); 
+        th1 = tablaADD.getTableHeader(); 
         Font fuente1 = new Font("Microsoft Yi Baiti", Font.PLAIN, 22); 
         th1.setFont(fuente1); 
-        th2 = jTable2.getTableHeader(); 
+        th2 = tablaPRODUCTOS.getTableHeader(); 
         Font fuente2 = new Font("Microsoft Yi Baiti", Font.PLAIN, 20); 
         th2.setFont(fuente2); 
         
@@ -117,6 +113,8 @@ ArrayList<Integer> units = new ArrayList<>();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -136,9 +134,10 @@ ArrayList<Integer> units = new ArrayList<>();
         jButton5 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaADD = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         lcd = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -150,9 +149,17 @@ ArrayList<Integer> units = new ArrayList<>();
         jLabel40 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaPRODUCTOS = new javax.swing.JTable();
         jLabel17 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+
+        jMenuItem1.setText("VER DESCRIPCION");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ventas");
@@ -426,8 +433,8 @@ ArrayList<Integer> units = new ArrayList<>();
         jLabel12.setText("Número de unidades");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, 200, 30));
 
-        jTable1.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 18)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaADD.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 18)); // NOI18N
+        tablaADD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -435,25 +442,25 @@ ArrayList<Integer> units = new ArrayList<>();
                 "Codigo", "Categoria", "Producto", "Precio", "Descuento", "Unidades", "Total", "Tipo Cliente", "#"
             }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablaADD.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                tablaADDMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jTable1MouseEntered(evt);
+                tablaADDMouseEntered(evt);
             }
         });
-        jTable1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        tablaADD.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jTable1MouseMoved(evt);
+                tablaADDMouseMoved(evt);
             }
         });
-        jTable1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        tablaADD.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jTable1PropertyChange(evt);
+                tablaADDPropertyChange(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaADD);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 1340, 220));
 
@@ -467,6 +474,14 @@ ArrayList<Integer> units = new ArrayList<>();
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Total Venta ");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 270, 80));
+
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 650, -1, -1));
 
         lcd.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
         lcd.setForeground(new java.awt.Color(102, 102, 102));
@@ -654,39 +669,40 @@ ArrayList<Integer> units = new ArrayList<>();
         });
         getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 320, 210, 70));
 
-        jTable2.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPRODUCTOS.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
+        tablaPRODUCTOS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "codigo", "categoria", "producto", "proveedor", "Precio", "ubicacion", "unidades", "fecha", "precio_venta", "precio_mayoreo", "precio_oro", "descuento", "lll"
+                "codigo_producto", "categoria", "producto", "ubicacion", "unidades", "fecha_vencimiento", "descripcion", "precio_venta", "precio_etiqueta", "lll"
             }
         ));
-        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablaPRODUCTOS.setComponentPopupMenu(jPopupMenu1);
+        tablaPRODUCTOS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable2MouseClicked(evt);
+                tablaPRODUCTOSMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jTable2MouseEntered(evt);
+                tablaPRODUCTOSMouseEntered(evt);
             }
         });
-        jTable2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        tablaPRODUCTOS.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jTable2MouseMoved(evt);
+                tablaPRODUCTOSMouseMoved(evt);
             }
         });
-        jTable2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        tablaPRODUCTOS.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jTable2PropertyChange(evt);
+                tablaPRODUCTOSPropertyChange(evt);
             }
         });
-        jTable2.addKeyListener(new java.awt.event.KeyAdapter() {
+        tablaPRODUCTOS.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTable2KeyPressed(evt);
+                tablaPRODUCTOSKeyPressed(evt);
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tablaPRODUCTOS);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 1340, 180));
 
@@ -764,13 +780,13 @@ ArrayList<Integer> units = new ArrayList<>();
         jButton3.setBorder(thickBorder);
         jLabel3.setForeground(ColorFont);
         reback();
-DefaultTableModel model = (DefaultTableModel)jTable1.getModel(); 
+DefaultTableModel model = (DefaultTableModel)tablaADD.getModel(); 
 int rows = model.getRowCount(); 
 for(int i = rows - 1; i >=0; i--)
 {
    model.removeRow(i); 
 }
-DefaultTableModel model2 = (DefaultTableModel)jTable2.getModel(); 
+DefaultTableModel model2 = (DefaultTableModel)tablaPRODUCTOS.getModel(); 
 int rows2 = model2.getRowCount(); 
 for(int i = rows2 - 1; i >=0; i--)
 {
@@ -845,18 +861,18 @@ if(LoginGT.boot==1){
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowGainedFocus
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void tablaADDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaADDMouseClicked
        // TODO add your handling code here:
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_tablaADDMouseClicked
 
     private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
        // TODO add your handling code here:
     }//GEN-LAST:event_formWindowStateChanged
 
-    private void jTable1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseMoved
+    private void tablaADDMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaADDMouseMoved
 
     // TODO add your handling code here:
-    }//GEN-LAST:event_jTable1MouseMoved
+    }//GEN-LAST:event_tablaADDMouseMoved
 
     private void jLabel17MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseMoved
         Border thickBorderX = new LineBorder(Color.WHITE, 5);
@@ -881,27 +897,27 @@ jButton12.setBorder(thickBorder4);
     }//GEN-LAST:event_jLabel38MousePressed
 
     private void jLabel38MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel38MouseReleased
-array_String = new String[jTable1.getRowCount()][jTable1.getColumnCount()];
-array_Tipo = new String[jTable1.getRowCount()][jTable1.getColumnCount()];
-array_Double = new Double[jTable1.getRowCount()][jTable1.getColumnCount()];
+array_String = new String[tablaADD.getRowCount()][tablaADD.getColumnCount()];
+array_Tipo = new String[tablaADD.getRowCount()][tablaADD.getColumnCount()];
+array_Double = new Double[tablaADD.getRowCount()][tablaADD.getColumnCount()];
     int i = 0;
     int j = 0;
-    for (i = 0; i < jTable1.getRowCount(); i++) {
+    for (i = 0; i < tablaADD.getRowCount(); i++) {
         for (j = 0; j < 3; j++) {
-            array_String[i][j] = (String) jTable1.getValueAt(i, j);
+            array_String[i][j] = (String) tablaADD.getValueAt(i, j);
         }
     }
      int f = 0;
     int g = 0;
-    for (f = 0; f < jTable1.getRowCount(); f++) {
+    for (f = 0; f < tablaADD.getRowCount(); f++) {
         for (g = 0; g < 4; g++) {
-            array_Double[f][g] = (Double) jTable1.getValueAt(f, g+3);
+            array_Double[f][g] = (Double) tablaADD.getValueAt(f, g+3);
         }
     }
     
-    for (f = 0; f < jTable1.getRowCount(); f++) {
+    for (f = 0; f < tablaADD.getRowCount(); f++) {
         for (g = 0; g < 1; g++) {
-            array_Tipo[f][g] = (String) jTable1.getValueAt(f, g+7);
+            array_Tipo[f][g] = (String) tablaADD.getValueAt(f, g+7);
         }
     }
     
@@ -961,20 +977,20 @@ jButton5.setBorder(thickBorder4);
     }//GEN-LAST:event_jLabel39MousePressed
 
     private void jLabel39MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel39MouseReleased
-if(jTable1.getSelectedRow() >= 0){
+if(tablaADD.getSelectedRow() >= 0){
  rebackUnid();
  
- int r = jTable1.getSelectedRow();
+ int r = tablaADD.getSelectedRow();
              units.remove( r);
-             DefaultTableModel modelo =(DefaultTableModel)jTable1.getModel(); 
-             int rw = jTable1.getSelectedRow();
+             DefaultTableModel modelo =(DefaultTableModel)tablaADD.getModel(); 
+             int rw = tablaADD.getSelectedRow();
              modelo.removeRow(rw );
              jLabel5.setText("");
              sumaT = 0.0;
-           int totalRow= jTable1.getRowCount();
+           int totalRow= tablaADD.getRowCount();
         for(int i=0;i<(totalRow);i++)
         {
-        double sumatoria= Double.parseDouble(String.valueOf(jTable1.getValueAt(i,6)));
+        double sumatoria= Double.parseDouble(String.valueOf(tablaADD.getValueAt(i,6)));
         sumaT= sumaT + sumatoria;
         auxST = Double.toString(sumaT);
         jLabel14.setVisible(true);
@@ -1096,33 +1112,33 @@ jLabel21.setToolTipText(null);
       // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
 
-    private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
+    private void tablaADDMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaADDMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTable1MouseEntered
+    }//GEN-LAST:event_tablaADDMouseEntered
 
-    private void jTable1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTable1PropertyChange
+    private void tablaADDPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tablaADDPropertyChange
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTable1PropertyChange
+    }//GEN-LAST:event_tablaADDPropertyChange
 
     private void jLabel39MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel39MouseEntered
 jButton10.setBorder(focusD);         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel39MouseEntered
 
-    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+    private void tablaPRODUCTOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPRODUCTOSMouseClicked
        // TODO add your handling code here:
-    }//GEN-LAST:event_jTable2MouseClicked
+    }//GEN-LAST:event_tablaPRODUCTOSMouseClicked
 
-    private void jTable2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseEntered
+    private void tablaPRODUCTOSMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPRODUCTOSMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTable2MouseEntered
+    }//GEN-LAST:event_tablaPRODUCTOSMouseEntered
 
-    private void jTable2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseMoved
+    private void tablaPRODUCTOSMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPRODUCTOSMouseMoved
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTable2MouseMoved
+    }//GEN-LAST:event_tablaPRODUCTOSMouseMoved
 
-    private void jTable2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTable2PropertyChange
+    private void tablaPRODUCTOSPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tablaPRODUCTOSPropertyChange
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTable2PropertyChange
+    }//GEN-LAST:event_tablaPRODUCTOSPropertyChange
 
     private void findActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findActionPerformed
         // TODO add your handling code here:
@@ -1186,12 +1202,26 @@ search= find.getText();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton12ActionPerformed
 
-    private void jTable2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyPressed
+    private void tablaPRODUCTOSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaPRODUCTOSKeyPressed
 int pressEnter = evt.getKeyCode();
 if(pressEnter==KeyEvent.VK_ENTER){
-JOptionPane.showMessageDialog(this,"hola vini");
+AddMatte();
 }// TODO add your handling code here:
-    }//GEN-LAST:event_jTable2KeyPressed
+    }//GEN-LAST:event_tablaPRODUCTOSKeyPressed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        reback();
+            // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+  int row = tablaPRODUCTOS.getSelectedRow();
+  DESCRPart = tablaPRODUCTOS.getModel().getValueAt(row, 6).toString();
+  ShowDescription desc = new ShowDescription();
+  desc.setLocationRelativeTo(null);
+  desc.setVisible(true);
+  // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1241,6 +1271,7 @@ JOptionPane.showMessageDialog(this,"hola vini");
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -1267,11 +1298,13 @@ JOptionPane.showMessageDialog(this,"hola vini");
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    public static javax.swing.JTable jTable1;
-    public static javax.swing.JTable jTable2;
     private javax.swing.JTextField lcd;
+    public static javax.swing.JTable tablaADD;
+    public static javax.swing.JTable tablaPRODUCTOS;
     // End of variables declaration//GEN-END:variables
 
 
@@ -1279,40 +1312,37 @@ public void reback(){
             
             try{    
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "Select *from tabla_aux";
+             String sql = "SELECT DISTINCT (t1.codigo_producto),(t1.categoria),(t1.producto), t1.unidades FROM tabla_aux t1 INNER JOIN (SELECT producto, MAX(Unidades) as unidades FROM tabla_aux GROUP BY producto) t2 ON t1.producto = t2.producto AND t1.unidades = t2.unidades ORDER BY t1.producto DESC";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              
             while (res.next()){
             ID = res.getString(1);  
-            MK = res.getString(3);  
-            MD = res.getString(4);  
-            UD  = res.getInt(8);
-            
-      Class.forName("com.mysql.jdbc.Driver");         
-      conI = DriverManager.getConnection(url, user,pass);
-      String query = "update producto set Unidades = ? where codigo_producto = ? && categoria = ? && producto = ?";
-      PreparedStatement preparedStmt = conI.prepareStatement(query);
-      preparedStmt.setInt   (1, UD);
-      preparedStmt.setString   (2, ID);
-      preparedStmt.setString   (3, MK);
-      preparedStmt.setString   (4, MD);
-      preparedStmt.executeUpdate();
-      
-      
-        Connection conex = DriverManager.getConnection(url, user, pass);
+            MK = res.getString(2);  
+            MD = res.getString(3);  
+            UD  = res.getInt(4);
+                Class.forName("com.mysql.jdbc.Driver");         
+                conI = DriverManager.getConnection(url, user,pass);
+                String query = "update producto set Unidades = ? where codigo_producto = ? && categoria = ? && producto = ?";
+                PreparedStatement preparedStmt = conI.prepareStatement(query);
+                preparedStmt.setInt   (1, UD);
+                preparedStmt.setString   (2, ID);
+                preparedStmt.setString   (3, MK);
+                preparedStmt.setString   (4, MD);
+                preparedStmt.executeUpdate();
+           }
+          Connection conex = DriverManager.getConnection(url, user, pass);
         String Qury = "TRUNCATE tabla_aux";
         Statement sts =  conex.createStatement();
         sts.executeUpdate(Qury);
-            }
-            }
+                }
             catch(SQLException ex){JOptionPane.showMessageDialog(this,ex);} catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(this,ex);
-            }
+         Logger.getLogger(hacer_ventas.class.getName()).log(Level.SEVERE, null, ex);
+     }
            }
 
 public void rebackUnid(){
-      int UD,rw = jTable1.getSelectedRow(); 
+      int UD,rw = tablaADD.getSelectedRow(); 
       String ID, MK, MD, PRD;
       
             try{    
@@ -1326,9 +1356,9 @@ public void rebackUnid(){
             MK = res.getString(3);  
             MD = res.getString(4);  
             UD  = res.getInt(8);
-      if(MK.equals(String.valueOf(jTable1.getValueAt(rw,1))) && MD.equals(String.valueOf(jTable1.getValueAt(rw,2)))){
+      if(MK.equals(String.valueOf(tablaADD.getValueAt(rw,1))) && MD.equals(String.valueOf(tablaADD.getValueAt(rw,2)))){
       conI = DriverManager.getConnection(url, user,pass);
-      String query = "update producto set unidades = ? where codigo_producto='"+String.valueOf(jTable1.getValueAt(rw,0))+"' && categoria='"+String.valueOf(jTable1.getValueAt(rw,1))+"'"+"&& producto='"+String.valueOf(jTable1.getValueAt(rw,2))+"'";
+      String query = "update producto set unidades = ? where codigo_producto='"+String.valueOf(tablaADD.getValueAt(rw,0))+"' && categoria='"+String.valueOf(tablaADD.getValueAt(rw,1))+"'"+"&& producto='"+String.valueOf(tablaADD.getValueAt(rw,2))+"'";
 
       PreparedStatement preparedStmt = conI.prepareStatement(query);
       preparedStmt.setInt   (1, UD);
@@ -1341,7 +1371,7 @@ public void rebackUnid(){
             }
     try{
       conI = DriverManager.getConnection(url, user,pass);
-        String Qury = "Delete from tabla_aux where codigo_producto='"+String.valueOf(jTable1.getValueAt(rw,0))+"' && categoria='"+String.valueOf(jTable1.getValueAt(rw,1))+"'"+"&& producto='"+String.valueOf(jTable1.getValueAt(rw,2))+"' && cant='"+jTable1.getValueAt(rw,8)+"'";
+        String Qury = "Delete from tabla_aux where codigo_producto='"+String.valueOf(tablaADD.getValueAt(rw,0))+"' && categoria='"+String.valueOf(tablaADD.getValueAt(rw,1))+"'"+"&& producto='"+String.valueOf(tablaADD.getValueAt(rw,2))+"' && cant='"+tablaADD.getValueAt(rw,8)+"'";
         Statement sts =  conI.createStatement();
         sts.executeUpdate(Qury);
         }
@@ -1354,13 +1384,13 @@ public void rebackUnid(){
 public void buscarT(String search){
         String busq = search;
         DefaultTableModel modelo = new DefaultTableModel();
-        jTable2.setModel(modelo);
+        tablaPRODUCTOS.setModel(modelo);
         Connection cnx = null;
         if (cnx == null) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento,descripcion, precio_venta, lll from producto where codigo_producto like '"+busq+"%' or "+"producto like '"+busq+"%'"+" or "+"categoria like '"+busq+"%' or descripcion like '"+busq+"%'";
+             String sql = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento,descripcion, precio_venta, precio_etiqueta, lll from producto where codigo_producto like '"+busq+"%' or "+"producto like '"+busq+"%'"+" or "+"categoria like '"+busq+"%' or descripcion like '"+busq+"%'";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
@@ -1388,9 +1418,9 @@ public void buscarT(String search){
 public void LlenarTabla(){
         
     
-    String Query = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento, descripcion, precio_venta, lll from producto";
+    String Query = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento, descripcion, precio_venta,precio_etiqueta, lll from producto";
         DefaultTableModel modelo = new DefaultTableModel();
-        jTable2.setModel(modelo);
+        tablaPRODUCTOS.setModel(modelo);
         Connection cnx = null;
         if (cnx == null) {
         try {
@@ -1423,22 +1453,22 @@ public void LlenarTabla(){
 
 
 public void AddMatte(){
-    int row = jTable2.getSelectedRow();
+    int row = tablaPRODUCTOS.getSelectedRow();
  int totalRow=0;
- int h=0,j=0;
- cantT1++;
+ int h=0;
+ 
  Auxiliar.clear();
  porciones.clear();
  descuentos.clear();
 if(row != -1)
 {
-cod_prod = jTable2.getModel().getValueAt(row, 0).toString();
-categor = jTable2.getModel().getValueAt(row, 1).toString();
-product = jTable2.getModel().getValueAt(row, 2).toString();
-PreV = Double.parseDouble(jTable2.getModel().getValueAt(row, 7).toString());
-int cantidadTablaBusqueda = Integer.parseInt(jTable2.getModel().getValueAt(row, 4).toString());
-autr = jTable2.getModel().getValueAt(row, 8).toString();
-DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+cod_prod = tablaPRODUCTOS.getModel().getValueAt(row, 0).toString();
+categor = tablaPRODUCTOS.getModel().getValueAt(row, 1).toString();
+product = tablaPRODUCTOS.getModel().getValueAt(row, 2).toString();
+PreV = Double.parseDouble(tablaPRODUCTOS.getModel().getValueAt(row, 7).toString());
+int cantidadTablaBusqueda = Integer.parseInt(tablaPRODUCTOS.getModel().getValueAt(row, 4).toString());
+autr = tablaPRODUCTOS.getModel().getValueAt(row, 9).toString();
+DefaultTableModel modelo = (DefaultTableModel) tablaADD.getModel();
 Object [] fila=new Object[9]; 
 cantidadMAyor m= new cantidadMAyor();
 unit = lcd.getText();
@@ -1481,11 +1511,13 @@ try{
                     if(autr.equals("-") &&  porciones.get(h).equals(unit)){
                         Auxiliar.add(porciones.get(h));
                         tipoVent = "Normal";
+                       
+                        cantT1++;
                         descuentoPersn=(Double.parseDouble(descuentos.get(h)));
                         totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV) - descuentoPersn);
                        operacion1 = cantidad - unidadesDeseadas;
                        units.add(operacion1);
-                        jTable1.setRowHeight(25);
+                        tablaADD.setRowHeight(25);
                         fila = new Object[9];
                         fila[0]=cod_prod;
                         fila[1]=categor; 
@@ -1506,12 +1538,12 @@ try{
                         PreparedStatement preparedStmt = conex.prepareStatement(query);
                         preparedStmt.executeUpdate();
                         modelo.addRow(fila); 
-                                 jTable1.setModel(modelo);
+                                 tablaADD.setModel(modelo);
                                  lcd.setText("0");
-                                totalRow= jTable1.getRowCount();
+                                totalRow= tablaADD.getRowCount();
                                     for(int ii=0;ii<totalRow;ii++)
                                     {
-                                    double sumatoria= Double.parseDouble(String.valueOf(jTable1.getValueAt(ii,6)));
+                                    double sumatoria= Double.parseDouble(String.valueOf(tablaADD.getValueAt(ii,6)));
                                     sumaT= sumaT + sumatoria;
                                     auxST = Double.toString(sumaT);
                                     jLabel14.setVisible(true);
@@ -1530,10 +1562,11 @@ try{
                           //verifica si tiene autorizado descuento y si es diferente de 4,10,12 no hace descuento
                   if( (autr.equals("-") &&  Auxiliar.size()==0)){
                         tipoVent = "Normal";
+                        cantT1++;
                         totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV));
                        operacion1 = cantidad - unidadesDeseadas;
                        units.add(operacion1);
-                        jTable1.setRowHeight(25);
+                        tablaADD.setRowHeight(25);
                         fila = new Object[9];
                         fila[0]=cod_prod;
                         fila[1]=categor; 
@@ -1554,12 +1587,12 @@ try{
                         PreparedStatement preparedStmt = conex.prepareStatement(query);
                         preparedStmt.executeUpdate();
                         modelo.addRow(fila); 
-                                 jTable1.setModel(modelo);
+                                 tablaADD.setModel(modelo);
                                  lcd.setText("0");
-                                totalRow= jTable1.getRowCount();
+                                totalRow= tablaADD.getRowCount();
                                     for(int ii=0;ii<totalRow;ii++)
                                     {
-                                    double sumatoria= Double.parseDouble(String.valueOf(jTable1.getValueAt(ii,6)));
+                                    double sumatoria= Double.parseDouble(String.valueOf(tablaADD.getValueAt(ii,6)));
                                     sumaT= sumaT + sumatoria;
                                     auxST = Double.toString(sumaT);
                                     jLabel14.setVisible(true);
@@ -1570,18 +1603,17 @@ try{
                                     cant=0;
                         }catch(SQLException es){
                         JOptionPane.showMessageDialog(this, es);
-                        }   
-                  j=Auxiliar.size();
-                  
+                        }                     
                  }
                  
                   //verifica si tiene autorizado descuento si no tiene no hace descuento aunque sea 4,10,12
                   if(autr.equals(".")){
                         tipoVent = "Normal";
+                        cantT1++;
                         totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV));
                        operacion1 = cantidad - unidadesDeseadas;
                        units.add(operacion1);
-                        jTable1.setRowHeight(25);
+                        tablaADD.setRowHeight(25);
                         fila = new Object[8];
                         fila[0]=cod_prod;
                         fila[1]=categor; 
@@ -1601,12 +1633,12 @@ try{
                         PreparedStatement preparedStmt = conex.prepareStatement(query);
                         preparedStmt.executeUpdate();
                         modelo.addRow(fila); 
-                                 jTable1.setModel(modelo);
+                                 tablaADD.setModel(modelo);
                                  lcd.setText("0");
-                                totalRow= jTable1.getRowCount();
+                                totalRow= tablaADD.getRowCount();
                                     for(int i=0;i<totalRow;i++)
                                     {
-                                    double sumatoria= Double.parseDouble(String.valueOf(jTable1.getValueAt(i,6)));
+                                    double sumatoria= Double.parseDouble(String.valueOf(tablaADD.getValueAt(i,6)));
                                     sumaT= sumaT + sumatoria;
                                     auxST = Double.toString(sumaT);
                                     jLabel14.setVisible(true);
@@ -1643,15 +1675,17 @@ else
 }
 
     public void columnas(){
-    jTable2.getColumnModel().getColumn(0).setPreferredWidth(140);
-    jTable2.getColumnModel().getColumn(1).setPreferredWidth(200);
-    jTable2.getColumnModel().getColumn(2).setPreferredWidth(450);
-    jTable2.getColumnModel().getColumn(3).setPreferredWidth(60);
-    jTable2.getColumnModel().getColumn(4).setPreferredWidth(80);
-    jTable2.getColumnModel().getColumn(5).setPreferredWidth(150);
-    jTable2.getColumnModel().getColumn(6).setPreferredWidth(1);
-    jTable2.getColumnModel().getColumn(7).setPreferredWidth(110);
-    jTable2.getColumnModel().getColumn(8).setPreferredWidth(20);
-    jTable2.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+    tablaPRODUCTOS.getColumnModel().getColumn(0).setPreferredWidth(130);
+    tablaPRODUCTOS.getColumnModel().getColumn(1).setPreferredWidth(190);
+    tablaPRODUCTOS.getColumnModel().getColumn(2).setPreferredWidth(450);
+    tablaPRODUCTOS.getColumnModel().getColumn(3).setPreferredWidth(80);
+    tablaPRODUCTOS.getColumnModel().getColumn(4).setPreferredWidth(80);
+    tablaPRODUCTOS.getColumnModel().getColumn(5).setPreferredWidth(150);
+    tablaPRODUCTOS.getColumnModel().getColumn(6).setPreferredWidth(1);
+    tablaPRODUCTOS.getColumnModel().getColumn(7).setPreferredWidth(110);
+    tablaPRODUCTOS.getColumnModel().getColumn(8).setPreferredWidth(120);
+    tablaPRODUCTOS.getColumnModel().getColumn(9).setPreferredWidth(20);
+    tablaPRODUCTOS.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
     }
+ 
 }
