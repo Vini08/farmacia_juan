@@ -1,6 +1,7 @@
 
 package System_Farmacia;
 
+import FARM.mensajesSYS.LectorBarras;
 import FARM.mensajesSYS.ShowDescription;
 import FARM.mensajesSYS.cantidadMAyor;
 import java.awt.Color;
@@ -100,7 +101,9 @@ public hacer_ventas(String N) {
         jLabel5.setVisible(false);
         jLabel3.setToolTipText(null);
         jLabel40.setToolTipText(null);
+        jLabel41.setToolTipText(null);
         jLabel39.setToolTipText(null);
+        LlenarTabla();
 
     }
 
@@ -137,7 +140,6 @@ public hacer_ventas(String N) {
         tablaADD = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         lcd = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -475,14 +477,6 @@ public hacer_ventas(String N) {
         jLabel6.setText("Total Venta ");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 270, 80));
 
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 650, -1, -1));
-
         lcd.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
         lcd.setForeground(new java.awt.Color(102, 102, 102));
         lcd.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -804,6 +798,9 @@ if(LoginGT.boot==1){
         jButton3.setBorder(thickBorderX);
         find.setText("");
         cantT1=0;
+        jLabel14.setVisible(false);
+        jLabel6.setVisible(false);
+        jLabel5.setVisible(false);
         this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel3MouseReleased
@@ -1178,7 +1175,9 @@ search= find.getText();
     }//GEN-LAST:event_jLabel41MousePressed
 
     private void jLabel41MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel41MouseReleased
-        // TODO add your handling code here:
+LectorBarras lec = new LectorBarras(NN, WIDTH);
+lec.setVisible(true);
+lec.setLocationRelativeTo(null);// TODO add your handling code here:
     }//GEN-LAST:event_jLabel41MouseReleased
 
     private void jLabel41MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel41MouseMoved
@@ -1206,13 +1205,22 @@ search= find.getText();
 int pressEnter = evt.getKeyCode();
 if(pressEnter==KeyEvent.VK_ENTER){
 AddMatte();
-}// TODO add your handling code here:
+evt.consume();
+}
+if(pressEnter==KeyEvent.VK_UP){
+cant++;
+lcd.setText(Integer.toString(cant)); 
+evt.consume();
+}
+if(pressEnter==KeyEvent.VK_DOWN){
+if(cant>0){
+    cant--;
+    lcd.setText(Integer.toString(cant));
+}
+evt.consume();
+}
+// TODO add your handling code here:
     }//GEN-LAST:event_tablaPRODUCTOSKeyPressed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        reback();
-            // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
   int row = tablaPRODUCTOS.getSelectedRow();
@@ -1271,7 +1279,6 @@ AddMatte();
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -1390,7 +1397,7 @@ public void buscarT(String search){
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento,descripcion, precio_venta, precio_etiqueta, lll from producto where codigo_producto like '"+busq+"%' or "+"producto like '"+busq+"%'"+" or "+"categoria like '"+busq+"%' or descripcion like '"+busq+"%'";
+             String sql = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento,descripcion, precio_venta, precio_etiqueta, lll from producto where unidades>0 && codigo_producto like '"+busq+"%' or "+"producto like '"+busq+"%'"+" or "+"categoria like '"+busq+"%' or descripcion like '"+busq+"%' ";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
@@ -1418,7 +1425,7 @@ public void buscarT(String search){
 public void LlenarTabla(){
         
     
-    String Query = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento, descripcion, precio_venta,precio_etiqueta, lll from producto";
+    String Query = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento, descripcion, precio_venta,precio_etiqueta, lll from producto where unidades>0";
         DefaultTableModel modelo = new DefaultTableModel();
         tablaPRODUCTOS.setModel(modelo);
         Connection cnx = null;

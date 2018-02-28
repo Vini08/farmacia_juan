@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
@@ -26,12 +27,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class inventario extends javax.swing.JFrame {
 
-     private int x;
+private int x;
 private int y;
-public static String sql = "SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades>0";
 public static String url = "jdbc:mysql://localhost:3306/bd_farm";
 public static String user = "root";
 public static String pass = "";
+public static String sql = "SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades>0";
 String busqueda;
 Color grisMoved =new Color(180,180,180);
 Color grisborde =new Color(224,224,224);
@@ -39,11 +40,11 @@ Color grisPress =new Color(179,179,179);
 Color ColorFont =new Color(123,123,123);
 Color ColorSalida =new Color(0,102,204);
 Color ColorSalida2 =new Color(2,72,142);
-public String auxUser, searc;
+String auxUser, searc;
 Border thickBorde = new LineBorder(Color.WHITE, 4);
-public static String code, mark, model, provv, usua, porcions, descu;
+public static String code, mark, model, provv, usua, porcions, descu,sqlINV;
 public static BigDecimal price0,price1,price2;      
-public static int units, test=0;
+public static int units, test=0,alertsunits;
 Color CBTNmenu =new Color(39,39,39);
 Color cleaan =new Color(0,0,255);
 Color ver =new Color(0,102,204);
@@ -57,10 +58,11 @@ DefaultTableModel dm;
     public inventario(String n) {
         initComponents();
          setLocationRelativeTo(null);
+         sqlINV=n;
        jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
         usua=auxUser;
-        LlenarTabla(sql);
+        LlenarTabla(sqlINV);
         jTextField1.requestFocus();
     }
 
@@ -304,16 +306,16 @@ DefaultTableModel dm;
                 jTextField1MouseMoved(evt);
             }
         });
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
         jTextField1.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextField1InputMethodTextChanged(evt);
-            }
-        });
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
             }
         });
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -336,17 +338,17 @@ DefaultTableModel dm;
         jLabel24.setToolTipText("");
         jLabel24.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel24.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel24.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel24MouseMoved(evt);
-            }
-        });
         jLabel24.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel24MousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jLabel24MouseReleased(evt);
+            }
+        });
+        jLabel24.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel24MouseMoved(evt);
             }
         });
         getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 590, 250, 120));
@@ -428,17 +430,17 @@ DefaultTableModel dm;
         jLabel26.setToolTipText("");
         jLabel26.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel26.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel26.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel26MouseMoved(evt);
-            }
-        });
         jLabel26.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel26MousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jLabel26MouseReleased(evt);
+            }
+        });
+        jLabel26.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel26MouseMoved(evt);
             }
         });
         getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 590, 400, 60));
@@ -611,8 +613,12 @@ DefaultTableModel dm;
         Border thickBorder = new LineBorder(ColorSalida2, 54);
         jButton3.setBorder(thickBorder);
         jLabel3.setForeground(Color.gray);
+       if(LoginGT.boot==0){
         MENUadmin.controlVentana2=true;
-        Border thickBorderX = new LineBorder(Color.WHITE, 5);
+        }
+        if(LoginGT.boot==1){
+                MENUusuario.controlVentana2=true;
+        }  Border thickBorderX = new LineBorder(Color.WHITE, 5);
         jButton3.setBorder(thickBorderX);
         this.dispose();
         // TODO add your handling code here:
@@ -625,7 +631,7 @@ DefaultTableModel dm;
         jLabel2.setForeground(ColorFont);
         jLabel3.setForeground(Color.WHITE);
         jLabel3.setToolTipText(null);
-        LlenarTabla(sql);
+     
 // TODO add your handling code here:
     }//GEN-LAST:event_jLabel3MouseMoved
 
@@ -689,7 +695,7 @@ code =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
 mark =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 2);
 model =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 3);
 provv =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 4);
-
+alertsunits =  (int) jTable1.getValueAt(jTable1.getSelectedRow(), 7);
 price0 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 9);
 price1 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 10);
 price2 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 11);
@@ -697,9 +703,16 @@ descu =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 12);
 porcions=  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 13);
 
 if(units==0){        
-EditarProdcut ed = new EditarProdcut(code, mark, model, units, provv, price1,price2,porcions);
+Agotados ed = new Agotados(usua,code, mark, model, units, provv, price0,price1,price2,porcions,descu);
 ed.setVisible(true);
 ed.setLocationRelativeTo(null);
+    
+}
+if(units<alertsunits){        
+Por_Agotarse ed = new Por_Agotarse(usua,code, mark, model, units, alertsunits, price0,price1,price2,porcions,descu);
+ed.setVisible(true);
+ed.setLocationRelativeTo(null);
+    
 }
     else if(units!=0){
          AdminEditarProdcut ad = new AdminEditarProdcut(usua,code, mark, model, units, provv, price0,price1,price2,porcions,descu);
@@ -731,7 +744,7 @@ y = evt.getY();         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel24MousePressed
 
     private void jLabel24MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseReleased
-LlenarTabla(sql);  
+LlenarTabla("SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades>0");  
 jTextField1.setText("");// TODO add your handling code here:
     }//GEN-LAST:event_jLabel24MouseReleased
 
@@ -816,8 +829,8 @@ jLabel25.setToolTipText(null);
     }//GEN-LAST:event_jLabel26MousePressed
 
     private void jLabel26MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseReleased
-String g=" SELECT *FROM producto where Unidades=0";
-        LlenarTabla(g);        // TODO add your handling code here:
+sql = "SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades=0";
+LlenarTabla(sql);        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel26MouseReleased
 
     private void jLabel26MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseMoved
@@ -960,7 +973,8 @@ try
     }//GEN-LAST:event_jTextField1InputMethodTextChanged
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
-searc= jTextField1.getText();
+searc= "";
+searc=jTextField1.getText();
         buscarT(searc);       // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1KeyReleased
 
@@ -1086,7 +1100,7 @@ searc= jTextField1.getText();
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades>0";
+             String sql = "SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, descuento, porciones from producto where codigo_producto like '"+busq+"%' or "+"producto like '"+busq+"%'"+" or "+"categoria like '"+busq+"%' or descripcion like '"+busq+"%'";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
@@ -1110,7 +1124,7 @@ searc= jTextField1.getText();
             }   
     }
 
- 
+
 }
 
 

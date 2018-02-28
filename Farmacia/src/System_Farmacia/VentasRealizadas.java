@@ -78,8 +78,6 @@ static float invT=0;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -109,16 +107,6 @@ static float invT=0;
         jLabel12 = new javax.swing.JLabel();
         jLabel77 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-
-        jMenuItem2.setText("Ver Detalle de Factura");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(jMenuItem2);
-
-        jPopupMenu1.getAccessibleContext().setAccessibleParent(jPopupMenu1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ventas Realizadas");
@@ -270,7 +258,6 @@ static float invT=0;
                 "ID Factura", "Usuario", "Total Factura", "Fecha"
             }
         ));
-        tablaVentas.setComponentPopupMenu(jPopupMenu1);
         tablaVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tablaVentas.setIntercellSpacing(new java.awt.Dimension(2, 2));
         tablaVentas.setRowHeight(19);
@@ -282,6 +269,11 @@ static float invT=0;
         tablaVentas.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 tablaVentasMouseMoved(evt);
+            }
+        });
+        tablaVentas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tablaVentasKeyPressed(evt);
             }
         });
         jScrollPane1.setViewportView(tablaVentas);
@@ -567,7 +559,7 @@ static float invT=0;
         Border thickBorder = new LineBorder(ColorSalida2, 54);
         jButton3.setBorder(thickBorder);
         jLabel3.setForeground(Color.gray);
-     if(LoginGT.boot==0){
+        if(LoginGT.boot==0){
         MENUadmin.controlVentana4=true;
         }
         if(LoginGT.boot==1){
@@ -773,11 +765,6 @@ if(check==true){
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel12MouseDragged
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-busqueda= (Integer) tablaVentas.getValueAt(tablaVentas.getSelectedRow(), 0);   
-  buscarT(busqueda);       // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     private void jLabel27MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseMoved
         Color X1 =new Color(9,9,165);
         Border thickBorder = new LineBorder(X1, 86);
@@ -798,6 +785,15 @@ busqueda= (Integer) tablaVentas.getValueAt(tablaVentas.getSelectedRow(), 0);
         Border thickBorder2 = new LineBorder(cleaan, 60);
         jButton9.setBorder(thickBorder2);        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel27MouseExited
+
+    private void tablaVentasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaVentasKeyPressed
+int pressEnter = evt.getKeyCode();
+if(pressEnter==KeyEvent.VK_ENTER){
+  busqueda= (Integer) tablaVentas.getValueAt(tablaVentas.getSelectedRow(), 0);   
+  buscarT(busqueda); 
+}
+// TODO add your handling code here:
+    }//GEN-LAST:event_tablaVentasKeyPressed
 
     /**
      * @param args the command line arguments
@@ -877,8 +873,6 @@ busqueda= (Integer) tablaVentas.getValueAt(tablaVentas.getSelectedRow(), 0);
     private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTable tablaVentas;
     // End of variables declaration//GEN-END:variables

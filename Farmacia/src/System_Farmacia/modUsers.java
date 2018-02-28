@@ -49,7 +49,6 @@ String nm, ps;
     public modUsers() {
         initComponents();
          setLocationRelativeTo(null);
-        jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
         LlenarTabla();
   
@@ -65,7 +64,6 @@ String nm, ps;
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
@@ -87,6 +85,7 @@ String nm, ps;
         setBackground(new java.awt.Color(153, 153, 153));
         setMinimumSize(new java.awt.Dimension(449, 401));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(678, 458));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -112,30 +111,6 @@ String nm, ps;
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("EDITAR INFORMACIÓN");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 40));
-
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setForeground(new java.awt.Color(102, 102, 102));
-        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton1.setFocusPainted(false);
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton1MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton1MouseReleased(evt);
-            }
-        });
-        jButton1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton1MouseMoved(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 380, 40));
 
         jTable1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -286,7 +261,7 @@ String nm, ps;
         getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 100, 30));
 
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blancoE2.jpg"))); // NOI18N
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/solid-orange-background.jpg"))); // NOI18N
         jLabel19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 22), new java.awt.Color(102, 102, 102))); // NOI18N
         jLabel19.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -300,29 +275,6 @@ String nm, ps;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
-        Border thickBorder = new LineBorder(grisPress, 54);
-        jButton1.setBorder(thickBorder);        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MousePressed
-
-    private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
-        Border thickBorder = new LineBorder(grisborde, 54);
-        jButton1.setBorder(thickBorder);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseReleased
-
-    private void jButton1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseMoved
-        Border thickBorder = new LineBorder(grisborde, 54);
-        jButton1.setBorder(thickBorder);
-        jButton3.setBorder(thickBorde);
-        jLabel3.setForeground(ColorFont);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseMoved
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         Border thickBorder = new LineBorder(ColorSalida2, 54);
@@ -339,7 +291,6 @@ String nm, ps;
     private void jLabel3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseMoved
         Border thickBorder = new LineBorder(ColorSalida, 54);
         jButton3.setBorder(thickBorder);
-        jButton1.setBorder(thickBorde);
         jLabel3.setForeground(Color.WHITE);
     
        
@@ -357,7 +308,6 @@ String nm, ps;
     private void jButton3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseMoved
         Border thickBorder = new LineBorder(Color.BLUE, 54);
         jButton3.setBorder(thickBorder);
-        jButton1.setBorder(thickBorde);
         jLabel3.setForeground(Color.WHITE);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3MouseMoved
@@ -368,7 +318,6 @@ String nm, ps;
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         Border thickBorder = new LineBorder(Color.WHITE, 5);
-        jButton1.setBorder(thickBorder);
         jButton3.setBorder(thickBorder);
         jLabel3.setForeground(ColorFont);
    
@@ -405,7 +354,10 @@ nw.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jLabel19MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseMoved
-LlenarTabla();        // TODO add your handling code here:
+ Border thickBorder = new LineBorder(Color.WHITE, 5);
+        jButton3.setBorder(thickBorder);
+        jLabel3.setForeground(ColorFont);
+        LlenarTabla();        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel19MouseMoved
 
     private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
@@ -529,7 +481,6 @@ leve.setText(String.valueOf(lv));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

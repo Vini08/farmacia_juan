@@ -9,7 +9,6 @@ import com.sun.awt.AWTUtilities;
 import System_Farmacia.AdminEditarProdcut;
 import System_Farmacia.LoginGT;
 import static System_Farmacia.AdminEditarProdcut.unit;
-import static System_Farmacia.stocktaking.units;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,30 +23,19 @@ import javax.swing.JOptionPane;
  *
  * @author Vinicio
  */
-public class AdministradorConfir extends javax.swing.JFrame {
+public class LectorBarras extends javax.swing.JFrame {
 
 String nombre, contraseña , n, p;
 String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
 String pass = "";
 int nvl;
-public static String usus;
-public static String code, mark, model, provv, usua;
-public static BigDecimal price1,price2,price3,descc;   
-    public AdministradorConfir(String n,String codes,String marks,String models,int unitss,String provvs,BigDecimal price1s,BigDecimal price2s,BigDecimal price3s,BigDecimal desc) {
+public static String usus;  
+    public LectorBarras(String n,int units) {
         initComponents();
         setLocationRelativeTo(null);
         AWTUtilities.setWindowOpaque(this, false);
-    usus=n;
-     code=codes;
-        mark=marks;
-        model=models;
-        unit=unitss;
-        provv=provvs;
-        price1=price1s;
-        price2=price2s;
-        price3=price3s;
-        descc= desc;
+    codeBarras.requestFocus();
     }
 
     /**
@@ -60,10 +48,8 @@ public static BigDecimal price1,price2,price3,descc;
     private void initComponents() {
 
         jLabel7 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        pssw = new javax.swing.JPasswordField();
+        codeBarras = new javax.swing.JPasswordField();
         jButton5 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -93,47 +79,33 @@ public static BigDecimal price1,price2,price3,descc;
                 jLabel7KeyPressed(evt);
             }
         });
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 500, 40));
-
-        jLabel4.setBackground(new java.awt.Color(153, 153, 153));
-        jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(231, 231, 231));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("que es el Administrador del Sistema.");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 517, 40));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 500, 50));
 
         jLabel5.setBackground(new java.awt.Color(153, 153, 153));
-        jLabel5.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(231, 231, 231));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Ingrese su contraseña para confirmar");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 517, -1));
+        jLabel5.setText("Escanee la Tarjeta del Cliente");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 517, -1));
 
-        jLabel17.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("Contraseña");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 190, 30));
-
-        pssw.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
-        pssw.setForeground(new java.awt.Color(102, 102, 102));
-        pssw.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        pssw.setBorder(null);
-        pssw.addActionListener(new java.awt.event.ActionListener() {
+        codeBarras.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
+        codeBarras.setForeground(new java.awt.Color(102, 102, 102));
+        codeBarras.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        codeBarras.setBorder(null);
+        codeBarras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                psswActionPerformed(evt);
+                codeBarrasActionPerformed(evt);
             }
         });
-        pssw.addKeyListener(new java.awt.event.KeyAdapter() {
+        codeBarras.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                psswKeyPressed(evt);
+                codeBarrasKeyPressed(evt);
             }
         });
-        getContentPane().add(pssw, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 190, 30));
+        getContentPane().add(codeBarras, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 290, 50));
 
-        jButton5.setBackground(new java.awt.Color(0, 102, 153));
+        jButton5.setBackground(new java.awt.Color(80, 191, 136));
         jButton5.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("ENTRAR");
         jButton5.setBorder(null);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -144,8 +116,8 @@ public static BigDecimal price1,price2,price3,descc;
         });
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 120, 40));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/barraMensajes.png"))); // NOI18N
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 520, 140));
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/lector_1.jpg"))); // NOI18N
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 520, 150));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/grisFondo.jpg"))); // NOI18N
         jLabel2.setMinimumSize(new java.awt.Dimension(519, 608));
@@ -179,15 +151,15 @@ this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel7KeyPressed
 
-    private void psswActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_psswActionPerformed
+    private void codeBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codeBarrasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_psswActionPerformed
+    }//GEN-LAST:event_codeBarrasActionPerformed
 
-    private void psswKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_psswKeyPressed
+    private void codeBarrasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codeBarrasKeyPressed
         if(evt.getKeyCode()==10){
             inicia();
         }        // TODO add your handling code here:
-    }//GEN-LAST:event_psswKeyPressed
+    }//GEN-LAST:event_codeBarrasKeyPressed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 inicia();     // TODO add your handling code here:
@@ -207,14 +179,22 @@ inicia();     // TODO add your handling code here:
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdministradorConfir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LectorBarras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdministradorConfir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LectorBarras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdministradorConfir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LectorBarras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdministradorConfir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LectorBarras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -227,24 +207,22 @@ inicia();     // TODO add your handling code here:
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdministradorConfir(usus,code, mark, model, units, provv, price1,price2,price3,descc).setVisible(true);
+                new LectorBarras(usus,unit).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPasswordField codeBarras;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPasswordField pssw;
     // End of variables declaration//GEN-END:variables
 
     public void inicia(){
-contraseña = pssw.getText();
+contraseña = codeBarras.getText();
 Connection cnx = null;
        
  try {

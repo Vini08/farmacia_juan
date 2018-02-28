@@ -26,6 +26,7 @@ import com.itextpdf.text.pdf.*;
 import static System_Farmacia.hacer_ventas.count;
 import FARM.mensajesSYS.VentaExitosa;
 import java.awt.Desktop;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 /**
@@ -108,7 +109,7 @@ jLabel22.setText(TTV);
         }   
          
          destino.setModel(modelo);
-        
+        jTextField1.requestFocus();
         }
 
     /**
@@ -129,7 +130,6 @@ jLabel22.setText(TTV);
         jLabel19 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -294,15 +294,6 @@ jLabel22.setText(TTV);
 
         jLabel1.setText(".");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 580, 10, -1));
-
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jButton2.setText("operar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 440, 180, 60));
 
         jLabel16.setFont(new java.awt.Font("Microsoft Tai Le", 1, 30)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 102, 0));
@@ -701,20 +692,16 @@ jLabel2.setForeground(Color.gray);        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel2MouseExited
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
-                // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1KeyPressed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-
-if(Double.parseDouble(jTextField1.getText())>Double.parseDouble(jLabel22.getText()) && !jTextField1.equals("")){
-efectivo=Double.parseDouble(jTextField1.getText());
-total=Double.parseDouble(jLabel22.getText());
-operacion= efectivo-total;
-jLabel24.setText(String.valueOf(operacion));
+int pressEnter = evt.getKeyChar();
+if(pressEnter==KeyEvent.VK_ENTER){
+    if(Double.parseDouble(jTextField1.getText())>Double.parseDouble(jLabel22.getText()) && !jTextField1.equals("")){
+    efectivo=Double.parseDouble(jTextField1.getText());
+    total=Double.parseDouble(jLabel22.getText());
+    operacion= efectivo-total;
+    jLabel24.setText(String.valueOf(operacion));
 }
-// TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+}                // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -761,7 +748,6 @@ jLabel24.setText(String.valueOf(operacion));
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTable destino;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
@@ -824,8 +810,7 @@ public void insertProd(){
                 stmt.setString(6,MENUusuario.horaMenu);}
                 
                 
-                stmt.executeUpdate();
-                stocktaking.test=1;       
+                stmt.executeUpdate();   
             } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,ex);
             }
