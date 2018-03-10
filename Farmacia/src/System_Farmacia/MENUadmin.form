@@ -359,6 +359,7 @@
       </Properties>
       <Events>
         <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel29MouseReleased"/>
+        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="jLabel29MouseMoved"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -428,6 +429,7 @@
       </Properties>
       <Events>
         <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel18MouseReleased"/>
+        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="jLabel18MouseMoved"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -519,7 +521,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="ORDEN DE TRABAJO"/>
+        <Property name="text" type="java.lang.String" value="PEDIDOS"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Cursor Por defecto"/>
@@ -721,7 +723,7 @@
           <Font name="Microsoft Yi Baiti" size="17" style="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="2"/>
-        <Property name="text" type="java.lang.String" value="F4   =   REPARACIONES"/>
+        <Property name="text" type="java.lang.String" value="F4   =   PEDIDOS"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -785,7 +787,7 @@
           <Font name="Microsoft Yi Baiti" size="17" style="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="2"/>
-        <Property name="text" type="java.lang.String" value="F5   =   GARANTIAS"/>
+        <Property name="text" type="java.lang.String" value="F5   =   USUARIOS"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

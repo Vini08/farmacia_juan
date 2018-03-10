@@ -29,7 +29,7 @@ import javax.swing.table.JTableHeader;
  *
  * @author Vinicio
  */
-public class hacer_ventas extends javax.swing.JFrame {
+public class pedidos extends javax.swing.JFrame {
  
  public static int test2=1;
 public static Double sumaT;
@@ -37,31 +37,30 @@ Connection cnx,conI = null;
 static String url = "jdbc:mysql://localhost:3306/bd_farm";
 static String user = "root";
 static String pass = "";
-int cant,operacion1, aux;
+int cant, aux;
 public static int count, cantT1;
-String ID, MK, MD, PRD, search, auty,DescuentoAUX, PorcionesAUX;
+String ID, MK, MD, DESCRPart;
 ArrayList<String> descuentos = new ArrayList<>();
 ArrayList<String> porciones = new ArrayList<>();
 ArrayList<String> Auxiliar = new ArrayList<>();
 int UD;
 String auxST,autr ;
-public String cdp, Cliente;
 private int x;
 private int y;
-public static String DESCRPart,cod_prod,categor,product, tipoVent;
-Double PreV, PreMay, descu,totalVenta,descuentoPersn;
-int cantidad, unidadesDeseadas = 0, auxBT=0,auxBTNar=0;
+public static String provee,cod_prod,categor,product, tipoVent;
+Double PreC,totalVenta;
+int cantidad, unidadesDeseadas = 0;
 String totalV, unit;
 Color CBTNFocus =new Color(243,98,1);
+Color CBTNFocusPedido =new Color(17,182,127);
 Color focusAdd =new Color(0,120,240);
 Color focusDel =new Color(198,17,17);
 Color focusMay =new Color(51,255,153);
 Border focus = new LineBorder(CBTNFocus, 86);
-Border focusA = new LineBorder(focusAdd, 86);
 Border focusD = new LineBorder(focusDel, 86);
-Border focusF = new LineBorder(focusMay, 86);
+Border focusF = new LineBorder(CBTNFocusPedido, 86);
 Color CBTNmenu =new Color(241,118,36);
-Color BTNMayoris =new Color(80,191,136);
+Color BTNPedio =new Color(0,153,102);
 Color add =new Color(0,102,204);
 Color delete =new Color(172,26,26);
 Color Nums =new Color(153,153,153);
@@ -76,18 +75,17 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
 Border bordePlano= new LineBorder(ColorPlanoBT, 4);
 public static String[][] array_String;
 public static String[][] array_Tipo;
-public static String NN;
+
 public static Double[][] array_Double; 
 ArrayList<Integer> units = new ArrayList<>();
    
 
-public hacer_ventas(String N) {
+public pedidos() {
         initComponents();
          setLocationRelativeTo(null);
-        find.requestFocus();
         jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
-        NN=cdp;
+    
         JTableHeader th1,th2; 
         th1 = tablaADD.getTableHeader(); 
         Font fuente1 = new Font("Microsoft Yi Baiti", Font.PLAIN, 22); 
@@ -100,10 +98,9 @@ public hacer_ventas(String N) {
         jLabel6.setVisible(false);
         jLabel5.setVisible(false);
         jLabel3.setToolTipText(null);
-        jLabel40.setToolTipText(null);
-        jLabel41.setToolTipText(null);
         jLabel39.setToolTipText(null);
-        LlenarTabla();
+        LlenarTabla("SELECT codigo_producto, categoria, producto, proveedor, unidades,alerta_unidades, precio_compra, fecha_vencimiento from producto where unidades=0 or unidades<alerta_unidades order by proveedor DESC");
+   
 
     }
 
@@ -123,13 +120,9 @@ public hacer_ventas(String N) {
         jLabel3 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jLabel41 = new javax.swing.JLabel();
-        jButton12 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -144,14 +137,13 @@ public hacer_ventas(String N) {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
-        find = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
         jLabel39 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
-        jLabel40 = new javax.swing.JLabel();
-        jButton11 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaPRODUCTOS = new javax.swing.JTable();
+        jLabel40 = new javax.swing.JLabel();
+        jButton11 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -271,9 +263,8 @@ public hacer_ventas(String N) {
         jLabel19.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/shopping-cart.png"))); // NOI18N
-        jLabel19.setText(" Venta");
-        jLabel19.setToolTipText("");
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 120, -1));
+        jLabel19.setText(" Pedidos");
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 150, -1));
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -298,51 +289,6 @@ public hacer_ventas(String N) {
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1324, 0, 41, 40));
 
-        jLabel41.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel41.setText("Mayoritas");
-        jLabel41.setToolTipText("");
-        jLabel41.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabel41.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel41.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel41MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jLabel41MouseReleased(evt);
-            }
-        });
-        jLabel41.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel41MouseMoved(evt);
-            }
-        });
-        getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 320, 210, 70));
-
-        jButton12.setBackground(new java.awt.Color(80, 191, 136));
-        jButton12.setForeground(new java.awt.Color(3, 64, 124));
-        jButton12.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton12.setFocusPainted(false);
-        jButton12.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton12MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton12MouseReleased(evt);
-            }
-        });
-        jButton12.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton12MouseMoved(evt);
-            }
-        });
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 320, 210, 70));
-
         jLabel1.setText(".");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 750, 10, -1));
 
@@ -350,8 +296,8 @@ public hacer_ventas(String N) {
         jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(231, 231, 231));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("REALIZAR VENTA");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 40));
+        jLabel4.setText("PEDIDOS");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 40));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -366,22 +312,12 @@ public hacer_ventas(String N) {
         });
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 0, 510, 40));
 
-        jLabel7.setBackground(new java.awt.Color(153, 153, 153));
-        jLabel7.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 36)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Buscar");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 50, 140, 50));
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/azulBarra.jpg"))); // NOI18N
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 50, 140, 50));
-
         jLabel9.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/magnifier.png"))); // NOI18N
-        jLabel9.setText(" Productos");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 150, 40));
+        jLabel9.setText(" Productos ");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 150, 40));
 
         jLabel20.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -402,7 +338,7 @@ public hacer_ventas(String N) {
                 jLabel20KeyPressed(evt);
             }
         });
-        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, 70, 70));
+        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 320, 70, 70));
 
         jLabel21.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -418,7 +354,7 @@ public hacer_ventas(String N) {
                 jLabel21MouseReleased(evt);
             }
         });
-        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 70, 70));
+        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 320, 70, 70));
 
         jButton4.setBackground(new java.awt.Color(153, 153, 153));
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
@@ -428,7 +364,7 @@ public hacer_ventas(String N) {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 70, 70));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 320, 70, 70));
 
         jButton5.setBackground(new java.awt.Color(153, 153, 153));
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
@@ -438,13 +374,13 @@ public hacer_ventas(String N) {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, 70, 70));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 320, 70, 70));
 
         jLabel12.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 22)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(38, 38, 38));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Número de unidades");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, 200, 30));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 290, 200, 30));
 
         tablaADD.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 18)); // NOI18N
         tablaADD.setModel(new javax.swing.table.DefaultTableModel(
@@ -452,7 +388,7 @@ public hacer_ventas(String N) {
 
             },
             new String [] {
-                "Codigo", "Categoria", "Producto", "Precio", "Descuento", "Unidades", "Total", "Tipo Cliente", "#"
+                "Codigo", "Categoria", "Producto", "Precio", "Unidades", "Total", "Proveedor", "#"
             }
         ));
         tablaADD.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -478,15 +414,15 @@ public hacer_ventas(String N) {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 1340, 220));
 
         jLabel5.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 54)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(243, 93, 14));
+        jLabel5.setForeground(new java.awt.Color(17, 182, 127));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 630, 320, 80));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 630, 320, 80));
 
         jLabel6.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 50)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(28, 28, 28));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Total Venta ");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 270, 80));
+        jLabel6.setText("Total Pedido ");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 290, 80));
 
         lcd.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
         lcd.setForeground(new java.awt.Color(102, 102, 102));
@@ -506,20 +442,20 @@ public hacer_ventas(String N) {
                 lcdKeyReleased(evt);
             }
         });
-        getContentPane().add(lcd, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 320, 60, 70));
+        getContentPane().add(lcd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 320, 60, 70));
 
         jLabel14.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 54)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(243, 93, 14));
+        jLabel14.setForeground(new java.awt.Color(17, 182, 127));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("Q");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 630, 40, 80));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 630, 40, 80));
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/AZUL.png"))); // NOI18N
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 40));
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel38.setText("Realizar Venta");
+        jLabel38.setText("Ver Pedidos");
         jLabel38.setToolTipText("");
         jLabel38.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel38.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -537,25 +473,6 @@ public hacer_ventas(String N) {
             }
         });
         getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 640, 210, 70));
-
-        find.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
-        find.setForeground(new java.awt.Color(102, 102, 102));
-        find.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        find.setBorder(null);
-        find.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                findActionPerformed(evt);
-            }
-        });
-        find.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                findKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                findKeyReleased(evt);
-            }
-        });
-        getContentPane().add(find, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 50, 280, 50));
 
         jButton9.setBackground(new java.awt.Color(241, 118, 36));
         jButton9.setForeground(new java.awt.Color(3, 64, 124));
@@ -603,7 +520,7 @@ public hacer_ventas(String N) {
                 jLabel39MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 320, 210, 70));
+        getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 320, 210, 70));
 
         jButton10.setBackground(new java.awt.Color(172, 26, 26));
         jButton10.setForeground(new java.awt.Color(3, 64, 124));
@@ -627,52 +544,7 @@ public hacer_ventas(String N) {
                 jButton10ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 320, 210, 70));
-
-        jLabel40.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel40.setText("Agregar Artículo");
-        jLabel40.setToolTipText("");
-        jLabel40.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabel40.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel40.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel40MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jLabel40MouseReleased(evt);
-            }
-        });
-        jLabel40.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel40MouseMoved(evt);
-            }
-        });
-        getContentPane().add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 320, 210, 70));
-
-        jButton11.setBackground(new java.awt.Color(0, 102, 204));
-        jButton11.setForeground(new java.awt.Color(3, 64, 124));
-        jButton11.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton11.setFocusPainted(false);
-        jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton11MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton11MouseReleased(evt);
-            }
-        });
-        jButton11.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton11MouseMoved(evt);
-            }
-        });
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 320, 210, 70));
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 320, 210, 70));
 
         tablaPRODUCTOS.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
         tablaPRODUCTOS.setModel(new javax.swing.table.DefaultTableModel(
@@ -709,7 +581,52 @@ public hacer_ventas(String N) {
         });
         jScrollPane2.setViewportView(tablaPRODUCTOS);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 1340, 180));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1340, 210));
+
+        jLabel40.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel40.setText("Guardar Pedido");
+        jLabel40.setToolTipText("");
+        jLabel40.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel40.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel40.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel40MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel40MouseReleased(evt);
+            }
+        });
+        jLabel40.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel40MouseMoved(evt);
+            }
+        });
+        getContentPane().add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 640, 210, 70));
+
+        jButton11.setBackground(new java.awt.Color(0, 153, 102));
+        jButton11.setForeground(new java.awt.Color(3, 64, 124));
+        jButton11.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton11.setFocusPainted(false);
+        jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton11MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton11MouseReleased(evt);
+            }
+        });
+        jButton11.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jButton11MouseMoved(evt);
+            }
+        });
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 640, 210, 70));
 
         jLabel13.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 22)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(80, 191, 136));
@@ -789,30 +706,16 @@ public hacer_ventas(String N) {
         Border thickBorder = new LineBorder(ColorSalida2, 54);
         jButton3.setBorder(thickBorder);
         jLabel3.setForeground(ColorFont);
-        reback();
-DefaultTableModel model = (DefaultTableModel)tablaADD.getModel(); 
-int rows = model.getRowCount(); 
-for(int i = rows - 1; i >=0; i--)
-{
-   model.removeRow(i); 
-}
-DefaultTableModel model2 = (DefaultTableModel)tablaPRODUCTOS.getModel(); 
-int rows2 = model2.getRowCount(); 
-for(int i = rows2 - 1; i >=0; i--)
-{
-   model2.removeRow(i); 
-}
 
 if(LoginGT.boot==0){
-        MENUadmin.controlVentana1=true;
+        MENUadmin.controlVentana5=true;
 }
 if(LoginGT.boot==1){
-        MENUusuario.controlVentana1=true;
+        MENUusuario.controlVentana5=true;
 }
 
         Border thickBorderX = new LineBorder(Color.WHITE, 5);
         jButton3.setBorder(thickBorderX);
-        find.setText("");
         jLabel13.setText("");
         cantT1=0;
         jLabel14.setVisible(false);
@@ -897,11 +800,10 @@ if(LoginGT.boot==1){
         Border thickBorder = new LineBorder(delete, 60);
 Border thickBorder2 = new LineBorder(add, 60);
 Border thickBorder3 = new LineBorder(CBTNmenu, 60);
-Border thickBorder4 = new LineBorder(BTNMayoris, 60);
 jButton10.setBorder(thickBorder);
-jButton11.setBorder(thickBorder2);
 jButton9.setBorder(thickBorder3);
-jButton12.setBorder(thickBorder4);
+Border thickBorder5 = new LineBorder(BTNPedio, 60);
+jButton11.setBorder(thickBorder5);
 
 // TODO add your handling code here:
     }//GEN-LAST:event_jLabel17MouseMoved
@@ -911,37 +813,7 @@ jButton12.setBorder(thickBorder4);
     }//GEN-LAST:event_jLabel38MousePressed
 
     private void jLabel38MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel38MouseReleased
-array_String = new String[tablaADD.getRowCount()][tablaADD.getColumnCount()];
-array_Tipo = new String[tablaADD.getRowCount()][tablaADD.getColumnCount()];
-array_Double = new Double[tablaADD.getRowCount()][tablaADD.getColumnCount()];
-    int i = 0;
-    int j = 0;
-    for (i = 0; i < tablaADD.getRowCount(); i++) {
-        for (j = 0; j < 3; j++) {
-            array_String[i][j] = (String) tablaADD.getValueAt(i, j);
-        }
-    }
-     int f = 0;
-    int g = 0;
-    for (f = 0; f < tablaADD.getRowCount(); f++) {
-        for (g = 0; g < 4; g++) {
-            array_Double[f][g] = (Double) tablaADD.getValueAt(f, g+3);
-        }
-    }
-    
-    for (f = 0; f < tablaADD.getRowCount(); f++) {
-        for (g = 0; g < 1; g++) {
-            array_Tipo[f][g] = (String) tablaADD.getValueAt(f, g+7);
-        }
-    }
-    
-ConfirmarVenta CV = new ConfirmarVenta(auxST,array_String,array_Tipo, array_Double,cdp, units,count,Cliente);
-
-        if(jLabel5.getText().length()!=0){
-CV.setVisible(true);
-CV.setLocationRelativeTo(null);
-
-}               // TODO add your handling code here:
+            // TODO add your handling code here:
     }//GEN-LAST:event_jLabel38MouseReleased
 
     private void jLabel38MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel38MouseMoved
@@ -972,13 +844,12 @@ Border thickBorder = new LineBorder(delete, 60);
 Border thickBorder2 = new LineBorder(add, 60);
 Border thickBorder3 = new LineBorder(CBTNmenu, 60);
 Border thickBorder4 = new LineBorder(Nums, 60);
-Border thickBorder5 = new LineBorder(BTNMayoris, 60);
+Border thickBorder5 = new LineBorder(BTNPedio, 60);
 jButton10.setBorder(thickBorder);
-jButton12.setBorder(thickBorder5);
-jButton11.setBorder(thickBorder2);
 jButton9.setBorder(thickBorder3);
 jButton4.setBorder(thickBorder4);
 jButton5.setBorder(thickBorder4);
+jButton11.setBorder(thickBorder5);
 
 
 
@@ -1012,7 +883,7 @@ if(tablaADD.getSelectedRow() >= 0){
         jLabel5.setVisible(true); 
         jLabel5.setText(auxST);
         }
-        LlenarTabla();
+        LlenarTabla("SELECT codigo_producto, categoria, producto, proveedor, unidades,alerta_unidades, fecha_vencimiento, precio_compra from producto where unidades=0 or unidades<alerta_unidades");
       }        
          // TODO add your handling code here:
     }//GEN-LAST:event_jLabel39MouseReleased
@@ -1037,37 +908,6 @@ jButton10.setBorder(focusD);        // TODO add your handling code here:
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jLabel40MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel40MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel40MousePressed
-
-    private void jLabel40MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel40MouseReleased
-AddMatte();
-// TODO add your handling code here:
-    }//GEN-LAST:event_jLabel40MouseReleased
-
-    private void jLabel40MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel40MouseMoved
- 
-jButton11.setBorder(focusA);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel40MouseMoved
-
-    private void jButton11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11MousePressed
-
-    private void jButton11MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11MouseReleased
-
-    private void jButton11MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11MouseMoved
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jLabel8MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseDragged
 this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);        // TODO add your handling code here:
@@ -1154,17 +994,6 @@ jButton10.setBorder(focusD);         // TODO add your handling code here:
         // TODO add your handling code here:
     }//GEN-LAST:event_tablaPRODUCTOSPropertyChange
 
-    private void findActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_findActionPerformed
-
-    private void findKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_findKeyPressed
-int pressEnter = evt.getKeyCode();
-if(pressEnter==KeyEvent.VK_ENTER){
-lcd.requestFocus();
-}// TODO add your handling code here:
-    }//GEN-LAST:event_findKeyPressed
-
     private void jLabel10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel10MousePressed
@@ -1172,12 +1001,6 @@ lcd.requestFocus();
     private void jLabel10MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseDragged
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel10MouseDragged
-
-    private void findKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_findKeyReleased
-search= find.getText();
-        buscarT(search);     
-        // TODO add your handling code here:
-    }//GEN-LAST:event_findKeyReleased
 
     private void lcdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lcdActionPerformed
         // TODO add your handling code here:
@@ -1206,37 +1029,6 @@ evt.consume();
     private void lcdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lcdKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_lcdKeyReleased
-
-    private void jLabel41MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel41MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel41MousePressed
-
-    private void jLabel41MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel41MouseReleased
-LectorBarras lec = new LectorBarras(NN, WIDTH);
-lec.setVisible(true);
-lec.setLocationRelativeTo(null);// TODO add your handling code here:
-    }//GEN-LAST:event_jLabel41MouseReleased
-
-    private void jLabel41MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel41MouseMoved
-//boton mayorita puntero arriba
-        jButton12.setBorder(focusF);         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel41MouseMoved
-
-    private void jButton12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12MousePressed
-
-    private void jButton12MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12MouseReleased
-
-    private void jButton12MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12MouseMoved
-
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12ActionPerformed
 
     private void tablaPRODUCTOSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaPRODUCTOSKeyPressed
 int pressEnter = evt.getKeyCode();
@@ -1272,6 +1064,35 @@ evt.consume();
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel20KeyPressed
 
+    private void jButton11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11MousePressed
+
+    private void jButton11MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11MouseReleased
+
+    private void jButton11MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11MouseMoved
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jLabel40MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel40MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel40MousePressed
+
+    private void jLabel40MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel40MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel40MouseReleased
+
+    private void jLabel40MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel40MouseMoved
+jLabel40.setToolTipText(null);  
+jButton11.setBorder(focusF);        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel40MouseMoved
+
     /**
      * @param args the command line arguments
      */
@@ -1289,14 +1110,22 @@ evt.consume();
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(hacer_ventas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(pedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(hacer_ventas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(pedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(hacer_ventas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(pedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(hacer_ventas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(pedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -1309,24 +1138,21 @@ evt.consume();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new hacer_ventas(NN).setVisible(true);
+                new pedidos().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JTextField find;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     public static javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -1341,10 +1167,8 @@ evt.consume();
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
     public static javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuItem jMenuItem1;
@@ -1357,38 +1181,7 @@ evt.consume();
     // End of variables declaration//GEN-END:variables
 
 
-public void reback(){
-            
-            try{    
-            cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "SELECT DISTINCT (t1.codigo_producto),(t1.categoria),(t1.producto), t1.unidades FROM tabla_aux t1 INNER JOIN (SELECT producto, MAX(Unidades) as unidades FROM tabla_aux GROUP BY producto) t2 ON t1.producto = t2.producto AND t1.unidades = t2.unidades ORDER BY t1.producto DESC";
-             Statement st = cnx.prepareStatement(sql);
-             ResultSet res = st.executeQuery(sql);
-             
-            while (res.next()){
-            ID = res.getString(1);  
-            MK = res.getString(2);  
-            MD = res.getString(3);  
-            UD  = res.getInt(4);
-                Class.forName("com.mysql.jdbc.Driver");         
-                conI = DriverManager.getConnection(url, user,pass);
-                String query = "update producto set Unidades = ? where codigo_producto = ? && categoria = ? && producto = ?";
-                PreparedStatement preparedStmt = conI.prepareStatement(query);
-                preparedStmt.setInt   (1, UD);
-                preparedStmt.setString   (2, ID);
-                preparedStmt.setString   (3, MK);
-                preparedStmt.setString   (4, MD);
-                preparedStmt.executeUpdate();
-           }
-          Connection conex = DriverManager.getConnection(url, user, pass);
-        String Qury = "TRUNCATE tabla_aux";
-        Statement sts =  conex.createStatement();
-        sts.executeUpdate(Qury);
-                }
-            catch(SQLException ex){JOptionPane.showMessageDialog(this,ex);} catch (ClassNotFoundException ex) {
-         Logger.getLogger(hacer_ventas.class.getName()).log(Level.SEVERE, null, ex);
-     }
-           }
+
 
 public void rebackUnid(){
       int UD,rw = tablaADD.getSelectedRow(); 
@@ -1430,47 +1223,9 @@ public void rebackUnid(){
         }
 
 
-public void buscarT(String search){
-        String busq = search;
-        DefaultTableModel modelo = new DefaultTableModel();
-        tablaPRODUCTOS.setModel(modelo);
-        Connection cnx = null;
-        if (cnx == null) {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento,descripcion, precio_venta, precio_etiqueta, lll from producto where unidades>0 && codigo_producto like '"+busq+"%' or codigo_barra like '"+busq+"%' or "+"producto like '"+busq+"%'"+" or "+"categoria like '"+busq+"%' or descripcion like '"+busq+"%' ";
-             Statement st = cnx.prepareStatement(sql);
-             ResultSet res = st.executeQuery(sql);
-             ResultSetMetaData rsMd = res.getMetaData();
-             int cantidadColumnas = rsMd.getColumnCount();
-             for (int i = 1; i <= cantidadColumnas; i++) {
-            modelo.addColumn(rsMd.getColumnLabel(i));
-         }
-             Object[] fila = new Object[cantidadColumnas];
-         while (res.next()){
-         
-         for (int i = 0; i < cantidadColumnas; i++) {
-         fila[i]=res.getObject(i+1);
-         }
-              modelo.addRow(fila);  
-             }
-         columnas();
-         tablaPRODUCTOS.setColumnSelectionInterval(0,0);
-         tablaPRODUCTOS.setRowSelectionInterval(0,0);
-             } catch (ClassNotFoundException ex) {
-             throw new ClassCastException(ex.getMessage());
-             } catch (SQLException ex) { 
-               JOptionPane.showMessageDialog(this,ex);
-            }
-        
-            }   
-    }
-
-public void LlenarTabla(){
+public void LlenarTabla(String Query){
         
     
-    String Query = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento, descripcion, precio_venta,precio_etiqueta, lll from producto where unidades>0";
         DefaultTableModel modelo = new DefaultTableModel();
         tablaPRODUCTOS.setModel(modelo);
         Connection cnx = null;
@@ -1507,94 +1262,46 @@ public void LlenarTabla(){
 public void AddMatte(){
     int row = tablaPRODUCTOS.getSelectedRow();
  int totalRow=0;
- int h=0;
+
  
- Auxiliar.clear();
- porciones.clear();
- descuentos.clear();
 if(row != -1)
 {
 cod_prod = tablaPRODUCTOS.getModel().getValueAt(row, 0).toString();
 categor = tablaPRODUCTOS.getModel().getValueAt(row, 1).toString();
 product = tablaPRODUCTOS.getModel().getValueAt(row, 2).toString();
-PreV = Double.parseDouble(tablaPRODUCTOS.getModel().getValueAt(row, 7).toString());
+provee = tablaPRODUCTOS.getModel().getValueAt(row, 3).toString();
+PreC = Double.parseDouble(tablaPRODUCTOS.getModel().getValueAt(row, 6).toString());
 int cantidadTablaBusqueda = Integer.parseInt(tablaPRODUCTOS.getModel().getValueAt(row, 4).toString());
-autr = tablaPRODUCTOS.getModel().getValueAt(row, 9).toString();
+
 DefaultTableModel modelo = (DefaultTableModel) tablaADD.getModel();
-Object [] fila=new Object[9]; 
-cantidadMAyor m= new cantidadMAyor();
-unit = lcd.getText();
+Object [] fila=new Object[8]; 
+unidadesDeseadas = Integer.parseInt(lcd.getText());
 cantidad = cantidadTablaBusqueda;
-//consulta para obtener porciones y descuentos
-if(autr.equals("-")){
-try{    
-            cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "Select descuento, porciones from producto where codigo_producto='"+cod_prod+"' && producto='"+product+"' && categoria='"+categor+"'";
-             Statement st = cnx.prepareStatement(sql);
-             ResultSet res = st.executeQuery(sql);
-             
-            while (res.next()){
-            DescuentoAUX= (res.getString(1));
-            PorcionesAUX= (res.getString(2));
-            }
-            }
-            catch(SQLException ex)
-            {JOptionPane.showMessageDialog(this,ex);}
-            StringTokenizer tokensDescuento=new StringTokenizer(DescuentoAUX,",");
-            while(tokensDescuento.hasMoreTokens()){
-            descuentos.add(tokensDescuento.nextToken());
-            }
-            StringTokenizer tokensPorcns=new StringTokenizer(PorcionesAUX,",");
-            while(tokensPorcns.hasMoreTokens()){
-            porciones.add(tokensPorcns.nextToken());
-            }
-}
-                 MSGUnidadesStock menUnid = new MSGUnidadesStock(unit, Integer.toString(cantidad));
-                 unidadesDeseadas = Integer.valueOf(lcd.getText()); 
+
                  
                  //if para veridifcar que unidades deseadas sean mayor a cero
                  if(unidadesDeseadas!= 0){
                      
-                 //if para verificar que hayan existencias en bodega    
-                 if(cantidad>= unidadesDeseadas ){
-                  
-                 //si tiene autorizado descuento
-                   while(h<porciones.size()){
-                    if(autr.equals("-") &&  porciones.get(h).equals(unit) && jLabel13.getText().isEmpty()){
-                        Auxiliar.add(porciones.get(h));
-                        tipoVent = "Normal";
-                        cantT1++;
-                        descuentoPersn=(Double.parseDouble(descuentos.get(h)));
-                        totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV) - descuentoPersn);
-                       operacion1 = cantidad - unidadesDeseadas;
-                       units.add(operacion1);
-                        tablaADD.setRowHeight(25);
+                       cantT1++;
+                       totalVenta = ((Double.valueOf(unidadesDeseadas)*PreC));
+                       tablaADD.setRowHeight(25);
                         fila = new Object[9];
                         fila[0]=cod_prod;
                         fila[1]=categor; 
                         fila[2]=product; 
-                        fila[3]=Double.valueOf(PreV);
-                        fila[4]=Double.valueOf(descuentoPersn); 
-                        fila[5]=Double.valueOf(unidadesDeseadas); 
-                        fila[6]=totalVenta; 
-                        fila[7]=tipoVent;  
-                        fila[8]=cantT1; 
+                        fila[3]=Double.valueOf(PreC);
+                        fila[4]=Double.valueOf(unidadesDeseadas); 
+                        fila[5]=totalVenta; 
+                        fila[6]=provee;  
+                        fila[7]=cantT1; 
                          sumaT = 0.0;
-                        try{
-                        Connection conex = DriverManager.getConnection(url, user, pass);
-                        String Qury = "INSERT INTO tabla_aux(codigo_producto,codigo_barra,categoria,producto,proveedor,descripcion,ubicacion,unidades, alerta_unidades,fecha_vencimiento,precio_compra,precio_venta,precio_mayoreo,precio_etiqueta,descuento,autorizy,porciones,cant) SELECT codigo_producto,codigo_barra,categoria,producto,proveedor,descripcion,ubicacion,unidades, alerta_unidades,fecha_vencimiento,precio_compra,precio_venta,precio_mayoreo,precio_etiqueta,descuento,lll,porciones,"+cantT1+" from producto where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        Statement sts =  conex.createStatement();
-                        sts.executeUpdate(Qury);
-                        String query = "update producto set unidades ='"+operacion1+"' where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        PreparedStatement preparedStmt = conex.prepareStatement(query);
-                        preparedStmt.executeUpdate();
-                        modelo.addRow(fila); 
+                            modelo.addRow(fila); 
                                  tablaADD.setModel(modelo);
                                  lcd.setText("0");
                                 totalRow= tablaADD.getRowCount();
                                     for(int ii=0;ii<totalRow;ii++)
                                     {
-                                    double sumatoria= Double.parseDouble(String.valueOf(tablaADD.getValueAt(ii,6)));
+                                    double sumatoria= Double.parseDouble(String.valueOf(tablaADD.getValueAt(ii,5)));
                                     sumaT= sumaT + sumatoria;
                                     auxST = Double.toString(sumaT);
                                     jLabel14.setVisible(true);
@@ -1603,224 +1310,27 @@ try{
                                     jLabel5.setText(auxST);
                                     }
                                     cant=0;
-                        }catch(SQLException es){
-                        JOptionPane.showMessageDialog(this, es);
-                        } 
-                        h=porciones.size();
-                 }
-                 h++;
-                 
-                }
-                   //entra si es mayorista
-                     if(autr.equals("-") && !jLabel13.getText().isEmpty() ){
-                        tipoVent = "Mayorista";
-                        cantT1++;
-                        totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV));
-                       operacion1 = cantidad - unidadesDeseadas;
-                       units.add(operacion1);
-                        tablaADD.setRowHeight(25);
-                        fila = new Object[9];
-                        fila[0]=cod_prod;
-                        fila[1]=categor; 
-                        fila[2]=product; 
-                        fila[3]=Double.valueOf(PreV);
-                        fila[4]=Double.valueOf(0.0); 
-                        fila[5]=Double.valueOf(unidadesDeseadas); 
-                        fila[6]=totalVenta; 
-                        fila[7]=tipoVent;  
-                        fila[8]=cantT1; 
-                         sumaT = 0.0;
-                        try{
-                        Connection conex = DriverManager.getConnection(url, user, pass);
-                        String Qury = "INSERT INTO tabla_aux(codigo_producto,codigo_barra,categoria,producto,proveedor,descripcion,ubicacion,unidades, alerta_unidades,fecha_vencimiento,precio_compra,precio_venta,precio_mayoreo,precio_etiqueta,descuento,autorizy,porciones,cant) SELECT codigo_producto,codigo_barra,categoria,producto,proveedor,descripcion,ubicacion,unidades, alerta_unidades,fecha_vencimiento,precio_compra,precio_venta,precio_mayoreo,precio_etiqueta,descuento,lll,porciones,"+cantT1+" from producto where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        Statement sts =  conex.createStatement();
-                        sts.executeUpdate(Qury);
-                        String query = "update producto set unidades ='"+operacion1+"' where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        PreparedStatement preparedStmt = conex.prepareStatement(query);
-                        preparedStmt.executeUpdate();
-                        modelo.addRow(fila); 
-                                 tablaADD.setModel(modelo);
-                                 lcd.setText("0");
-                                totalRow= tablaADD.getRowCount();
-                                    for(int ii=0;ii<totalRow;ii++)
-                                    {
-                                    double sumatoria= Double.parseDouble(String.valueOf(tablaADD.getValueAt(ii,6)));
-                                    sumaT= sumaT + sumatoria;
-                                    auxST = Double.toString(sumaT);
-                                    jLabel14.setVisible(true);
-                                    jLabel6.setVisible(true);
-                                    jLabel5.setVisible(true); 
-                                    jLabel5.setText(auxST);
-                                    }
-                                    cant=0;
-                        }catch(SQLException es){
-                        JOptionPane.showMessageDialog(this, es);
-                        } 
-                 }
-                          //verifica si tiene autorizado descuento y si es diferente de 4,10,12 no hace descuento
-                  if( (autr.equals("-") &&  Auxiliar.size()==0) && jLabel13.getText().isEmpty()){
-                        tipoVent = "Normal";
-                        cantT1++;
-                        totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV));
-                       operacion1 = cantidad - unidadesDeseadas;
-                       units.add(operacion1);
-                        tablaADD.setRowHeight(25);
-                        fila = new Object[9];
-                        fila[0]=cod_prod;
-                        fila[1]=categor; 
-                        fila[2]=product; 
-                        fila[3]=Double.valueOf(PreV);
-                        fila[4]=Double.valueOf(0.0); 
-                        fila[5]=Double.valueOf(unidadesDeseadas); 
-                        fila[6]=totalVenta; 
-                        fila[7]=tipoVent;  
-                        fila[8]=cantT1;
-                         sumaT = 0.0;
-                        try{
-                        Connection conex = DriverManager.getConnection(url, user, pass);
-                        String Qury = "INSERT INTO tabla_aux(codigo_producto,codigo_barra,categoria,producto,proveedor,descripcion,ubicacion,unidades, alerta_unidades,fecha_vencimiento,precio_compra,precio_venta,precio_mayoreo,precio_etiqueta,descuento,autorizy,porciones,cant) SELECT codigo_producto,codigo_barra,categoria,producto,proveedor,descripcion,ubicacion,unidades, alerta_unidades,fecha_vencimiento,precio_compra,precio_venta,precio_mayoreo,precio_etiqueta,descuento,lll,porciones,"+cantT1+" from producto where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        Statement sts =  conex.createStatement();
-                        sts.executeUpdate(Qury);
-                        String query = "update producto set unidades ='"+operacion1+"' where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        PreparedStatement preparedStmt = conex.prepareStatement(query);
-                        preparedStmt.executeUpdate();
-                        modelo.addRow(fila); 
-                                 tablaADD.setModel(modelo);
-                                 lcd.setText("0");
-                                totalRow= tablaADD.getRowCount();
-                                    for(int ii=0;ii<totalRow;ii++)
-                                    {
-                                    double sumatoria= Double.parseDouble(String.valueOf(tablaADD.getValueAt(ii,6)));
-                                    sumaT= sumaT + sumatoria;
-                                    auxST = Double.toString(sumaT);
-                                    jLabel14.setVisible(true);
-                                    jLabel6.setVisible(true);
-                                    jLabel5.setVisible(true); 
-                                    jLabel5.setText(auxST);
-                                    }
-                                    cant=0;
-                        }catch(SQLException es){
-                        JOptionPane.showMessageDialog(this, es);
-                        }                     
-                 }
-                 
-                  //verifica si tiene autorizado descuento si no tiene no hace descuento aunque sea 4,10,12
-                  if(autr.equals(".")){
-                        tipoVent = "Normal";
-                        cantT1++;
-                        totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV));
-                       operacion1 = cantidad - unidadesDeseadas;
-                       units.add(operacion1);
-                        tablaADD.setRowHeight(25);
-                        fila = new Object[9];
-                        fila[0]=cod_prod;
-                        fila[1]=categor; 
-                        fila[2]=product; 
-                        fila[3]=Double.valueOf(PreV);
-                        fila[4]=Double.valueOf(0.0); 
-                        fila[5]=Double.valueOf(unidadesDeseadas); 
-                        fila[6]=totalVenta; 
-                        fila[7]=tipoVent;  
-                        fila[8]=cantT1;
-                         sumaT = 0.0;
-                        try{
-                        Connection conex = DriverManager.getConnection(url, user, pass);
-                        String Qury = "INSERT INTO tabla_aux(codigo_producto,codigo_barra,categoria,producto,proveedor,descripcion,ubicacion,unidades, alerta_unidades,fecha_vencimiento,precio_compra,precio_venta,precio_mayoreo,precio_etiqueta,descuento,autorizy,porciones,cant) SELECT codigo_producto,codigo_barra,categoria,producto,proveedor,descripcion,ubicacion,unidades, alerta_unidades,fecha_vencimiento,precio_compra,precio_venta,precio_mayoreo,precio_etiqueta,descuento,lll,porciones,"+cantT1+" from producto where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        Statement sts =  conex.createStatement();
-                        sts.executeUpdate(Qury);
-                        String query = "update producto set unidades ='"+operacion1+"' where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
-                        PreparedStatement preparedStmt = conex.prepareStatement(query);
-                        preparedStmt.executeUpdate();
-                        modelo.addRow(fila); 
-                                 tablaADD.setModel(modelo);
-                                 lcd.setText("0");
-                                totalRow= tablaADD.getRowCount();
-                                    for(int i=0;i<totalRow;i++)
-                                    {
-                                    double sumatoria= Double.parseDouble(String.valueOf(tablaADD.getValueAt(i,6)));
-                                    sumaT= sumaT + sumatoria;
-                                    auxST = Double.toString(sumaT);
-                                    jLabel14.setVisible(true);
-                                    jLabel6.setVisible(true);
-                                    jLabel5.setVisible(true); 
-                                    jLabel5.setText(auxST);
-                                    }
-                                    cant=0;
-                        }catch(SQLException es){
-                        JOptionPane.showMessageDialog(this, es);
-                        }
-                 }
-                  
-      
-                     //limpia y pone foco a label para buscar de nuevo y recarga la tabla de bsuqueda
                     
-                     find.setText("");
-                     find.requestFocus();
+               
         }
-        else 
-            menUnid.setVisible(true);
-            menUnid.setLocationRelativeTo(null);
-        }
-        else 
-           m.setVisible(true);
-           m.setLocationRelativeTo(null);
-
-
-   }
+}    
 else
     JOptionPane.showMessageDialog(this,"No seleccionó ningun artículo");
 // TODO add your handling 
 }
 
     public static void columnas(){
-    tablaPRODUCTOS.getColumnModel().getColumn(0).setPreferredWidth(130);
+    tablaPRODUCTOS.getColumnModel().getColumn(0).setPreferredWidth(210);
     tablaPRODUCTOS.getColumnModel().getColumn(1).setPreferredWidth(180);
-    tablaPRODUCTOS.getColumnModel().getColumn(2).setPreferredWidth(450);
-    tablaPRODUCTOS.getColumnModel().getColumn(3).setPreferredWidth(80);
+    tablaPRODUCTOS.getColumnModel().getColumn(2).setPreferredWidth(400);
+    tablaPRODUCTOS.getColumnModel().getColumn(3).setPreferredWidth(260);
     tablaPRODUCTOS.getColumnModel().getColumn(4).setPreferredWidth(80);
     tablaPRODUCTOS.getColumnModel().getColumn(5).setPreferredWidth(150);
-    tablaPRODUCTOS.getColumnModel().getColumn(6).setPreferredWidth(1);
-    tablaPRODUCTOS.getColumnModel().getColumn(7).setPreferredWidth(120);
-    tablaPRODUCTOS.getColumnModel().getColumn(8).setPreferredWidth(120);
-    tablaPRODUCTOS.getColumnModel().getColumn(9).setPreferredWidth(20);
+    tablaPRODUCTOS.getColumnModel().getColumn(6).setPreferredWidth(150);
+    tablaPRODUCTOS.getColumnModel().getColumn(7).setPreferredWidth(140);
     tablaPRODUCTOS.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
     }
     
-    
-    public static void buscarMayoristas(){
-      
-        DefaultTableModel modelo = new DefaultTableModel();
-        tablaPRODUCTOS.setModel(modelo);
-        Connection cnx = null;
-        if (cnx == null) {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento,descripcion, precio_mayoreo, precio_etiqueta, lll from producto where unidades>0";
-             Statement st = cnx.prepareStatement(sql);
-             ResultSet res = st.executeQuery(sql);
-             ResultSetMetaData rsMd = res.getMetaData();
-             int cantidadColumnas = rsMd.getColumnCount();
-             for (int i = 1; i <= cantidadColumnas; i++) {
-            modelo.addColumn(rsMd.getColumnLabel(i));
-         }
-             Object[] fila = new Object[cantidadColumnas];
-         while (res.next()){
-         
-         for (int i = 0; i < cantidadColumnas; i++) {
-         fila[i]=res.getObject(i+1);
-         }
-              modelo.addRow(fila);  
-             }
-         columnas();
-         tablaPRODUCTOS.setColumnSelectionInterval(0,0);
-         tablaPRODUCTOS.setRowSelectionInterval(0,0);
-             } catch (ClassNotFoundException ex) {
-             throw new ClassCastException(ex.getMessage());
-             } catch (SQLException ex) { 
-            }
-        
-            }   
-    }
+   
  
 }

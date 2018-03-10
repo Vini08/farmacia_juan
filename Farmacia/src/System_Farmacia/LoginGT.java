@@ -1,12 +1,18 @@
 
 package System_Farmacia;
 
+import FARM.mensajesSYS.datosAlmacenados;
+import static System_Farmacia.MENUadmin.horaMenu;
 import java.awt.Color;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -18,7 +24,7 @@ import javax.swing.border.LineBorder;
  * @author Vinicio
  */
  
-public class LoginGT extends javax.swing.JFrame {
+public class LoginGT extends javax.swing.JFrame implements Runnable {
 
  String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
@@ -31,6 +37,9 @@ Color ColorSalida =new Color(0,102,204);
 Color ColorSalida2 =new Color(2,72,142);
 Border thickBorde = new LineBorder(Color.WHITE, 4);
 String nombre, contraseña , n, p;
+String hora,minutos,segundos,ampm;
+Calendar fecha;    
+Thread h1;
 public static int nvl, boot;
 private int x;
 private int y;
@@ -38,6 +47,9 @@ private int y;
 public LoginGT() {
         initComponents();
         setLocationRelativeTo(null);
+        h1 = new Thread(this);
+        h1.start();
+     
        jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
          jButton6.setBorder(thickBorde);
@@ -65,6 +77,7 @@ public LoginGT() {
         passw = new javax.swing.JPasswordField();
         jButton2 = new javax.swing.JButton();
         ms = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -311,12 +324,29 @@ public LoginGT() {
         ms.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(ms, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 260, 30));
 
+        jLabel19.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 16)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(187, 187, 187));
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 360, 20));
+
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/azulBarra.jpg"))); // NOI18N
         jLabel18.setPreferredSize(new java.awt.Dimension(367, 70));
         getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 370, 80));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+public void run(){
+ Thread ct = Thread.currentThread();
+ while(ct == h1) {   
+  calcula();
+  horaMenu = hora + ":" + minutos + ":" + segundos + " "+ampm;
+  jLabel19.setText(hora + ":" + minutos + ":" + segundos + " "+ampm);
+  try {
+   Thread.sleep(1000);
+  }catch(InterruptedException e) {}
+ }
+}
+
 
     private void jButton1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseMoved
 Border thickBorder = new LineBorder(grisborde, 54);
@@ -525,6 +555,7 @@ passw.requestFocus();
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -539,6 +570,12 @@ passw.requestFocus();
     // End of variables declaration//GEN-END:variables
 
 public void inicia(){
+Calendar fechax = new GregorianCalendar();
+
+int año = fechax.get(Calendar.YEAR);
+int mes = fechax.get(Calendar.MONTH);
+int dia = fechax.get(Calendar.DAY_OF_MONTH);    
+String dat = año+"-"+(mes+1)+"-"+dia;    
 nombre = name.getText();
 contraseña = passw.getText();
 Connection cnx = null;
@@ -560,6 +597,7 @@ Connection cnx = null;
                 
                 if (nvl==0){
                     boot=0;
+                    bitacora(n, dat, jLabel19.getText(),"- - - -");
                 MENUadmin menu = new MENUadmin(n);
                 menu.setVisible(true);
                 menu.setLocationRelativeTo(null);
@@ -586,4 +624,39 @@ Connection cnx = null;
  name.requestFocus();
 
 }
+
+
+    public void calcula () {        
+        Calendar calendario = new GregorianCalendar();
+        Date fechaHoraActual = new Date();
+        calendario.setTime(fechaHoraActual);
+        ampm = calendario.get(Calendar.AM_PM)==Calendar.AM?"AM":"PM";
+
+        if(ampm.equals("PM")){
+         int h = calendario.get(Calendar.HOUR_OF_DAY)-12;
+         hora = h>9?""+h:"0"+h;
+        }else{
+         hora = calendario.get(Calendar.HOUR_OF_DAY)>9?""+calendario.get(Calendar.HOUR_OF_DAY):"0"+calendario.get(Calendar.HOUR_OF_DAY);            
+        }
+        minutos = calendario.get(Calendar.MINUTE)>9?""+calendario.get(Calendar.MINUTE):"0"+calendario.get(Calendar.MINUTE);
+        segundos = calendario.get(Calendar.SECOND)>9?""+calendario.get(Calendar.SECOND):"0"+calendario.get(Calendar.SECOND); 
+    }
+
+    public void bitacora(String us,String  fecha,String ingr, String sald)
+   {      
+       try {            
+       Connection conn = DriverManager.getConnection(url, user, pass);
+       CallableStatement proc = conn.prepareCall(" CALL bitacora(?, ?, ?, ?) ");
+            //se cargan los parametros de entrada
+            proc.setString(1, us);
+            proc.setString(2, fecha);
+            proc.setString(3, ingr);
+            proc.setString(4, sald);
+            // Se ejecuta el procedimiento almacenado
+            proc.execute();  
+
+        } catch (SQLException ex) { 
+        JOptionPane.showMessageDialog(this,ex);
+    }  
+   }
 }

@@ -93,8 +93,6 @@ DefaultTableModel dm;
         jButton9 = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
-        jLabel26 = new javax.swing.JLabel();
-        jButton11 = new javax.swing.JButton();
         jLabel27 = new javax.swing.JLabel();
         jButton12 = new javax.swing.JButton();
         jLabel28 = new javax.swing.JLabel();
@@ -329,7 +327,7 @@ DefaultTableModel dm;
                 jTextField1KeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 660, 200, 50));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 590, 200, 50));
 
         jLabel24.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
@@ -384,11 +382,6 @@ DefaultTableModel dm;
         jLabel25.setToolTipText("");
         jLabel25.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel25.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel25.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel25MouseMoved(evt);
-            }
-        });
         jLabel25.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel25MousePressed(evt);
@@ -397,7 +390,12 @@ DefaultTableModel dm;
                 jLabel25MouseReleased(evt);
             }
         });
-        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 660, 200, 50));
+        jLabel25.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel25MouseMoved(evt);
+            }
+        });
+        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 590, 200, 50));
 
         jButton10.setBackground(new java.awt.Color(39, 39, 39));
         jButton10.setForeground(new java.awt.Color(3, 64, 124));
@@ -421,53 +419,7 @@ DefaultTableModel dm;
                 jButton10ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 660, 200, 50));
-
-        jLabel26.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel26.setText("Ver productos agotados");
-        jLabel26.setToolTipText("");
-        jLabel26.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabel26.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel26.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel26MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jLabel26MouseReleased(evt);
-            }
-        });
-        jLabel26.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel26MouseMoved(evt);
-            }
-        });
-        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 590, 400, 60));
-
-        jButton11.setBackground(new java.awt.Color(0, 102, 204));
-        jButton11.setForeground(new java.awt.Color(3, 64, 124));
-        jButton11.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton11.setFocusPainted(false);
-        jButton11.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton11MouseMoved(evt);
-            }
-        });
-        jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton11MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton11MouseReleased(evt);
-            }
-        });
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 590, 400, 60));
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 590, 200, 50));
 
         jLabel27.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
@@ -518,21 +470,21 @@ DefaultTableModel dm;
         jLabel28.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(255, 255, 255));
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel28.setText("Nuevo Proveedor/Categoria");
+        jLabel28.setText("Nuevos Registros");
         jLabel28.setToolTipText("");
         jLabel28.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel28.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel28.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel28MouseMoved(evt);
-            }
-        });
         jLabel28.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel28MousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jLabel28MouseReleased(evt);
+            }
+        });
+        jLabel28.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel28MouseMoved(evt);
             }
         });
         getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 590, 310, 120));
@@ -665,9 +617,7 @@ DefaultTableModel dm;
             jLabel24.setForeground(Color.WHITE); 
             jButton10.setBorder(thickBorder);
             jLabel25.setForeground(Color.WHITE); 
-            jButton11.setBorder(thickBorder3);
-            jLabel26.setForeground(Color.WHITE); 
-            jButton12.setBorder(thickBorder4);
+              jButton12.setBorder(thickBorder4);
             jLabel27.setForeground(Color.WHITE); 
             jButton13.setBorder(thickBorder5);
             jLabel28.setForeground(Color.WHITE);
@@ -703,13 +653,13 @@ descu =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 12);
 porcions=  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 13);
 
 if(units==0){        
-Agotados ed = new Agotados(usua,code, mark, model, units, provv, price0,price1,price2,porcions,descu);
+Agotados ed = new Agotados();
 ed.setVisible(true);
 ed.setLocationRelativeTo(null);
     
 }
-if(units<alertsunits){        
-Por_Agotarse ed = new Por_Agotarse(usua,code, mark, model, units, alertsunits, price0,price1,price2,porcions,descu);
+if(units<alertsunits && units!=0){        
+porAgotarse ed = new porAgotarse();
 ed.setVisible(true);
 ed.setLocationRelativeTo(null);
     
@@ -782,8 +732,6 @@ jLabel24.setToolTipText(null);
             jLabel24.setForeground(Color.WHITE); 
             jButton10.setBorder(thickBorder);
             jLabel25.setForeground(Color.WHITE); 
-            jButton11.setBorder(thickBorder3);
-            jLabel26.setForeground(Color.WHITE); 
             jButton12.setBorder(thickBorder4);
             jLabel27.setForeground(Color.WHITE);
             jButton13.setBorder(thickBorder5);
@@ -823,38 +771,6 @@ jLabel25.setToolTipText(null);
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jLabel26MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel26MousePressed
-
-    private void jLabel26MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseReleased
-sql = "SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades=0";
-LlenarTabla(sql);        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel26MouseReleased
-
-    private void jLabel26MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseMoved
-Color X1 =new Color(31,128,225);
-Border thickBorder = new LineBorder(X1, 86);
-jLabel26.setToolTipText(null); 
-        jButton11.setBorder(thickBorder);          // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel26MouseMoved
-
-    private void jButton11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11MousePressed
-
-    private void jButton11MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11MouseReleased
-
-    private void jButton11MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11MouseMoved
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jLabel27MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MousePressed
         // TODO add your handling code here:
@@ -902,7 +818,7 @@ jTextField1.setToolTipText(null);        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel28MousePressed
 
     private void jLabel28MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseReleased
-proveedor C = new proveedor();
+nuevosRegistros C = new nuevosRegistros();
         C.setVisible(true);
         C.setLocationRelativeTo(null);        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel28MouseReleased
@@ -1035,7 +951,6 @@ searc=jTextField1.getText();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton3;
@@ -1044,7 +959,6 @@ searc=jTextField1.getText();
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;

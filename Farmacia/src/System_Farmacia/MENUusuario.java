@@ -905,29 +905,11 @@ this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + e
     }//GEN-LAST:event_jLabel29MouseReleased
 
     private void jLabel20MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseReleased
-inventario S = new inventario(sqlAGO);
-if(controlVentana2==true){
-S.auxUser=nombr;
-S.setVisible(true);
-S.setLocationRelativeTo(null);       
-controlVentana2=false;
-}
-else if(controlVentana2==false){
-S.toFront();
-}       // TODO add your handling code here:
+      // TODO add your handling code here:
     }//GEN-LAST:event_jLabel20MouseReleased
 
     private void jLabel18MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseReleased
-   inventario S = new inventario(sqlPORAGOT);
-if(controlVentana2==true){
-S.auxUser=nombr;
-S.setVisible(true);
-S.setLocationRelativeTo(null);       
-controlVentana2=false;
-}
-else if(controlVentana2==false){
-S.toFront();
-}      // TODO add your handling code here:
+     // TODO add your handling code here:
     }//GEN-LAST:event_jLabel18MouseReleased
 
     /**

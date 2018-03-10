@@ -9,15 +9,23 @@ import com.sun.awt.AWTUtilities;
 import System_Farmacia.AdminEditarProdcut;
 import System_Farmacia.LoginGT;
 import static System_Farmacia.AdminEditarProdcut.unit;
+import static System_Farmacia.LoginGT.boot;
+import static System_Farmacia.LoginGT.nvl;
+import System_Farmacia.MENUadmin;
+import System_Farmacia.MENUusuario;
+import System_Farmacia.hacer_ventas;
+import static System_Farmacia.hacer_ventas.tablaPRODUCTOS;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,12 +33,13 @@ import javax.swing.JOptionPane;
  */
 public class LectorBarras extends javax.swing.JFrame {
 
-String nombre, contraseña , n, p;
+               
+String nombre , n;
 String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
 String pass = "";
 int nvl;
-public static String usus;  
+public static String mayoris;  
     public LectorBarras(String n,int units) {
         initComponents();
         setLocationRelativeTo(null);
@@ -50,7 +59,6 @@ public static String usus;
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         codeBarras = new javax.swing.JPasswordField();
-        jButton5 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -73,13 +81,18 @@ public static String usus;
         jLabel7.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(217, 217, 217));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("ENTER = SALIR");
+        jLabel7.setText("X");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel7MouseReleased(evt);
+            }
+        });
         jLabel7.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jLabel7KeyPressed(evt);
             }
         });
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 500, 50));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 50, 50));
 
         jLabel5.setBackground(new java.awt.Color(153, 153, 153));
         jLabel5.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 36)); // NOI18N
@@ -102,19 +115,7 @@ public static String usus;
                 codeBarrasKeyPressed(evt);
             }
         });
-        getContentPane().add(codeBarras, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 290, 50));
-
-        jButton5.setBackground(new java.awt.Color(80, 191, 136));
-        jButton5.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        jButton5.setText("ENTRAR");
-        jButton5.setBorder(null);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 120, 40));
+        getContentPane().add(codeBarras, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 290, 50));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/lector_1.jpg"))); // NOI18N
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 520, 150));
@@ -140,30 +141,27 @@ public static String usus;
     }//GEN-LAST:event_jLabel2KeyPressed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-if (evt.getKeyCode()==10){
-this.dispose();
-
-}        // TODO add your handling code here:
-    }//GEN-LAST:event_formKeyPressed
-
-    private void jLabel7KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel7KeyPressed
-
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel7KeyPressed
+    }//GEN-LAST:event_formKeyPressed
 
     private void codeBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codeBarrasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_codeBarrasActionPerformed
 
     private void codeBarrasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codeBarrasKeyPressed
-        if(evt.getKeyCode()==10){
-            inicia();
-        }        // TODO add your handling code here:
+if(evt.getKeyCode()==10){
+inicia();
+}              // TODO add your handling code here:
     }//GEN-LAST:event_codeBarrasKeyPressed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-inicia();     // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void jLabel7KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel7KeyPressed
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel7KeyPressed
+
+    private void jLabel7MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseReleased
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel7MouseReleased
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -207,56 +205,45 @@ inicia();     // TODO add your handling code here:
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LectorBarras(usus,unit).setVisible(true);
+                new LectorBarras(mayoris,unit).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField codeBarras;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 
-    public void inicia(){
-contraseña = codeBarras.getText();
+   
+   
+   public void inicia(){       
+nombre = codeBarras.getText();
 Connection cnx = null;
        
  try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "Select *from usuario";
+             String sql = "Select codigo_Mayorista, nombre from cliente_mayoreo where codigo_Mayorista='"+nombre+"'";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
-            
-             while (res.next()){
-            n = res.getString(2);
-            p = res.getString(3);
-            nvl  = res.getInt(4);
-            if (n.equals(usus) ){
-   
-            if (p.equals(contraseña)&&nvl==0){
-//            AdminEditarProdcut mn = new AdminEditarProdcut(usua,code, mark, model, units, provv,price price1,price2,price3,descc);
-  //          mn.setVisible(true);
-    //        mn.setLocationRelativeTo(null);
-             this.dispose();
+             
+            while (res.next()){
+            n = res.getString(1);
+            mayoris = res.getString(2);
+            if (n.equals(nombre) ){
+                 hacer_ventas.buscarMayoristas();
+                 hacer_ventas.jLabel13.setText("NOMBRE DE CLIENTE: "+mayoris);
+                 this.dispose();
             }
-            else 
-                this.dispose();
-            }
-            else 
-               this.dispose();
             }
                 } catch (ClassNotFoundException ex) {
-   JOptionPane.showMessageDialog(this, ex);
                 } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, ex);
+                Logger.getLogger(LoginGT.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-
 }
-    
 }

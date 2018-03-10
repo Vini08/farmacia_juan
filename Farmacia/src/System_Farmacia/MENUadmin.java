@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -356,6 +357,11 @@ public MENUadmin(String Name) {
                 jLabel29MouseReleased(evt);
             }
         });
+        jLabel29.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel29MouseMoved(evt);
+            }
+        });
         getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(1254, 30, 20, -1));
 
         jLabel1.setText(".");
@@ -392,6 +398,11 @@ public MENUadmin(String Name) {
         jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jLabel18MouseReleased(evt);
+            }
+        });
+        jLabel18.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel18MouseMoved(evt);
             }
         });
         getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(1147, 12, 60, 40));
@@ -449,7 +460,7 @@ public MENUadmin(String Name) {
         jLabel24.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel24.setText("ORDEN DE TRABAJO");
+        jLabel24.setText("PEDIDOS");
         jLabel24.setToolTipText("");
         jLabel24.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel24.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -629,7 +640,7 @@ public MENUadmin(String Name) {
 
         jLabel22.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 17)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel22.setText("F4   =   REPARACIONES");
+        jLabel22.setText("F4   =   PEDIDOS");
         getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 200, -1));
 
         jLabel30.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
@@ -678,7 +689,7 @@ public MENUadmin(String Name) {
 
         jLabel31.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 17)); // NOI18N
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel31.setText("F5   =   GARANTIAS");
+        jLabel31.setText("F5   =   USUARIOS");
         getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 220, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blancoE2.jpg"))); // NOI18N
@@ -855,6 +866,7 @@ Border thickBorder = new LineBorder(ColorSalida, 54);
         jButton3.setBorder(thickBorder);
         reback();
         CrearBackup("inventario");
+        bitacora(nombr, jLabel19.getText());
         System.exit(1);
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel3MouseReleased
@@ -934,7 +946,15 @@ Vn.toFront();
     }//GEN-LAST:event_jLabel24MousePressed
 
     private void jLabel24MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseReleased
-
+if(controlVentana5==true){
+pedidos C = new pedidos();
+C.setVisible(true);
+C.setLocationRelativeTo(null);
+controlVentana4=false;
+}
+else if(controlVentana5==false){
+Vn.toFront();
+}
     }//GEN-LAST:event_jLabel24MouseReleased
 
     private void jLabel24MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseMoved
@@ -1187,26 +1207,32 @@ VS.toFront();
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jLabel29MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel29MouseReleased
-      // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel29MouseReleased
-
-    private void jLabel20MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseReleased
- inventario S = new inventario(sqlAGO);
+ Agotados S = new Agotados();
 if(controlVentana2==true){
-S.auxUser=nombr;
 S.setVisible(true);
 S.setLocationRelativeTo(null);       
 controlVentana2=false;
 }
 else if(controlVentana2==false){
 S.toFront();
-}       // TODO add your handling code here:
+}      // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel29MouseReleased
+
+    private void jLabel20MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseReleased
+ Agotados S = new Agotados();
+if(controlVentana2==true){
+S.setVisible(true);
+S.setLocationRelativeTo(null);       
+controlVentana2=false;
+}
+else if(controlVentana2==false){
+S.toFront();
+}      // TODO add your handling code here:
     }//GEN-LAST:event_jLabel20MouseReleased
 
     private void jLabel18MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseReleased
-   inventario S = new inventario(sqlPORAGOT);
+porAgotarse S = new porAgotarse();
 if(controlVentana2==true){
-S.auxUser=nombr;
 S.setVisible(true);
 S.setLocationRelativeTo(null);       
 controlVentana2=false;
@@ -1215,6 +1241,16 @@ else if(controlVentana2==false){
 S.toFront();
 }      // TODO add your handling code here:
     }//GEN-LAST:event_jLabel18MouseReleased
+
+    private void jLabel18MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseMoved
+    conteoPORagotar("SELECT count(codigo_producto)as cuantos FROM producto where Unidades<alerta_unidades");
+            // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel18MouseMoved
+
+    private void jLabel29MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel29MouseMoved
+  conteoAgotados("SELECT count(codigo_producto)as cuantos FROM producto where Unidades=0");
+             // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel29MouseMoved
 
     /**
      * @param args the command line arguments
@@ -1326,6 +1362,12 @@ C.setVisible(true);
 C.setLocationRelativeTo(null);
 controlVentana4=false;
 }
+if(numAtajo==KeyEvent.VK_F4 && controlVentana5==true){
+pedidos C = new pedidos();
+C.setVisible(true);
+C.setLocationRelativeTo(null);
+controlVentana4=false;
+}
 }
     
     
@@ -1421,7 +1463,7 @@ public void conteoAgotados(String sql){
         catch(SQLException ex){JOptionPane.showMessageDialog(this,ex);}
        }
     
-public void conteoPORagotar(String sql){
+    public void conteoPORagotar(String sql){
     try{
              cnx = DriverManager.getConnection(url, user,pass);
              Statement st = cnx.prepareStatement(sql);
@@ -1431,5 +1473,30 @@ public void conteoPORagotar(String sql){
             }
         }
         catch(SQLException ex){JOptionPane.showMessageDialog(this,ex);}
-       }
+     }
+    
+    
+       public void bitacora(String us, String sald)
+   {      
+       Calendar fechax = new GregorianCalendar();
+
+int año = fechax.get(Calendar.YEAR);
+int mes = fechax.get(Calendar.MONTH);
+int dia = fechax.get(Calendar.DAY_OF_MONTH);  
+String dat = año+"-"+(mes+1)+"-"+dia;   
+       try {            
+       Connection conn = DriverManager.getConnection(url, user, pass);
+       CallableStatement proc = conn.prepareCall(" CALL bitacora(?, ?, ?, ?) ");
+            //se cargan los parametros de entrada
+            proc.setString(1, us);
+            proc.setString(2, dat);
+            proc.setString(3, "- - - -");
+            proc.setString(4, sald);
+            // Se ejecuta el procedimiento almacenado
+            proc.execute();  
+
+        } catch (SQLException ex) { 
+        JOptionPane.showMessageDialog(this,ex);
+    }  
+   }
 }

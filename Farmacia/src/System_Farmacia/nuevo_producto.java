@@ -619,6 +619,7 @@ Connection cnx = null;
     private void jLabel3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseReleased
         Border thickBorder = new LineBorder(ColorSalida2, 54);
         jButton3.setBorder(thickBorder);
+        jTextField1.setText("");
         this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel3MouseReleased
