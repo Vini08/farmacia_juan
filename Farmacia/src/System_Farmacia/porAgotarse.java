@@ -91,7 +91,7 @@ Connection cnx,conI = null;
         jLabel18 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Nuevo Producto");
+        setTitle("Productos por Agotarse");
         setBackground(new java.awt.Color(153, 102, 255));
         setMinimumSize(new java.awt.Dimension(940, 670));
         setUndecorated(true);

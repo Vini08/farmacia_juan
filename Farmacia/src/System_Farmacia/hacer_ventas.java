@@ -737,6 +737,8 @@ public hacer_ventas(String N) {
         });
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 560, 40));
 
+        getAccessibleContext().setAccessibleName("Realizar venta");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -936,8 +938,7 @@ array_Double = new Double[tablaADD.getRowCount()][tablaADD.getColumnCount()];
     }
     
 ConfirmarVenta CV = new ConfirmarVenta(auxST,array_String,array_Tipo, array_Double,cdp, units,count,Cliente);
-
-        if(jLabel5.getText().length()!=0){
+if(jLabel5.getText().length()!=0){
 CV.setVisible(true);
 CV.setLocationRelativeTo(null);
 

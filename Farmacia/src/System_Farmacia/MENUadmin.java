@@ -950,7 +950,7 @@ if(controlVentana5==true){
 pedidos C = new pedidos();
 C.setVisible(true);
 C.setLocationRelativeTo(null);
-controlVentana4=false;
+controlVentana5=false;
 }
 else if(controlVentana5==false){
 Vn.toFront();

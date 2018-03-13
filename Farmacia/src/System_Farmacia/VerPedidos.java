@@ -5,8 +5,13 @@
  */
 package System_Farmacia;
 
+import static System_Farmacia.hacer_ventas.jLabel5;
+import static System_Farmacia.hacer_ventas.sumaT;
+import static System_Farmacia.hacer_ventas.tablaADD;
+import static System_Farmacia.hacer_ventas.url;
 import static System_Farmacia.inventario.jTable1;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,41 +21,33 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import static System_Farmacia.hacer_ventas.tablaPRODUCTOS;
+import javax.swing.table.JTableHeader;
 
 /**
  *
  * @author Vinicio
  */
-public class reportes extends javax.swing.JFrame {
+public class VerPedidos extends javax.swing.JFrame {
 
 private int x;
 private int y;
-static int w=0,z=0,d=0; 
+static int w=0; 
+public boolean check=true;
 static String inv[]=new String[5000];
-ArrayList<Double> prec_venta=new ArrayList<Double>();
-static String code[]=new String[5000];
-ArrayList<Double>  prec_compra=new ArrayList<Double>();
-ArrayList<Double> realGanan=new ArrayList<Double>();
-ArrayList<Double>  desc=new ArrayList<Double>();
-    ArrayList<Integer> canti = new ArrayList<>();
- ArrayList<String> ls = new ArrayList<String>();
+static String GN[]=new String[5000];
+Connection conI = null;
 String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
-String pass = "";
+String pass = "",auxST;
 int busqueda;
 Color grisMoved =new Color(180,180,180);
 Color grisborde =new Color(224,224,224);
@@ -62,14 +59,17 @@ Color CBTNmenu =new Color(39,39,39);
 Color cleaan =new Color(0,0,255);
 Color vver =new Color(102,102,102);
 Border thickBorde = new LineBorder(Color.WHITE, 4);
-static double gainT=0, auxRG;
 static float invT=0;
-public boolean check=true;      
-    public reportes() {
+      
+    public VerPedidos() {
         initComponents();
          setLocationRelativeTo(null);
        jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
+     JTableHeader th1;
+     th1 = tablaVentas.getTableHeader();
+      Font fuente1 = new Font("Microsoft Yi Baiti", Font.PLAIN, 22); 
+        th1.setFont(fuente1); 
         LlenarTabla();
         jLabel2.setToolTipText(null);
         jLabel3.setToolTipText(null);
@@ -84,8 +84,6 @@ public boolean check=true;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -94,40 +92,23 @@ public boolean check=true;
         jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaVentas = new javax.swing.JTable();
         jLabel20 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        DEl = new com.toedter.calendar.JDateChooser();
-        jLabel24 = new javax.swing.JLabel();
-        AL = new com.toedter.calendar.JDateChooser();
         jLabel10 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
         jLabel75 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
-        jLabel28 = new javax.swing.JLabel();
-        jButton12 = new javax.swing.JButton();
-        jLabel76 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel77 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-
-        jMenuItem2.setText("Ver Detalle de Factura");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(jMenuItem2);
-
-        jPopupMenu1.getAccessibleContext().setAccessibleParent(jPopupMenu1);
+        jLabel22 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Reportes");
+        setTitle("Pedidos Realizados");
         setUndecorated(true);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -239,72 +220,68 @@ public boolean check=true;
         jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(231, 231, 231));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("REPORTES");
+        jLabel4.setText("PEDIDOS REALIZADOS");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 40));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/solid-orange-background.jpg"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/verde.jpg"))); // NOI18N
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 40));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 480, 40));
 
-        jTable1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaVentas.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        tablaVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "codigo_detalle", "codigo_factura", "categoria", "producto", "unidades", "precio_venta", "descuento", "precio_total", "tipo", "fecha", "Ganancia"
+                "ID Factura", "Usuario", "Total Factura", "Fecha"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jTable1.setComponentPopupMenu(jPopupMenu1);
-        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable1.setIntercellSpacing(new java.awt.Dimension(2, 2));
-        jTable1.setRowHeight(19);
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        ));
+        tablaVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tablaVentas.setIntercellSpacing(new java.awt.Dimension(2, 2));
+        tablaVentas.setRowHeight(19);
+        tablaVentas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jTable1MouseEntered(evt);
+                tablaVentasMouseEntered(evt);
             }
         });
-        jTable1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        tablaVentas.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jTable1MouseMoved(evt);
+                tablaVentasMouseMoved(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        tablaVentas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tablaVentasKeyPressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaVentas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 1320, 380));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 1320, 440));
 
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/barraMensajes.png"))); // NOI18N
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/verde.jpg"))); // NOI18N
         jLabel20.setPreferredSize(new java.awt.Dimension(367, 70));
-        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 650, 730, 80));
+        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 650, 480, 80));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -323,37 +300,25 @@ public boolean check=true;
         jLabel14.setForeground(new java.awt.Color(0, 51, 255));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("Q");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 560, 50, 70));
+        jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 560, 50, 80));
 
         jLabel13.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 58)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 51, 255));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 560, 310, 70));
-
-        jLabel25.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 17)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(96, 96, 96));
-        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel25.setText("DEL DIA:");
-        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 520, 80, 50));
-        getContentPane().add(DEl, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 520, 190, 50));
-
-        jLabel24.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 17)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(96, 96, 96));
-        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel24.setText("AL DIA:");
-        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 580, 80, 50));
-        getContentPane().add(AL, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 580, 190, 50));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 560, 310, 80));
 
         jLabel10.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 58)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(96, 96, 96));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Total Venta ");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 510, 420, 50));
+        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 560, 300, 80));
 
         jLabel26.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 36)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel26.setText("Ventas del Día");
+        jLabel26.setText("Eliminar Pedido de Lista");
         jLabel26.setToolTipText("");
         jLabel26.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel26.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -373,7 +338,7 @@ public boolean check=true;
                 jLabel26MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, 300, 120));
+        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 420, 80));
 
         jButton10.setBackground(new java.awt.Color(39, 39, 39));
         jButton10.setForeground(new java.awt.Color(3, 64, 124));
@@ -397,12 +362,12 @@ public boolean check=true;
                 jButton10ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, 300, 120));
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 420, 80));
 
         jLabel75.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel75.setForeground(new java.awt.Color(102, 102, 102));
         jLabel75.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 2), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(102, 102, 102))); // NOI18N
-        getContentPane().add(jLabel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 500, 420, 140));
+        getContentPane().add(jLabel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 560, 660, 80));
 
         jLabel27.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
@@ -453,60 +418,6 @@ public boolean check=true;
         });
         getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 260, 50));
 
-        jLabel28.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 30)); // NOI18N
-        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel28.setText("Ver por Fecha");
-        jLabel28.setToolTipText("");
-        jLabel28.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabel28.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel28.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel28MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel28MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jLabel28MouseReleased(evt);
-            }
-        });
-        jLabel28.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel28MouseMoved(evt);
-            }
-        });
-        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 510, 170, 120));
-
-        jButton12.setBackground(new java.awt.Color(102, 102, 102));
-        jButton12.setForeground(new java.awt.Color(3, 64, 124));
-        jButton12.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton12.setFocusPainted(false);
-        jButton12.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton12MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton12MouseReleased(evt);
-            }
-        });
-        jButton12.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton12MouseMoved(evt);
-            }
-        });
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 510, 170, 120));
-
-        jLabel76.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel76.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel76.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 2), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(102, 102, 102))); // NOI18N
-        getContentPane().add(jLabel76, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 500, 520, 140));
-
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
         jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -520,16 +431,15 @@ public boolean check=true;
         });
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 690, 40));
 
-        jLabel77.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel77.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel77.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 2), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(102, 102, 102))); // NOI18N
-        getContentPane().add(jLabel77, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 340, 140));
-
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/barraMensajes.png"))); // NOI18N
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/verde.jpg"))); // NOI18N
         jLabel21.setPreferredSize(new java.awt.Dimension(367, 70));
-        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 650, 730, 80));
+        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 650, 480, 80));
 
-        getAccessibleContext().setAccessibleName("Reportes");
+        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/verde.jpg"))); // NOI18N
+        jLabel22.setPreferredSize(new java.awt.Dimension(367, 70));
+        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 650, 480, 80));
+
+        getAccessibleContext().setAccessibleName("Pedidos Realizados");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -583,8 +493,12 @@ public boolean check=true;
         Border thickBorder = new LineBorder(ColorSalida2, 54);
         jButton3.setBorder(thickBorder);
         jLabel3.setForeground(Color.gray);
-        MENUadmin.controlVentana3=true;
-                Border thickBorderX = new LineBorder(Color.WHITE, 5);
+        if(LoginGT.boot==0){
+        MENUadmin.controlVentana4=true;
+        }
+        if(LoginGT.boot==1){
+                MENUusuario.controlVentana4=true;
+        }   Border thickBorderX = new LineBorder(Color.WHITE, 5);
         jButton3.setBorder(thickBorderX);
 
         this.dispose();
@@ -636,27 +550,6 @@ x = evt.getX();
                 y = evt.getY();        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel9MousePressed
 
-    private void jLabel26MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel26MousePressed
-
-    private void jLabel26MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseReleased
-  Date hoy = new Date();
- SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
- String dia = String.valueOf(sdf.format(hoy));        
-
-LLenarDELAL(dia,dia);       // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel26MouseReleased
-
-    private void jLabel26MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseMoved
-        Color X1 =new Color(61,61,61);
-        Border thickBorder = new LineBorder(X1, 86);
-        jLabel26.setToolTipText(null);
-        jButton10.setBorder(thickBorder);
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel26MouseMoved
-
     private void jButton10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton10MousePressed
@@ -679,17 +572,8 @@ LLenarDELAL(dia,dia);       // TODO add your handling code here:
 jButton10.setBorder(thickBorder);
 Border thickBorder2 = new LineBorder(cleaan, 60);
 jButton9.setBorder(thickBorder2);
-Border thickBorder3 = new LineBorder(vver, 60);
-jButton12.setBorder(thickBorder3);
 // TODO add your handling code here:
     }//GEN-LAST:event_formWindowActivated
-
-    private void jLabel26MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseExited
- 
-        Border thickBorder = new LineBorder(CBTNmenu, 86);
-        jLabel25.setToolTipText(null);
-        jButton10.setBorder(thickBorder);        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel26MouseExited
 
     private void jButton9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MousePressed
         // TODO add your handling code here:
@@ -707,70 +591,27 @@ jButton12.setBorder(thickBorder3);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
 
-    private void jLabel28MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel28MousePressed
-
-    private void jLabel28MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseReleased
-  String formato = DEl.getDateFormatString();
-Date date1 = DEl.getDate();
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
-String delDia =  String.valueOf(sdf.format(date1));
-
-String formato2 = AL.getDateFormatString();
-Date date2 = AL.getDate();
-SimpleDateFormat axx = new SimpleDateFormat("yyyy-M-d");
-String alDia =  String.valueOf(axx.format(date2));        
-
-LLenarDELAL(delDia,alDia);        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel28MouseReleased
-
-    private void jLabel28MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseMoved
-        Color X1 =new Color(72,72,72);
-        Border thickBorder = new LineBorder(X1, 86);
-        jLabel28.setToolTipText(null);
-        jButton12.setBorder(thickBorder);        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel28MouseMoved
-
-    private void jButton12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12MousePressed
-
-    private void jButton12MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12MouseReleased
-
-    private void jButton12MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12MouseMoved
-
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12ActionPerformed
-
-    private void jLabel28MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseExited
-
-        Border thickBorder = new LineBorder(vver, 86);
-        jLabel28.setToolTipText(null);
-        jButton12.setBorder(thickBorder);        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel28MouseExited
-
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
-
-// TODO add your handling code here:
+if(check==true){
+    LlenarTabla();
+    check=false;
+}// TODO add your handling code here:
     }//GEN-LAST:event_formMouseEntered
 
-    private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
+    private void tablaVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVentasMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTable1MouseEntered
+    }//GEN-LAST:event_tablaVentasMouseEntered
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
 
-    private void jTable1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseMoved
-       // TODO add your handling code here:
-    }//GEN-LAST:event_jTable1MouseMoved
+    private void tablaVentasMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVentasMouseMoved
+if(check==true){
+    LlenarTabla();
+    check=false;
+}        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaVentasMouseMoved
 
     private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
         // TODO add your handling code here:
@@ -779,11 +620,6 @@ LLenarDELAL(delDia,alDia);        // TODO add your handling code here:
     private void jLabel12MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseDragged
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel12MouseDragged
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-busqueda= (Integer) jTable1.getValueAt(jTable1.getSelectedRow(), 0);   
-  buscarT(busqueda);       // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jLabel27MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseMoved
         Color X1 =new Color(9,9,165);
@@ -794,7 +630,7 @@ busqueda= (Integer) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
     }//GEN-LAST:event_jLabel27MouseMoved
 
     private void jLabel27MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseReleased
-LlenarTabla();      // TODO add your handling code here:
+        LlenarTabla();       // TODO add your handling code here:
     }//GEN-LAST:event_jLabel27MouseReleased
 
     private void jLabel27MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MousePressed
@@ -805,6 +641,54 @@ LlenarTabla();      // TODO add your handling code here:
         Border thickBorder2 = new LineBorder(cleaan, 60);
         jButton9.setBorder(thickBorder2);        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel27MouseExited
+
+    private void tablaVentasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaVentasKeyPressed
+int pressEnter = evt.getKeyCode();
+if(pressEnter==KeyEvent.VK_ENTER){
+  busqueda= (Integer) tablaVentas.getValueAt(tablaVentas.getSelectedRow(), 0);   
+  buscarT(busqueda); 
+}
+// TODO add your handling code here:
+    }//GEN-LAST:event_tablaVentasKeyPressed
+
+    private void jLabel26MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseMoved
+        Color X1 =new Color(61,61,61);
+        Border thickBorder = new LineBorder(X1, 86);
+        jLabel26.setToolTipText(null);
+        jButton10.setBorder(thickBorder);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel26MouseMoved
+
+    private void jLabel26MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseReleased
+if(tablaVentas.getSelectedRow() >= 0){
+rebackUnid();
+        DefaultTableModel modelo =(DefaultTableModel)tablaVentas.getModel(); 
+        int rw = tablaVentas.getSelectedRow();
+        modelo.removeRow(rw );
+        jLabel13.setText("");
+        sumaT = 0.0;
+        int totalRow= tablaVentas.getRowCount();
+        for(int i=0;i<(totalRow);i++)
+        {
+        double sumatoria= Double.parseDouble(String.valueOf(tablaVentas.getValueAt(i,2)));
+        sumaT= sumaT + sumatoria;
+        auxST = Double.toString(sumaT);
+        jLabel13.setText(auxST);
+        }
+        LlenarTabla();
+      }             // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel26MouseReleased
+
+    private void jLabel26MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel26MousePressed
+
+    private void jLabel26MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseExited
+
+        Border thickBorder = new LineBorder(CBTNmenu, 86);
+        jButton10.setBorder(thickBorder);        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel26MouseExited
 
     /**
      * @param args the command line arguments
@@ -823,13 +707,13 @@ LlenarTabla();      // TODO add your handling code here:
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(reportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VerPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(reportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VerPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(reportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VerPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(reportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VerPedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -867,17 +751,14 @@ LlenarTabla();      // TODO add your handling code here:
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new reportes().setVisible(true);
+                new VerPedidos().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser AL;
-    private com.toedter.calendar.JDateChooser DEl;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel10;
@@ -888,102 +769,67 @@ LlenarTabla();      // TODO add your handling code here:
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel75;
-    private javax.swing.JLabel jLabel76;
-    private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private static javax.swing.JTable tablaVentas;
     // End of variables declaration//GEN-END:variables
 
- public void LlenarTabla(){  
-     z=0;
-     w=0;
-     prec_venta.clear();
-     prec_compra.clear();
-     desc.clear();
-     realGanan.clear();
-     
+ public void LlenarTabla(){
         DefaultTableModel modelo = new DefaultTableModel();
-        jTable1.setModel(modelo);
-        Connection cnx = null;
-       
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "Select *from detalle_factura";
-             Statement st = cnx.prepareStatement(sql);
-             ResultSet res = st.executeQuery(sql);
-             ResultSetMetaData rsMd = res.getMetaData();
-             int cantidadColumnas = rsMd.getColumnCount()+1;
-             
-             for (int i = 1; i < cantidadColumnas; i++) {
-             modelo.addColumn(rsMd.getColumnLabel(i));}
-                    while (res.next()){
-                    code[z] = res.getString(3);  
-                    canti.add(res.getInt(6));
-                    prec_venta.add(res.getDouble(7));
-                    Double gainAux =(prec_venta.get(z));
-                    gainT = gainT + gainAux;
-                    z++;
-                    desc.add(res.getDouble(8));
-                    inv[w] = res.getString(9);
-                    Float auxo = Float.parseFloat(inv[w]);
-                    invT = invT + auxo;
-                    w++;
-                    
-                    Object[] fila = new Object[cantidadColumnas]; 
-                    for (int i = 0; i < cantidadColumnas-1; i++) {
-                    fila[i]=res.getObject(i+1);
-                    }
-                    modelo.addRow(fila);
-                    }
-             } catch (SQLException ex) { 
-                Logger.getLogger(LoginGT.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) { 
-             Logger.getLogger(reportes.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try{
-              for (int i = 0; i < code.length; i++) {
-                String query = "SELECT precio_compra from producto where codigo_producto='"+code[i]+"'";
-                Statement sts = cnx.prepareStatement(query);
-                ResultSet rest = sts.executeQuery(query);
-                while (rest.next()){
-                 prec_compra.add(rest.getDouble(1));
-                 }
-              }
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this,ex);
-            }
-            for (int i = 0; i < prec_compra.size(); i++) {
-             realGanan.add(((prec_venta.get(i)*canti.get(i))-desc.get(i))-(prec_compra.get(i)*canti.get(i)));    
-            }
-            Vector<Double> v = new Vector<Double>();
-            v.addAll(realGanan);
-         modelo.addColumn("Ganancia", v);
-         jLabel13.setText(""+invT);
-         invT = 0;
-    }
- 
- public void buscarT(int busq){
-         DefaultTableModel modelo = new DefaultTableModel();
-        jTable1.setModel(modelo);
+        tablaVentas.setModel(modelo);
+        tablaVentas.setRowHeight(25);
         Connection cnx = null;
         if (cnx == null) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "Select *from detalle_factura where codigo_factura='"+busq+"'";
+             String sql = "Select *from pedidos";
+             Statement st = cnx.prepareStatement(sql);
+             ResultSet res = st.executeQuery(sql);
+             ResultSetMetaData rsMd = res.getMetaData();
+             int cantidadColumnas = rsMd.getColumnCount();
+             for (int i = 1; i <= cantidadColumnas; i++) {
+            modelo.addColumn(rsMd.getColumnLabel(i));
+         }
+         while (res.next()){
+             inv[w] = res.getString(3);
+                    Float auxo = Float.parseFloat(inv[w]);
+                    invT = invT + auxo;
+                    w++;
+         Object[] fila = new Object[cantidadColumnas];
+         for (int i = 0; i < cantidadColumnas; i++) {
+         fila[i]=res.getObject(i+1);
+         }
+              modelo.addRow(fila);
+             
+             }
+         
+         jLabel13.setText(""+invT);
+         invT = 0;
+             } catch (ClassNotFoundException ex) {
+             throw new ClassCastException(ex.getMessage());
+             } catch (SQLException ex) { 
+                Logger.getLogger(LoginGT.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+            }   
+    }
+ 
+ public void buscarT(int busq){
+         DefaultTableModel modelo = new DefaultTableModel();
+        tablaVentas.setModel(modelo);
+        Connection cnx = null;
+        if (cnx == null) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            cnx = DriverManager.getConnection(url, user,pass);
+             String sql = "Select *from detalle_pedido where codigo_pedido='"+busq+"'";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
@@ -1012,97 +858,30 @@ LlenarTabla();      // TODO add your handling code here:
  
  public void sumaT(){
      double sumatoria1=0.0;
-        int totalRow= jTable1.getRowCount();
+        int totalRow= tablaVentas.getRowCount();
         totalRow-=1;
         for(int i=0;i<=(totalRow);i++)
         {
-             double sumatoria= Double.parseDouble(String.valueOf(jTable1.getValueAt(i,8)));
+             double sumatoria= Double.parseDouble(String.valueOf(tablaVentas.getValueAt(i,7)));
              sumatoria1+=sumatoria;
- }
-   jLabel13.setText(Double.toString(sumatoria1));
-   
+        }
+        jLabel13.setText(Double.toString(sumatoria1));
  }
  
-  public void LLenarDELAL(String delDia,String alDia){
-     jTable1.getColumnModel().getColumn(0).setPreferredWidth(90);
-jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
-jTable1.getColumnModel().getColumn(2).setPreferredWidth(150);
-jTable1.getColumnModel().getColumn(3).setPreferredWidth(200);
-jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_LAST_COLUMN);
-jLabel13.setText("");
-invT=0;
-w=0;
-
-
-DefaultTableModel modelo = new DefaultTableModel();
-        jTable1.setModel(modelo);
-        Connection cnx = null;
-        if (cnx == null) {
-             try {
-             Class.forName("com.mysql.jdbc.Driver");
-             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "SELECT * FROM factura  where DATE(fecha) BETWEEN '"+delDia+"' AND '"+alDia+"'";
-             Statement st = cnx.prepareStatement(sql);
-             ResultSet res = st.executeQuery(sql);
-             ResultSetMetaData rsMd = res.getMetaData();
-             int cantidadColumnas = rsMd.getColumnCount();
-             for (int i = 1; i <= cantidadColumnas; i++) {
-             modelo.addColumn(rsMd.getColumnLabel(i));
-            }
-                while (res.next()){
-                inv[w] = res.getString(3);
-                    Float auxo = Float.parseFloat(inv[w]);
-                    invT = invT + auxo;
-                    w++;
-                    Object[] fila = new Object[cantidadColumnas];
-                    for (int i = 0; i < cantidadColumnas; i++) {
-                    fila[i]=res.getObject(i+1);
-                    }
-              modelo.addRow(fila);
-             }
-         jLabel13.setText(""+invT);
-         invT = 0;
-             } catch (ClassNotFoundException ex) {
-             throw new ClassCastException(ex.getMessage());
-             } catch (SQLException ex) { 
-                Logger.getLogger(LoginGT.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-            }   
-    }
-  
-  public void limpiar(){
-          String Query = "Select *from detalle_factura";
-           DefaultTableModel modelo = new DefaultTableModel();
-        jTable1.setModel(modelo);
-        Connection cnx = null;
-        if (cnx == null) {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            cnx = DriverManager.getConnection(url, user,pass);
-           
-             Statement st = cnx.prepareStatement(Query);
-             ResultSet res = st.executeQuery(Query);
-             ResultSetMetaData rsMd = res.getMetaData();
-             int cantidadColumnas = rsMd.getColumnCount();
-             for (int i = 1; i <= cantidadColumnas; i++) {
-            modelo.addColumn(rsMd.getColumnLabel(i));
-         }
-         while (res.next()){
-         Object[] fila = new Object[cantidadColumnas];
-         for (int i = 0; i < cantidadColumnas; i++) {
-         fila[i]=res.getObject(i+1);
-         }
-              modelo.addRow(fila);
-             
-             }
-             } catch (ClassNotFoundException ex) {
-             throw new ClassCastException(ex.getMessage());
-             } catch (SQLException ex) { 
-                Logger.getLogger(LoginGT.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-            }  
-     
-  }
+ 
+ public void rebackUnid(){
+      int rw = tablaVentas.getSelectedRow(); 
+   
+       try{
+       conI = DriverManager.getConnection(url, user,pass);
+        String Qury = "Delete from pedidos where codigo_pedido='"+String.valueOf(tablaVentas.getValueAt(rw,0))+"'";
+        Statement sts =  conI.createStatement();
+        sts.executeUpdate(Qury);
+        }
+        catch(SQLException ex){
+        JOptionPane.showMessageDialog(this,ex+ " Truncate");
+        }
+        }
 }
 
 

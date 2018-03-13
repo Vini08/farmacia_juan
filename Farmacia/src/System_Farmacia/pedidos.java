@@ -3,7 +3,10 @@ package System_Farmacia;
 
 import FARM.mensajesSYS.LectorBarras;
 import FARM.mensajesSYS.ShowDescription;
+import FARM.mensajesSYS.VentaExitosa;
 import FARM.mensajesSYS.cantidadMAyor;
+import static System_Farmacia.hacer_ventas.jLabel5;
+import static System_Farmacia.hacer_ventas.tablaADD;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
@@ -15,6 +18,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,31 +36,18 @@ import javax.swing.table.JTableHeader;
  */
 public class pedidos extends javax.swing.JFrame {
  
- public static int test2=1;
-public static Double sumaT;
+public static Double sumaT,PreC,totalVenta;
 Connection cnx,conI = null;
 static String url = "jdbc:mysql://localhost:3306/bd_farm";
 static String user = "root";
 static String pass = "";
-int cant, aux;
-public static int count, cantT1;
-String ID, MK, MD, DESCRPart;
-ArrayList<String> descuentos = new ArrayList<>();
-ArrayList<String> porciones = new ArrayList<>();
-ArrayList<String> Auxiliar = new ArrayList<>();
-int UD;
-String auxST,autr ;
+public static int  cantT1, cant,lastID,unidadesDeseadas = 0;
 private int x;
 private int y;
-public static String provee,cod_prod,categor,product, tipoVent;
-Double PreC,totalVenta;
-int cantidad, unidadesDeseadas = 0;
-String totalV, unit;
+public static String auxST,autr,provee,cod_prod,categor,product, tipoVent,totalV, unit;
 Color CBTNFocus =new Color(243,98,1);
 Color CBTNFocusPedido =new Color(17,182,127);
-Color focusAdd =new Color(0,120,240);
 Color focusDel =new Color(198,17,17);
-Color focusMay =new Color(51,255,153);
 Border focus = new LineBorder(CBTNFocus, 86);
 Border focusD = new LineBorder(focusDel, 86);
 Border focusF = new LineBorder(CBTNFocusPedido, 86);
@@ -64,20 +56,13 @@ Color BTNPedio =new Color(0,153,102);
 Color add =new Color(0,102,204);
 Color delete =new Color(172,26,26);
 Color Nums =new Color(153,153,153);
-Color grisMoved =new Color(180,180,180);
 Color grisborde =new Color(224,224,224);
 Color grisPress =new Color(179,179,179);
-Color ColorPlanoBT =new Color(255,102,04);
 Color ColorFont =new Color(123,123,123);
 Color ColorSalida =new Color(0,102,204);
 Color ColorSalida2 =new Color(2,72,142);
 Border thickBorde = new LineBorder(Color.WHITE, 4);
-Border bordePlano= new LineBorder(ColorPlanoBT, 4);
-public static String[][] array_String;
-public static String[][] array_Tipo;
 
-public static Double[][] array_Double; 
-ArrayList<Integer> units = new ArrayList<>();
    
 
 public pedidos() {
@@ -96,7 +81,7 @@ public pedidos() {
         
         jLabel14.setVisible(false);
         jLabel6.setVisible(false);
-        jLabel5.setVisible(false);
+        total.setVisible(false);
         jLabel3.setToolTipText(null);
         jLabel39.setToolTipText(null);
         LlenarTabla("SELECT codigo_producto, categoria, producto, proveedor, unidades,alerta_unidades, precio_compra, fecha_vencimiento from producto where unidades=0 or unidades<alerta_unidades order by proveedor DESC");
@@ -113,8 +98,6 @@ public pedidos() {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -131,7 +114,7 @@ public pedidos() {
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaADD = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
+        total = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         lcd = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -148,16 +131,8 @@ public pedidos() {
         jLabel17 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
-        jMenuItem1.setText("VER DESCRIPCION");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(jMenuItem1);
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Ventas");
+        setTitle("Pedidos");
         setMinimumSize(new java.awt.Dimension(891, 600));
         setUndecorated(true);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -413,10 +388,10 @@ public pedidos() {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 1340, 220));
 
-        jLabel5.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 54)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(17, 182, 127));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 630, 320, 80));
+        total.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 54)); // NOI18N
+        total.setForeground(new java.awt.Color(17, 182, 127));
+        total.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 630, 320, 80));
 
         jLabel6.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 50)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(28, 28, 28));
@@ -455,7 +430,7 @@ public pedidos() {
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel38.setText("Ver Pedidos");
+        jLabel38.setText("Guardar Pedidos");
         jLabel38.setToolTipText("");
         jLabel38.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel38.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -555,7 +530,6 @@ public pedidos() {
                 "codigo_producto", "categoria", "producto", "ubicacion", "unidades", "fecha_vencimiento", "descripcion", "precio_venta", "precio_etiqueta", "lll"
             }
         ));
-        tablaPRODUCTOS.setComponentPopupMenu(jPopupMenu1);
         tablaPRODUCTOS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaPRODUCTOSMouseClicked(evt);
@@ -585,7 +559,7 @@ public pedidos() {
 
         jLabel40.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel40.setText("Guardar Pedido");
+        jLabel40.setText("Ver Pedido");
         jLabel40.setToolTipText("");
         jLabel40.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel40.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -654,6 +628,8 @@ public pedidos() {
         });
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 560, 40));
 
+        getAccessibleContext().setAccessibleName("Pedidos");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -720,7 +696,7 @@ if(LoginGT.boot==1){
         cantT1=0;
         jLabel14.setVisible(false);
         jLabel6.setVisible(false);
-        jLabel5.setVisible(false);
+        total.setVisible(false);
         this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel3MouseReleased
@@ -813,7 +789,9 @@ jButton11.setBorder(thickBorder5);
     }//GEN-LAST:event_jLabel38MousePressed
 
     private void jLabel38MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel38MouseReleased
-            // TODO add your handling code here:
+if(total.getText().length()!=0){
+    insertProd();
+} // TODO add your handling code here:
     }//GEN-LAST:event_jLabel38MouseReleased
 
     private void jLabel38MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel38MouseMoved
@@ -866,11 +844,10 @@ if(tablaADD.getSelectedRow() >= 0){
  rebackUnid();
  
  int r = tablaADD.getSelectedRow();
-             units.remove( r);
              DefaultTableModel modelo =(DefaultTableModel)tablaADD.getModel(); 
              int rw = tablaADD.getSelectedRow();
              modelo.removeRow(rw );
-             jLabel5.setText("");
+             total.setText("");
              sumaT = 0.0;
            int totalRow= tablaADD.getRowCount();
         for(int i=0;i<(totalRow);i++)
@@ -880,8 +857,8 @@ if(tablaADD.getSelectedRow() >= 0){
         auxST = Double.toString(sumaT);
         jLabel14.setVisible(true);
         jLabel6.setVisible(true);
-        jLabel5.setVisible(true); 
-        jLabel5.setText(auxST);
+        total.setVisible(true); 
+        total.setText(auxST);
         }
         LlenarTabla("SELECT codigo_producto, categoria, producto, proveedor, unidades,alerta_unidades, fecha_vencimiento, precio_compra from producto where unidades=0 or unidades<alerta_unidades");
       }        
@@ -1051,15 +1028,6 @@ evt.consume();
 // TODO add your handling code here:
     }//GEN-LAST:event_tablaPRODUCTOSKeyPressed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-  int row = tablaPRODUCTOS.getSelectedRow();
-  DESCRPart = tablaPRODUCTOS.getModel().getValueAt(row, 6).toString();
-  ShowDescription desc = new ShowDescription();
-  desc.setLocationRelativeTo(null);
-  desc.setVisible(true);
-  // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void jLabel20KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel20KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel20KeyPressed
@@ -1085,7 +1053,9 @@ evt.consume();
     }//GEN-LAST:event_jLabel40MousePressed
 
     private void jLabel40MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel40MouseReleased
-        // TODO add your handling code here:
+VerPedidos ver = new VerPedidos();
+ver.setLocationRelativeTo(null);
+ver.setVisible(true);     // TODO add your handling code here:
     }//GEN-LAST:event_jLabel40MouseReleased
 
     private void jLabel40MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel40MouseMoved
@@ -1167,17 +1137,15 @@ jButton11.setBorder(focusF);        // TODO add your handling code here:
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
-    public static javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField lcd;
     public static javax.swing.JTable tablaADD;
     public static javax.swing.JTable tablaPRODUCTOS;
+    public static javax.swing.JLabel total;
     // End of variables declaration//GEN-END:variables
 
 
@@ -1271,12 +1239,11 @@ categor = tablaPRODUCTOS.getModel().getValueAt(row, 1).toString();
 product = tablaPRODUCTOS.getModel().getValueAt(row, 2).toString();
 provee = tablaPRODUCTOS.getModel().getValueAt(row, 3).toString();
 PreC = Double.parseDouble(tablaPRODUCTOS.getModel().getValueAt(row, 6).toString());
-int cantidadTablaBusqueda = Integer.parseInt(tablaPRODUCTOS.getModel().getValueAt(row, 4).toString());
 
 DefaultTableModel modelo = (DefaultTableModel) tablaADD.getModel();
 Object [] fila=new Object[8]; 
 unidadesDeseadas = Integer.parseInt(lcd.getText());
-cantidad = cantidadTablaBusqueda;
+
 
                  
                  //if para veridifcar que unidades deseadas sean mayor a cero
@@ -1306,8 +1273,8 @@ cantidad = cantidadTablaBusqueda;
                                     auxST = Double.toString(sumaT);
                                     jLabel14.setVisible(true);
                                     jLabel6.setVisible(true);
-                                    jLabel5.setVisible(true); 
-                                    jLabel5.setText(auxST);
+                                    total.setVisible(true); 
+                                    total.setText(auxST);
                                     }
                                     cant=0;
                     
@@ -1332,5 +1299,77 @@ else
     }
     
    
- 
+ public void insertProd(){
+       
+            Calendar fecha = new GregorianCalendar();
+            
+            int año = fecha.get(Calendar.YEAR);
+            int mes = fecha.get(Calendar.MONTH);
+            int dia = fecha.get(Calendar.DAY_OF_MONTH);
+            //---------------------------------------------------------------------------------------------------
+            //--------------inserto en factura ------------------------------------------------------------------
+            try {
+                Connection conn = DriverManager.getConnection(url, user, pass);
+                String sql = "INSERT INTO pedidos(codigo_pedido,laboratorio,total,fecha,pedido_realizado) values (NULL, ?, ?, ?, ?)";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                
+                stmt.setString(1,tablaADD.getModel().getValueAt(0, 6).toString());
+                stmt.setString(2, total.getText());
+                stmt.setString(3,año+"-"+(mes+1)+"-"+dia);
+                stmt.setString(4,"NO");
+                stmt.executeUpdate();   
+            } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,ex);
+            }
+            //---------------------------------------------------------------------------------------------------
+            //--------------select ultimo ID------------------------------------------------------------------
+            try{
+                 Connection con = DriverManager.getConnection(url, user, pass);
+            String query = "SELECT *FROM pedidos";
+            Statement sts = con.prepareStatement(query);
+            ResultSet rest = sts.executeQuery(query);
+            
+           while (rest.next()){
+            lastID = rest.getInt(1);
+            
+            }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this,ex);
+            }
+            
+            //---------------------------------------------------------------------------------------------------
+            //--------------inserto en Detallefactura ------------------------------------------------------------------
+           try{
+                for(int i=0; i<tablaADD.getRowCount();i++){
+             Connection conex = DriverManager.getConnection(url, user, pass);
+               String sql = "INSERT INTO detalle_pedido(codigo_detalle_pedido,codigo_pedido,codigo_producto,categoria,producto, precio_compra,unidades,total) values (null, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement stmt = conex.prepareStatement(sql);
+            
+            stmt.setInt(1,lastID);          
+            stmt.setString(2, (String) tablaADD.getValueAt(i,0));
+            stmt.setString(3,(String) tablaADD.getValueAt(i,1));
+            stmt.setString(4,(String) tablaADD.getValueAt(i,2));
+            stmt.setDouble(5,(Double) tablaADD.getValueAt(i,3));
+            stmt.setDouble(6,(Double) tablaADD.getValueAt(i,4));
+            stmt.setDouble(7,(Double) tablaADD.getValueAt(i,5));
+            stmt.executeUpdate();
+            
+           }
+            }catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this,ex);
+            }
+            //---------------------------------------------------------------------------------------------------
+  
+  DefaultTableModel model = (DefaultTableModel)tablaADD.getModel(); 
+int rows = model.getRowCount(); 
+for(int i = rows - 1; i >=0; i--)
+{
+   model.removeRow(i); 
+}
+
+        jLabel14.setVisible(false);
+        jLabel6.setVisible(false);
+        total.setVisible(false);
+ }
+      
 }

@@ -106,7 +106,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         jLabel18 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Nuevo Cliente");
+        setTitle("Nuevos Registros");
         setMinimumSize(new java.awt.Dimension(929, 670));
         setUndecorated(true);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
