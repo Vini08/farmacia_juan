@@ -542,6 +542,11 @@ public hacer_ventas(String N) {
         find.setForeground(new java.awt.Color(102, 102, 102));
         find.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         find.setBorder(null);
+        find.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                findMouseClicked(evt);
+            }
+        });
         find.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 findActionPerformed(evt);
@@ -1273,6 +1278,10 @@ evt.consume();
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel20KeyPressed
 
+    private void findMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_findMouseClicked
+find.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_findMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1440,7 +1449,7 @@ public void buscarT(String search){
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento,descripcion, precio_venta, precio_etiqueta, lll from producto where unidades>0 && codigo_producto like '"+busq+"%' or codigo_barra like '"+busq+"%' or "+"producto like '"+busq+"%'"+" or "+"categoria like '"+busq+"%' or descripcion like '"+busq+"%' ";
+             String sql = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento,descripcion, precio_etiqueta, precio_venta, lll from producto where unidades>0 && codigo_producto like '"+busq+"%' or codigo_barra like '"+busq+"%' or "+"producto like '"+busq+"%'"+" or "+"categoria like '"+busq+"%' or descripcion like '"+busq+"%' ";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
@@ -1471,7 +1480,7 @@ public void buscarT(String search){
 public void LlenarTabla(){
         
     
-    String Query = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento, descripcion, precio_venta,precio_etiqueta, lll from producto where unidades>0";
+    String Query = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento, descripcion, precio_etiqueta, precio_venta, lll from producto where unidades>0";
         DefaultTableModel modelo = new DefaultTableModel();
         tablaPRODUCTOS.setModel(modelo);
         Connection cnx = null;

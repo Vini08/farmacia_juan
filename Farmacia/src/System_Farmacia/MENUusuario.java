@@ -53,7 +53,7 @@ public static String nombr, horaMenu,level="1";
 String hora,minutos,segundos,ampm;
 Calendar calendario;    
 Thread h1;
-public static VentasRealizadas VS = new VentasRealizadas();
+public static VentasDIA VS = new VentasDIA();
 public static hacer_ventas Vn = new hacer_ventas(nombr);
 public static boolean controlVentana=true,controlVentana1=true,controlVentana2=true,controlVentana3=true,controlVentana4=true,controlVentana5=true; 
 

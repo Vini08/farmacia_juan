@@ -115,6 +115,10 @@ private int y;
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jTextField11 = new javax.swing.JTextField();
+        jTextField12 = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nuevo Producto");
@@ -261,7 +265,7 @@ private int y;
         jLabel7.setForeground(new java.awt.Color(82, 82, 82));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("PRECIO DE VENTA");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 190, 370, 30));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 130, 370, 30));
 
         jLabel9.setFont(new java.awt.Font("Microsoft Tai Le", 0, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -292,13 +296,13 @@ private int y;
         jLabel13.setForeground(new java.awt.Color(82, 82, 82));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("CODIGO PRODUCTO");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 370, 30));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 370, 30));
 
         jLabel14.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(82, 82, 82));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("CATEGORIA");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, 370, 30));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 370, 30));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blancoE2.jpg"))); // NOI18N
         jLabel5.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -312,45 +316,46 @@ private int y;
         jLabel15.setForeground(new java.awt.Color(82, 82, 82));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("PRECIO MAYOREO");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 270, 370, 30));
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 210, 370, 30));
 
         jLabel17.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(82, 82, 82));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("UNIDADES");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, 370, 30));
+        jLabel17.setText("FECHA DE VENCIMIENTO");
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 450, 370, 30));
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(153, 153, 153));
         jTextField1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.setBorder(null);
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 370, 40));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 370, 40));
 
         jTextField2.setEditable(false);
         jTextField2.setBackground(new java.awt.Color(153, 153, 153));
         jTextField2.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField2.setBorder(null);
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, 370, 40));
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 370, 40));
 
         jTextField3.setBackground(new java.awt.Color(153, 153, 153));
         jTextField3.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField3.setBorder(null);
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, 370, 40));
+        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, 370, 40));
 
+        jTextField4.setEditable(false);
         jTextField4.setBackground(new java.awt.Color(153, 153, 153));
         jTextField4.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField4.setBorder(null);
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, 370, 40));
+        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, 370, 40));
 
         jTextField5.setBackground(new java.awt.Color(153, 153, 153));
         jTextField5.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField5.setBorder(null);
-        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 220, 370, 40));
+        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 160, 370, 40));
 
         jLabel23.setFont(new java.awt.Font("Microsoft Tai Le", 0, 10)); // NOI18N
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -374,26 +379,26 @@ private int y;
         jLabel25.setForeground(new java.awt.Color(82, 82, 82));
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel25.setText("PROVEEDOR");
-        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 430, 370, 30));
+        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 370, 30));
 
         jTextField6.setBackground(new java.awt.Color(153, 153, 153));
         jTextField6.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField6.setBorder(null);
-        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 300, 370, 40));
+        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 240, 370, 40));
 
         jTextField8.setEditable(false);
         jTextField8.setBackground(new java.awt.Color(153, 153, 153));
         jTextField8.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField8.setBorder(null);
-        getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 300, 370, 40));
+        getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 370, 40));
 
         jLabel27.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(82, 82, 82));
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel27.setText("PRODUCTO");
-        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 370, 30));
+        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 370, 30));
 
         jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
         getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 550, 40));
@@ -402,7 +407,7 @@ private int y;
         jLabel30.setForeground(new java.awt.Color(82, 82, 82));
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel30.setText("CANTIDADES QUE SE DESCONTARAN");
-        getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 350, 370, 30));
+        getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 290, 370, 30));
 
         jTextField9.setBackground(new java.awt.Color(153, 153, 153));
         jTextField9.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
@@ -413,25 +418,25 @@ private int y;
                 jTextField9ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 380, 370, 40));
+        getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 320, 370, 40));
 
         jTextField10.setBackground(new java.awt.Color(153, 153, 153));
         jTextField10.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField10.setBorder(null);
-        getContentPane().add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 140, 370, 40));
+        getContentPane().add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 80, 370, 40));
 
         jLabel31.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(82, 82, 82));
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel31.setText("PRECIO COMPRA");
-        getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 110, 370, 30));
+        getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 50, 370, 30));
 
         jLabel32.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(82, 82, 82));
         jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel32.setText("¿CUANDO SE HARAN LOS DESCUENTOS?");
-        getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 440, 370, 30));
+        getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 370, 370, 30));
 
         jTextField11.setBackground(new java.awt.Color(153, 153, 153));
         jTextField11.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
@@ -442,7 +447,41 @@ private int y;
                 jTextField11ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 470, 370, 40));
+        getContentPane().add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 400, 370, 40));
+
+        jTextField12.setBackground(new java.awt.Color(153, 153, 153));
+        jTextField12.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
+        jTextField12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField12.setBorder(null);
+        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField12ActionPerformed(evt);
+            }
+        });
+        jTextField12.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField12KeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField12KeyTyped(evt);
+            }
+        });
+        getContentPane().add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 480, 370, 40));
+
+        jLabel18.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("UNIDADES");
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, 370, 30));
+
+        jDateChooser1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
+        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 480, 370, 40));
+
+        jLabel19.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("ALERTA DE UNIDADES");
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, 370, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -575,6 +614,18 @@ x = evt.getX();
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField11ActionPerformed
 
+    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField12ActionPerformed
+
+    private void jTextField12KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField12KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField12KeyPressed
+
+    private void jTextField12KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField12KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField12KeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -621,6 +672,7 @@ x = evt.getX();
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -629,6 +681,8 @@ x = evt.getX();
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -651,6 +705,7 @@ x = evt.getX();
     public static final javax.swing.JTextField jTextField1 = new javax.swing.JTextField();
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
+    private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;

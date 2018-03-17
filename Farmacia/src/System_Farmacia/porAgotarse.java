@@ -46,7 +46,7 @@ Connection cnx,conI = null;
         initComponents();
         jTextField1.requestFocus();
          setLocationRelativeTo(null);
-         LlenarTabla("SELECT codigo_producto, categoria, producto,proveedor,unidades,alerta_unidades,precio_compra,precio_venta,precio_mayoreo FROM producto where unidades<alerta_unidades");
+         LlenarTabla("SELECT codigo_producto, categoria, producto,proveedor,unidades,alerta_unidades,precio_compra,precio_venta,precio_mayoreo FROM producto where unidades<alerta_unidades and unidades!=0");
        jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
     }

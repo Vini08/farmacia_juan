@@ -109,6 +109,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         setTitle("Nuevos Registros");
         setMinimumSize(new java.awt.Dimension(929, 670));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1369, 729));
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 formMouseMoved(evt);

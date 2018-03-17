@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -50,25 +51,28 @@ Color ColorFont =new Color(123,123,123);
 Color ColorSalida =new Color(0,102,204);
 Color ColorSalida2 =new Color(2,72,142);
 Color CBTNmenu =new Color(39,39,39);
-Color cleaan =new Color(56,56,56);
+Color cleaan =new Color(0,0,255);
+Color vver =new Color(102,102,102);
 Border thickBorde = new LineBorder(Color.WHITE, 4);
 static float invT=0;
-      
+public static String delDia,alDia;      
     public VentasDIA() {
         initComponents();
          setLocationRelativeTo(null);
        jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
-        JTableHeader th1;
-        th1 = tablaVentas.getTableHeader();
-        Font fuente1 = new Font("Microsoft Yi Baiti", Font.PLAIN, 22); 
+     JTableHeader th1;
+     th1 = tablaVentas.getTableHeader();
+      Font fuente1 = new Font("Microsoft Yi Baiti", Font.PLAIN, 22); 
         th1.setFont(fuente1); 
-            Date hoy = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
-            String dia = String.valueOf(sdf.format(hoy));        
-             LLenarDELAL(dia,dia);
-                jLabel2.setToolTipText(null);
-                jLabel3.setToolTipText(null);
+DateFormat dateFormat = new SimpleDateFormat("yyyy-M-d");
+Date date = new Date();
+delDia =  String.valueOf(dateFormat.format(date));
+alDia =  String.valueOf(dateFormat.format(date));        
+
+LLenarDELAL(delDia,alDia);
+        jLabel2.setToolTipText(null);
+        jLabel3.setToolTipText(null);
     }
 
     /**
@@ -80,8 +84,6 @@ static float invT=0;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -101,16 +103,6 @@ static float invT=0;
         jButton9 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-
-        jMenuItem2.setText("Ver Detalle de Factura");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(jMenuItem2);
-
-        jPopupMenu1.getAccessibleContext().setAccessibleParent(jPopupMenu1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ventas Realizadas");
@@ -225,11 +217,11 @@ static float invT=0;
         jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(231, 231, 231));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("VENTAS REALIZADAS");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 40));
+        jLabel4.setText("VENTAS REALIZADAS POR DIA");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 40));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/solid-orange-background.jpg"))); // NOI18N
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 40));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 40));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 480, 40));
@@ -262,7 +254,6 @@ static float invT=0;
                 "ID Factura", "Usuario", "Total Factura", "Fecha"
             }
         ));
-        tablaVentas.setComponentPopupMenu(jPopupMenu1);
         tablaVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tablaVentas.setIntercellSpacing(new java.awt.Dimension(2, 2));
         tablaVentas.setRowHeight(19);
@@ -276,9 +267,14 @@ static float invT=0;
                 tablaVentasMouseMoved(evt);
             }
         });
+        tablaVentas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tablaVentasKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaVentas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 1320, 440));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 1320, 450));
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/barraMensajes.png"))); // NOI18N
         jLabel20.setPreferredSize(new java.awt.Dimension(367, 70));
@@ -301,23 +297,23 @@ static float invT=0;
         jLabel14.setForeground(new java.awt.Color(0, 51, 255));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("Q");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 560, 50, 70));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 570, 50, 70));
 
         jLabel13.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 58)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 51, 255));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 560, 310, 70));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 570, 210, 70));
 
         jLabel10.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 58)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(96, 96, 96));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Total Venta ");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 510, 420, 50));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 570, 310, 70));
 
         jLabel75.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel75.setForeground(new java.awt.Color(102, 102, 102));
         jLabel75.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 2), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(102, 102, 102))); // NOI18N
-        getContentPane().add(jLabel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 500, 420, 140));
+        getContentPane().add(jLabel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 570, 570, 70));
 
         jLabel27.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
@@ -342,9 +338,9 @@ static float invT=0;
                 jLabel27MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 260, 140));
+        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 260, 50));
 
-        jButton9.setBackground(new java.awt.Color(56, 56, 56));
+        jButton9.setBackground(new java.awt.Color(0, 0, 255));
         jButton9.setForeground(new java.awt.Color(3, 64, 124));
         jButton9.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton9.setFocusPainted(false);
@@ -366,7 +362,7 @@ static float invT=0;
                 jButton9ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 260, 140));
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 260, 50));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
         jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -437,7 +433,7 @@ static float invT=0;
         Border thickBorder = new LineBorder(ColorSalida2, 54);
         jButton3.setBorder(thickBorder);
         jLabel3.setForeground(Color.gray);
-     if(LoginGT.boot==0){
+        if(LoginGT.boot==0){
         MENUadmin.controlVentana4=true;
         }
         if(LoginGT.boot==1){
@@ -496,8 +492,9 @@ x = evt.getX();
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
        
- Border thickBorder2 = new LineBorder(cleaan, 100);
+Border thickBorder2 = new LineBorder(cleaan, 60);
 jButton9.setBorder(thickBorder2);
+
 // TODO add your handling code here:
     }//GEN-LAST:event_formWindowActivated
 
@@ -530,7 +527,7 @@ jButton9.setBorder(thickBorder2);
     }//GEN-LAST:event_formWindowOpened
 
     private void tablaVentasMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVentasMouseMoved
-        // TODO add your handling code here:
+      // TODO add your handling code here:
     }//GEN-LAST:event_tablaVentasMouseMoved
 
     private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
@@ -541,24 +538,16 @@ jButton9.setBorder(thickBorder2);
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel12MouseDragged
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-busqueda= (Integer) tablaVentas.getValueAt(tablaVentas.getSelectedRow(), 0);   
-  buscarT(busqueda);       // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     private void jLabel27MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseMoved
-        Color X1 =new Color(85,85,85);
-        Border thickBorder = new LineBorder(X1, 106);
+        Color X1 =new Color(9,9,165);
+        Border thickBorder = new LineBorder(X1, 86);
         jLabel27.setToolTipText(null);
         jButton9.setBorder(thickBorder);
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel27MouseMoved
 
     private void jLabel27MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseReleased
-Date hoy = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
-            String dia = String.valueOf(sdf.format(hoy));    
-            LLenarDELAL(dia, dia);              // TODO add your handling code here:
+        LLenarDELAL(delDia,alDia);              // TODO add your handling code here:
     }//GEN-LAST:event_jLabel27MouseReleased
 
     private void jLabel27MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MousePressed
@@ -566,9 +555,18 @@ Date hoy = new Date();
     }//GEN-LAST:event_jLabel27MousePressed
 
     private void jLabel27MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseExited
-        Border thickBorder2 = new LineBorder(cleaan, 100);
+        Border thickBorder2 = new LineBorder(cleaan, 60);
         jButton9.setBorder(thickBorder2);        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel27MouseExited
+
+    private void tablaVentasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaVentasKeyPressed
+int pressEnter = evt.getKeyCode();
+if(pressEnter==KeyEvent.VK_ENTER){
+  busqueda= (Integer) tablaVentas.getValueAt(tablaVentas.getSelectedRow(), 0);   
+  buscarT(busqueda); 
+}
+// TODO add your handling code here:
+    }//GEN-LAST:event_tablaVentasKeyPressed
 
     /**
      * @param args the command line arguments
@@ -654,8 +652,6 @@ Date hoy = new Date();
     private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTable tablaVentas;
     // End of variables declaration//GEN-END:variables
@@ -719,8 +715,8 @@ jLabel13.setText("");
 invT=0;
 w=0;
 
+
 DefaultTableModel modelo = new DefaultTableModel();
-tablaVentas.setRowHeight(25);
         tablaVentas.setModel(modelo);
         Connection cnx = null;
         if (cnx == null) {

@@ -652,23 +652,11 @@ price2 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 11);
 descu =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 12);
 porcions=  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 13);
 
-if(units==0){        
-Agotados ed = new Agotados();
-ed.setVisible(true);
-ed.setLocationRelativeTo(null);
-    
-}
-if(units<alertsunits && units!=0){        
-porAgotarse ed = new porAgotarse();
-ed.setVisible(true);
-ed.setLocationRelativeTo(null);
-    
-}
-    else if(units!=0){
-         AdminEditarProdcut ad = new AdminEditarProdcut(usua,code, mark, model, units, provv, price0,price1,price2,porcions,descu);
-       ad.setVisible(true);
+
+    AdminEditarProdcut ad = new AdminEditarProdcut(usua,code, mark, model, units, provv, price0,price1,price2,porcions,descu);
+    ad.setVisible(true);
     ad.setLocationRelativeTo(null);
-    }
+    
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jLabel9MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseDragged
