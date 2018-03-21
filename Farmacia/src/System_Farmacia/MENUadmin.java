@@ -55,8 +55,8 @@ String hora,minutos,segundos,ampm;
 Calendar calendario;    
 Thread h1;
 public static VentasRealizadas VS = new VentasRealizadas();
-public static hacer_ventas Vn = new hacer_ventas(nombr);
-public static reportes rept = new reportes();
+
+
 public static boolean controlVentana=true,controlVentana1=true,controlVentana2=true,controlVentana3=true,controlVentana4=true,controlVentana5=true; 
 
 public MENUadmin(String Name) {
@@ -881,6 +881,8 @@ Border thickBorder = new LineBorder(ColorSalida, 54);
     }//GEN-LAST:event_jLabel23MousePressed
 
     private void jLabel23MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseReleased
+hacer_ventas Vn = new hacer_ventas(nombr);
+
 if(controlVentana1==true){
 Vn.cdp=nombr;
 hacer_ventas.test2=1;
@@ -946,14 +948,14 @@ Vn.toFront();
     }//GEN-LAST:event_jLabel24MousePressed
 
     private void jLabel24MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseReleased
-if(controlVentana5==true){
 pedidos C = new pedidos();
+if(controlVentana5==true){
 C.setVisible(true);
 C.setLocationRelativeTo(null);
 controlVentana5=false;
 }
 else if(controlVentana5==false){
-Vn.toFront();
+C.toFront();
 }
     }//GEN-LAST:event_jLabel24MouseReleased
 
@@ -1144,8 +1146,9 @@ this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + e
 
     private void jLabel30MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel30MouseReleased
 if(controlVentana3==true){
-rept.check=true;    
+
 reportes rep = new reportes();
+rep.check=true;    
 rep.setVisible(true);
 rep.setLocationRelativeTo(null);
 controlVentana3=false;
@@ -1336,6 +1339,7 @@ S.toFront();
     public void atajos(int numAtajo){
 
 if( numAtajo==KeyEvent.VK_F1 && controlVentana1==true){
+hacer_ventas Vn = new hacer_ventas(nombr);
 Vn.cdp=nombr;
 Vn.setVisible(true);
 Vn.setLocationRelativeTo(null);

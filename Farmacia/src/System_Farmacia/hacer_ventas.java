@@ -300,7 +300,7 @@ public hacer_ventas(String N) {
 
         jLabel41.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel41.setText("Mayoritas");
+        jLabel41.setText("Mayoristas");
         jLabel41.setToolTipText("");
         jLabel41.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel41.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1527,7 +1527,7 @@ if(row != -1)
 cod_prod = tablaPRODUCTOS.getModel().getValueAt(row, 0).toString();
 categor = tablaPRODUCTOS.getModel().getValueAt(row, 1).toString();
 product = tablaPRODUCTOS.getModel().getValueAt(row, 2).toString();
-PreV = Double.parseDouble(tablaPRODUCTOS.getModel().getValueAt(row, 7).toString());
+PreV = Double.parseDouble(tablaPRODUCTOS.getModel().getValueAt(row, 8).toString());
 int cantidadTablaBusqueda = Integer.parseInt(tablaPRODUCTOS.getModel().getValueAt(row, 4).toString());
 autr = tablaPRODUCTOS.getModel().getValueAt(row, 9).toString();
 DefaultTableModel modelo = (DefaultTableModel) tablaADD.getModel();

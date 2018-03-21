@@ -5,31 +5,26 @@
  */
 package System_Farmacia;
 
-import static System_Farmacia.inventario.jTable1;
 import java.awt.Color;
-import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import static System_Farmacia.hacer_ventas.tablaPRODUCTOS;
+
 
 /**
  *
@@ -39,15 +34,19 @@ public class reportes extends javax.swing.JFrame {
 
 private int x;
 private int y;
-static int w=0,z=0,d=0; 
+static int w=0,ww=0 ,z=0,d=0; 
 static String inv[]=new String[5000];
-ArrayList<Double> prec_venta=new ArrayList<Double>();
-static String code[]=new String[5000];
-ArrayList<Double>  prec_compra=new ArrayList<Double>();
-ArrayList<Double> realGanan=new ArrayList<Double>();
-ArrayList<Double>  desc=new ArrayList<Double>();
-    ArrayList<Integer> canti = new ArrayList<>();
- ArrayList<String> ls = new ArrayList<String>();
+static String invCost[]=new String[5000];
+ArrayList<Double> prec_venta=new ArrayList<>();
+ArrayList<String> code=new ArrayList<>();
+ArrayList<String> codePROD=new ArrayList<>();
+ArrayList<Double>  prec_compra=new ArrayList<>();
+ArrayList<Double>  pre_CDIA=new ArrayList<>();
+ArrayList<Double> realGanan=new ArrayList<>();
+ArrayList<Double> realCosto=new ArrayList<>();
+ArrayList<Double>  desc=new ArrayList<>();
+ArrayList<Integer> canti = new ArrayList<>();
+ArrayList<String> ls = new ArrayList<>();
 String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
 String pass = "";
@@ -62,7 +61,7 @@ Color CBTNmenu =new Color(39,39,39);
 Color cleaan =new Color(0,0,255);
 Color vver =new Color(102,102,102);
 Border thickBorde = new LineBorder(Color.WHITE, 4);
-static double gainT=0, auxRG;
+static double costT=0,gainT=0, auxRG, ganacT, percent;
 static float invT=0;
 public boolean check=true;      
     public reportes() {
@@ -84,8 +83,6 @@ public boolean check=true;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -94,7 +91,7 @@ public boolean check=true;
         jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaPRODUCTOs = new javax.swing.JTable();
         jLabel20 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -106,7 +103,6 @@ public boolean check=true;
         jLabel10 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
-        jLabel75 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
         jLabel28 = new javax.swing.JLabel();
@@ -115,16 +111,18 @@ public boolean check=true;
         jLabel12 = new javax.swing.JLabel();
         jLabel77 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-
-        jMenuItem2.setText("Ver Detalle de Factura");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(jMenuItem2);
-
-        jPopupMenu1.getAccessibleContext().setAccessibleParent(jPopupMenu1);
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel75 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel78 = new javax.swing.JLabel();
+        jLabel79 = new javax.swing.JLabel();
+        jLabel80 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Reportes");
@@ -248,8 +246,8 @@ public boolean check=true;
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 480, 40));
 
-        jTable1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPRODUCTOs.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        tablaPRODUCTOs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null},
@@ -284,23 +282,22 @@ public boolean check=true;
                 return types [columnIndex];
             }
         });
-        jTable1.setComponentPopupMenu(jPopupMenu1);
-        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable1.setIntercellSpacing(new java.awt.Dimension(2, 2));
-        jTable1.setRowHeight(19);
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablaPRODUCTOs.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tablaPRODUCTOs.setIntercellSpacing(new java.awt.Dimension(2, 2));
+        tablaPRODUCTOs.setRowHeight(19);
+        tablaPRODUCTOs.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jTable1MouseEntered(evt);
+                tablaPRODUCTOsMouseEntered(evt);
             }
         });
-        jTable1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        tablaPRODUCTOs.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jTable1MouseMoved(evt);
+                tablaPRODUCTOsMouseMoved(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaPRODUCTOs);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 1320, 380));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 1340, 400));
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/barraMensajes.png"))); // NOI18N
         jLabel20.setPreferredSize(new java.awt.Dimension(367, 70));
@@ -319,36 +316,36 @@ public boolean check=true;
         });
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 0, -1, 40));
 
-        jLabel14.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 58)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 36)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 51, 255));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("Q");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 560, 50, 70));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 560, 30, 40));
 
-        jLabel13.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 58)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 36)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 51, 255));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 560, 310, 70));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 560, 170, 40));
 
         jLabel25.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 17)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(96, 96, 96));
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel25.setText("DEL DIA:");
-        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 520, 80, 50));
-        getContentPane().add(DEl, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 520, 190, 50));
+        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 520, 80, 60));
+        getContentPane().add(DEl, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 530, 260, 40));
 
         jLabel24.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 17)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(96, 96, 96));
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel24.setText("AL DIA:");
-        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 580, 80, 50));
-        getContentPane().add(AL, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 580, 190, 50));
+        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 580, 80, 60));
+        getContentPane().add(AL, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 590, 260, 40));
 
-        jLabel10.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 58)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 27)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(96, 96, 96));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("Total Venta ");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 510, 420, 50));
+        jLabel10.setText("VENDIDO");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 560, 140, 40));
 
         jLabel26.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 36)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
@@ -373,7 +370,7 @@ public boolean check=true;
                 jLabel26MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, 300, 120));
+        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 220, 100));
 
         jButton10.setBackground(new java.awt.Color(39, 39, 39));
         jButton10.setForeground(new java.awt.Color(3, 64, 124));
@@ -397,12 +394,7 @@ public boolean check=true;
                 jButton10ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, 300, 120));
-
-        jLabel75.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel75.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel75.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 2), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(102, 102, 102))); // NOI18N
-        getContentPane().add(jLabel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 500, 420, 140));
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 220, 100));
 
         jLabel27.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
@@ -476,7 +468,7 @@ public boolean check=true;
                 jLabel28MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 510, 170, 120));
+        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 530, 170, 100));
 
         jButton12.setBackground(new java.awt.Color(102, 102, 102));
         jButton12.setForeground(new java.awt.Color(3, 64, 124));
@@ -500,12 +492,12 @@ public boolean check=true;
                 jButton12ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 510, 170, 120));
+        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 530, 170, 100));
 
         jLabel76.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel76.setForeground(new java.awt.Color(102, 102, 102));
         jLabel76.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 2), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(102, 102, 102))); // NOI18N
-        getContentPane().add(jLabel76, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 500, 520, 140));
+        getContentPane().add(jLabel76, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 520, 580, 120));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
         jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -523,13 +515,76 @@ public boolean check=true;
         jLabel77.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel77.setForeground(new java.awt.Color(102, 102, 102));
         jLabel77.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 2), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(102, 102, 102))); // NOI18N
-        getContentPane().add(jLabel77, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 340, 140));
+        getContentPane().add(jLabel77, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 240, 120));
 
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/barraMensajes.png"))); // NOI18N
         jLabel21.setPreferredSize(new java.awt.Dimension(367, 70));
         getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 650, 730, 80));
 
-        getAccessibleContext().setAccessibleName("Reportes");
+        jLabel15.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 27)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(96, 96, 96));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("INVERTIDO");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 520, 160, 40));
+
+        jLabel16.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 36)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel16.setText("Q");
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 520, 30, 40));
+
+        jLabel17.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 36)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 520, 170, 40));
+
+        jLabel18.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 27)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(96, 96, 96));
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("GANANCIA");
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 600, 160, 40));
+
+        jLabel19.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 36)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel19.setText("Q");
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 600, 30, 40));
+
+        jLabel22.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 36)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 600, 170, 40));
+
+        jLabel75.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel75.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel75.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 2), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(102, 102, 102))); // NOI18N
+        getContentPane().add(jLabel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 520, 360, 40));
+
+        jLabel23.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 36)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 600, 100, 40));
+
+        jLabel30.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 36)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel30.setText("%");
+        getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 600, 30, 40));
+
+        jLabel78.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel78.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel78.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 2), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(102, 102, 102))); // NOI18N
+        getContentPane().add(jLabel78, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 600, 140, 40));
+
+        jLabel79.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel79.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel79.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 2), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(102, 102, 102))); // NOI18N
+        getContentPane().add(jLabel79, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 600, 360, 40));
+
+        jLabel80.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel80.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel80.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 2), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(102, 102, 102))); // NOI18N
+        getContentPane().add(jLabel80, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 560, 360, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -760,17 +815,17 @@ LLenarDELAL(delDia,alDia);        // TODO add your handling code here:
 // TODO add your handling code here:
     }//GEN-LAST:event_formMouseEntered
 
-    private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
+    private void tablaPRODUCTOsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPRODUCTOsMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTable1MouseEntered
+    }//GEN-LAST:event_tablaPRODUCTOsMouseEntered
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
 
-    private void jTable1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseMoved
+    private void tablaPRODUCTOsMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPRODUCTOsMouseMoved
        // TODO add your handling code here:
-    }//GEN-LAST:event_jTable1MouseMoved
+    }//GEN-LAST:event_tablaPRODUCTOsMouseMoved
 
     private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
         // TODO add your handling code here:
@@ -779,11 +834,6 @@ LLenarDELAL(delDia,alDia);        // TODO add your handling code here:
     private void jLabel12MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseDragged
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel12MouseDragged
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-busqueda= (Integer) jTable1.getValueAt(jTable1.getSelectedRow(), 0);   
-  buscarT(busqueda);       // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jLabel27MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseMoved
         Color X1 =new Color(9,9,165);
@@ -885,25 +935,34 @@ LlenarTabla();      // TODO add your handling code here:
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel77;
+    private javax.swing.JLabel jLabel78;
+    private javax.swing.JLabel jLabel79;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public static javax.swing.JTable tablaPRODUCTOs;
     // End of variables declaration//GEN-END:variables
 
  public void LlenarTabla(){  
@@ -913,15 +972,18 @@ LlenarTabla();      // TODO add your handling code here:
      prec_compra.clear();
      desc.clear();
      realGanan.clear();
+     canti.clear();
+     desc.clear();
+     code.clear();
      
         DefaultTableModel modelo = new DefaultTableModel();
-        jTable1.setModel(modelo);
+        tablaPRODUCTOs.setModel(modelo);
         Connection cnx = null;
        
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "Select *from detalle_factura";
+             String sql = "Select codigo_factura,codigo_producto,categoria,producto,unidades,precio_venta,descuento,precio_total,fecha from detalle_factura";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
@@ -930,150 +992,174 @@ LlenarTabla();      // TODO add your handling code here:
              for (int i = 1; i < cantidadColumnas; i++) {
              modelo.addColumn(rsMd.getColumnLabel(i));}
                     while (res.next()){
-                    code[z] = res.getString(3);  
-                    canti.add(res.getInt(6));
-                    prec_venta.add(res.getDouble(7));
+                    code.add( res.getString(2));  
+                    canti.add(res.getInt(5));
+                    prec_venta.add(res.getDouble(6));
                     Double gainAux =(prec_venta.get(z));
                     gainT = gainT + gainAux;
                     z++;
-                    desc.add(res.getDouble(8));
-                    inv[w] = res.getString(9);
+                    desc.add(res.getDouble(7));
+                    inv[w] = res.getString(8);
                     Float auxo = Float.parseFloat(inv[w]);
                     invT = invT + auxo;
                     w++;
-                    
+                  
                     Object[] fila = new Object[cantidadColumnas]; 
                     for (int i = 0; i < cantidadColumnas-1; i++) {
                     fila[i]=res.getObject(i+1);
                     }
                     modelo.addRow(fila);
                     }
+                    columnas();
              } catch (SQLException ex) { 
                 Logger.getLogger(LoginGT.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) { 
              Logger.getLogger(reportes.class.getName()).log(Level.SEVERE, null, ex);
             }
+       
             try{
-              for (int i = 0; i < code.length; i++) {
-                String query = "SELECT precio_compra from producto where codigo_producto='"+code[i]+"'";
+              for (int i = 0; i < code.size(); i++) {
+                String query = "SELECT precio_compra from producto where codigo_producto='"+code.get(i)+"'";
                 Statement sts = cnx.prepareStatement(query);
                 ResultSet rest = sts.executeQuery(query);
                 while (rest.next()){
-                 prec_compra.add(rest.getDouble(1));
-                 }
+                    prec_compra.add(rest.getDouble(1));
+                  }
               }
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this,ex);
             }
+          
             for (int i = 0; i < prec_compra.size(); i++) {
              realGanan.add(((prec_venta.get(i)*canti.get(i))-desc.get(i))-(prec_compra.get(i)*canti.get(i)));    
+            Double auxo = (realGanan.get(i));
+                    ganacT= ganacT + auxo; 
             }
+            for (int i = 0; i < prec_compra.size(); i++) {
+            realCosto.add((prec_compra.get(i)*canti.get(i))); 
+            Double auxo = (realCosto.get(i));
+                    costT= costT + auxo;   
+            }
+            percent = (ganacT/costT)*100;
+         
             Vector<Double> v = new Vector<Double>();
             v.addAll(realGanan);
          modelo.addColumn("Ganancia", v);
          jLabel13.setText(""+invT);
+         jLabel17.setText(String.valueOf(costT));
+         jLabel22.setText(String.valueOf(ganacT));
+         DecimalFormat df = new DecimalFormat("####0.00");
+         jLabel23.setText(df.format((percent)));
          invT = 0;
+         costT=0;
+         ganacT=0;
+         columnas();
     }
  
- public void buscarT(int busq){
-         DefaultTableModel modelo = new DefaultTableModel();
-        jTable1.setModel(modelo);
-        Connection cnx = null;
-        if (cnx == null) {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "Select *from detalle_factura where codigo_factura='"+busq+"'";
-             Statement st = cnx.prepareStatement(sql);
-             ResultSet res = st.executeQuery(sql);
-             ResultSetMetaData rsMd = res.getMetaData();
-             int cantidadColumnas = rsMd.getColumnCount();
-             for (int i = 1; i <= cantidadColumnas; i++) {
-            modelo.addColumn(rsMd.getColumnLabel(i));
-         }
-         while (res.next()){
-               
-         Object[] fila = new Object[cantidadColumnas];
-         for (int i = 0; i < cantidadColumnas; i++) {
-         fila[i]=res.getObject(i+1);
-         }
-              modelo.addRow(fila);
-             
-             }
-             } catch (ClassNotFoundException ex) {
-             throw new ClassCastException(ex.getMessage());
-             } catch (SQLException ex) { 
-                Logger.getLogger(LoginGT.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-        sumaT();
-            }   
-    }
- 
- 
- public void sumaT(){
-     double sumatoria1=0.0;
-        int totalRow= jTable1.getRowCount();
-        totalRow-=1;
-        for(int i=0;i<=(totalRow);i++)
-        {
-             double sumatoria= Double.parseDouble(String.valueOf(jTable1.getValueAt(i,8)));
-             sumatoria1+=sumatoria;
- }
-   jLabel13.setText(Double.toString(sumatoria1));
-   
- }
+
  
   public void LLenarDELAL(String delDia,String alDia){
-     jTable1.getColumnModel().getColumn(0).setPreferredWidth(90);
-jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
-jTable1.getColumnModel().getColumn(2).setPreferredWidth(150);
-jTable1.getColumnModel().getColumn(3).setPreferredWidth(200);
-jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_LAST_COLUMN);
-jLabel13.setText("");
-invT=0;
-w=0;
-
-
-DefaultTableModel modelo = new DefaultTableModel();
-        jTable1.setModel(modelo);
+     z=0;
+     w=0;
+     prec_venta.clear();
+     pre_CDIA.clear();
+     desc.clear();
+     realGanan.clear();
+     realCosto.clear();
+     codePROD.clear();
+     canti.clear();
+     invT = 0;
+     costT=0;
+     ganacT=0;
+     percent=0;
+     
+     DefaultTableModel modelo = new DefaultTableModel();
+     tablaPRODUCTOs.setModel(modelo);
+      
         Connection cnx = null;
         if (cnx == null) {
              try {
              Class.forName("com.mysql.jdbc.Driver");
              cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "SELECT * FROM factura  where DATE(fecha) BETWEEN '"+delDia+"' AND '"+alDia+"'";
-             Statement st = cnx.prepareStatement(sql);
+            //obtiene datos de detalle de una fecha a otra y obtiene el mas importante que es codePROD 
+             String sql = "SELECT codigo_factura,codigo_producto,categoria,producto,unidades,precio_venta,descuento,precio_total,fecha FROM detalle_factura  where DATE(fecha) BETWEEN '"+delDia+"' AND '"+alDia+"'";
+            Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
-             int cantidadColumnas = rsMd.getColumnCount();
-             for (int i = 1; i <= cantidadColumnas; i++) {
-             modelo.addColumn(rsMd.getColumnLabel(i));
-            }
-                while (res.next()){
-                inv[w] = res.getString(3);
+             int cantidadColumnas = rsMd.getColumnCount()+1;
+             
+             for (int i = 1; i < cantidadColumnas; i++) {
+             modelo.addColumn(rsMd.getColumnLabel(i));}
+                    while (res.next()){
+                    codePROD.add( res.getString(2));  
+                    canti.add(res.getInt(5));
+                    prec_venta.add(res.getDouble(6));
+                    Double gainAux =(prec_venta.get(z));
+                    gainT = gainT + gainAux;
+                    z++;
+                    desc.add(res.getDouble(7));
+                    inv[w] = res.getString(8);
                     Float auxo = Float.parseFloat(inv[w]);
                     invT = invT + auxo;
                     w++;
-                    Object[] fila = new Object[cantidadColumnas];
-                    for (int i = 0; i < cantidadColumnas; i++) {
+                  
+                    Object[] fila = new Object[cantidadColumnas]; 
+                    for (int i = 0; i < cantidadColumnas-1; i++) {
                     fila[i]=res.getObject(i+1);
                     }
-              modelo.addRow(fila);
-             }
+                    modelo.addRow(fila);
+                    }
+            } catch (SQLException ex) {
+                
+            } catch (ClassNotFoundException ex) {
+               Logger.getLogger(reportes.class.getName()).log(Level.SEVERE, null, ex);
+           }
+             //obtiene el precio de compra solo de los productos que se obtuvieron de dettalleFACT and save in codePROD
+               try{
+              for (int i = 0; i < codePROD.size(); i++) {
+                String query = "SELECT precio_compra from producto where codigo_producto='"+codePROD.get(i)+"'";
+                Statement sts = cnx.prepareStatement(query);
+                ResultSet rest = sts.executeQuery(query);
+                //Gurda los precios de compra en pre_CDIA
+                while (rest.next()){
+                    pre_CDIA.add(rest.getDouble(1));
+                  }
+              }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this,ex);
+            }
+          //operacion para obtener gqanancia
+            for (int i = 0; i < pre_CDIA.size(); i++) {
+             realGanan.add(((prec_venta.get(i)*canti.get(i))-desc.get(i))-(pre_CDIA.get(i)*canti.get(i)));    
+            Double auxo = (realGanan.get(i));
+                    ganacT= ganacT + auxo; 
+            }
+            //operacion para obtener la invertido
+            for (int i = 0; i < pre_CDIA.size(); i++) {
+            realCosto.add(pre_CDIA.get(i)*canti.get(i)); 
+            Double auxo = (realCosto.get(i));
+            costT= costT + auxo;  
+            }
+            //muestra el porcentaje de ganancia
+            percent = (ganacT/costT)*100;
+         //crea una columna ganancia y agrega ganancias por productos
+            Vector<Double> v = new Vector<Double>();
+            v.addAll(realGanan);
+            //aqui agrega la columna al modelo de la tabla ya con datos
+         modelo.addColumn("Ganancia", v);
          jLabel13.setText(""+invT);
-         invT = 0;
-             } catch (ClassNotFoundException ex) {
-             throw new ClassCastException(ex.getMessage());
-             } catch (SQLException ex) { 
-                Logger.getLogger(LoginGT.class.getName()).log(Level.SEVERE, null, ex);
-            } 
+         jLabel17.setText(String.valueOf(costT));
+         jLabel22.setText(String.valueOf(ganacT));
+         DecimalFormat df = new DecimalFormat("####0.00");
+         jLabel23.setText(df.format((percent)));
+         columnas();
             }   
     }
   
   public void limpiar(){
           String Query = "Select *from detalle_factura";
            DefaultTableModel modelo = new DefaultTableModel();
-        jTable1.setModel(modelo);
+        tablaPRODUCTOs.setModel(modelo);
         Connection cnx = null;
         if (cnx == null) {
         try {
@@ -1101,8 +1187,20 @@ DefaultTableModel modelo = new DefaultTableModel();
                 Logger.getLogger(LoginGT.class.getName()).log(Level.SEVERE, null, ex);
             } 
             }  
-     
   }
+  
+    public static void columnas(){
+    tablaPRODUCTOs.getColumnModel().getColumn(0).setPreferredWidth(70);
+    tablaPRODUCTOs.getColumnModel().getColumn(1).setPreferredWidth(180);
+    tablaPRODUCTOs.getColumnModel().getColumn(2).setPreferredWidth(180);
+    tablaPRODUCTOs.getColumnModel().getColumn(3).setPreferredWidth(180);
+    tablaPRODUCTOs.getColumnModel().getColumn(4).setPreferredWidth(40);
+    tablaPRODUCTOs.getColumnModel().getColumn(5).setPreferredWidth(80);
+    tablaPRODUCTOs.getColumnModel().getColumn(6).setPreferredWidth(50);
+    tablaPRODUCTOs.getColumnModel().getColumn(7).setPreferredWidth(70);
+    tablaPRODUCTOs.getColumnModel().getColumn(8).setPreferredWidth(110);
+    tablaPRODUCTOs.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+    }
 }
 
 
