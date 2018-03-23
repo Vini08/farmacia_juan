@@ -12,6 +12,11 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -26,20 +31,20 @@ String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
 String pass = "";
 int unids;
-String codP,nameP,catP, provP, unidP;
-Double preC, precV, preM, preO;
+String codP,nameP,catP, provP, unidP,fechaP;
+Double preC, precV, preM, preE;
 Color grisborde =new Color(224,224,224);
 Color grisPress =new Color(179,179,179);
 Color ColorFont =new Color(123,123,123);
 Color ColorSalida =new Color(0,102,204);
 Color ColorSalida2 =new Color(2,72,142);
 Border thickBorde = new LineBorder(Color.WHITE, 4);
- public static String us, code, mark, model, provv, porcions,Descuento,sehace;
-public static BigDecimal price0,price1,price2;   
-public static int unit; 
+ public static String us, code, mark, model, provv, porcions,Descuento,sehace, fechas;
+public static BigDecimal price0,price1,price2,price3;   
+public static int unit,alerta,alertP; 
 private int x;
 private int y;
-    public AdminEditarProdcut(String u, String codes,String marks,String models,int unitss,String provvs,BigDecimal price10s, BigDecimal price1s,BigDecimal price2s,String pors,String descu   ) {
+    public AdminEditarProdcut(String u, String codes,String marks,String models,int unitss,String provvs,BigDecimal price10s, BigDecimal price1s,BigDecimal price2s,BigDecimal price3s,String pors,String descu,int alerts, String Dates) throws ParseException {
         initComponents();
         jTextField1.requestFocus();
          setLocationRelativeTo(null);
@@ -53,18 +58,26 @@ private int y;
         price0=price10s;
         price1=price1s;
         price2=price2s;
+        price3=price3s;
         porcions=pors;
         Descuento=descu;
+        alerta=alerts;
+        fechas=Dates;
+        java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse(fechas);
+        jDateChooser1.setDate(date);
         jTextField1.setText(code);
         jTextField2.setText(mark);
-        jTextField8.setText(model);
         jTextField3.setText(Integer.toString(unit));
         jTextField4.setText(provv);
-        jTextField10.setText(String.valueOf(price0));
         jTextField5.setText(String.valueOf(price1));
         jTextField6.setText(String.valueOf(price2));
+        jTextField8.setText(model);
         jTextField9.setText(String.valueOf(Descuento));
+        jTextField10.setText(String.valueOf(price0));
         jTextField11.setText(String.valueOf(porcions));
+        jTextField12.setText(Integer.toString(alerta));
+        jTextField13.setText(String.valueOf(price3));
+         
     }
 
     /**
@@ -119,6 +132,8 @@ private int y;
         jLabel18 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel19 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jTextField13 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nuevo Producto");
@@ -274,7 +289,7 @@ private int y;
 
         jLabel16.setFont(new java.awt.Font("Microsoft Tai Le", 0, 14)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("de las celdas, verifique que cada uno ");
+        jLabel16.setText("las celdas, verifique que cada uno ");
         getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 230, -1));
 
         jLabel21.setFont(new java.awt.Font("Microsoft Tai Le", 0, 14)); // NOI18N
@@ -450,7 +465,7 @@ private int y;
         getContentPane().add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 400, 370, 40));
 
         jTextField12.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField12.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
+        jTextField12.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField12.setBorder(null);
         jTextField12.addActionListener(new java.awt.event.ActionListener() {
@@ -482,6 +497,31 @@ private int y;
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("ALERTA DE UNIDADES");
         getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, 370, 30));
+
+        jLabel26.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel26.setText("PRECIO ETIQUETA");
+        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 530, 370, 30));
+
+        jTextField13.setBackground(new java.awt.Color(153, 153, 153));
+        jTextField13.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
+        jTextField13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField13.setBorder(null);
+        jTextField13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField13ActionPerformed(evt);
+            }
+        });
+        jTextField13.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField13KeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField13KeyTyped(evt);
+            }
+        });
+        getContentPane().add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 560, 370, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -580,17 +620,25 @@ private int y;
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         codP = jTextField1.getText();
-          nameP=jTextField2.getText();
+        nameP=jTextField2.getText();
         catP=jTextField8.getText();
         provP = jTextField4.getText();
         preC=Double.parseDouble(jTextField10.getText());
         precV = Double.parseDouble(jTextField5.getText());
         preM = Double.parseDouble(jTextField6.getText());
-         unidP = jTextField3.getText();
+        preE = Double.parseDouble(jTextField13.getText());
+                unidP = jTextField3.getText();
         unids = Integer.parseInt(unidP);
         Descuento = jTextField9.getText();
         sehace = jTextField11.getText();
-        ModificarProd(unids, provP, preC, precV, preM,codP,catP,nameP,Descuento,sehace);
+        alertP = Integer.parseInt(jTextField12.getText());
+                String formato = jDateChooser1.getDateFormatString();
+                Date date = jDateChooser1.getDate();
+                SimpleDateFormat sdf = new SimpleDateFormat(formato);
+        fechas = String.valueOf(sdf.format(date));
+  
+        
+        ModificarProd(unids, provP, preC, precV, preM,preE,codP,catP,nameP,Descuento,sehace,alertP,fechas);
         inventario.test=1;
        hacer_ventas.test2=1;
         inventario.LlenarTabla(sql);
@@ -625,6 +673,18 @@ x = evt.getX();
     private void jTextField12KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField12KeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField12KeyTyped
+
+    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField13ActionPerformed
+
+    private void jTextField13KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField13KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField13KeyPressed
+
+    private void jTextField13KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField13KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField13KeyTyped
 
     /**
      * @param args the command line arguments
@@ -663,7 +723,11 @@ x = evt.getX();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminEditarProdcut(us,code, mark, model, unit, provv,price0, price1,price2,porcions,Descuento).setVisible(true);
+                try {
+                    new AdminEditarProdcut(us,code, mark, model, unit, provv,price0, price1,price2,price3,porcions,Descuento,alerta,fechas).setVisible(true);
+                } catch (ParseException ex) {
+                    Logger.getLogger(AdminEditarProdcut.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -690,6 +754,7 @@ x = evt.getX();
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
@@ -706,6 +771,7 @@ x = evt.getX();
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
@@ -717,22 +783,25 @@ x = evt.getX();
 
    
     
-  public void ModificarProd(int unid, String prov, Double pp, Double p1,Double p2,String codd,String nam, String cate, String des, String SH){
+  public void ModificarProd(int unid, String prov, Double pp, Double p1,Double p2,Double p3, String codd,String nam, String cate, String des, String SH,int alertaU, String vencimi ){
           
         try{
             Connection conn = DriverManager.getConnection(url, user, pass);
-           CallableStatement cmst= conn.prepareCall("call ModificarProducto (?,?,?,?,?,?,?,?,?,?)");
+           CallableStatement cmst= conn.prepareCall("call ModificarProducto (?,?,?,?,?,?,?,?,?,?,?,?,?)");
            
            cmst.setInt(1,unid);
            cmst.setString(2,prov);
            cmst.setDouble(3,pp);
            cmst.setDouble(4,p1);
            cmst.setDouble(5,p2);
-           cmst.setString(6,codd);
-           cmst.setString(7,cate);
-           cmst.setString(8,nam);
-           cmst.setString(9,des);
-            cmst.setString(10,SH);
+           cmst.setDouble(6,p3);
+           cmst.setString(7,codd);
+           cmst.setString(8,cate);
+           cmst.setString(9,nam);
+           cmst.setString(10,des);
+           cmst.setString(11,SH);
+           cmst.setInt(12,alertaU);
+           cmst.setString(13,vencimi);
            cmst.execute();            
        
         conn.close();

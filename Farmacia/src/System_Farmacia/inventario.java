@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -27,12 +28,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class inventario extends javax.swing.JFrame {
 
+public static Double sumaT;
 private int x;
 private int y;
 public static String url = "jdbc:mysql://localhost:3306/bd_farm";
 public static String user = "root";
-public static String pass = "";
-public static String sql = "SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades>0";
+public static String pass = "",auxST;
+public static String sql = "SELECT codigo_producto, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo,.precio_etiqueta, descuento, porciones from producto where Unidades>0";
 String busqueda;
 Color grisMoved =new Color(180,180,180);
 Color grisborde =new Color(224,224,224);
@@ -42,8 +44,8 @@ Color ColorSalida =new Color(0,102,204);
 Color ColorSalida2 =new Color(2,72,142);
 String auxUser, searc;
 Border thickBorde = new LineBorder(Color.WHITE, 4);
-public static String code, mark, model, provv, usua, porcions, descu,sqlINV;
-public static BigDecimal price0,price1,price2;      
+public static String code, mark, model, provv, usua, porcions, descu,sqlINV, dates;
+public static BigDecimal price0,price1,price2,price3;      
 public static int units, test=0,alertsunits;
 Color CBTNmenu =new Color(39,39,39);
 Color cleaan =new Color(0,0,255);
@@ -97,6 +99,7 @@ DefaultTableModel dm;
         jButton12 = new javax.swing.JButton();
         jLabel28 = new javax.swing.JLabel();
         jButton13 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jPopupMenu1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -279,7 +282,7 @@ DefaultTableModel dm;
         });
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1350, 530));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 1350, 510));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -513,6 +516,14 @@ DefaultTableModel dm;
         });
         getContentPane().add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 590, 310, 120));
 
+        jButton2.setText("CEO");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 46, -1, 20));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -640,22 +651,30 @@ DefaultTableModel dm;
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
 
-units = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 6);
+units = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 5);
 code =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
-mark =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 2);
-model =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 3);
-provv =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 4);
-alertsunits =  (int) jTable1.getValueAt(jTable1.getSelectedRow(), 7);
-price0 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 9);
-price1 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 10);
-price2 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 11);
+mark =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 1);
+model =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 2);
+provv =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 3);
+alertsunits =  (int) jTable1.getValueAt(jTable1.getSelectedRow(), 6);
+dates = (String) jTable1.getValueAt(jTable1.getSelectedRow(),7);
+price0 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 8);
+price1 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 9);
+price2 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 10);
+price3 =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 11);
 descu =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 12);
 porcions=  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 13);
 
 
-    AdminEditarProdcut ad = new AdminEditarProdcut(usua,code, mark, model, units, provv, price0,price1,price2,porcions,descu);
+    AdminEditarProdcut ad;
+    try {
+    ad = new AdminEditarProdcut(usua,code, mark, model, units, provv, price0,price1,price2,price3,porcions,descu,alertsunits,dates);
     ad.setVisible(true);
     ad.setLocationRelativeTo(null);
+    } catch (ParseException ex) {
+        Logger.getLogger(inventario.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
     
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -886,6 +905,10 @@ searc=jTextField1.getText();
         // TODO add your handling code here:
     }//GEN-LAST:event_jPopupMenu1PropertyChange
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+JOptionPane.showMessageDialog(this,"TOTAL INVERTIDO EN PRODUCTOS:  Q"+auxST);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -941,6 +964,7 @@ searc=jTextField1.getText();
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel11;
@@ -985,12 +1009,22 @@ searc=jTextField1.getText();
               modelo.addRow(fila);
              
              }
+        
              } catch (ClassNotFoundException ex) {
              throw new ClassCastException(ex.getMessage());
              } catch (SQLException ex) { 
                 Logger.getLogger(LoginGT.class.getName()).log(Level.SEVERE, null, ex);
             } 
             }   
+         sumaT = 0.0;
+         int totalRow= jTable1.getRowCount();
+           for(int ii=0;ii<totalRow;ii++)
+                                    {
+                                    double sumatoria= (Double.parseDouble(String.valueOf(jTable1.getValueAt(ii,9)))*Double.parseDouble(String.valueOf(jTable1.getValueAt(ii,6))));
+                                    sumaT= sumaT + sumatoria;
+                                    auxST = Double.toString(sumaT);
+                                    
+             }
     }
  
  public void buscarT(String search){
@@ -1002,7 +1036,7 @@ searc=jTextField1.getText();
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, descuento, porciones from producto where codigo_producto like '"+busq+"%' or "+"producto like '"+busq+"%'"+" or "+"categoria like '"+busq+"%' or descripcion like '"+busq+"%'";
+             String sql = "SELECT codigo_producto, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo,precio_etiqueta, descuento, porciones from producto where codigo_producto like '"+busq+"%' or "+"producto like '"+busq+"%'"+" or "+"categoria like '"+busq+"%' or descripcion like '"+busq+"%'";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
