@@ -5,13 +5,7 @@
  */
 package System_Farmacia;
 
-import static System_Farmacia.inventario.jTable1;
-import static System_Farmacia.inventario.pass;
-import static System_Farmacia.inventario.url;
-import static System_Farmacia.inventario.user;
-import FARM.mensajesSYS.datosAlmacenados;
 import java.awt.Color;
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -20,7 +14,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
@@ -29,14 +22,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Vinicio
  */
-public class modUsers extends javax.swing.JFrame {
+public class bitacora extends javax.swing.JFrame {
 
 Connection cnx = null;
 String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
 String pass = "";
-public static int cod, lv;
-String nombre, contraseña;
 Color grisMoved =new Color(180,180,180);
 Color grisborde =new Color(224,224,224);
 Color grisPress =new Color(179,179,179);
@@ -44,8 +35,7 @@ Color ColorFont =new Color(123,123,123);
 Color ColorSalida =new Color(0,102,204);
 Color ColorSalida2 =new Color(2,72,142);
 Border thickBorde = new LineBorder(Color.WHITE, 4);
-String nm, ps;
-    public modUsers() {
+    public bitacora() {
         initComponents();
          setLocationRelativeTo(null);
         jButton3.setBorder(thickBorde);
@@ -65,19 +55,9 @@ String nm, ps;
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        leve = new javax.swing.JTextField();
-        psswd = new javax.swing.JTextField();
-        name = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,7 +65,7 @@ String nm, ps;
         setBackground(new java.awt.Color(153, 153, 153));
         setMinimumSize(new java.awt.Dimension(449, 401));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(780, 519));
+        setPreferredSize(new java.awt.Dimension(779, 629));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -109,8 +89,8 @@ String nm, ps;
         jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(231, 231, 231));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("EDITAR INFORMACIÓN");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 40));
+        jLabel4.setText("DATOS DE INGRESO A SISTEMA");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 320, 40));
 
         jTable1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -138,20 +118,7 @@ String nm, ps;
         });
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 690, 230));
-
-        jButton4.setBackground(new java.awt.Color(91, 61, 135));
-        jButton4.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Nuevo Usuario");
-        jButton4.setBorder(null);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 350, 180, 130));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 650, 500));
 
         jLabel3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(123, 123, 123));
@@ -196,84 +163,17 @@ String nm, ps;
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 0, 41, 40));
 
-        jLabel1.setText(".");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 580, 10, -1));
-
-        jLabel20.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(22, 22, 22));
-        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setText("Nivel");
-        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 60, 30));
-
-        leve.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        leve.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        leve.setBorder(null);
-        leve.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                leveActionPerformed(evt);
-            }
-        });
-        getContentPane().add(leve, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, 180, 30));
-
-        psswd.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        psswd.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        psswd.setBorder(null);
-        psswd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                psswdActionPerformed(evt);
-            }
-        });
-        getContentPane().add(psswd, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, 180, 30));
-
-        name.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        name.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        name.setBorder(null);
-        name.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameActionPerformed(evt);
-            }
-        });
-        getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 180, 30));
-
-        jButton2.setBackground(new java.awt.Color(91, 61, 135));
-        jButton2.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Editar");
-        jButton2.setBorder(null);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 350, 180, 130));
-
-        jLabel18.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(22, 22, 22));
-        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setText("Nombre");
-        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 80, 30));
-
-        jLabel17.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(22, 22, 22));
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("Contraseña");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 100, 30));
-
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/morado.jpg"))); // NOI18N
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/fondoverde.jpg"))); // NOI18N
         jLabel19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 22), new java.awt.Color(102, 102, 102))); // NOI18N
         jLabel19.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 jLabel19MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 780, 480));
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 780, 590));
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/AZUL.png"))); // NOI18N
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 40));
-
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/indicac.png"))); // NOI18N
         jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel10MousePressed(evt);
@@ -284,7 +184,7 @@ String nm, ps;
                 jLabel10MouseDragged(evt);
             }
         });
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 520, 40));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -297,6 +197,9 @@ String nm, ps;
     private void jLabel3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseReleased
         Border thickBorder = new LineBorder(ColorSalida2, 54);
         jButton3.setBorder(thickBorder);
+        if(LoginGT.boot==0){
+        MENUadmin.controlVentana6=true;
+        }
         this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel3MouseReleased
@@ -344,33 +247,15 @@ String nm, ps;
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowGainedFocus
 
-    private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-nm = name.getText();
-ps = psswd.getText();
-lv = Integer.parseInt(leve.getText());
-        ModificarDatos(nm, ps,lv,cod);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseEntered
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-UserNew nw = new UserNew();
-nw.setVisible(true);
-nw.setLocationRelativeTo(null);
-// TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jLabel19MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseMoved
  Border thickBorder = new LineBorder(Color.WHITE, 5);
         jButton3.setBorder(thickBorder);
         jLabel3.setForeground(ColorFont);
-        LlenarTabla();        // TODO add your handling code here:
+
     }//GEN-LAST:event_jLabel19MouseMoved
 
     private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
@@ -378,22 +263,8 @@ nw.setLocationRelativeTo(null);
     }//GEN-LAST:event_jTable1MouseReleased
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-nm = ((String) jTable1.getValueAt(jTable1.getSelectedRow(), 1));        // TODO add your handling code here:
-ps = ((String)jTable1.getValueAt(jTable1.getSelectedRow(), 2));
-lv = ((int)jTable1.getValueAt(jTable1.getSelectedRow(), 3));
-cod = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
-name.setText(nm);
-psswd.setText(ps);
-leve.setText(String.valueOf(lv));
+
     }//GEN-LAST:event_jTable1MouseClicked
-
-    private void psswdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_psswdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_psswdActionPerformed
-
-    private void leveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_leveActionPerformed
 
     private void jLabel10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MousePressed
         // TODO add your handling code here:
@@ -420,14 +291,78 @@ leve.setText(String.valueOf(lv));
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(modUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(bitacora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(modUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(bitacora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(modUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(bitacora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(modUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(bitacora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -496,62 +431,25 @@ leve.setText(String.valueOf(lv));
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new modUsers().setVisible(true);
+                new bitacora().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable1;
-    private javax.swing.JTextField leve;
-    private javax.swing.JTextField name;
-    private javax.swing.JTextField psswd;
     // End of variables declaration//GEN-END:variables
 
-public void ModificarDatos(String nombre, String pss, int lev, int code){
-          
-        try{
-            Connection conn = DriverManager.getConnection(url, user, pass);
-           CallableStatement cmst= conn.prepareCall("call ModificarDatos (?,?,?,?)");
-           cmst.setInt(1,cod);
-           cmst.setString(2,nombre);
-           cmst.setString(3,pss);
-           cmst.setInt(4,lev);
-           
-           cmst.execute();            
-       
-        conn.close();
-        name.setText("");
-        psswd.setText("");
-        name.requestFocus();
-        leve.setText("");
-        
-        datosAlmacenados v = new datosAlmacenados();
-        v.setVisible(true);
-        v.setLocationRelativeTo(null);
-        
-        }catch(SQLException sqlex){
-         JOptionPane.showMessageDialog(this,sqlex);
-        }catch(Exception ex){
-           JOptionPane.showMessageDialog(this,ex);
-        }
-    }
+
 
 public void LlenarTabla(){
-    String Query = "SELECT *from usuario";
+    String Query = "SELECT *from bitacora";
    
         DefaultTableModel modelo = new DefaultTableModel();
         jTable1.setModel(modelo);

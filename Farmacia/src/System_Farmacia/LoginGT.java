@@ -605,6 +605,7 @@ Connection cnx = null;
                 }
                 if (nvl==1){
                     boot=1;
+                bitacora(n, dat, jLabel19.getText(),"- - - -");
                 MENUusuario menu = new MENUusuario(n);
                 menu.setVisible(true);
                 menu.setLocationRelativeTo(null);

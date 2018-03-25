@@ -29,8 +29,7 @@ import javax.swing.table.DefaultTableModel;
 public class inventario extends javax.swing.JFrame {
 
 public static Double sumaT;
-private int x;
-private int y;
+private int x,y,units;
 public static String url = "jdbc:mysql://localhost:3306/bd_farm";
 public static String user = "root";
 public static String pass = "",auxST;
@@ -45,8 +44,9 @@ Color ColorSalida2 =new Color(2,72,142);
 String auxUser, searc;
 Border thickBorde = new LineBorder(Color.WHITE, 4);
 public static String code, mark, model, provv, usua, porcions, descu,sqlINV, dates;
-public static BigDecimal price0,price1,price2,price3;      
-public static int units, test=0,alertsunits;
+public static BigDecimal price0,price1,price2,price3;  
+BigDecimal PreV,totalBaja;
+public static int  test=0,alertsunits;
 Color CBTNmenu =new Color(39,39,39);
 Color cleaan =new Color(0,0,255);
 Color ver =new Color(0,102,204);
@@ -80,6 +80,7 @@ DefaultTableModel dm;
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -122,6 +123,14 @@ DefaultTableModel dm;
             }
         });
         jPopupMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Dar de Baja");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inventario");
@@ -330,12 +339,12 @@ DefaultTableModel dm;
                 jTextField1KeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 590, 200, 50));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 590, 200, 50));
 
         jLabel24.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel24.setText("Recargar");
+        jLabel24.setText("Productos dados de Baja");
         jLabel24.setToolTipText("");
         jLabel24.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel24.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -352,17 +361,12 @@ DefaultTableModel dm;
                 jLabel24MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 590, 250, 120));
+        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 590, 270, 120));
 
         jButton9.setBackground(new java.awt.Color(0, 0, 255));
         jButton9.setForeground(new java.awt.Color(3, 64, 124));
         jButton9.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton9.setFocusPainted(false);
-        jButton9.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton9MouseMoved(evt);
-            }
-        });
         jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton9MousePressed(evt);
@@ -371,12 +375,17 @@ DefaultTableModel dm;
                 jButton9MouseReleased(evt);
             }
         });
+        jButton9.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jButton9MouseMoved(evt);
+            }
+        });
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 590, 250, 120));
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 590, 270, 120));
 
         jLabel25.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
@@ -398,7 +407,7 @@ DefaultTableModel dm;
                 jLabel25MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 590, 200, 50));
+        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 590, 170, 50));
 
         jButton10.setBackground(new java.awt.Color(39, 39, 39));
         jButton10.setForeground(new java.awt.Color(3, 64, 124));
@@ -422,7 +431,7 @@ DefaultTableModel dm;
                 jButton10ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 590, 200, 50));
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 590, 180, 50));
 
         jLabel27.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
@@ -666,14 +675,10 @@ descu =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 12);
 porcions=  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 13);
 
 
-    AdminEditarProdcut ad;
-    try {
-    ad = new AdminEditarProdcut(usua,code, mark, model, units, provv, price0,price1,price2,price3,porcions,descu,alertsunits,dates);
+    AdminEditarProdcut ad = new AdminEditarProdcut(usua,code, mark, model, units, provv, price0,price1,price2,price3,porcions,descu,alertsunits,dates);
     ad.setVisible(true);
     ad.setLocationRelativeTo(null);
-    } catch (ParseException ex) {
-        Logger.getLogger(inventario.class.getName()).log(Level.SEVERE, null, ex);
-    }
+    
     
     
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -701,8 +706,9 @@ y = evt.getY();         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel24MousePressed
 
     private void jLabel24MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseReleased
-LlenarTabla("SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades>0");  
-jTextField1.setText("");// TODO add your handling code here:
+DadosdeBaja dd = new DadosdeBaja();
+dd.setVisible(true);
+dd.setLocationRelativeTo(null);
     }//GEN-LAST:event_jLabel24MouseReleased
 
     private void jLabel24MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseMoved
@@ -909,6 +915,20 @@ searc=jTextField1.getText();
 JOptionPane.showMessageDialog(this,"TOTAL INVERTIDO EN PRODUCTOS:  Q"+auxST);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+
+code =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+mark =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 1);
+model =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 2);
+units = (int) jTable1.getValueAt(jTable1.getSelectedRow(),5);
+PreV =  (BigDecimal) jTable1.getValueAt(jTable1.getSelectedRow(), 8);
+
+DarBaja baja = new DarBaja(code, mark,model,units,PreV);
+baja.setVisible(true);
+baja.setLocationRelativeTo(null);
+// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -979,6 +999,7 @@ JOptionPane.showMessageDialog(this,"TOTAL INVERTIDO EN PRODUCTOS:  Q"+auxST);   
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable1;
@@ -1020,7 +1041,7 @@ JOptionPane.showMessageDialog(this,"TOTAL INVERTIDO EN PRODUCTOS:  Q"+auxST);   
          int totalRow= jTable1.getRowCount();
            for(int ii=0;ii<totalRow;ii++)
                                     {
-                                    double sumatoria= (Double.parseDouble(String.valueOf(jTable1.getValueAt(ii,9)))*Double.parseDouble(String.valueOf(jTable1.getValueAt(ii,6))));
+                                    double sumatoria= (Double.parseDouble(String.valueOf(jTable1.getValueAt(ii,8)))*Double.parseDouble(String.valueOf(jTable1.getValueAt(ii,5))));
                                     sumaT= sumaT + sumatoria;
                                     auxST = Double.toString(sumaT);
                                     
@@ -1053,9 +1074,9 @@ JOptionPane.showMessageDialog(this,"TOTAL INVERTIDO EN PRODUCTOS:  Q"+auxST);   
              
              }
              } catch (ClassNotFoundException ex) {
-             throw new ClassCastException(ex.getMessage());
+             JOptionPane.showMessageDialog(this, ex);
              } catch (SQLException ex) { 
-                Logger.getLogger(LoginGT.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(this, ex);
             } 
             }   
     }

@@ -79,6 +79,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         setTitle("Ventas");
         setMinimumSize(new java.awt.Dimension(458, 594));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(458, 443));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);

@@ -58,11 +58,11 @@ static float invT=0;
     public VentasRealizadas() {
         initComponents();
          setLocationRelativeTo(null);
-       jButton1.setBorder(thickBorde);
+        jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
-     JTableHeader th1;
-     th1 = tablaVentas.getTableHeader();
-      Font fuente1 = new Font("Microsoft Yi Baiti", Font.PLAIN, 22); 
+        JTableHeader th1;
+        th1 = tablaVentas.getTableHeader();
+        Font fuente1 = new Font("Microsoft Yi Baiti", Font.PLAIN, 22); 
         th1.setFont(fuente1); 
         LlenarTabla();
         jLabel2.setToolTipText(null);

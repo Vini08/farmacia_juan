@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FARM.mensajesSYS;
+package System_Farmacia;
 
+import FARM.mensajesSYS.datosAlmacenados;
 import System_Farmacia.LoginGT;
 import System_Farmacia.modUsers;
 import java.awt.Color;
@@ -39,7 +40,6 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
     public UserNew() {
         initComponents();
          setLocationRelativeTo(null);
-        jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
   jTextField1.requestFocus();
     }
@@ -53,10 +53,8 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -73,6 +71,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         setTitle("Ventas");
         setMinimumSize(new java.awt.Dimension(359, 401));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(360, 380));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -92,25 +91,6 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Microsoft Tai Le", 0, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(123, 123, 123));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("-");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel2MousePressed(evt);
-            }
-        });
-        jLabel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel2MouseMoved(evt);
-            }
-        });
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 40, 40));
-
         jLabel4.setBackground(new java.awt.Color(153, 153, 153));
         jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(231, 231, 231));
@@ -120,30 +100,6 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/AZUL.png"))); // NOI18N
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 40));
-
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setForeground(new java.awt.Color(102, 102, 102));
-        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton1.setFocusPainted(false);
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton1MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton1MouseReleased(evt);
-            }
-        });
-        jButton1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton1MouseMoved(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 40, 40));
 
         jLabel3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(123, 123, 123));
@@ -202,6 +158,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 180, 30));
 
         jLabel7.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(20, 20, 20));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Nivel");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 180, 30));
@@ -227,7 +184,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         });
         getContentPane().add(passw, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 180, 30));
 
-        jButton2.setBackground(new java.awt.Color(3, 64, 124));
+        jButton2.setBackground(new java.awt.Color(91, 61, 135));
         jButton2.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Crear");
@@ -241,63 +198,29 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 180, 60));
 
         jLabel18.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(52, 52, 52));
+        jLabel18.setForeground(new java.awt.Color(20, 20, 20));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("Nombre");
         getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 230, 30));
 
         jLabel17.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(52, 52, 52));
+        jLabel17.setForeground(new java.awt.Color(20, 20, 20));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("Contraseña");
         getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 230, 30));
 
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blancoE.jpg"))); // NOI18N
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/indicac.png"))); // NOI18N
         jLabel19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 22), new java.awt.Color(102, 102, 102))); // NOI18N
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 360, 340));
+        jLabel19.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel19MouseMoved(evt);
+            }
+        });
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 360, 370));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        this.setExtendedState(ICONIFIED);        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel2MouseClicked
-
-    private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
-        Border thickBorder = new LineBorder(grisPress, 54);
-        jButton1.setBorder(thickBorder);         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel2MousePressed
-
-    private void jLabel2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseMoved
-        Border thickBorder = new LineBorder(grisborde, 54);
-        jButton1.setBorder(thickBorder);
-        jButton3.setBorder(thickBorde);
-        jLabel3.setForeground(ColorFont);// TODO add your handling code here:
-    }//GEN-LAST:event_jLabel2MouseMoved
-
-    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
-        Border thickBorder = new LineBorder(grisPress, 54);
-        jButton1.setBorder(thickBorder);        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MousePressed
-
-    private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
-        Border thickBorder = new LineBorder(grisborde, 54);
-        jButton1.setBorder(thickBorder);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseReleased
-
-    private void jButton1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseMoved
-        Border thickBorder = new LineBorder(grisborde, 54);
-        jButton1.setBorder(thickBorder);
-        jButton3.setBorder(thickBorde);
-        jLabel2.setForeground(Color.BLACK);
-        jLabel3.setForeground(ColorFont);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseMoved
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         Border thickBorder = new LineBorder(ColorSalida2, 54);
@@ -314,8 +237,6 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
     private void jLabel3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseMoved
         Border thickBorder = new LineBorder(ColorSalida, 54);
         jButton3.setBorder(thickBorder);
-        jButton1.setBorder(thickBorde);
-        jLabel2.setForeground(ColorFont);
         jLabel3.setForeground(Color.WHITE);
     
        
@@ -333,7 +254,6 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
     private void jButton3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseMoved
         Border thickBorder = new LineBorder(Color.BLUE, 54);
         jButton3.setBorder(thickBorder);
-        jButton1.setBorder(thickBorde);
         jLabel3.setForeground(Color.WHITE);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3MouseMoved
@@ -344,9 +264,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         Border thickBorder = new LineBorder(Color.WHITE, 5);
-        jButton1.setBorder(thickBorder);
         jButton3.setBorder(thickBorder);
-        jLabel2.setForeground(ColorFont);
         jLabel3.setForeground(ColorFont);
    
     }//GEN-LAST:event_formMouseMoved
@@ -378,6 +296,13 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
       n=jTextField2.getText();
         procUsuario(nm,p,n);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jLabel19MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseMoved
+        Border thickBorder = new LineBorder(Color.WHITE, 5);
+        jButton3.setBorder(thickBorder);
+        jLabel3.setForeground(ColorFont);
+
+    }//GEN-LAST:event_jLabel19MouseMoved
 
     /**
      * @param args the command line arguments
@@ -446,7 +371,6 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -454,7 +378,6 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;

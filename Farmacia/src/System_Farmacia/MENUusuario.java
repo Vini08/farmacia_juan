@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -53,7 +54,7 @@ public static String nombr, horaMenu,level="1";
 String hora,minutos,segundos,ampm;
 Calendar calendario;    
 Thread h1;
-public static VentasDIA VS = new VentasDIA();
+
 public static hacer_ventas Vn = new hacer_ventas(nombr);
 public static boolean controlVentana=true,controlVentana1=true,controlVentana2=true,controlVentana3=true,controlVentana4=true,controlVentana5=true; 
 
@@ -682,6 +683,7 @@ Border thickBorder = new LineBorder(ColorSalida, 54);
         Border thickBorder = new LineBorder(ColorSalida2, 54);
         jButton3.setBorder(thickBorder);
         reback();
+        bitacora(nombr, jLabel19.getText());
         CrearBackup("inventario");
         System.exit(1);
         // TODO add your handling code here:
@@ -797,6 +799,7 @@ jButton11.setBorder(focus);
     }//GEN-LAST:event_jLabel27MousePressed
 
     private void jLabel27MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseReleased
+VentasDIA VS = new VentasDIA();
 if(controlVentana4==true){
 VS.check=true;    
 VS.setVisible(true);
@@ -1120,4 +1123,28 @@ public void conteoPORagotar(String sql){
         }
         catch(SQLException ex){JOptionPane.showMessageDialog(this,ex);}
        }
+
+
+public void bitacora(String us, String sald)
+{      
+Calendar fechax = new GregorianCalendar();
+int año = fechax.get(Calendar.YEAR);
+int mes = fechax.get(Calendar.MONTH);
+int dia = fechax.get(Calendar.DAY_OF_MONTH);  
+String dat = año+"-"+(mes+1)+"-"+dia;   
+       try {            
+       Connection conn = DriverManager.getConnection(url, user, pass);
+       CallableStatement proc = conn.prepareCall(" CALL bitacora(?, ?, ?, ?) ");
+            //se cargan los parametros de entrada
+            proc.setString(1, us);
+            proc.setString(2, dat);
+            proc.setString(3, "- - - -");
+            proc.setString(4, sald);
+            // Se ejecuta el procedimiento almacenado
+            proc.execute();  
+
+        } catch (SQLException ex) { 
+        JOptionPane.showMessageDialog(this,ex);
+    }  
+   }
 }

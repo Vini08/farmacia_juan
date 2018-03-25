@@ -11,7 +11,9 @@ import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,7 +28,7 @@ import javax.swing.border.LineBorder;
  * @author Vinicio
  */
 public class AdminEditarProdcut extends javax.swing.JFrame {
-public static String sql = "SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades>0";
+public static String sql = "SELECT codigo_producto,  categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo,precio_etiqueta, descuento, porciones from producto where Unidades>=0";
 String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
 String pass = "";
@@ -42,13 +44,15 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
  public static String us, code, mark, model, provv, porcions,Descuento,sehace, fechas;
 public static BigDecimal price0,price1,price2,price3;   
 public static int unit,alerta,alertP; 
+Connection cnx;
 private int x;
 private int y;
-    public AdminEditarProdcut(String u, String codes,String marks,String models,int unitss,String provvs,BigDecimal price10s, BigDecimal price1s,BigDecimal price2s,BigDecimal price3s,String pors,String descu,int alerts, String Dates) throws ParseException {
+    public AdminEditarProdcut(String u, String codes,String marks,String models,int unitss,String provvs,BigDecimal price10s, BigDecimal price1s,BigDecimal price2s,BigDecimal price3s,String pors,String descu,int alerts, String Dates) {
+    try {
         initComponents();
         jTextField1.requestFocus();
-         setLocationRelativeTo(null);
-       jButton1.setBorder(thickBorde);
+        setLocationRelativeTo(null);
+        jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
         code=codes;
         mark=marks;
@@ -63,8 +67,6 @@ private int y;
         Descuento=descu;
         alerta=alerts;
         fechas=Dates;
-        java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse(fechas);
-        jDateChooser1.setDate(date);
         jTextField1.setText(code);
         jTextField2.setText(mark);
         jTextField3.setText(Integer.toString(unit));
@@ -77,6 +79,11 @@ private int y;
         jTextField11.setText(String.valueOf(porcions));
         jTextField12.setText(Integer.toString(alerta));
         jTextField13.setText(String.valueOf(price3));
+        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(fechas);
+        jDateChooser1.setDate(date);
+    } catch (ParseException ex) {
+        Logger.getLogger(AdminEditarProdcut.class.getName()).log(Level.SEVERE, null, ex);
+    }
          
     }
 
@@ -637,11 +644,11 @@ private int y;
                 SimpleDateFormat sdf = new SimpleDateFormat(formato);
         fechas = String.valueOf(sdf.format(date));
   
-        
-        ModificarProd(unids, provP, preC, precV, preM,preE,codP,catP,nameP,Descuento,sehace,alertP,fechas);
-        inventario.test=1;
+        ModificarProd(unids, provP, preC, precV, preM, preE, codP, catP, nameP, Descuento, sehace, alertP, fechas);
+       inventario.test=1;
        hacer_ventas.test2=1;
-        inventario.LlenarTabla(sql);
+       inventario.LlenarTabla(sql);
+        Por_agotarse("SELECT count(codigo_producto)as cuantos FROM producto where Unidades<alerta_unidades");
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -674,17 +681,17 @@ x = evt.getX();
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField12KeyTyped
 
-    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
+    private void jTextField13KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField13KeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField13ActionPerformed
+    }//GEN-LAST:event_jTextField13KeyTyped
 
     private void jTextField13KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField13KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField13KeyPressed
 
-    private void jTextField13KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField13KeyTyped
+    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField13KeyTyped
+    }//GEN-LAST:event_jTextField13ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -723,11 +730,9 @@ x = evt.getX();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
+               
                     new AdminEditarProdcut(us,code, mark, model, unit, provv,price0, price1,price2,price3,porcions,Descuento,alerta,fechas).setVisible(true);
-                } catch (ParseException ex) {
-                    Logger.getLogger(AdminEditarProdcut.class.getName()).log(Level.SEVERE, null, ex);
-                }
+               
             }
         });
     }
@@ -816,4 +821,20 @@ x = evt.getX();
         }
     }
 
+   public void Por_agotarse(String sql){
+    try{
+             cnx = DriverManager.getConnection(url, user,pass);
+             Statement st = cnx.prepareStatement(sql);
+             ResultSet res = st.executeQuery(sql);  
+            while (res.next()){
+              if(LoginGT.boot==0){
+                MENUadmin.jLabel18.setText(res.getString(1));
+                }
+                if(LoginGT.boot==1){
+                MENUusuario.jLabel18.setText(res.getString(1));
+                }
+            }
+        }
+        catch(SQLException ex){JOptionPane.showMessageDialog(this,ex);}
+       }
 }
