@@ -361,7 +361,7 @@ DefaultTableModel dm;
                 jLabel24MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 590, 270, 120));
+        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 590, 310, 120));
 
         jButton9.setBackground(new java.awt.Color(0, 0, 255));
         jButton9.setForeground(new java.awt.Color(3, 64, 124));
@@ -385,7 +385,7 @@ DefaultTableModel dm;
                 jButton9ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 590, 270, 120));
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 590, 310, 120));
 
         jLabel25.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
@@ -453,7 +453,7 @@ DefaultTableModel dm;
                 jLabel27MouseReleased(evt);
             }
         });
-        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 310, 120));
+        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 270, 120));
 
         jButton12.setBackground(new java.awt.Color(3, 64, 124));
         jButton12.setForeground(new java.awt.Color(3, 64, 124));
@@ -477,7 +477,7 @@ DefaultTableModel dm;
                 jButton12ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 310, 120));
+        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 270, 120));
 
         jLabel28.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(255, 255, 255));
@@ -499,7 +499,7 @@ DefaultTableModel dm;
                 jLabel28MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 590, 310, 120));
+        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 590, 310, 120));
 
         jButton13.setBackground(new java.awt.Color(26, 44, 61));
         jButton13.setForeground(new java.awt.Color(3, 64, 124));
@@ -523,7 +523,7 @@ DefaultTableModel dm;
                 jButton13ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 590, 310, 120));
+        getContentPane().add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 590, 310, 120));
 
         jButton2.setText("CEO");
         jButton2.addActionListener(new java.awt.event.ActionListener() {

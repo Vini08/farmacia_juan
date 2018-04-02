@@ -1,12 +1,6 @@
 
 package System_Farmacia;
 
-import FARM.mensajesSYS.LectorBarras;
-import FARM.mensajesSYS.ShowDescription;
-import FARM.mensajesSYS.VentaExitosa;
-import FARM.mensajesSYS.cantidadMAyor;
-import static System_Farmacia.hacer_ventas.jLabel5;
-import static System_Farmacia.hacer_ventas.tablaADD;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
@@ -1315,7 +1309,7 @@ else
                 
                 stmt.setString(1,tablaADD.getModel().getValueAt(0, 6).toString());
                 stmt.setString(2, total.getText());
-                stmt.setString(3,año+"-"+(mes+1)+"-"+dia);
+                stmt.setString(3,año+"/"+(mes+1)+"/"+dia);
                 stmt.setString(4,"NO");
                 stmt.executeUpdate();   
             } catch (SQLException ex) {

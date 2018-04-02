@@ -56,7 +56,7 @@ public static String nombr, horaMenu,level="1",fechaGlobal;
 String hora,minutos,segundos,ampm;
 Calendar calendario;    
 Thread h1;
-DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 Date date = new Date();
 
 
@@ -933,7 +933,6 @@ Border thickBorder = new LineBorder(ColorSalida, 54);
 
     private void jLabel23MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseReleased
 hacer_ventas Vn = new hacer_ventas(nombr);
-
 if(controlVentana1==true){
 Vn.cdp=nombr;
 hacer_ventas.test2=1;
@@ -942,7 +941,7 @@ Vn.setLocationRelativeTo(null);
 hacer_ventas.find.requestFocus();
 controlVentana1=false;
 }
-else if(controlVentana1==false){
+if(controlVentana1==false){
 Vn.toFront();
 }
 // TODO add your handling code here:

@@ -802,7 +802,7 @@ public void insertProd(){
                 stmt.setString(2, TTV);
                 stmt.setDouble(3, efectivo);
                 stmt.setDouble(4, operacion);
-                stmt.setString(5,año+"-"+(mes+1)+"-"+dia);
+                stmt.setString(5,año+"/"+(mes+01)+"/"+dia);
                 if(LoginGT.boot==0){
                  stmt.setString(6,MENUadmin.horaMenu);
                 }
@@ -847,7 +847,7 @@ public void insertProd(){
             stmt.setDouble(7,(Double) destino.getValueAt(i,4));
             stmt.setDouble(8,(Double) destino.getValueAt(i,6));
             stmt.setString(9,(String) destino.getValueAt(i,7));
-            stmt.setString(10,año+"-"+(mes+1)+"-"+dia);
+            stmt.setString(10,año+"/"+(mes+1)+"/"+dia);
             stmt.executeUpdate();
             
            }

@@ -27,7 +27,7 @@ String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
 String pass = "";
 
-String provee, tel_prov,empresa,tel_emp,dire_empre, cuenta, codMayorista, nomreMayorista, telMayorista, ubiccionMAyorista;
+String provee, tel_prov, codMayorista, nomreMayorista, telMayorista, ubiccionMAyorista;
 
 Color grisMoved =new Color(180,180,180);
 Color grisborde =new Color(224,224,224);
@@ -566,7 +566,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
 if(jTextField2.getText().length()!=0 && jTextField3.getText().length()!=0 ){
         provee = jTextField3.getText();
         tel_prov = jTextField2.getText();
-        prodProducto(provee,tel_prov,empresa,tel_emp,dire_empre,cuenta);
+        prodProducto(provee,tel_prov);
        // insertProd();
     }   
 else 
@@ -751,19 +751,16 @@ jTextField12.requestFocus();
 
    
     
-     public void prodProducto(String proveedor,String  telPRov,String emp, String telEmp,String dire, String cuenta)
+     public void prodProducto(String proveedor,String  telPRov)
    {    
        
        try {            
        Connection conn = DriverManager.getConnection(url, user, pass);
-       CallableStatement proc = conn.prepareCall(" CALL registrar_provedor(?, ?, ?, ?, ?, ?) ");
+       CallableStatement proc = conn.prepareCall(" CALL registrar_provedor(?, ?) ");
             //se cargan los parametros de entrada
-            proc.setString("empresa", emp);
-            proc.setString("tel_empresa", telEmp);
-            proc.setString("direccion", dire);
+        
             proc.setString("proveedor", proveedor);
             proc.setString("tel_proveedor", telPRov);
-            proc.setString("no_cuenta_banco", cuenta);
             // Se ejecuta el procedimiento almacenado
             proc.execute();  
         jTextField3.setText("");

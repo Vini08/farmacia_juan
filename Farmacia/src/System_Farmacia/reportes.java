@@ -697,7 +697,7 @@ x = evt.getX();
 
     private void jLabel26MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseReleased
   Date hoy = new Date();
- SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
+ SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/d");
  String dia = String.valueOf(sdf.format(hoy));        
 
 LLenarDELAL(dia,dia);       // TODO add your handling code here:
