@@ -75,7 +75,8 @@ public MENUusuario(String Name) {
         jLabel19.setText(hora + ":" + minutos + ":" + segundos);
         conteoAgotados("SELECT count(codigo_producto)as cuantos FROM producto where Unidades=0");
         conteoPORagotar("SELECT count(codigo_producto)as cuantos FROM producto where Unidades<alerta_unidades");
-        jLabel28.setToolTipText(null);
+         conteoRECORDATORY("SELECT count(codigo) as conteo FROM bd_farm.recordatorios ");
+       jLabel28.setToolTipText(null);
     }
 
     /**
@@ -93,6 +94,8 @@ public MENUusuario(String Name) {
         jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -246,6 +249,32 @@ public MENUusuario(String Name) {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("F2   =   INVENTARIO");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 230, -1));
+
+        jLabel35.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel35.setText("1");
+        jLabel35.setToolTipText("Productos por Agotarse");
+        jLabel35.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel35MouseReleased(evt);
+            }
+        });
+        jLabel35.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel35MouseMoved(evt);
+            }
+        });
+        getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 0, 40, -1));
+
+        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/nota.png"))); // NOI18N
+        jLabel34.setToolTipText("");
+        jLabel34.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel34MouseReleased(evt);
+            }
+        });
+        getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 0, -1, 70));
 
         jLabel7.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(68, 68, 68));
@@ -915,6 +944,20 @@ this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + e
      // TODO add your handling code here:
     }//GEN-LAST:event_jLabel18MouseReleased
 
+    private void jLabel35MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel35MouseReleased
+
+    private void jLabel35MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel35MouseMoved
+
+    private void jLabel34MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel34MouseReleased
+        recordatorios record = new recordatorios();
+        record.setVisible(true);
+        record.setLocationRelativeTo(null);// TODO add your handling code here:
+    }//GEN-LAST:event_jLabel34MouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -980,6 +1023,8 @@ this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + e
     public static javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel32;
+    private static javax.swing.JLabel jLabel34;
+    public static javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1124,6 +1169,23 @@ public void conteoPORagotar(String sql){
         catch(SQLException ex){JOptionPane.showMessageDialog(this,ex);}
        }
 
+ public void conteoRECORDATORY(String sql){
+    try{
+             cnx = DriverManager.getConnection(url, user,pass);
+             Statement st = cnx.prepareStatement(sql);
+             ResultSet res = st.executeQuery(sql);  
+            while (res.next()){
+              if(LoginGT.boot==0){
+                MENUadmin.jLabel35.setText(res.getString(1));
+                }
+                if(LoginGT.boot==1){
+                MENUusuario.jLabel35.setText(res.getString(1));
+                }
+            }
+        }
+        catch(SQLException ex){JOptionPane.showMessageDialog(this,ex);}
+       }
+ 
 
 public void bitacora(String us, String sald)
 {      
