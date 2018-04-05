@@ -81,6 +81,7 @@ public MENUadmin(String Name) {
         conteoAgotados("SELECT count(codigo_producto)as cuantos FROM producto where Unidades=0");
         conteoPORagotar("SELECT count(codigo_producto)as cuantos FROM producto where Unidades<alerta_unidades");
         conteoRECORDATORY("SELECT count(codigo) as conteo FROM bd_farm.recordatorios ");
+        conteoPedidos("SELECT count(codigo_pedido) as conteo FROM bd_farm.pedidos ");
         jLabel28.setToolTipText(null);
     }
 
@@ -127,7 +128,9 @@ public MENUadmin(String Name) {
         jButton11 = new javax.swing.JButton();
         jLabel27 = new javax.swing.JLabel();
         jButton12 = new javax.swing.JButton();
+        jLabel37 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jButton14 = new javax.swing.JButton();
@@ -182,7 +185,7 @@ public MENUadmin(String Name) {
                 jLabel2MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1284, 0, 40, 60));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 0, 50, 60));
 
         jLabel10.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 22)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(3, 64, 124));
@@ -217,7 +220,7 @@ public MENUadmin(String Name) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1284, 0, 40, 60));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1285, 0, 40, 60));
 
         jLabel3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(123, 123, 123));
@@ -237,7 +240,7 @@ public MENUadmin(String Name) {
                 jLabel3MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1324, 0, 40, 60));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1321, 0, 50, 60));
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -260,7 +263,7 @@ public MENUadmin(String Name) {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1324, 0, 41, 60));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1325, 0, 41, 60));
 
         jLabel6.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 17)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -291,7 +294,7 @@ public MENUadmin(String Name) {
         jLabel35.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(255, 255, 255));
         jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel35.setText("1");
+        jLabel35.setText("2");
         jLabel35.setToolTipText("Productos por Agotarse");
         jLabel35.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -303,7 +306,7 @@ public MENUadmin(String Name) {
                 jLabel35MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(1076, 0, 40, -1));
+        getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(1027, 2, 40, -1));
 
         jLabel28.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 27)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(255, 255, 255));
@@ -431,11 +434,11 @@ public MENUadmin(String Name) {
                 jLabel18MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(1152, 20, 50, 20));
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(1092, 22, 50, 20));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/notify.png"))); // NOI18N
         jLabel4.setToolTipText("");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 10, -1, 50));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 10, -1, 50));
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/notificacion.png"))); // NOI18N
         jLabel20.setToolTipText("Productos Agotados");
@@ -651,6 +654,23 @@ public MENUadmin(String Name) {
         });
         getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 380, 350, 140));
 
+        jLabel37.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel37.setText("2");
+        jLabel37.setToolTipText("Productos por Agotarse");
+        jLabel37.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel37MouseReleased(evt);
+            }
+        });
+        jLabel37.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel37MouseMoved(evt);
+            }
+        });
+        getContentPane().add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(1187, 0, 30, 30));
+
         jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/nota.png"))); // NOI18N
         jLabel34.setToolTipText("Recordatorios");
         jLabel34.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -658,7 +678,18 @@ public MENUadmin(String Name) {
                 jLabel34MouseReleased(evt);
             }
         });
-        getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 0, -1, 70));
+        getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 0, -1, 60));
+
+        jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/almac_1.png"))); // NOI18N
+        jLabel36.setToolTipText("Pedidos");
+        jLabel36.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel36.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel36MouseReleased(evt);
+            }
+        });
+        getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 0, -1, 60));
 
         jLabel22.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 17)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -1386,6 +1417,20 @@ record.setVisible(true);
 record.setLocationRelativeTo(null);// TODO add your handling code here:
     }//GEN-LAST:event_jLabel34MouseReleased
 
+    private void jLabel36MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel36MouseReleased
+VerPedidos ver = new VerPedidos();
+ver.setVisible(true);
+ver.setLocationRelativeTo(null);// TODO add your handling code here:
+    }//GEN-LAST:event_jLabel36MouseReleased
+
+    private void jLabel37MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel37MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel37MouseReleased
+
+    private void jLabel37MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel37MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel37MouseMoved
+
     /**
      * @param args the command line arguments
      */
@@ -1463,6 +1508,8 @@ record.setLocationRelativeTo(null);// TODO add your handling code here:
     private javax.swing.JLabel jLabel33;
     private static javax.swing.JLabel jLabel34;
     public static javax.swing.JLabel jLabel35;
+    private static javax.swing.JLabel jLabel36;
+    public static javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1631,7 +1678,23 @@ public void conteoAgotados(String sql){
         catch(SQLException ex){JOptionPane.showMessageDialog(this,ex);}
        }
     
-    
+  public void conteoPedidos(String sql){
+    try{
+             cnx = DriverManager.getConnection(url, user,pass);
+             Statement st = cnx.prepareStatement(sql);
+             ResultSet res = st.executeQuery(sql);  
+            while (res.next()){
+              if(LoginGT.boot==0){
+                MENUadmin.jLabel37.setText(res.getString(1));
+                }
+                if(LoginGT.boot==1){
+                MENUusuario.jLabel37.setText(res.getString(1));
+                }
+            }
+        }
+        catch(SQLException ex){JOptionPane.showMessageDialog(this,ex);}
+       }
+  
 public void bitacora(String us, String sald)
 {      
 Calendar fechax = new GregorianCalendar();

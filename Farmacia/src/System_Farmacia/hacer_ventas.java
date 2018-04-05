@@ -168,6 +168,7 @@ public hacer_ventas(String N) {
         setTitle("Ventas");
         setMinimumSize(new java.awt.Dimension(891, 600));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1370, 730));
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 formMouseMoved(evt);
@@ -1075,15 +1076,6 @@ jButton11.setBorder(focusA);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton11ActionPerformed
 
-    private void jLabel8MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseDragged
-this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel8MouseDragged
-
-    private void jLabel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MousePressed
-x = evt.getX();
-                y = evt.getY();         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel8MousePressed
-
     private void jLabel21MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel21MouseReleased
 if(cant>0){
     cant--;
@@ -1170,14 +1162,6 @@ if(pressEnter==KeyEvent.VK_ENTER){
 lcd.requestFocus();
 }// TODO add your handling code here:
     }//GEN-LAST:event_findKeyPressed
-
-    private void jLabel10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel10MousePressed
-
-    private void jLabel10MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseDragged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel10MouseDragged
 
     private void findKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_findKeyReleased
 search= find.getText();
@@ -1281,6 +1265,23 @@ evt.consume();
     private void findMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_findMouseClicked
 find.setText("");        // TODO add your handling code here:
     }//GEN-LAST:event_findMouseClicked
+
+    private void jLabel8MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseDragged
+        this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel8MouseDragged
+
+    private void jLabel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MousePressed
+        x = evt.getX();
+        y = evt.getY();         // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel8MousePressed
+
+    private void jLabel10MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseDragged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel10MouseDragged
+
+    private void jLabel10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel10MousePressed
 
     /**
      * @param args the command line arguments

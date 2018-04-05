@@ -8,12 +8,14 @@ package System_Farmacia;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -25,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Vinicio
  */
 public class recordatorios extends javax.swing.JFrame {
-
+Connection cnx;
 public static String url = "jdbc:mysql://localhost:3306/bd_farm";
 public static String user = "root";
 public static String pass = "";
@@ -59,6 +61,8 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -71,6 +75,14 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         jLabel26 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
+
+        jMenuItem1.setText("Eliminar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Reportes");
@@ -222,9 +234,11 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
                 "Nombre", "Tipo", "Telefono", "fecha_consulta", "hora", "costo", "asunto"
             }
         ));
+        tablaPRODUCTOs.setComponentPopupMenu(jPopupMenu1);
         tablaPRODUCTOs.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tablaPRODUCTOs.setIntercellSpacing(new java.awt.Dimension(2, 2));
         tablaPRODUCTOs.setRowHeight(25);
+        tablaPRODUCTOs.setSelectionBackground(new java.awt.Color(219, 125, 31));
         tablaPRODUCTOs.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 tablaPRODUCTOsMouseEntered(evt);
@@ -454,6 +468,27 @@ jButton10.setBorder(thickBorder);
        // TODO add your handling code here:
     }//GEN-LAST:event_tablaPRODUCTOsMouseMoved
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+Connection cnx = null;
+try
+    {
+        Class.forName("com.mysql.jdbc.Driver");
+            cnx = DriverManager.getConnection(url, user,pass); 
+      String query = "delete from recordatorios where codigo= ? ";
+      PreparedStatement preparedStmt = cnx.prepareStatement(query);
+      preparedStmt.setInt(1,(int) tablaPRODUCTOs.getValueAt(tablaPRODUCTOs.getSelectedRow(), 0));
+
+      preparedStmt.execute();
+      cnx.close();
+      LlenarTabla(); 
+      conteoRECORDATORY("SELECT count(codigo) as conteo FROM bd_farm.recordatorios ");
+    }
+    catch (Exception e)
+    {
+      JOptionPane.showMessageDialog(this,e);
+    }        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -563,6 +598,8 @@ jButton10.setBorder(thickBorder);
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable tablaPRODUCTOs;
     // End of variables declaration//GEN-END:variables
@@ -601,7 +638,22 @@ jButton10.setBorder(thickBorder);
             } 
     }
  
-  
+    public void conteoRECORDATORY(String sql){
+    try{
+             cnx = DriverManager.getConnection(url, user,pass);
+             Statement st = cnx.prepareStatement(sql);
+             ResultSet res = st.executeQuery(sql);  
+            while (res.next()){
+              if(LoginGT.boot==0){
+                MENUadmin.jLabel35.setText(res.getString(1));
+                }
+                if(LoginGT.boot==1){
+                MENUusuario.jLabel35.setText(res.getString(1));
+                }
+            }
+        }
+        catch(SQLException ex){JOptionPane.showMessageDialog(this,ex);}
+       }
   
     public static void columnas(){
     tablaPRODUCTOs.getColumnModel().getColumn(0).setPreferredWidth(10);

@@ -86,11 +86,9 @@ DefaultTableModel dm;
         jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel9 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
@@ -252,12 +250,9 @@ DefaultTableModel dm;
         jLabel4.setForeground(new java.awt.Color(231, 231, 231));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("INVENTARIO");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 40));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 0, 130, 40));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/AZUL.png"))); // NOI18N
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 40));
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/azulBarra.jpg"))); // NOI18N
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel8MousePressed(evt);
@@ -268,7 +263,7 @@ DefaultTableModel dm;
                 jLabel8MouseDragged(evt);
             }
         });
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 0, 660, 40));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, 40));
 
         jTable1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -292,19 +287,6 @@ DefaultTableModel dm;
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 1350, 510));
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
-        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel9MousePressed(evt);
-            }
-        });
-        jLabel9.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jLabel9MouseDragged(evt);
-            }
-        });
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 530, 40));
 
         jTextField1.setBackground(new java.awt.Color(153, 153, 153));
         jTextField1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
@@ -683,18 +665,9 @@ porcions=  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 13);
     
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jLabel9MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseDragged
-this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel9MouseDragged
-
     private void jLabel8MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseDragged
 this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel8MouseDragged
-
-    private void jLabel9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MousePressed
-x = evt.getX();
-y = evt.getY();         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel9MousePressed
 
     private void jLabel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MousePressed
 x = evt.getX();
@@ -891,8 +864,7 @@ try
     }
     catch (Exception e)
     {
-      System.err.println("Got an exception! ");
-      System.err.println(e.getMessage());
+      JOptionPane.showMessageDialog(this,e);
     } 
            // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -987,7 +959,6 @@ baja.setLocationRelativeTo(null);
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -996,7 +967,6 @@ baja.setLocationRelativeTo(null);
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
