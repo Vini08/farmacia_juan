@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.border.Border;
@@ -23,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Vinicio
  */
 public class bitacora extends javax.swing.JFrame {
-
+Color vver =new Color(102,102,102);
 Connection cnx = null;
 String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
@@ -57,8 +59,11 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         jTable1 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jLabel19 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jButton12 = new javax.swing.JButton();
+        DEl = new com.toedter.calendar.JDateChooser();
+        jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ventas");
@@ -71,6 +76,11 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
                 formWindowGainedFocus(evt);
             }
             public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
             }
         });
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -118,7 +128,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         });
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 650, 500));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 660, 470));
 
         jLabel3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(123, 123, 123));
@@ -163,16 +173,6 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 0, 41, 40));
 
-        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/fondoverde.jpg"))); // NOI18N
-        jLabel19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 22), new java.awt.Color(102, 102, 102))); // NOI18N
-        jLabel19.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel19MouseMoved(evt);
-            }
-        });
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 780, 590));
-
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/indicac.png"))); // NOI18N
         jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -185,6 +185,66 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
             }
         });
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 40));
+
+        jLabel28.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 30)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel28.setText("VER POR FECHA DE INGRESO");
+        jLabel28.setToolTipText("");
+        jLabel28.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel28.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel28.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel28MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel28MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel28MouseReleased(evt);
+            }
+        });
+        jLabel28.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel28MouseMoved(evt);
+            }
+        });
+        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 570, 390, 40));
+
+        jButton12.setBackground(new java.awt.Color(102, 102, 102));
+        jButton12.setForeground(new java.awt.Color(3, 64, 124));
+        jButton12.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton12.setFocusPainted(false);
+        jButton12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton12MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton12MouseReleased(evt);
+            }
+        });
+        jButton12.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jButton12MouseMoved(evt);
+            }
+        });
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 570, 390, 40));
+        getContentPane().add(DEl, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 570, 260, 40));
+
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/fondoverde.jpg"))); // NOI18N
+        jLabel19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 22), new java.awt.Color(102, 102, 102))); // NOI18N
+        jLabel19.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel19MouseMoved(evt);
+            }
+        });
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 780, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -235,7 +295,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         Border thickBorder = new LineBorder(Color.WHITE, 5);
         jButton3.setBorder(thickBorder);
-        jLabel3.setForeground(ColorFont);
+        jLabel3.setForeground(ColorFont); 
    
     }//GEN-LAST:event_formMouseMoved
 
@@ -273,6 +333,55 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
     private void jLabel10MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseDragged
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel10MouseDragged
+
+    private void jLabel28MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseExited
+
+        Border thickBorder = new LineBorder(vver, 86);
+        jLabel28.setToolTipText(null);
+        jButton12.setBorder(thickBorder);        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel28MouseExited
+
+    private void jLabel28MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel28MousePressed
+
+    private void jLabel28MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseReleased
+        String formato = DEl.getDateFormatString();
+        Date date1 = DEl.getDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
+        String delDia =  String.valueOf(sdf.format(date1));
+
+        LlenarFecha(delDia);        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel28MouseReleased
+
+    private void jLabel28MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseMoved
+        Color X1 =new Color(72,72,72);
+        Border thickBorder = new LineBorder(X1, 86);
+        jLabel28.setToolTipText(null);
+        jButton12.setBorder(thickBorder);        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel28MouseMoved
+
+    private void jButton12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton12MousePressed
+
+    private void jButton12MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton12MouseReleased
+
+    private void jButton12MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton12MouseMoved
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+
+Border thickBorder3 = new LineBorder(vver, 60);
+jButton12.setBorder(thickBorder3);        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -437,9 +546,12 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser DEl;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
@@ -449,7 +561,40 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
 
 
 public void LlenarTabla(){
-    String Query = "SELECT *from bitacora";
+    String Query = "SELECT usuario,fecha_ingreso,hora_ingreso,hora_salida from bitacora";
+   
+        DefaultTableModel modelo = new DefaultTableModel();
+        jTable1.setModel(modelo);
+        Connection cnx = null;
+        if (cnx == null) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            cnx = DriverManager.getConnection(url, user,pass);
+           
+             Statement st = cnx.prepareStatement(Query);
+             ResultSet res = st.executeQuery(Query);
+             ResultSetMetaData rsMd = res.getMetaData();
+             int cantidadColumnas = rsMd.getColumnCount();
+             for (int i = 1; i <= cantidadColumnas; i++) {
+            modelo.addColumn(rsMd.getColumnLabel(i));
+         }
+         while (res.next()){
+         Object[] fila = new Object[cantidadColumnas];
+         for (int i = 0; i < cantidadColumnas; i++) {
+         fila[i]=res.getObject(i+1);
+         }
+              modelo.addRow(fila);
+             
+             }
+             } catch (ClassNotFoundException ex) {
+             throw new ClassCastException(ex.getMessage());
+             } catch (SQLException ex) { 
+                Logger.getLogger(LoginGT.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+            }   
+    }
+public void LlenarFecha(String date){
+    String Query = "SELECT usuario,fecha_ingreso,hora_ingreso,hora_salida from bitacora where fecha_ingreso='"+date+"'";
    
         DefaultTableModel modelo = new DefaultTableModel();
         jTable1.setModel(modelo);

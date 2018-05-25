@@ -783,6 +783,7 @@ jButton11.setBorder(thickBorder5);
     private void jLabel38MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel38MouseReleased
 if(total.getText().length()!=0){
     insertProd();
+    conteoPedidos("SELECT count(codigo_pedido) as conteo FROM bd_farm.pedidos ");
 } // TODO add your handling code here:
     }//GEN-LAST:event_jLabel38MouseReleased
 
@@ -1364,4 +1365,21 @@ for(int i = rows - 1; i >=0; i--)
         total.setVisible(false);
  }
       
+ 
+   public void conteoPedidos(String sql){
+    try{
+        conI  = DriverManager.getConnection(url, user,pass);
+        Statement st = conI.prepareStatement(sql);
+        ResultSet res = st.executeQuery(sql);  
+        while (res.next()){
+        if(LoginGT.boot==0){
+        MENUadmin.jLabel37.setText(res.getString(1));
+        }
+        if(LoginGT.boot==1){
+        MENUusuario.jLabel37.setText(res.getString(1));
+        }
+      }
+      }
+      catch(SQLException ex){JOptionPane.showMessageDialog(this,ex);}
+      }
 }

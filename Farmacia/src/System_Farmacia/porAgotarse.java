@@ -49,6 +49,15 @@ Connection cnx,conI = null;
          LlenarTabla("SELECT codigo_producto, categoria, producto,proveedor,unidades,alerta_unidades,precio_compra,precio_venta,precio_mayoreo FROM producto where unidades<alerta_unidades and unidades!=0");
        jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
+        jTextField7.setText("");
+        jTextField8.setText("");
+        jTextField10.setText("");
     }
 
     /**

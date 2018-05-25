@@ -89,11 +89,8 @@ public boolean check=true;
         jButton3 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaPRODUCTOs = new javax.swing.JTable();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -108,7 +105,6 @@ public boolean check=true;
         jLabel28 = new javax.swing.JLabel();
         jButton12 = new javax.swing.JButton();
         jLabel76 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         jLabel77 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -238,13 +234,10 @@ public boolean check=true;
         jLabel4.setForeground(new java.awt.Color(231, 231, 231));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("REPORTES");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 40));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 1210, 40));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/solid-orange-background.jpg"))); // NOI18N
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 40));
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 480, 40));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, 40));
 
         tablaPRODUCTOs.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         tablaPRODUCTOs.setModel(new javax.swing.table.DefaultTableModel(
@@ -298,23 +291,6 @@ public boolean check=true;
         jScrollPane1.setViewportView(tablaPRODUCTOs);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 1340, 400));
-
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/barraMensajes.png"))); // NOI18N
-        jLabel20.setPreferredSize(new java.awt.Dimension(367, 70));
-        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 650, 730, 80));
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
-        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel9MousePressed(evt);
-            }
-        });
-        jLabel9.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jLabel9MouseDragged(evt);
-            }
-        });
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 0, -1, 40));
 
         jLabel14.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 36)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 51, 255));
@@ -468,7 +444,7 @@ public boolean check=true;
                 jLabel28MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 530, 170, 100));
+        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 530, 140, 100));
 
         jButton12.setBackground(new java.awt.Color(102, 102, 102));
         jButton12.setForeground(new java.awt.Color(3, 64, 124));
@@ -499,27 +475,14 @@ public boolean check=true;
         jLabel76.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 2), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(102, 102, 102))); // NOI18N
         getContentPane().add(jLabel76, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 520, 580, 120));
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
-        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel12MousePressed(evt);
-            }
-        });
-        jLabel12.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jLabel12MouseDragged(evt);
-            }
-        });
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 690, 40));
-
         jLabel77.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel77.setForeground(new java.awt.Color(102, 102, 102));
         jLabel77.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 2), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(102, 102, 102))); // NOI18N
         getContentPane().add(jLabel77, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 240, 120));
 
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/barraMensajes.png"))); // NOI18N
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/solid-orange-background.jpg"))); // NOI18N
         jLabel21.setPreferredSize(new java.awt.Dimension(367, 70));
-        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 650, 730, 80));
+        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 650, 1370, 80));
 
         jLabel15.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 27)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(96, 96, 96));
@@ -682,15 +645,6 @@ public boolean check=true;
         jLabel3.setForeground(ColorFont);        // TODO add your handling code here:
     }//GEN-LAST:event_formMouseMoved
 
-    private void jLabel9MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseDragged
-this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel9MouseDragged
-
-    private void jLabel9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MousePressed
-x = evt.getX();
-                y = evt.getY();        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel9MousePressed
-
     private void jLabel26MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel26MousePressed
@@ -815,25 +769,9 @@ LLenarDELAL(delDia,alDia);        // TODO add your handling code here:
 // TODO add your handling code here:
     }//GEN-LAST:event_formMouseEntered
 
-    private void tablaPRODUCTOsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPRODUCTOsMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tablaPRODUCTOsMouseEntered
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
-
-    private void tablaPRODUCTOsMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPRODUCTOsMouseMoved
-       // TODO add your handling code here:
-    }//GEN-LAST:event_tablaPRODUCTOsMouseMoved
-
-    private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel12MousePressed
-
-    private void jLabel12MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseDragged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel12MouseDragged
 
     private void jLabel27MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseMoved
         Color X1 =new Color(9,9,165);
@@ -855,6 +793,14 @@ LlenarTabla();      // TODO add your handling code here:
         Border thickBorder2 = new LineBorder(cleaan, 60);
         jButton9.setBorder(thickBorder2);        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel27MouseExited
+
+    private void tablaPRODUCTOsMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPRODUCTOsMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaPRODUCTOsMouseMoved
+
+    private void tablaPRODUCTOsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPRODUCTOsMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaPRODUCTOsMouseEntered
 
     /**
      * @param args the command line arguments
@@ -932,7 +878,6 @@ LlenarTabla();      // TODO add your handling code here:
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -941,7 +886,6 @@ LlenarTabla();      // TODO add your handling code here:
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -958,11 +902,9 @@ LlenarTabla();      // TODO add your handling code here:
     private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel78;
     private javax.swing.JLabel jLabel79;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel80;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable tablaPRODUCTOs;
+    private static javax.swing.JTable tablaPRODUCTOs;
     // End of variables declaration//GEN-END:variables
 
  public void LlenarTabla(){  

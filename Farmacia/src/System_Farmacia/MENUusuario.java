@@ -56,7 +56,7 @@ Calendar calendario;
 Thread h1;
 
 public static hacer_ventas Vn = new hacer_ventas(nombr);
-public static boolean controlVentana=true,controlVentana1=true,controlVentana2=true,controlVentana3=true,controlVentana4=true,controlVentana5=true; 
+public static boolean controlVentana=true,controlVentana1=true,controlVentana2=true,controlVentana3=true,controlVentana4=true,controlVentana5=true,controlVentana6=true,controlVentana7=true; 
 
 public MENUusuario(String Name) {
         initComponents();
@@ -313,7 +313,7 @@ public MENUusuario(String Name) {
                 jLabel28MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 60));
+        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 60));
 
         jButton13.setBackground(new java.awt.Color(3, 64, 124));
         jButton13.setForeground(new java.awt.Color(3, 64, 124));
@@ -972,7 +972,15 @@ this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + e
     }//GEN-LAST:event_jLabel20MouseReleased
 
     private void jLabel18MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseReleased
-     // TODO add your handling code here:
+porAgotarse S = new porAgotarse();
+if(controlVentana2==true){
+S.setVisible(true);
+S.setLocationRelativeTo(null);       
+controlVentana2=false;
+}
+else if(controlVentana2==false){
+S.toFront();
+}      // TODO add your handling code here:
     }//GEN-LAST:event_jLabel18MouseReleased
 
     private void jLabel35MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseReleased

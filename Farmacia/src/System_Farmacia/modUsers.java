@@ -297,6 +297,12 @@ String nm, ps;
     private void jLabel3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseReleased
         Border thickBorder = new LineBorder(ColorSalida2, 54);
         jButton3.setBorder(thickBorder);
+         if(LoginGT.boot==0){
+        MENUadmin.controlVentana7=true;
+        }
+        if(LoginGT.boot==1){
+                MENUusuario.controlVentana7=true;
+        } 
         this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel3MouseReleased

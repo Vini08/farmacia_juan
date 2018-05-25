@@ -130,7 +130,6 @@ public hacer_ventas(String N) {
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
@@ -142,7 +141,6 @@ public hacer_ventas(String N) {
         jLabel6 = new javax.swing.JLabel();
         lcd = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         find = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
@@ -274,7 +272,7 @@ public hacer_ventas(String N) {
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/shopping-cart.png"))); // NOI18N
         jLabel19.setText(" Venta");
         jLabel19.setToolTipText("");
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 120, -1));
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 120, -1));
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -299,7 +297,7 @@ public hacer_ventas(String N) {
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1324, 0, 41, 40));
 
-        jLabel41.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        jLabel41.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel41.setText("Mayoristas");
         jLabel41.setToolTipText("");
@@ -318,7 +316,7 @@ public hacer_ventas(String N) {
                 jLabel41MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 320, 210, 70));
+        getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 390, 140, 30));
 
         jButton12.setBackground(new java.awt.Color(80, 191, 136));
         jButton12.setForeground(new java.awt.Color(3, 64, 124));
@@ -342,7 +340,7 @@ public hacer_ventas(String N) {
                 jButton12ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 320, 210, 70));
+        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 390, 140, 30));
 
         jLabel1.setText(".");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 750, 10, -1));
@@ -351,8 +349,8 @@ public hacer_ventas(String N) {
         jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(231, 231, 231));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("REALIZAR VENTA");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 40));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/log_loggin.png"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 70));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -368,21 +366,14 @@ public hacer_ventas(String N) {
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 0, 510, 40));
 
         jLabel7.setBackground(new java.awt.Color(153, 153, 153));
-        jLabel7.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 36)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Buscar");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 50, 140, 50));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 50, 80, 30));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/azulBarra.jpg"))); // NOI18N
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 50, 140, 50));
-
-        jLabel9.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/magnifier.png"))); // NOI18N
-        jLabel9.setText(" Productos");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 150, 40));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 50, 80, 30));
 
         jLabel20.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -403,7 +394,7 @@ public hacer_ventas(String N) {
                 jLabel20KeyPressed(evt);
             }
         });
-        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, 70, 70));
+        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 390, 50, 30));
 
         jLabel21.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -419,7 +410,7 @@ public hacer_ventas(String N) {
                 jLabel21MouseReleased(evt);
             }
         });
-        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 70, 70));
+        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 390, 50, 30));
 
         jButton4.setBackground(new java.awt.Color(153, 153, 153));
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
@@ -429,7 +420,7 @@ public hacer_ventas(String N) {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 70, 70));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 390, 50, 30));
 
         jButton5.setBackground(new java.awt.Color(153, 153, 153));
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
@@ -439,15 +430,15 @@ public hacer_ventas(String N) {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, 70, 70));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 390, 50, 30));
 
-        jLabel12.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 22)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(38, 38, 38));
+        jLabel12.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 16)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Número de unidades");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, 200, 30));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 390, 150, 30));
 
-        tablaADD.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 18)); // NOI18N
+        tablaADD.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
         tablaADD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -456,6 +447,7 @@ public hacer_ventas(String N) {
                 "Codigo", "Categoria", "Producto", "Precio", "Descuento", "Unidades", "Total", "Tipo Cliente", "#"
             }
         ));
+        tablaADD.setRowHeight(22);
         tablaADD.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaADDMouseClicked(evt);
@@ -476,18 +468,18 @@ public hacer_ventas(String N) {
         });
         jScrollPane1.setViewportView(tablaADD);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 1340, 220));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 1340, 250));
 
-        jLabel5.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 54)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 40)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(243, 93, 14));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 630, 320, 80));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 680, 320, 50));
 
-        jLabel6.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 50)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 40)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(28, 28, 28));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Total Venta ");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 270, 80));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 680, 240, 50));
 
         lcd.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
         lcd.setForeground(new java.awt.Color(102, 102, 102));
@@ -507,18 +499,15 @@ public hacer_ventas(String N) {
                 lcdKeyReleased(evt);
             }
         });
-        getContentPane().add(lcd, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 320, 60, 70));
+        getContentPane().add(lcd, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 390, 40, 30));
 
-        jLabel14.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 54)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 40)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(243, 93, 14));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("Q");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 630, 40, 80));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 680, 40, 50));
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/AZUL.png"))); // NOI18N
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 40));
-
-        jLabel38.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        jLabel38.setFont(new java.awt.Font("Tahoma", 0, 19)); // NOI18N
         jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel38.setText("Realizar Venta");
         jLabel38.setToolTipText("");
@@ -537,7 +526,7 @@ public hacer_ventas(String N) {
                 jLabel38MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 640, 210, 70));
+        getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 690, 210, 30));
 
         find.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
         find.setForeground(new java.awt.Color(102, 102, 102));
@@ -561,7 +550,7 @@ public hacer_ventas(String N) {
                 findKeyReleased(evt);
             }
         });
-        getContentPane().add(find, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 50, 280, 50));
+        getContentPane().add(find, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 50, 240, 30));
 
         jButton9.setBackground(new java.awt.Color(241, 118, 36));
         jButton9.setForeground(new java.awt.Color(3, 64, 124));
@@ -585,9 +574,9 @@ public hacer_ventas(String N) {
                 jButton9ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 640, 210, 70));
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 690, 210, 30));
 
-        jLabel39.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        jLabel39.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel39.setText("Eliminar Artículo");
         jLabel39.setToolTipText("");
@@ -609,7 +598,7 @@ public hacer_ventas(String N) {
                 jLabel39MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 320, 210, 70));
+        getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 390, 180, 30));
 
         jButton10.setBackground(new java.awt.Color(172, 26, 26));
         jButton10.setForeground(new java.awt.Color(3, 64, 124));
@@ -633,9 +622,9 @@ public hacer_ventas(String N) {
                 jButton10ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 320, 210, 70));
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 390, 180, 30));
 
-        jLabel40.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        jLabel40.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel40.setText("Agregar Artículo");
         jLabel40.setToolTipText("");
@@ -654,7 +643,7 @@ public hacer_ventas(String N) {
                 jLabel40MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 320, 210, 70));
+        getContentPane().add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 390, 170, 30));
 
         jButton11.setBackground(new java.awt.Color(0, 102, 204));
         jButton11.setForeground(new java.awt.Color(3, 64, 124));
@@ -678,9 +667,9 @@ public hacer_ventas(String N) {
                 jButton11ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 320, 210, 70));
+        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 390, 170, 30));
 
-        tablaPRODUCTOS.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
+        tablaPRODUCTOS.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 25)); // NOI18N
         tablaPRODUCTOS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -690,6 +679,7 @@ public hacer_ventas(String N) {
             }
         ));
         tablaPRODUCTOS.setComponentPopupMenu(jPopupMenu1);
+        tablaPRODUCTOS.setRowHeight(23);
         tablaPRODUCTOS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaPRODUCTOSMouseClicked(evt);
@@ -715,7 +705,7 @@ public hacer_ventas(String N) {
         });
         jScrollPane2.setViewportView(tablaPRODUCTOS);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 1340, 180));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 1340, 290));
 
         jLabel13.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 22)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(80, 191, 136));
@@ -741,7 +731,7 @@ public hacer_ventas(String N) {
                 jLabel10MouseDragged(evt);
             }
         });
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 560, 40));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 470, 40));
 
         getAccessibleContext().setAccessibleName("Realizar venta");
 
@@ -1341,7 +1331,6 @@ find.setText("");        // TODO add your handling code here:
     private javax.swing.JLabel jLabel12;
     public static javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -1357,7 +1346,6 @@ find.setText("");        // TODO add your handling code here:
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1784,16 +1772,16 @@ else
 }
 
     public static void columnas(){
-    tablaPRODUCTOS.getColumnModel().getColumn(0).setPreferredWidth(130);
+    tablaPRODUCTOS.getColumnModel().getColumn(0).setPreferredWidth(180);
     tablaPRODUCTOS.getColumnModel().getColumn(1).setPreferredWidth(180);
-    tablaPRODUCTOS.getColumnModel().getColumn(2).setPreferredWidth(450);
+    tablaPRODUCTOS.getColumnModel().getColumn(2).setPreferredWidth(390);
     tablaPRODUCTOS.getColumnModel().getColumn(3).setPreferredWidth(80);
     tablaPRODUCTOS.getColumnModel().getColumn(4).setPreferredWidth(80);
     tablaPRODUCTOS.getColumnModel().getColumn(5).setPreferredWidth(150);
-    tablaPRODUCTOS.getColumnModel().getColumn(6).setPreferredWidth(1);
+    tablaPRODUCTOS.getColumnModel().getColumn(6).setPreferredWidth(0);
     tablaPRODUCTOS.getColumnModel().getColumn(7).setPreferredWidth(120);
-    tablaPRODUCTOS.getColumnModel().getColumn(8).setPreferredWidth(120);
-    tablaPRODUCTOS.getColumnModel().getColumn(9).setPreferredWidth(20);
+    tablaPRODUCTOS.getColumnModel().getColumn(8).setPreferredWidth(110);
+    tablaPRODUCTOS.getColumnModel().getColumn(9).setPreferredWidth(30);
     tablaPRODUCTOS.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
     }
     

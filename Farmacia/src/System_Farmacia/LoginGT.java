@@ -77,14 +77,16 @@ public LoginGT() {
         passw = new javax.swing.JPasswordField();
         jButton2 = new javax.swing.JButton();
         ms = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        reloj = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("inicio");
         setIconImages(null);
-        setMinimumSize(new java.awt.Dimension(366, 430));
+        setMinimumSize(new java.awt.Dimension(319, 430));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(319, 530));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -121,7 +123,7 @@ public LoginGT() {
                 jLabel2MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(287, 0, 40, 40));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 40, 40));
 
         jLabel4.setBackground(new java.awt.Color(153, 153, 153));
         jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
@@ -176,7 +178,7 @@ public LoginGT() {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(287, 0, 40, 40));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 40, 40));
 
         jLabel3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(123, 123, 123));
@@ -196,7 +198,7 @@ public LoginGT() {
                 jLabel3MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 0, 40, 40));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 40, 40));
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -219,7 +221,7 @@ public LoginGT() {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 0, 40, 40));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 40, 40));
 
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -244,17 +246,17 @@ public LoginGT() {
         });
         getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 40, 40));
 
-        jLabel6.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 26)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(20, 108, 197));
+        jLabel6.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 48)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Contraseña");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 367, 50));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/log_loggin.png"))); // NOI18N
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 320, 80));
 
         jLabel7.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 26)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(20, 108, 197));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Usuario");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 360, 50));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 310, 50));
 
         name.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
         name.setForeground(new java.awt.Color(102, 102, 102));
@@ -270,13 +272,13 @@ public LoginGT() {
                 nameKeyPressed(evt);
             }
         });
-        getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 230, 50));
+        getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 180, 50));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/user.png"))); // NOI18N
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 40, 50));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 40, 50));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/usuario_1.png"))); // NOI18N
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 60, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 60, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -305,7 +307,7 @@ public LoginGT() {
                 passwKeyPressed(evt);
             }
         });
-        getContentPane().add(passw, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 230, 50));
+        getContentPane().add(passw, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 180, 50));
 
         jButton2.setBackground(new java.awt.Color(3, 64, 124));
         jButton2.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
@@ -318,20 +320,26 @@ public LoginGT() {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, 180, 90));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 180, 60));
 
         ms.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
         ms.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(ms, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 260, 30));
+        getContentPane().add(ms, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 260, 30));
 
-        jLabel19.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 16)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(187, 187, 187));
-        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 360, 20));
+        reloj.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 16)); // NOI18N
+        reloj.setForeground(new java.awt.Color(187, 187, 187));
+        reloj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(reloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 320, 20));
 
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/azulBarra.jpg"))); // NOI18N
         jLabel18.setPreferredSize(new java.awt.Dimension(367, 70));
-        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 370, 80));
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 320, 130));
+
+        jLabel10.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 26)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(20, 108, 197));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Contraseña");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 320, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -340,7 +348,7 @@ public void run(){
  while(ct == h1) {   
   calcula();
   horaMenu = hora + ":" + minutos + ":" + segundos + " "+ampm;
-  jLabel19.setText(hora + ":" + minutos + ":" + segundos + " "+ampm);
+  reloj.setText(hora + ":" + minutos + ":" + segundos + " "+ampm);
   try {
    Thread.sleep(1000);
   }catch(InterruptedException e) {}
@@ -554,8 +562,8 @@ passw.requestFocus();
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -567,6 +575,7 @@ passw.requestFocus();
     private javax.swing.JLabel ms;
     private javax.swing.JTextField name;
     private javax.swing.JPasswordField passw;
+    private javax.swing.JLabel reloj;
     // End of variables declaration//GEN-END:variables
 
 public void inicia(){
@@ -597,7 +606,7 @@ Connection cnx = null;
                 
                 if (nvl==0){
                     boot=0;
-                    bitacora(n, dat, jLabel19.getText(),"- - - -");
+                bitacora(n, dat, reloj.getText(),"- - - -");
                 MENUadmin menu = new MENUadmin(n);
                 menu.setVisible(true);
                 menu.setLocationRelativeTo(null);
@@ -605,7 +614,7 @@ Connection cnx = null;
                 }
                 if (nvl==1){
                     boot=1;
-                bitacora(n, dat, jLabel19.getText(),"- - - -");
+                bitacora(n, dat, reloj.getText(),"- - - -");
                 MENUusuario menu = new MENUusuario(n);
                 menu.setVisible(true);
                 menu.setLocationRelativeTo(null);

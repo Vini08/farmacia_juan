@@ -49,7 +49,7 @@ Color CBTNFocus =new Color(6,47,88);
 Color ColorSalida =new Color(0,102,204);
 Color ColorSalida2 =new Color(2,72,142);
 Border thickBorde = new LineBorder(Color.WHITE, 4);
-Border focus = new LineBorder(CBTNFocus, 96);
+Border focus = new LineBorder(CBTNFocus, 105);
 private int x;
 private int y;
 public static String nombr, horaMenu,level="1",fechaGlobal; 
@@ -60,7 +60,7 @@ DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 Date date = new Date();
 
 
-public static boolean controlVentana=true,controlVentana1=true,controlVentana2=true,controlVentana3=true,controlVentana4=true,controlVentana5=true, controlVentana6=true; 
+public static boolean controlVentana=true,controlVentana1=true,controlVentana2=true,controlVentana3=true,controlVentana4=true,controlVentana5=true, controlVentana6=true,controlVentana7=true; 
 
 public MENUadmin(String Name) {
         initComponents();
@@ -101,19 +101,14 @@ public MENUadmin(String Name) {
         jButton3 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jButton13 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -132,33 +127,37 @@ public MENUadmin(String Name) {
         jLabel34 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jButton14 = new javax.swing.JButton();
         jLabel31 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
         jButton15 = new javax.swing.JButton();
         jLabel33 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jButton16 = new javax.swing.JButton();
+        jLabel38 = new javax.swing.JLabel();
+        jButton17 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("menú");
         setMinimumSize(new java.awt.Dimension(810, 600));
         setUndecorated(true);
         setResizable(false);
-        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                formMouseMoved(evt);
-            }
-        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
+            }
+        });
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
             }
         });
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -268,7 +267,7 @@ public MENUadmin(String Name) {
         jLabel6.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 17)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("F2   =   INVENTARIO");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 230, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 230, -1));
 
         jLabel7.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(68, 68, 68));
@@ -276,20 +275,10 @@ public MENUadmin(String Name) {
         jLabel7.setText("admin");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 0, 120, 60));
 
-        jLabel9.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Seleccione una de las 6 opciones");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 260, -1));
-
-        jLabel12.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("le proporcionará diferentes opciones.");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 260, 40));
-
         jLabel13.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 17)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel13.setText("F3   =   REPORTES");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 200, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 200, -1));
 
         jLabel35.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(255, 255, 255));
@@ -326,7 +315,7 @@ public MENUadmin(String Name) {
                 jLabel28MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 60));
+        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 60));
 
         jButton13.setBackground(new java.awt.Color(3, 64, 124));
         jButton13.setForeground(new java.awt.Color(3, 64, 124));
@@ -350,32 +339,22 @@ public MENUadmin(String Name) {
                 jButton13ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 60));
+        getContentPane().add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 60));
 
         jLabel14.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 17)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel14.setText("F6   =   VENTAS REALIZADAS");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 220, -1));
+        jLabel14.setText("F7   =   UNIDADES VENDIDAS");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 580, 220, -1));
 
         jLabel15.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 17)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel15.setText("F1   =   REALIZAR VENTA");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 240, -1));
-
-        jLabel16.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 18)); // NOI18N
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("y se abrirá una nueva ventana que ");
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 260, 30));
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 240, -1));
 
         jLabel17.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 18)); // NOI18N
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("Atajos");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 260, -1));
-
-        jLabel21.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 18)); // NOI18N
-        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel21.setText("Instrucciones");
-        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 200, -1));
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 260, -1));
 
         jLabel29.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(255, 255, 255));
@@ -392,9 +371,6 @@ public MENUadmin(String Name) {
             }
         });
         getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(1254, 30, 20, -1));
-
-        jLabel1.setText(".");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 580, 10, -1));
 
         jLabel23.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
@@ -414,7 +390,7 @@ public MENUadmin(String Name) {
                 jLabel23MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 330, 170));
+        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 250, 200));
 
         jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/usuario.png"))); // NOI18N
         getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 0, -1, 60));
@@ -471,7 +447,7 @@ public MENUadmin(String Name) {
                 jButton8ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 330, 170));
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 250, 200));
 
         jLabel24.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
@@ -496,7 +472,7 @@ public MENUadmin(String Name) {
                 jLabel24MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 130, 350, 100));
+        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 150, 260, 100));
 
         jButton9.setBackground(new java.awt.Color(3, 64, 124));
         jButton9.setForeground(new java.awt.Color(3, 64, 124));
@@ -520,7 +496,7 @@ public MENUadmin(String Name) {
                 jButton9ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 130, 350, 100));
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 150, 260, 100));
 
         jLabel25.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
@@ -540,7 +516,7 @@ public MENUadmin(String Name) {
                 jLabel25MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 250, 350, 110));
+        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 270, 260, 110));
 
         jButton10.setBackground(new java.awt.Color(3, 64, 124));
         jButton10.setForeground(new java.awt.Color(3, 64, 124));
@@ -564,7 +540,7 @@ public MENUadmin(String Name) {
                 jButton10ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 250, 350, 110));
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 270, 260, 110));
 
         jLabel26.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
@@ -584,7 +560,7 @@ public MENUadmin(String Name) {
                 jLabel26MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 330, 330, 140));
+        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, 250, 170));
 
         jButton11.setBackground(new java.awt.Color(3, 64, 124));
         jButton11.setForeground(new java.awt.Color(3, 64, 124));
@@ -608,7 +584,7 @@ public MENUadmin(String Name) {
                 jButton11ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 330, 330, 140));
+        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, 250, 170));
 
         jLabel27.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
@@ -628,7 +604,7 @@ public MENUadmin(String Name) {
                 jLabel27MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 380, 350, 140));
+        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 400, 260, 140));
 
         jButton12.setBackground(new java.awt.Color(3, 64, 124));
         jButton12.setForeground(new java.awt.Color(3, 64, 124));
@@ -652,7 +628,7 @@ public MENUadmin(String Name) {
                 jButton12ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 380, 350, 140));
+        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 400, 260, 140));
 
         jLabel37.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(255, 255, 255));
@@ -694,7 +670,13 @@ public MENUadmin(String Name) {
         jLabel22.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 17)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel22.setText("F4   =   PEDIDOS");
-        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 200, -1));
+        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 200, -1));
+
+        jLabel41.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 48)); // NOI18N
+        jLabel41.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/logo_farm.jpeg"))); // NOI18N
+        getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 280, 260));
 
         jLabel30.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(255, 255, 255));
@@ -714,17 +696,12 @@ public MENUadmin(String Name) {
                 jLabel30MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 500, 330, 120));
+        getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 150, 250, 130));
 
         jButton14.setBackground(new java.awt.Color(3, 64, 124));
         jButton14.setForeground(new java.awt.Color(3, 64, 124));
         jButton14.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton14.setFocusPainted(false);
-        jButton14.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton14MouseMoved(evt);
-            }
-        });
         jButton14.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton14MousePressed(evt);
@@ -733,25 +710,22 @@ public MENUadmin(String Name) {
                 jButton14MouseReleased(evt);
             }
         });
+        jButton14.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jButton14MouseMoved(evt);
+            }
+        });
         jButton14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton14ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 500, 330, 120));
+        getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 150, 250, 130));
 
         jLabel31.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 17)); // NOI18N
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel31.setText("F5   =   USUARIOS");
-        getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 220, -1));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blancoE2.jpg"))); // NOI18N
-        jLabel5.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jLabel5KeyPressed(evt);
-            }
-        });
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 260, 590));
+        getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 220, -1));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
         jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -784,6 +758,11 @@ public MENUadmin(String Name) {
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel19.setText("12:34:45");
         getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 60, 130, 20));
+
+        jLabel39.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 17)); // NOI18N
+        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel39.setText("F6   =   VENTAS REALIZADAS");
+        getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, 220, -1));
 
         jButton15.setBackground(new java.awt.Color(3, 64, 124));
         jButton15.setForeground(new java.awt.Color(3, 64, 124));
@@ -827,7 +806,15 @@ public MENUadmin(String Name) {
                 jLabel33MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 540, 350, 80));
+        getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 440, 250, 100));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
+        jLabel5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel5KeyPressed(evt);
+            }
+        });
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 280, 340));
 
         jButton16.setBackground(new java.awt.Color(3, 64, 124));
         jButton16.setForeground(new java.awt.Color(3, 64, 124));
@@ -851,7 +838,51 @@ public MENUadmin(String Name) {
                 jButton16ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 540, 350, 80));
+        getContentPane().add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 440, 250, 100));
+
+        jLabel38.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel38.setText("UNIDADES VENDIDAS");
+        jLabel38.setToolTipText("");
+        jLabel38.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel38MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel38MouseReleased(evt);
+            }
+        });
+        jLabel38.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel38MouseMoved(evt);
+            }
+        });
+        getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 300, 250, 120));
+
+        jButton17.setBackground(new java.awt.Color(3, 64, 124));
+        jButton17.setForeground(new java.awt.Color(3, 64, 124));
+        jButton17.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton17.setFocusPainted(false);
+        jButton17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton17MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton17MouseReleased(evt);
+            }
+        });
+        jButton17.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jButton17MouseMoved(evt);
+            }
+        });
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 300, 250, 120));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -876,7 +907,6 @@ public void run(){
     }//GEN-LAST:event_jLabel2MousePressed
 
     private void jLabel2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseMoved
-        jLabel12.setToolTipText(null);  
         Border thickBorder = new LineBorder(grisborde, 54);
         jButton1.setBorder(thickBorder);
         jButton3.setBorder(thickBorde);
@@ -933,7 +963,7 @@ public void run(){
         jButton3.setBorder(thickBorde);
         jLabel2.setForeground(ColorFont);
         jLabel3.setForeground(ColorFont); 
-        Border thickBorder = new LineBorder(CBTNmenu, 90);
+        Border thickBorder = new LineBorder(CBTNmenu, 105);
         Border thickBorder2 = new LineBorder(CBTNmenu, 86);
         jButton8.setBorder(thickBorder);
         jLabel23.setForeground(Color.WHITE);  
@@ -949,6 +979,7 @@ public void run(){
         jButton13.setBorder(thickBorder);
         jLabel28.setForeground(Color.WHITE); 
         jButton14.setBorder(thickBorder);
+        jButton17.setBorder(thickBorder);
         jLabel30.setForeground(Color.WHITE); 
 // TODO add your handling code here:
     }//GEN-LAST:event_formMouseMoved
@@ -1032,7 +1063,7 @@ Vn.toFront();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        Border thickBorder = new LineBorder(CBTNmenu, 90);
+        Border thickBorder = new LineBorder(CBTNmenu, 104);
         Border thickBorder2 = new LineBorder(CBTNmenu, 86);
         jButton15.setBorder(thickBorder);
        jButton8.setBorder(thickBorder);
@@ -1049,6 +1080,7 @@ Vn.toFront();
         jButton13.setBorder(thickBorder);
          jLabel28.setForeground(Color.WHITE); 
         jButton14.setBorder(thickBorder);
+        jButton17.setBorder(thickBorder);
         jLabel30.setForeground(Color.WHITE); 
         
 // TODO add your handling code here:
@@ -1431,6 +1463,39 @@ ver.setLocationRelativeTo(null);// TODO add your handling code here:
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel37MouseMoved
 
+    private void jLabel38MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel38MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel38MousePressed
+
+    private void jLabel38MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel38MouseReleased
+UnidadesVendidas unid = new UnidadesVendidas();
+unid.setVisible(true);
+unid.setLocationRelativeTo(unid);// TODO add your handling code here:
+    }//GEN-LAST:event_jLabel38MouseReleased
+
+    private void jLabel38MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel38MouseMoved
+jLabel38.setToolTipText(null); 
+  jButton17.setBorder(focus);
+        jLabel38.setForeground(Color.WHITE);
+// TODO add your handling code here:
+    }//GEN-LAST:event_jLabel38MouseMoved
+
+    private void jButton17MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton17MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton17MousePressed
+
+    private void jButton17MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton17MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton17MouseReleased
+
+    private void jButton17MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton17MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton17MouseMoved
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton17ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1476,23 +1541,20 @@ ver.setLocationRelativeTo(null);// TODO add your handling code here:
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     public static javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -1510,12 +1572,14 @@ ver.setLocationRelativeTo(null);// TODO add your handling code here:
     public static javax.swing.JLabel jLabel35;
     private static javax.swing.JLabel jLabel36;
     public static javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 
     public void atajos(int numAtajo){
@@ -1548,11 +1612,23 @@ C.setVisible(true);
 C.setLocationRelativeTo(null);
 controlVentana4=false;
 }
+if(numAtajo==KeyEvent.VK_F5 && controlVentana7==true){
+modUsers C = new modUsers();
+C.setVisible(true);
+C.setLocationRelativeTo(null);
+controlVentana7=false;
+}
 if(numAtajo==KeyEvent.VK_F4 && controlVentana5==true){
 pedidos C = new pedidos();
 C.setVisible(true);
 C.setLocationRelativeTo(null);
-controlVentana4=false;
+controlVentana5=false;
+}
+if(numAtajo==KeyEvent.VK_F7 && controlVentana6==true){
+UnidadesVendidas C = new UnidadesVendidas();
+C.setVisible(true);
+C.setLocationRelativeTo(null);
+controlVentana6=false;
 }
 }
     
