@@ -551,7 +551,7 @@ public pedidos() {
 
         jLabel40.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel40.setText("Ver Pedido");
+        jLabel40.setText("Ver Pedidos");
         jLabel40.setToolTipText("");
         jLabel40.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel40.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -619,8 +619,6 @@ public pedidos() {
             }
         });
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 560, 40));
-
-        getAccessibleContext().setAccessibleName("Pedidos");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

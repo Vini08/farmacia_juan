@@ -45,6 +45,7 @@ private int y;
 private static double efectivo, total,operacion;
 FileOutputStream ficheroPdf;
 String destPDf;
+ArrayList<String> inyecctar = new ArrayList<>();
 Double Prec, totalVenta ;
 int cantidad, unidadesDeseadas = 0;
 String Mark, ModelS, PriceSale, totalV, unit;
@@ -94,16 +95,14 @@ jLabel22.setText(TTV);
     int i = 0;
     int j = 0;
         for (i = 0; i <array_String.length; i++) {
-        for (j = 0; j < 3; j++) {
+         for (j = 0; j < 3; j++) {
         fila[j]=array_String[i][j]; 
         }
         for (j = 0; j < 4; j++) {
         fila[j+3]=array_Double[i][j]; 
-        
         }
          for (j = 0; j < 1; j++) {
         fila[j+7]=array_tipo[i][j]; 
-        
         }
         modelo.addRow(fila); 
         }   
@@ -694,7 +693,7 @@ jLabel2.setForeground(Color.gray);        // TODO add your handling code here:
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
 int pressEnter = evt.getKeyChar();
 if(pressEnter==KeyEvent.VK_ENTER){
-    if(Double.parseDouble(jTextField1.getText())>Double.parseDouble(jLabel22.getText()) && !jTextField1.equals("")){
+    if(Double.parseDouble(jTextField1.getText())>=Double.parseDouble(jLabel22.getText()) && !jTextField1.equals("")){
     efectivo=Double.parseDouble(jTextField1.getText());
     total=Double.parseDouble(jLabel22.getText());
     operacion= efectivo-total;
@@ -916,218 +915,35 @@ public void insertProd(){
       VentaExitosa vt = new VentaExitosa();
       vt.setVisible(true);
       vt.setLocationRelativeTo(null);
+      
+      for (int i = 0; i <array_String.length; i++) {
+      if(array_String[i][0].equals("8832")){
+         try{
+             Connection conex = DriverManager.getConnection(url, user, pass);
+               String sql = "INSERT INTO inyecciones (categoria,producto,hora,fecha) values (?, ?, ?, ?)";
+            PreparedStatement stmt = conex.prepareStatement(sql);
+                     
+            stmt.setString(1,array_String[i][1]);
+            stmt.setString(2,array_String[i][2]);
+            if(LoginGT.boot==0){
+            stmt.setString(3,MENUadmin.jLabel19.getText());               
+            }
+            if(LoginGT.boot==1){
+            stmt.setString(3,MENUusuario.jLabel19.getText());               
+            }
+            stmt.setString(4,año+"/"+(mes+1)+"/"+dia);
+            stmt.executeUpdate();
+            
+           }
+           catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this,ex);
+            }
+     
     }
+   }
+}
          
 
-
-public void pdf(){
-    PdfWriter writer = null;
-    String NameUSer="Usuario";
-    com.itextpdf.text.Font f=new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.TIMES_ROMAN,50.0f,com.itextpdf.text.Font.UNDERLINE,BaseColor.RED);
-    Calendar fecha = new GregorianCalendar();
-    String TIPc = String.valueOf(destino.getValueAt(0,6));        
-            int año = fecha.get(Calendar.YEAR);
-            int mes = fecha.get(Calendar.MONTH)+1;
-            int dia = fecha.get(Calendar.DAY_OF_MONTH);
-    
-        Document documento = new Document(PageSize.A4); 
-        documento.setMargins(0, 0, 50, 100);
-    
-    try 
-    {
-    ficheroPdf = new FileOutputStream("C:\\Users\\"+NameUSer+"\\Documents\\PDFVentas\\Comprobante - "+lastID+".PDF");
-   destPDf=("C:\\Users\\"+NameUSer+"\\Documents\\PDFVentas\\Comprobante - "+lastID+".PDF");
-   writer = PdfWriter.getInstance(documento,ficheroPdf);
-   
-    }
-    catch (Exception ex) 
-    {
-     JOptionPane.showMessageDialog(this,ex.toString());
-    }
-try{
-    documento.open();
-  
-         Image imagen = Image.getInstance("C:\\Users\\"+NameUSer+"\\Pictures\\BarraGT.png");
-         imagen.scaleAbsolute(600f, 85f);
-         imagen.setAlignment(Element.ALIGN_TOP);
-          imagen.setAlignment(Element.ALIGN_CENTER);
-          Paragraph parrafo1 = new Paragraph("14 calle 9-11 zona 3, Quetzaltenango.");
-          Paragraph parrafo2 = new Paragraph("41518382 - 59266021");
-          Paragraph parrafo3 = new Paragraph("                                                 ");
-          Paragraph totVT = new Paragraph("TOTAL VENTA: Q "+jLabel22.getText());//Paragraph parrafo4 = new Paragraph("Fecha de Emisión: "+ dia+"/"+(mes+1)+"/"+año);
-          parrafo1.setAlignment(1);
-          parrafo2.setAlignment(1);
-          
-            PdfPTable table = new PdfPTable(7);     
-            PdfPTable table2 = new PdfPTable(7);
-            PdfPTable table3 = new PdfPTable(4);
-            PdfPTable tCliente = new PdfPTable(7); 
-            
-            table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
-            PdfPCell celdaX1 = new PdfPCell(new Paragraph(" NOMBRE CLIENTE"));
-            PdfPCell celdaX2 = new PdfPCell(new Paragraph(" TIPO DE CLIENTE"));
-            PdfPCell datoX1 = new PdfPCell(new Paragraph(clin));
-            PdfPCell datoX2 = new PdfPCell(new Paragraph(TIPc));
-            
-            celdaX1.setBorder(0);
-            celdaX1.setBackgroundColor(NameC);
-            celdaX1.setColspan(2);
-            celdaX1.setHorizontalAlignment(Element.ALIGN_LEFT);
-            datoX1.setBorder(0);
-            datoX1.setBackgroundColor(NameC);
-            datoX1.setColspan(2);
-            datoX1.setHorizontalAlignment(Element.ALIGN_CENTER);
-            celdaX2.setBorder(0);
-            celdaX2.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            celdaX2.setColspan(2);
-            celdaX2.setHorizontalAlignment(Element.ALIGN_LEFT);
-            datoX2.setBorder(0);
-            datoX2.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            datoX2.setColspan(1);
-            datoX2.setHorizontalAlignment(Element.ALIGN_CENTER);
-            tCliente.addCell(celdaX1);
-            tCliente.addCell(datoX1);
-            tCliente.addCell(celdaX2);
-            tCliente.addCell(datoX2);
-            
-            
-            tCliente.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
-            PdfPCell celda1 = new PdfPCell(new Paragraph("FECHA"));
-            PdfPCell celda2 = new PdfPCell(new Paragraph("COMPROBANTE"));
-            PdfPCell celda3 = new PdfPCell(new Paragraph("VENDEDOR"));
-            PdfPCell celda4 = new PdfPCell(new Paragraph("000" + Integer.toString(lastID)));
-            PdfPCell celda5 = new PdfPCell(new Paragraph(usrs));
-           
-            // cuantas columnas ocupa la celda
-            celda1.setBorder(0);
-            celda1.setBackgroundColor(BaseColor.GRAY);
-            celda1.setColspan(3);
-            celda1.setHorizontalAlignment(Element.ALIGN_CENTER);
-            table.addCell(celda1);
-            
-            celda2.setBorder(0);celda2.setBackgroundColor(BaseColor.GRAY);
-            celda2.setColspan(2);
-            celda2.setRowspan(2);
-            celda2.setHorizontalAlignment(Element.ALIGN_CENTER);
-            table.addCell(celda2);
-            
-            celda3.setBorder(0);
-            celda3.setBackgroundColor(BaseColor.GRAY);
-            celda3.setColspan(3);
-            celda3.setRowspan(2);
-            celda3.setHorizontalAlignment(Element.ALIGN_CENTER);
-            table.addCell(celda3);
-            
-            celda4.setColspan(2);
-            celda4.setRowspan(2);
-            celda4.setHorizontalAlignment(Element.ALIGN_CENTER);
-            
-            celda5.setColspan(3);
-            celda5.setRowspan(2);
-            celda5.setHorizontalAlignment(Element.ALIGN_CENTER);
-            table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_LEFT);
-            table.addCell("DIA");
-            table.addCell("MES");
-            table.addCell("AÑO");
-            table2.addCell(Integer.toString(dia));
-            table2.addCell(Integer.toString(mes));
-            table2.addCell(Integer.toString(año));
-            table2.addCell(celda4);
-            table2.addCell(celda5);
-
-            //Agregamos la imagen al documento.
-          Class.forName("com.mysql.jdbc.Driver");
-          cnx = DriverManager.getConnection(url, user,pass);
-          Statement stmt = cnx.createStatement(); 
-          String sql = "Select Tipo,Marca,Modelo,Unidades,Precio,Precio_x_Unidades from detalle_factura where idFactura='"+lastID+"'";
-          ResultSet query = stmt.executeQuery(sql);  
-          PdfPTable LogTable = new PdfPTable(6);
-          PdfPCell cab1 = new PdfPCell(new Paragraph("Tipo"));
-            PdfPCell cab2 = new PdfPCell(new Paragraph("Marca"));
-            PdfPCell cab3 = new PdfPCell(new Paragraph("Modelo"));
-            PdfPCell cab4 = new PdfPCell(new Paragraph("Precio"));
-            PdfPCell cab5 = new PdfPCell(new Paragraph("Unidades"));
-            PdfPCell cab6 = new PdfPCell(new Paragraph("PrecXunids"));
-          cab1.setBackgroundColor(BaseColor.GRAY); 
-          cab2.setBackgroundColor(BaseColor.GRAY);
-          cab3.setBackgroundColor(BaseColor.GRAY);
-          cab4.setBackgroundColor(BaseColor.GRAY);
-          cab5.setBackgroundColor(BaseColor.GRAY);
-          cab6.setBackgroundColor(BaseColor.GRAY);
-         LogTable.addCell(cab1);
-          LogTable.addCell(cab2);
-          LogTable.addCell(cab3);
-          LogTable.addCell(cab4);
-          LogTable.addCell(cab5);
-          LogTable.addCell(cab6);
-          Paragraph parraf1 = new Paragraph("DETALLE DE VENTA");
-          parraf1.setAlignment(Element.ALIGN_CENTER);
-         
-          PdfPCell table_cell;  
-         while (query.next()) {         
-             String tip = query.getString("Tipo");  
-                 table_cell=new PdfPCell(new Phrase(tip));  
-                 LogTable.addCell(table_cell);
-                   String vendr = query.getString("Marca");  
-                 table_cell=new PdfPCell(new Phrase(vendr));  
-                 LogTable.addCell(table_cell);
-                 String Username = query.getString("Modelo");  
-                 table_cell=new PdfPCell(new Phrase(Username));  
-                 LogTable.addCell(table_cell);  
-                 String ipaddress=query.getString("Unidades");  
-                 table_cell=new PdfPCell(new Phrase(ipaddress));  
-                 LogTable.addCell(table_cell);  
-                String prec=query.getString("Precio");  
-                 table_cell=new PdfPCell(new Phrase(prec));  
-                 LogTable.addCell(table_cell); 
-                  String precUnid=query.getString("Precio_x_Unidades");  
-                 table_cell=new PdfPCell(new Phrase(precUnid));  
-                 LogTable.addCell(table_cell); 
-         }  
-         /* Attach report table to PDF */  
-           
-         /* Close all DB related objects */  
-         query.close();  
-         stmt.close();   
-         cnx.close(); 
-            documento.add(imagen);
-                  documento.add(parrafo1);
-                  documento.add(parrafo2);
-                  documento.add(parrafo3);
-                  documento.add(table);
-                  documento.add(table2);
-                  documento.add(parrafo3);
-                  documento.add(tCliente);
-                  documento.add(parrafo3);
-                  documento.add(parraf1);
-                  documento.add(parrafo3);
-                   documento.add(LogTable);
-                    documento.add(parrafo3);
-                   totVT.setAlignment(Element.ALIGN_CENTER);
-                   documento.add(totVT);
-writer.setPageEvent(new MyFooter());
-    documento.close();
-    
-}catch(Exception ex){
-    System.out.println(ex.toString());
-}
- 
-}
-
-
-
-
-  class MyFooter extends PdfPageEventHelper {
-    public void onEndPage(PdfWriter writer, Document document) {
-  float fntSize, f1;
-    fntSize = 18.7f;
-    f1=16f;
-     ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, new Phrase("Gracias por su Preferencia",FontFactory.getFont(FontFactory.COURIER, fntSize)), 290, 110, 0);
-    ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, new Phrase("Dirección: 14 calle 9-11 zona 3, Quetzaltenango.",FontFactory.getFont(FontFactory.COURIER, f1)), 290, 85, 0);
-    ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, new Phrase("Teléfonos:  41518382 - 59266021",FontFactory.getFont(FontFactory.COURIER, f1)), 290, 60, 0);
-  
-    }
-}
   
 }
 

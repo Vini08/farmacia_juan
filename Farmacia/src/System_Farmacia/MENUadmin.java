@@ -1552,7 +1552,7 @@ jLabel38.setToolTipText(null);
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     public static javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
+    public static javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel22;

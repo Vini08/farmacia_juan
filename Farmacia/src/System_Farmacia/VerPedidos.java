@@ -636,7 +636,7 @@ if(check==true){
     private void tablaVentasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaVentasKeyPressed
 int pressEnter = evt.getKeyCode();
 if(pressEnter==KeyEvent.VK_ENTER){
-  busqueda= (Integer) tablaVentas.getValueAt(tablaVentas.getSelectedRow(), 0);   
+  busqueda=   Integer.parseInt( tablaVentas.getValueAt(tablaVentas.getSelectedRow(), 0).toString() );
   buscarT(busqueda); 
 }
 // TODO add your handling code here:
