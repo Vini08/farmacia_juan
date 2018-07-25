@@ -558,7 +558,7 @@ Connection cnx = null;
         jLabel36.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(33, 33, 33));
         jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel36.setText("¿CUALES SERAN LOS DESCUENTOS?");
+        jLabel36.setText("¿CUALES SERAN LOS DESCUENTOS EN QUETZALES?");
         getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 350, 350, -1));
 
         jLabel37.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N

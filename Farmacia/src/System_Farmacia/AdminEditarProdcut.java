@@ -28,12 +28,12 @@ import javax.swing.border.LineBorder;
  * @author Vinicio
  */
 public class AdminEditarProdcut extends javax.swing.JFrame {
-public static String sql = "SELECT codigo_producto,  categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo,precio_etiqueta, descuento, porciones from producto where Unidades>=0";
-String url = "jdbc:mysql://localhost:3306/bd_farm";
+public static String sql = "SELECT codigo_producto, codigo_barra,  categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo,precio_etiqueta, descuento, porciones from producto where Unidades>=0";
+public static String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
 String pass = "";
 int unids;
-String codP,nameP,catP, provP, unidP,fechaP;
+String codP,codeBR,productP,nameP,catP, provP, unidP,fechaP,descr;
 Double preC, precV, preM, preE;
 Color grisborde =new Color(224,224,224);
 Color grisPress =new Color(179,179,179);
@@ -41,13 +41,13 @@ Color ColorFont =new Color(123,123,123);
 Color ColorSalida =new Color(0,102,204);
 Color ColorSalida2 =new Color(2,72,142);
 Border thickBorde = new LineBorder(Color.WHITE, 4);
- public static String us, code, mark, model, provv, porcions,Descuento,sehace, fechas;
+ public static String us, code, codebr, mark, model, provv, porcions,Descuento,sehace, fechas, descriptio;
 public static BigDecimal price0,price1,price2,price3;   
 public static int unit,alerta,alertP; 
 Connection cnx;
 private int x;
 private int y;
-    public AdminEditarProdcut(String u, String codes,String marks,String models,int unitss,String provvs,BigDecimal price10s, BigDecimal price1s,BigDecimal price2s,BigDecimal price3s,String pors,String descu,int alerts, String Dates) {
+    public AdminEditarProdcut(String u, String codes, String br, String marks,String models,int unitss,String provvs,BigDecimal price10s, BigDecimal price1s,BigDecimal price2s,BigDecimal price3s,String pors,String descu,int alerts, String Dates, String descripc) {
     try {
         initComponents();
         jTextField1.requestFocus();
@@ -55,6 +55,7 @@ private int y;
         jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
         code=codes;
+        codebr=br;
         mark=marks;
         model=models;
         unit=unitss;
@@ -67,8 +68,10 @@ private int y;
         Descuento=descu;
         alerta=alerts;
         fechas=Dates;
+        descriptio=descripc;
         jTextField1.setText(code);
         jTextField2.setText(mark);
+        jTextField7.setText(codebr);
         jTextField3.setText(Integer.toString(unit));
         jTextField4.setText(provv);
         jTextField5.setText(String.valueOf(price1));
@@ -79,6 +82,7 @@ private int y;
         jTextField11.setText(String.valueOf(porcions));
         jTextField12.setText(Integer.toString(alerta));
         jTextField13.setText(String.valueOf(price3));
+        jTextArea1.setText(descriptio);
         Date date = new SimpleDateFormat("dd/MM/yyyy").parse(fechas);
         jDateChooser1.setDate(date);
     } catch (ParseException ex) {
@@ -96,7 +100,6 @@ private int y;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel29 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -106,7 +109,6 @@ private int y;
         jLabel8 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -141,12 +143,18 @@ private int y;
         jLabel19 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jTextField13 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jLabel33 = new javax.swing.JLabel();
+        jTextField7 = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nuevo Producto");
         setBackground(new java.awt.Color(153, 102, 255));
-        setMinimumSize(new java.awt.Dimension(940, 670));
+        setMinimumSize(new java.awt.Dimension(1600, 900));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1600, 900));
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 formMouseMoved(evt);
@@ -154,31 +162,10 @@ private int y;
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel29.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 18)); // NOI18N
-        jLabel29.setForeground(new java.awt.Color(68, 68, 68));
-        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel29.setText("Administrador");
-        jLabel29.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel29MousePressed(evt);
-            }
-        });
-        jLabel29.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jLabel29MouseDragged(evt);
-            }
-        });
-        getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 1100, 40));
-
         jLabel2.setFont(new java.awt.Font("Microsoft Tai Le", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(123, 123, 123));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("-");
-        jLabel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel2MouseMoved(evt);
-            }
-        });
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
@@ -187,17 +174,17 @@ private int y;
                 jLabel2MousePressed(evt);
             }
         });
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1285, 0, 40, 40));
+        jLabel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel2MouseMoved(evt);
+            }
+        });
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1520, 0, 40, 40));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setForeground(new java.awt.Color(102, 102, 102));
         jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton1.setFocusPainted(false);
-        jButton1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton1MouseMoved(evt);
-            }
-        });
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton1MousePressed(evt);
@@ -206,23 +193,23 @@ private int y;
                 jButton1MouseReleased(evt);
             }
         });
+        jButton1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jButton1MouseMoved(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1285, 0, 40, 40));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1520, 0, 40, 40));
 
         jLabel3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(123, 123, 123));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("<<");
         jLabel3.setToolTipText("");
-        jLabel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel3MouseMoved(evt);
-            }
-        });
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel3MousePressed(evt);
@@ -231,16 +218,16 @@ private int y;
                 jLabel3MouseReleased(evt);
             }
         });
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1325, 0, 40, 40));
+        jLabel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel3MouseMoved(evt);
+            }
+        });
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1560, 0, 40, 40));
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton3.setFocusPainted(false);
-        jButton3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton3MouseMoved(evt);
-            }
-        });
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton3MousePressed(evt);
@@ -249,12 +236,17 @@ private int y;
                 jButton3MouseReleased(evt);
             }
         });
+        jButton3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jButton3MouseMoved(evt);
+            }
+        });
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1325, 0, 41, 40));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1560, 0, 41, 40));
 
         jLabel4.setBackground(new java.awt.Color(153, 153, 153));
         jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
@@ -267,7 +259,7 @@ private int y;
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 40));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 630, 40));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 0, 630, 40));
 
         jLabel22.setFont(new java.awt.Font("Microsoft Tai Le", 0, 14)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -279,15 +271,11 @@ private int y;
         jLabel24.setText("presione EDITAR y los datos serán");
         getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/grisFondo.jpg"))); // NOI18N
-        jLabel20.setPreferredSize(new java.awt.Dimension(367, 70));
-        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 650, 1370, 80));
-
         jLabel7.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(82, 82, 82));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("PRECIO DE VENTA");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 130, 370, 30));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 50, 590, 30));
 
         jLabel9.setFont(new java.awt.Font("Microsoft Tai Le", 0, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -318,13 +306,13 @@ private int y;
         jLabel13.setForeground(new java.awt.Color(82, 82, 82));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("CODIGO PRODUCTO");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 370, 30));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 460, 30));
 
         jLabel14.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(82, 82, 82));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("CATEGORIA");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 370, 30));
+        jLabel14.setText("CODIGO BARRA");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 460, 30));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blancoE2.jpg"))); // NOI18N
         jLabel5.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -332,52 +320,52 @@ private int y;
                 jLabel5KeyPressed(evt);
             }
         });
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 250, 610));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 250, 860));
 
         jLabel15.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(82, 82, 82));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("PRECIO MAYOREO");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 210, 370, 30));
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 130, 590, 30));
 
         jLabel17.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(82, 82, 82));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("FECHA DE VENCIMIENTO");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 450, 370, 30));
+        jLabel17.setText("DESCRIPCION");
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 440, 370, 30));
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(153, 153, 153));
         jTextField1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.setBorder(null);
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 370, 40));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 460, 40));
 
         jTextField2.setEditable(false);
         jTextField2.setBackground(new java.awt.Color(153, 153, 153));
         jTextField2.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField2.setBorder(null);
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 370, 40));
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 460, 40));
 
         jTextField3.setBackground(new java.awt.Color(153, 153, 153));
         jTextField3.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField3.setBorder(null);
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, 370, 40));
+        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 480, 460, 40));
 
         jTextField4.setEditable(false);
         jTextField4.setBackground(new java.awt.Color(153, 153, 153));
         jTextField4.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField4.setBorder(null);
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, 370, 40));
+        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, 460, 40));
 
         jTextField5.setBackground(new java.awt.Color(153, 153, 153));
         jTextField5.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField5.setBorder(null);
-        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 160, 370, 40));
+        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 80, 590, 40));
 
         jLabel23.setFont(new java.awt.Font("Microsoft Tai Le", 0, 10)); // NOI18N
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -395,41 +383,40 @@ private int y;
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 540, 370, 80));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 780, 330, 100));
 
         jLabel25.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(82, 82, 82));
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel25.setText("PROVEEDOR");
-        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 370, 30));
+        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, 460, 30));
 
         jTextField6.setBackground(new java.awt.Color(153, 153, 153));
         jTextField6.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField6.setBorder(null);
-        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 240, 370, 40));
+        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 160, 590, 40));
 
-        jTextField8.setEditable(false);
         jTextField8.setBackground(new java.awt.Color(153, 153, 153));
         jTextField8.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField8.setBorder(null);
-        getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 370, 40));
+        getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, 460, 40));
 
         jLabel27.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(82, 82, 82));
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel27.setText("PRODUCTO");
-        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 370, 30));
+        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 460, 30));
 
         jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
-        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 550, 40));
+        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 640, 40));
 
         jLabel30.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(82, 82, 82));
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel30.setText("CANTIDADES QUE SE DESCONTARAN");
-        getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 290, 370, 30));
+        getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 210, 590, 30));
 
         jTextField9.setBackground(new java.awt.Color(153, 153, 153));
         jTextField9.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
@@ -440,25 +427,25 @@ private int y;
                 jTextField9ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 320, 370, 40));
+        getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 240, 590, 40));
 
         jTextField10.setBackground(new java.awt.Color(153, 153, 153));
         jTextField10.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField10.setBorder(null);
-        getContentPane().add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 80, 370, 40));
+        getContentPane().add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 720, 460, 40));
 
         jLabel31.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(82, 82, 82));
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel31.setText("PRECIO COMPRA");
-        getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 50, 370, 30));
+        getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 690, 460, 30));
 
         jLabel32.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(82, 82, 82));
         jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel32.setText("¿CUANDO SE HARAN LOS DESCUENTOS?");
-        getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 370, 370, 30));
+        getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 290, 590, 30));
 
         jTextField11.setBackground(new java.awt.Color(153, 153, 153));
         jTextField11.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
@@ -469,7 +456,7 @@ private int y;
                 jTextField11ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 400, 370, 40));
+        getContentPane().add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 320, 590, 40));
 
         jTextField12.setBackground(new java.awt.Color(153, 153, 153));
         jTextField12.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
@@ -488,28 +475,28 @@ private int y;
                 jTextField12KeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 480, 370, 40));
+        getContentPane().add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 560, 460, 40));
 
         jLabel18.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(82, 82, 82));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("UNIDADES");
-        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, 370, 30));
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, 460, 30));
 
         jDateChooser1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 480, 370, 40));
+        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 400, 590, 40));
 
         jLabel19.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(82, 82, 82));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("ALERTA DE UNIDADES");
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, 370, 30));
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 530, 460, 30));
 
         jLabel26.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(82, 82, 82));
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel26.setText("PRECIO ETIQUETA");
-        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 530, 370, 30));
+        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 610, 460, 30));
 
         jTextField13.setBackground(new java.awt.Color(153, 153, 153));
         jTextField13.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
@@ -528,7 +515,31 @@ private int y;
                 jTextField13KeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 560, 370, 40));
+        getContentPane().add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 640, 460, 40));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 470, 710, 290));
+
+        jLabel33.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel33.setText("FECHA DE VENCIMIENTO");
+        getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 370, 590, 30));
+
+        jTextField7.setBackground(new java.awt.Color(153, 153, 153));
+        jTextField7.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
+        jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField7.setBorder(null);
+        getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 460, 40));
+
+        jLabel20.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("CATEGORIA");
+        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 460, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -627,6 +638,7 @@ private int y;
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         codP = jTextField1.getText();
+        codeBR = jTextField7.getText();
         nameP=jTextField2.getText();
         catP=jTextField8.getText();
         provP = jTextField4.getText();
@@ -634,7 +646,7 @@ private int y;
         precV = Double.parseDouble(jTextField5.getText());
         preM = Double.parseDouble(jTextField6.getText());
         preE = Double.parseDouble(jTextField13.getText());
-                unidP = jTextField3.getText();
+        unidP = jTextField3.getText();
         unids = Integer.parseInt(unidP);
         Descuento = jTextField9.getText();
         sehace = jTextField11.getText();
@@ -643,23 +655,14 @@ private int y;
                 Date date = jDateChooser1.getDate();
                 SimpleDateFormat sdf = new SimpleDateFormat(formato);
         fechas = String.valueOf(sdf.format(date));
-  
-        ModificarProd(unids, provP, preC, precV, preM, preE, codP, catP, nameP, Descuento, sehace, alertP, fechas);
+        descr = jTextArea1.getText();
+        ModificarProd(unids, codeBR, provP, preC, precV, preM, preE, codP, catP, nameP, Descuento, sehace, alertP, fechas,descr);
        inventario.test=1;
        hacer_ventas.test2=1;
        inventario.LlenarTabla(sql);
         Por_agotarse("SELECT count(codigo_producto)as cuantos FROM producto where Unidades<alerta_unidades");
         
     }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jLabel29MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel29MouseDragged
-this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel29MouseDragged
-
-    private void jLabel29MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel29MousePressed
-x = evt.getX();
-                y = evt.getY();         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel29MousePressed
 
     private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
         // TODO add your handling code here:
@@ -731,7 +734,7 @@ x = evt.getX();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                
-                    new AdminEditarProdcut(us,code, mark, model, unit, provv,price0, price1,price2,price3,porcions,Descuento,alerta,fechas).setVisible(true);
+                    new AdminEditarProdcut(us,code, codebr, mark, model, unit, provv,price0, price1,price2,price3,porcions,Descuento,alerta,fechas, descriptio).setVisible(true);
                
             }
         });
@@ -762,16 +765,18 @@ x = evt.getX();
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     public static final javax.swing.JTextField jTextField1 = new javax.swing.JTextField();
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
@@ -782,31 +787,34 @@ x = evt.getX();
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 
    
     
-  public void ModificarProd(int unid, String prov, Double pp, Double p1,Double p2,Double p3, String codd,String nam, String cate, String des, String SH,int alertaU, String vencimi ){
+  public void ModificarProd(int unid, String codeBAR, String prov, Double pp, Double p1,Double p2,Double p3, String codd,String nam, String cate, String des, String SH,int alertaU, String vencimi, String desc ){
           
         try{
             Connection conn = DriverManager.getConnection(url, user, pass);
-           CallableStatement cmst= conn.prepareCall("call ModificarProducto (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+           CallableStatement cmst= conn.prepareCall("call ModificarProducto (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
            
            cmst.setInt(1,unid);
-           cmst.setString(2,prov);
-           cmst.setDouble(3,pp);
-           cmst.setDouble(4,p1);
-           cmst.setDouble(5,p2);
-           cmst.setDouble(6,p3);
-           cmst.setString(7,codd);
-           cmst.setString(8,cate);
-           cmst.setString(9,nam);
-           cmst.setString(10,des);
-           cmst.setString(11,SH);
-           cmst.setInt(12,alertaU);
-           cmst.setString(13,vencimi);
+           cmst.setString(2,codeBAR);
+           cmst.setString(3,prov);
+           cmst.setDouble(4,pp);
+           cmst.setDouble(5,p1);
+           cmst.setDouble(6,p2);
+           cmst.setDouble(7,p3);
+           cmst.setString(8,codd);
+           cmst.setString(9,cate);
+           cmst.setString(10,nam);
+           cmst.setString(11,des);
+           cmst.setString(12,SH);
+           cmst.setInt(13,alertaU);
+           cmst.setString(14,vencimi);
+           cmst.setString(15,desc);
            cmst.execute();            
        
         conn.close();

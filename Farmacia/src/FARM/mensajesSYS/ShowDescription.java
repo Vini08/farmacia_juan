@@ -5,14 +5,11 @@
  */
 package FARM.mensajesSYS;
 
+import System_Farmacia.Inventario2;
+import System_Farmacia.LoginGT;
+import System_Farmacia.hacer_ventas;
 import com.sun.awt.AWTUtilities;
 import java.awt.event.KeyEvent;
-import static System_Farmacia.hacer_ventas.DESCRPart;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import javax.swing.JScrollPane;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 /**
  *
  * @author Vinicio
@@ -23,7 +20,12 @@ public class ShowDescription extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         AWTUtilities.setWindowOpaque(this, false);
-        jTextArea1.setText(DESCRPart);
+        if(LoginGT.boot==0){
+                jTextArea1.setText(hacer_ventas.DESCRPart);
+                }
+                if(LoginGT.boot==1){
+                jTextArea1.setText(Inventario2.DESCRPart);
+                }
         jTextArea1.setLineWrap(true);
         jTextArea1.setWrapStyleWord(true);
     }
@@ -79,12 +81,12 @@ public class ShowDescription extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(231, 231, 231));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("DESCRIPCION DE PRODUCTO");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 517, 50));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 0, 520, 50));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/barraMensajes.png"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/fondoverde.jpg"))); // NOI18N
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 50));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/solid-orange-background.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/indicac.png"))); // NOI18N
         jLabel2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jLabel2KeyPressed(evt);

@@ -845,7 +845,7 @@
           <Color blue="21" green="21" red="21" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="&#xbf;CUALES SERAN LOS DESCUENTOS?"/>
+        <Property name="text" type="java.lang.String" value="&#xbf;CUALES SERAN LOS DESCUENTOS EN QUETZALES?"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

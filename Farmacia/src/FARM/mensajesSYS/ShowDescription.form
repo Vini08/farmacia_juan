@@ -80,14 +80,14 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="0" width="517" height="50"/>
+          <AbsoluteConstraints x="-3" y="0" width="520" height="50"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Imagen/barraMensajes.png"/>
+          <Image iconType="3" name="/Imagen/fondoverde.jpg"/>
         </Property>
       </Properties>
       <Constraints>
@@ -99,7 +99,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Imagen/solid-orange-background.jpg"/>
+          <Image iconType="3" name="/Imagen/indicac.png"/>
         </Property>
       </Properties>
       <Events>

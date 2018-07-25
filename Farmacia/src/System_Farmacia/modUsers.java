@@ -5,7 +5,6 @@
  */
 package System_Farmacia;
 
-import static System_Farmacia.inventario.jTable1;
 import static System_Farmacia.inventario.pass;
 import static System_Farmacia.inventario.url;
 import static System_Farmacia.inventario.user;
@@ -24,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import static System_Farmacia.inventario.tablaInventario;
 
 /**
  *
