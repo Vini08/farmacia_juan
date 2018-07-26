@@ -6,26 +6,14 @@
 package FARM.mensajesSYS;
 
 import com.sun.awt.AWTUtilities;
-import System_Farmacia.AdminEditarProdcut;
-import System_Farmacia.LoginGT;
 import static System_Farmacia.AdminEditarProdcut.unit;
-import static System_Farmacia.LoginGT.boot;
-import static System_Farmacia.LoginGT.nvl;
-import System_Farmacia.MENUadmin;
-import System_Farmacia.MENUusuario;
 import System_Farmacia.hacer_ventas;
-import static System_Farmacia.hacer_ventas.tablaPRODUCTOS;
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -39,7 +27,8 @@ String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
 String pass = "";
 int nvl;
-public static String mayoris;  
+public static String mayoris;
+public  static int mayoreo=0;
     public LectorBarras(String n,int units) {
         initComponents();
         setLocationRelativeTo(null);
@@ -237,12 +226,14 @@ Connection cnx = null;
             if (n.equals(nombre) ){
                  hacer_ventas.buscarMayoristas();
                  hacer_ventas.jLabel13.setText("NOMBRE DE CLIENTE: "+mayoris);
+                 mayoreo=1;
                  this.dispose();
             }
             }
                 } catch (ClassNotFoundException ex) {
+                    JOptionPane.showMessageDialog(this,ex);
                 } catch (SQLException ex) {
-                Logger.getLogger(LoginGT.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this,ex);
                 }
 
 }

@@ -42,7 +42,7 @@
           <Font name="Microsoft Tai Le" size="12" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="52" green="52" red="52" type="rgb"/>
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="NOMBRE DE CLIENTE"/>
@@ -81,7 +81,7 @@
           <Font name="Microsoft Tai Le" size="12" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="52" green="52" red="52" type="rgb"/>
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="CODIGO DE BARRA"/>
@@ -361,6 +361,9 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Microsoft Tai Le" size="12" style="1"/>
         </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="TELEFONO PROVEEDOR"/>
       </Properties>
@@ -492,6 +495,9 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Microsoft Tai Le" size="12" style="1"/>
         </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="NOMBRE DE CATEGORIA"/>
       </Properties>
@@ -539,6 +545,9 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Microsoft Tai Le" size="12" style="1"/>
         </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="NOMBRE PROVEEDOR"/>
       </Properties>
@@ -561,8 +570,8 @@
                   <Color PropertyName="highlight" blue="33" green="33" red="33" type="rgb"/>
                 </EtchetBorder>
               </Border>
-              <Font PropertyName="font" name="Microsoft Yi Baiti" size="28" style="0"/>
-              <Color PropertyName="color" blue="33" green="33" red="33" type="rgb"/>
+              <Font PropertyName="font" name="Microsoft Yi Baiti" size="28" style="1"/>
+              <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -689,8 +698,8 @@
                   <Color PropertyName="highlight" blue="33" green="33" red="33" type="rgb"/>
                 </EtchetBorder>
               </Border>
-              <Font PropertyName="font" name="Microsoft Yi Baiti" size="28" style="0"/>
-              <Color PropertyName="color" blue="33" green="33" red="33" type="rgb"/>
+              <Font PropertyName="font" name="Microsoft Yi Baiti" size="28" style="1"/>
+              <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -722,7 +731,7 @@
           <Font name="Microsoft Tai Le" size="12" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="52" green="52" red="52" type="rgb"/>
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="TELEFONO"/>
@@ -761,7 +770,7 @@
           <Font name="Microsoft Tai Le" size="12" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="52" green="52" red="52" type="rgb"/>
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="UBICACION"/>
@@ -807,8 +816,8 @@
                   <Color PropertyName="highlight" blue="33" green="33" red="33" type="rgb"/>
                 </EtchetBorder>
               </Border>
-              <Font PropertyName="font" name="Microsoft Yi Baiti" size="28" style="0"/>
-              <Color PropertyName="color" blue="33" green="33" red="33" type="rgb"/>
+              <Font PropertyName="font" name="Microsoft Yi Baiti" size="28" style="1"/>
+              <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
             </TitledBorder>
           </Border>
         </Property>

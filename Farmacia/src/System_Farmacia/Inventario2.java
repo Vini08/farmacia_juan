@@ -35,7 +35,7 @@ private int y;
 public static String url = "jdbc:mysql://localhost:3306/bd_farm";
 public static String user = "root";
 public static String pass = "";
-public static String sql = "SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades>0";
+public static String sql = "SELECT codigo_producto, codigo_barra, categoria, producto, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades>0";
 String busqueda;
 Color grisMoved =new Color(180,180,180);
 Color grisborde =new Color(224,224,224);
@@ -959,10 +959,10 @@ public static void columnas(){
     tableColumn14.setHeaderValue( "PORCIONES" );
     tableHeader.repaint();
 
-    tablaInventario.getColumnModel().getColumn(0).setPreferredWidth(65);
-    tablaInventario.getColumnModel().getColumn(1).setPreferredWidth(65);
-    tablaInventario.getColumnModel().getColumn(2).setPreferredWidth(115);
-    tablaInventario.getColumnModel().getColumn(3).setPreferredWidth(400);
+    tablaInventario.getColumnModel().getColumn(0).setPreferredWidth(15);
+    tablaInventario.getColumnModel().getColumn(1).setPreferredWidth(90);
+    tablaInventario.getColumnModel().getColumn(2).setPreferredWidth(1);
+    tablaInventario.getColumnModel().getColumn(3).setPreferredWidth(480);
     tablaInventario.getColumnModel().getColumn(4).setPreferredWidth(120);
     tablaInventario.getColumnModel().getColumn(5).setPreferredWidth(1);
     tablaInventario.getColumnModel().getColumn(6).setPreferredWidth(50);
@@ -971,8 +971,8 @@ public static void columnas(){
     tablaInventario.getColumnModel().getColumn(9).setPreferredWidth(80);
     tablaInventario.getColumnModel().getColumn(0).setPreferredWidth(80);
     tablaInventario.getColumnModel().getColumn(11).setPreferredWidth(80);
-    tablaInventario.getColumnModel().getColumn(12).setPreferredWidth(40);
-    tablaInventario.getColumnModel().getColumn(13).setPreferredWidth(50);
+    tablaInventario.getColumnModel().getColumn(12).setPreferredWidth(80);
+    tablaInventario.getColumnModel().getColumn(13).setPreferredWidth(70);
     tablaInventario.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
     
     }

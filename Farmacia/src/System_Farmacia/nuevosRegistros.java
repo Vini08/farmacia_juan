@@ -111,7 +111,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel34.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
-        jLabel34.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
         jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel34.setText("NOMBRE DE CLIENTE");
         getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 190, 340, 20));
@@ -128,7 +128,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         getContentPane().add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 210, 340, 60));
 
         jLabel33.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
-        jLabel33.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
         jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel33.setText("CODIGO DE BARRA");
         getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 90, 340, 20));
@@ -294,6 +294,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 130, -1));
 
         jLabel14.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("TELEFONO PROVEEDOR");
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 340, 20));
@@ -354,6 +355,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 160, 330, 160));
 
         jLabel29.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel29.setText("NOMBRE DE CATEGORIA");
         getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 530, 360, 20));
@@ -370,12 +372,13 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 319, 190, -1));
 
         jLabel15.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("NOMBRE PROVEEDOR");
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 340, 20));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/fondoverde.jpg"))); // NOI18N
-        jLabel13.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(51, 51, 51), null), "CATEGORIA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 28), new java.awt.Color(51, 51, 51))); // NOI18N
+        jLabel13.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(51, 51, 51), null), "CATEGORIA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 1, 28), new java.awt.Color(255, 255, 255))); // NOI18N
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, 750, 270));
 
         jTextField3.setBackground(new java.awt.Color(153, 153, 153));
@@ -426,7 +429,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 190, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/azulfondo.jpg"))); // NOI18N
-        jLabel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(51, 51, 51), null), "PROVEEDOR", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 28), new java.awt.Color(51, 51, 51))); // NOI18N
+        jLabel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(51, 51, 51), null), "PROVEEDOR", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 1, 28), new java.awt.Color(255, 255, 255))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 750, 370));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/indicac.png"))); // NOI18N
@@ -438,7 +441,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 740));
 
         jLabel35.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
-        jLabel35.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
         jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel35.setText("TELEFONO");
         getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 400, 340, 20));
@@ -455,7 +458,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
         getContentPane().add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 310, 340, 60));
 
         jLabel36.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
-        jLabel36.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
         jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel36.setText("UBICACION");
         getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 290, 340, 20));
@@ -468,7 +471,7 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
 
         jLabel18.setBackground(new java.awt.Color(153, 153, 0));
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/solid-orange-background.jpg"))); // NOI18N
-        jLabel18.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(51, 51, 51), null), "CLIENTE MAYORISTA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 28), new java.awt.Color(51, 51, 51))); // NOI18N
+        jLabel18.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(51, 51, 51), null), "CLIENTE MAYORISTA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 1, 28), new java.awt.Color(255, 255, 255))); // NOI18N
         getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 40, 380, 670));
 
         pack();

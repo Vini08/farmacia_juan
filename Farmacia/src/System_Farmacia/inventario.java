@@ -1119,8 +1119,8 @@ public static void columnas(){
     tableHeader.repaint();
 
     tablaInventario.getColumnModel().getColumn(0).setPreferredWidth(65);
-    tablaInventario.getColumnModel().getColumn(1).setPreferredWidth(75);
-    tablaInventario.getColumnModel().getColumn(2).setPreferredWidth(115);
+    tablaInventario.getColumnModel().getColumn(1).setPreferredWidth(95);
+    tablaInventario.getColumnModel().getColumn(2).setPreferredWidth(1);
     tablaInventario.getColumnModel().getColumn(3).setPreferredWidth(400);
     tablaInventario.getColumnModel().getColumn(4).setPreferredWidth(120);
     tablaInventario.getColumnModel().getColumn(5).setPreferredWidth(1);
@@ -1131,8 +1131,8 @@ public static void columnas(){
     tablaInventario.getColumnModel().getColumn(10).setPreferredWidth(80);
     tablaInventario.getColumnModel().getColumn(11).setPreferredWidth(80);
     tablaInventario.getColumnModel().getColumn(12).setPreferredWidth(80);
-    tablaInventario.getColumnModel().getColumn(13).setPreferredWidth(40);
-    tablaInventario.getColumnModel().getColumn(14).setPreferredWidth(50);
+    tablaInventario.getColumnModel().getColumn(13).setPreferredWidth(80);
+    tablaInventario.getColumnModel().getColumn(14).setPreferredWidth(70);
     tablaInventario.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
     
     }

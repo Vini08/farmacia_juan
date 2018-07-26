@@ -41,7 +41,7 @@ Color ColorFont =new Color(123,123,123);
 Color ColorSalida =new Color(0,102,204);
 Color ColorSalida2 =new Color(2,72,142);
 Border thickBorde = new LineBorder(Color.WHITE, 4);
- public static String us, code, codebr, mark, model, provv, porcions,Descuento,sehace, fechas, descriptio;
+ public static String us, code, codebr, mark, model, provv, porcions,Descuento,sehace, fechas, descriptio, check;
 public static BigDecimal price0,price1,price2,price3;   
 public static int unit,alerta,alertP; 
 Connection cnx;
@@ -332,7 +332,7 @@ private int y;
         jLabel17.setForeground(new java.awt.Color(82, 82, 82));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("DESCRIPCION");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 440, 370, 30));
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 440, 580, 30));
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(153, 153, 153));
@@ -383,7 +383,7 @@ private int y;
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 780, 330, 100));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 780, 360, 100));
 
         jLabel25.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(82, 82, 82));
@@ -656,7 +656,12 @@ private int y;
                 SimpleDateFormat sdf = new SimpleDateFormat(formato);
         fechas = String.valueOf(sdf.format(date));
         descr = jTextArea1.getText();
-        ModificarProd(unids, codeBR, provP, preC, precV, preM, preE, codP, catP, nameP, Descuento, sehace, alertP, fechas,descr);
+        if((jTextField9.getText().equals("0")) || (jTextField11.getText().equals("0"))){
+            check=".";
+        }
+        else
+            check="-";
+        ModificarProd(unids, codeBR, provP, preC, precV, preM, preE, codP, catP, nameP, Descuento, sehace, alertP, fechas,descr,check);
        inventario.test=1;
        hacer_ventas.test2=1;
        inventario.LlenarTabla(sql);
@@ -794,11 +799,11 @@ private int y;
 
    
     
-  public void ModificarProd(int unid, String codeBAR, String prov, Double pp, Double p1,Double p2,Double p3, String codd,String nam, String cate, String des, String SH,int alertaU, String vencimi, String desc ){
+  public void ModificarProd(int unid, String codeBAR, String prov, Double pp, Double p1,Double p2,Double p3, String codd,String nam, String cate, String des, String SH,int alertaU, String vencimi, String desc, String checks ){
           
         try{
             Connection conn = DriverManager.getConnection(url, user, pass);
-           CallableStatement cmst= conn.prepareCall("call ModificarProducto (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+           CallableStatement cmst= conn.prepareCall("call ModificarProducto (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
            
            cmst.setInt(1,unid);
            cmst.setString(2,codeBAR);
@@ -815,6 +820,7 @@ private int y;
            cmst.setInt(13,alertaU);
            cmst.setString(14,vencimi);
            cmst.setString(15,desc);
+           cmst.setString(16,checks);
            cmst.execute();            
        
         conn.close();

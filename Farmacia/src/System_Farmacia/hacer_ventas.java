@@ -668,7 +668,7 @@ public hacer_ventas(String N) {
         jLabel13.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 22)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(80, 191, 136));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 400, 40));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 500, 50));
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/grisFondo.jpg"))); // NOI18N
         jLabel17.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -774,6 +774,7 @@ if(LoginGT.boot==1){
         jLabel14.setVisible(false);
         jLabel6.setVisible(false);
         jLabel5.setVisible(false);
+        LectorBarras.mayoreo=0;
         this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel3MouseReleased
@@ -1388,9 +1389,44 @@ public void buscarT(String search){
             }   
     }
 
-public void LlenarTabla(){
+public void cargarMayo(){
+        DefaultTableModel modelo = new DefaultTableModel();
+        tablaPRODUCTOS.setModel(modelo);
+        Connection cnx = null;
+        if (cnx == null) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            cnx = DriverManager.getConnection(url, user,pass);
+             String sql = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento,descripcion, precio_etiqueta, precio_mayoreo, lll from producto where unidades>0 ";
+             Statement st = cnx.prepareStatement(sql);
+             ResultSet res = st.executeQuery(sql);
+             ResultSetMetaData rsMd = res.getMetaData();
+             int cantidadColumnas = rsMd.getColumnCount();
+             for (int i = 1; i <= cantidadColumnas; i++) {
+            modelo.addColumn(rsMd.getColumnLabel(i));
+            }
+            Object[] fila = new Object[cantidadColumnas];
+            while (res.next()){
+            for (int i = 0; i < cantidadColumnas; i++) {
+            fila[i]=res.getObject(i+1);
+            }
+            modelo.addRow(fila);  
+            }
+            columnas();
+            tablaPRODUCTOS.setColumnSelectionInterval(0,0);
+            tablaPRODUCTOS.setRowSelectionInterval(0,0);
+             } catch (ClassNotFoundException ex) {
+             throw new ClassCastException(ex.getMessage());
+             } catch (SQLException ex) { 
+               JOptionPane.showMessageDialog(this,ex);
+            }
         
-    
+            }   
+    }
+
+
+public void LlenarTabla(){
+            
     String Query = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento, descripcion, precio_etiqueta, precio_venta, lll from producto where unidades>0 ";
         DefaultTableModel modelo = new DefaultTableModel();
         tablaPRODUCTOS.setModel(modelo);
@@ -1533,7 +1569,8 @@ try{
                  
                 }
                    //entra si es mayorista
-                     if(autr.equals("-") && !jLabel13.getText().isEmpty() ){
+                     if((LectorBarras.mayoreo==1) && (!jLabel13.getText().isEmpty())){
+                         find.setFocusable(false);
                         tipoVent = "Mayorista";
                         cantT1++;
                         totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV));
@@ -1552,6 +1589,7 @@ try{
                         fila[8]=cantT1; 
                          sumaT = 0.0;
                         try{
+                            find.setFocusable(false);
                         Connection conex = DriverManager.getConnection(url, user, pass);
                         String Qury = "INSERT INTO tabla_aux(codigo_producto,codigo_barra,categoria,producto,proveedor,descripcion,ubicacion,unidades, alerta_unidades,fecha_vencimiento,precio_compra,precio_venta,precio_mayoreo,precio_etiqueta,descuento,autorizy,porciones,cant) SELECT codigo_producto,codigo_barra,categoria,producto,proveedor,descripcion,ubicacion,unidades, alerta_unidades,fecha_vencimiento,precio_compra,precio_venta,precio_mayoreo,precio_etiqueta,descuento,lll,porciones,"+cantT1+" from producto where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
                         Statement sts =  conex.createStatement();
@@ -1565,6 +1603,7 @@ try{
                                 totalRow= tablaADD.getRowCount();
                                     for(int ii=0;ii<totalRow;ii++)
                                     {
+                                        find.setFocusable(false);
                                     double sumatoria= Double.parseDouble(String.valueOf(tablaADD.getValueAt(ii,6)));
                                     sumaT= sumaT + sumatoria;
                                     auxST = Double.toString(sumaT);
@@ -1572,11 +1611,13 @@ try{
                                     jLabel6.setVisible(true);
                                     jLabel5.setVisible(true); 
                                     jLabel5.setText(auxST);
+                                    jLabel13.requestFocus();
                                     }
                                     cant=0;
+                                    cargarMayo();
                         }catch(SQLException es){
                         JOptionPane.showMessageDialog(this, es);
-                        } 
+                        } find.setFocusable(false);
                  }
                           //verifica si tiene autorizado descuento y si es diferente de 4,10,12 no hace descuento
                   if( (autr.equals("-") &&  Auxiliar.size()==0) && jLabel13.getText().isEmpty()){
@@ -1626,7 +1667,7 @@ try{
                  }
                  
                   //verifica si tiene autorizado descuento si no tiene no hace descuento aunque sea 4,10,12
-                  if(autr.equals(".")){
+                  if(autr.equals(".") && (LectorBarras.mayoreo==0)){
                         tipoVent = "Normal";
                         cantT1++;
                         totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV));
@@ -1671,10 +1712,7 @@ try{
                         JOptionPane.showMessageDialog(this, es);
                         }
                  }
-                  
-      
-                     //limpia y pone foco a label para buscar de nuevo y recarga la tabla de bsuqueda
-                    
+                     //limpia y pone foco a label para buscar de nuevo y recarga la tabla de bsuqueda                    
                      find.setText("");
                      find.requestFocus();
         }
@@ -1705,7 +1743,7 @@ else
     TableColumn tableColumn3 = tableColumnModel.getColumn(3);
     tableColumn3.setHeaderValue( "LUGAR" );
     TableColumn tableColumn4 = tableColumnModel.getColumn(4);
-    tableColumn4.setHeaderValue( "CANT" );
+    tableColumn4.setHeaderValue( "UNIDADES" );
     TableColumn tableColumn5 = tableColumnModel.getColumn(5);
     tableColumn5.setHeaderValue( "VENCIMIENTO" );
     TableColumn tableColumn6 = tableColumnModel.getColumn(6);
@@ -1714,17 +1752,18 @@ else
     tableColumn7.setHeaderValue( "ETIQUETA" );
     TableColumn tableColumn8 = tableColumnModel.getColumn(8);
     tableColumn8.setHeaderValue( "VENTA" );
+
     tableHeader.repaint();
 
     tablaPRODUCTOS.getColumnModel().getColumn(0).setPreferredWidth(75);
-    tablaPRODUCTOS.getColumnModel().getColumn(1).setPreferredWidth(165);
-    tablaPRODUCTOS.getColumnModel().getColumn(2).setPreferredWidth(600);
+    tablaPRODUCTOS.getColumnModel().getColumn(1).setPreferredWidth(175);
+    tablaPRODUCTOS.getColumnModel().getColumn(2).setPreferredWidth(690);
     tablaPRODUCTOS.getColumnModel().getColumn(3).setPreferredWidth(70);
-    tablaPRODUCTOS.getColumnModel().getColumn(4).setPreferredWidth(70);
-    tablaPRODUCTOS.getColumnModel().getColumn(5).setPreferredWidth(140);
+    tablaPRODUCTOS.getColumnModel().getColumn(4).setPreferredWidth(80);
+    tablaPRODUCTOS.getColumnModel().getColumn(5).setPreferredWidth(130);
     tablaPRODUCTOS.getColumnModel().getColumn(6).setPreferredWidth(1);
-    tablaPRODUCTOS.getColumnModel().getColumn(7).setPreferredWidth(100);
-    tablaPRODUCTOS.getColumnModel().getColumn(8).setPreferredWidth(90);
+    tablaPRODUCTOS.getColumnModel().getColumn(7).setPreferredWidth(120);
+    tablaPRODUCTOS.getColumnModel().getColumn(8).setPreferredWidth(120);
     tablaPRODUCTOS.getColumnModel().getColumn(9).setPreferredWidth(30);
     tablaPRODUCTOS.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
     
@@ -1754,7 +1793,7 @@ else
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento,descripcion, precio_mayoreo, precio_etiqueta, lll from producto where unidades>0";
+             String sql = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento,descripcion, precio_etiqueta, precio_mayoreo, lll from bd_farm.producto where unidades>0";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
@@ -1763,13 +1802,13 @@ else
             modelo.addColumn(rsMd.getColumnLabel(i));
          }
              Object[] fila = new Object[cantidadColumnas];
-         while (res.next()){
-         
-         for (int i = 0; i < cantidadColumnas; i++) {
-         fila[i]=res.getObject(i+1);
-         }
+              while (res.next()){       
+              for (int i = 0; i < cantidadColumnas; i++) {
+              fila[i]=res.getObject(i+1);
+              }
               modelo.addRow(fila);  
              }
+         jLabel13.requestFocus();
          columnas();
          tablaPRODUCTOS.setColumnSelectionInterval(0,0);
          tablaPRODUCTOS.setRowSelectionInterval(0,0);

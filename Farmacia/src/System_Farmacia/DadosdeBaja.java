@@ -149,7 +149,7 @@ public DadosdeBaja() {
                 jLabel3MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 0, 40, 40));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1560, 0, 40, 40));
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -172,20 +172,20 @@ public DadosdeBaja() {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 0, 41, 40));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1560, 0, 41, 40));
 
         jLabel6.setBackground(new java.awt.Color(153, 153, 153));
         jLabel6.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 46)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(231, 231, 231));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 670, 180, 60));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 840, 180, 60));
 
         jLabel7.setBackground(new java.awt.Color(153, 153, 153));
         jLabel7.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 46)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(231, 231, 231));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Q");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 670, 40, 60));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 840, 40, 60));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/indicac.png"))); // NOI18N
         jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -198,7 +198,7 @@ public DadosdeBaja() {
                 jLabel10MouseDragged(evt);
             }
         });
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1330, 40));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1560, 40));
 
         jTable1.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -234,7 +234,7 @@ public DadosdeBaja() {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 1330, 510));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 1560, 510));
 
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/grisFondo.jpg"))); // NOI18N
@@ -244,14 +244,14 @@ public DadosdeBaja() {
                 jLabel19MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1370, 550));
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1600, 720));
 
         jLabel8.setBackground(new java.awt.Color(153, 153, 153));
         jLabel8.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(231, 231, 231));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("TOTAL");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 680, 70, 50));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 850, 70, 50));
 
         jLabel20.setBackground(new java.awt.Color(153, 153, 153));
         jLabel20.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 23)); // NOI18N
@@ -259,7 +259,7 @@ public DadosdeBaja() {
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("0.0");
         jLabel20.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DICIEMBRE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(252, 252, 252)));
-        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 610, 100, 50));
+        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 780, 100, 50));
 
         jLabel23.setBackground(new java.awt.Color(153, 153, 153));
         jLabel23.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 23)); // NOI18N
@@ -267,7 +267,7 @@ public DadosdeBaja() {
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setText("0.0");
         jLabel23.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ENERO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(252, 252, 252)));
-        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 610, 100, 50));
+        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 780, 100, 50));
 
         jLabel24.setBackground(new java.awt.Color(153, 153, 153));
         jLabel24.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 23)); // NOI18N
@@ -275,7 +275,7 @@ public DadosdeBaja() {
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel24.setText("0.0");
         jLabel24.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "FEBRERO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(252, 252, 252)));
-        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 610, 100, 50));
+        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 780, 100, 50));
 
         jLabel25.setBackground(new java.awt.Color(153, 153, 153));
         jLabel25.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 23)); // NOI18N
@@ -283,7 +283,7 @@ public DadosdeBaja() {
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel25.setText("0.0");
         jLabel25.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "MARZO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(252, 252, 252)));
-        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 610, 100, 50));
+        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 780, 100, 50));
 
         jLabel26.setBackground(new java.awt.Color(153, 153, 153));
         jLabel26.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 23)); // NOI18N
@@ -291,7 +291,7 @@ public DadosdeBaja() {
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel26.setText("0.0");
         jLabel26.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ABRIL", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(252, 252, 252)));
-        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 610, 100, 50));
+        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 780, 100, 50));
 
         jLabel27.setBackground(new java.awt.Color(153, 153, 153));
         jLabel27.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 23)); // NOI18N
@@ -299,7 +299,7 @@ public DadosdeBaja() {
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel27.setText("0.0");
         jLabel27.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "MAYO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(252, 252, 252)));
-        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 610, 100, 50));
+        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 780, 100, 50));
 
         jLabel28.setBackground(new java.awt.Color(153, 153, 153));
         jLabel28.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 23)); // NOI18N
@@ -307,7 +307,7 @@ public DadosdeBaja() {
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel28.setText("0.0");
         jLabel28.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "JUNIO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(252, 252, 252)));
-        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 610, 100, 50));
+        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 780, 100, 50));
 
         jLabel29.setBackground(new java.awt.Color(153, 153, 153));
         jLabel29.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 23)); // NOI18N
@@ -315,7 +315,7 @@ public DadosdeBaja() {
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel29.setText("0.0");
         jLabel29.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "JULIO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(252, 252, 252)));
-        getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 610, 100, 50));
+        getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 780, 100, 50));
 
         jLabel30.setBackground(new java.awt.Color(153, 153, 153));
         jLabel30.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 23)); // NOI18N
@@ -323,7 +323,7 @@ public DadosdeBaja() {
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel30.setText("0.0");
         jLabel30.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "AGOSTO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(252, 252, 252)));
-        getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 610, 100, 50));
+        getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 780, 100, 50));
 
         jLabel31.setBackground(new java.awt.Color(153, 153, 153));
         jLabel31.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 23)); // NOI18N
@@ -331,7 +331,7 @@ public DadosdeBaja() {
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel31.setText("0.0");
         jLabel31.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SEPTIEMBRE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(252, 252, 252)));
-        getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 610, 100, 50));
+        getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 780, 100, 50));
 
         jLabel32.setBackground(new java.awt.Color(153, 153, 153));
         jLabel32.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 23)); // NOI18N
@@ -339,7 +339,7 @@ public DadosdeBaja() {
         jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel32.setText("0.0");
         jLabel32.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "OCTUBRE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(252, 252, 252)));
-        getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 610, 100, 50));
+        getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 780, 100, 50));
 
         jLabel33.setBackground(new java.awt.Color(153, 153, 153));
         jLabel33.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 23)); // NOI18N
@@ -347,7 +347,7 @@ public DadosdeBaja() {
         jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel33.setText("0.0");
         jLabel33.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "NOVIEMBRE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(252, 252, 252)));
-        getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 610, 100, 50));
+        getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 780, 100, 50));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/indicac.png"))); // NOI18N
         jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -360,7 +360,7 @@ public DadosdeBaja() {
                 jLabel11MouseDragged(evt);
             }
         });
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 590, 1370, 140));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 760, 1600, 140));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
