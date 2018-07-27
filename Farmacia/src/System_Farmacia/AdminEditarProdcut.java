@@ -383,7 +383,7 @@ private int y;
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 780, 360, 100));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 490, 350, 100));
 
         jLabel25.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(82, 82, 82));
@@ -521,7 +521,7 @@ private int y;
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 470, 710, 290));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 470, 240, 290));
 
         jLabel33.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(82, 82, 82));

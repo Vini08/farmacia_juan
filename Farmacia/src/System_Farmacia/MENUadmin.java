@@ -37,7 +37,7 @@ Connection cnx,conI = null;
 String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
 String pass = "";
-public static String sqlINV = "SELECT codigo_producto, codigo_barra,  categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo,precio_etiqueta, descuento, porciones from producto where Unidades>=0";
+public static String sqlINV = "SELECT codigo_producto, codigo_barra,  categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_etiqueta, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades>=0";
 public static String sqlAGO = "SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades=0";
 public static String sqlPORAGOT = "SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades<alerta_unidades";
 Color grisMoved =new Color(180,180,180);

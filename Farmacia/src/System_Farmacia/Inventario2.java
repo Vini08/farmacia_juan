@@ -35,7 +35,7 @@ private int y;
 public static String url = "jdbc:mysql://localhost:3306/bd_farm";
 public static String user = "root";
 public static String pass = "";
-public static String sql = "SELECT codigo_producto, codigo_barra, categoria, producto, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades>0";
+public static String sql = "SELECT codigo_producto, codigo_barra, categoria, producto, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_etiqueta, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades>0";
 String busqueda;
 Color grisMoved =new Color(180,180,180);
 Color grisborde =new Color(224,224,224);
@@ -695,7 +695,7 @@ jLabel25.setToolTipText(null);
     }//GEN-LAST:event_jLabel26MousePressed
 
     private void jLabel26MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseReleased
-sql = "SELECT codigo_producto,  codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_venta, precio_mayoreo,precio_etiqueta, descuento, porciones from producto where Unidades =0";
+sql = "SELECT codigo_producto,  codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_etiqueta, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades =0";
 LlenarTabla(sql);        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel26MouseReleased
 
@@ -756,7 +756,7 @@ searc=jTextField1.getText();
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
  int row = tablaInventario.getSelectedRow();
-  DESCRPart = tablaInventario.getModel().getValueAt(row, 5).toString();
+  DESCRPart = tablaInventario.getModel().getValueAt(row, 4).toString();
   ShowDescription desc = new ShowDescription();
   desc.setLocationRelativeTo(null);
   desc.setVisible(true);        // TODO add your handling code here:
@@ -937,42 +937,36 @@ public static void columnas(){
     tableColumn1.setHeaderValue( "CATEGORIA" );
     TableColumn tableColumn2 = tableColumnModel.getColumn(3);
     tableColumn2.setHeaderValue( "PRODUCTO" );
-    TableColumn tableColumn3 = tableColumnModel.getColumn(4);
-    tableColumn3.setHeaderValue( "PROVEEDOR" );
-    TableColumn tableColumn4 = tableColumnModel.getColumn(5);
+      TableColumn tableColumn4 = tableColumnModel.getColumn(4);
     tableColumn4.setHeaderValue( "DESCRIPCION" );
-    TableColumn tableColumn6 = tableColumnModel.getColumn(6);
+    TableColumn tableColumn6 = tableColumnModel.getColumn(5);
     tableColumn6.setHeaderValue( "CANT" );
-    TableColumn tableColumn7 = tableColumnModel.getColumn(7);
-    tableColumn7.setHeaderValue( "ALERTA" );
-    TableColumn tableColumn8 = tableColumnModel.getColumn(8);
+    TableColumn tableColumn8 = tableColumnModel.getColumn(6);
     tableColumn8.setHeaderValue( "VENCIMIENTO" );
-    TableColumn tableColumn10 = tableColumnModel.getColumn(9);
-    tableColumn10.setHeaderValue( "VENTA" );
-    TableColumn tableColumn11 = tableColumnModel.getColumn(10);
-    tableColumn11.setHeaderValue( "MAYOREO" );
-    TableColumn tableColumn12 = tableColumnModel.getColumn(11);
-    tableColumn12.setHeaderValue( "ETIQUETA" );
-    TableColumn tableColumn13 = tableColumnModel.getColumn(12);
+    TableColumn tableColumn10 = tableColumnModel.getColumn(7);
+    tableColumn10.setHeaderValue( "ETIQUETA" );
+    TableColumn tableColumn11 = tableColumnModel.getColumn(8);
+    tableColumn11.setHeaderValue( "VENTA" );
+    TableColumn tableColumn12 = tableColumnModel.getColumn(9);
+    tableColumn12.setHeaderValue( "MAYOREO" );
+    TableColumn tableColumn13 = tableColumnModel.getColumn(10);
     tableColumn13.setHeaderValue( "DESCUENTO" );
-    TableColumn tableColumn14 = tableColumnModel.getColumn(13);
+    TableColumn tableColumn14 = tableColumnModel.getColumn(11);
     tableColumn14.setHeaderValue( "PORCIONES" );
     tableHeader.repaint();
 
-    tablaInventario.getColumnModel().getColumn(0).setPreferredWidth(15);
-    tablaInventario.getColumnModel().getColumn(1).setPreferredWidth(90);
-    tablaInventario.getColumnModel().getColumn(2).setPreferredWidth(1);
-    tablaInventario.getColumnModel().getColumn(3).setPreferredWidth(480);
-    tablaInventario.getColumnModel().getColumn(4).setPreferredWidth(120);
-    tablaInventario.getColumnModel().getColumn(5).setPreferredWidth(1);
-    tablaInventario.getColumnModel().getColumn(6).setPreferredWidth(50);
-    tablaInventario.getColumnModel().getColumn(7).setPreferredWidth(60);
-    tablaInventario.getColumnModel().getColumn(8).setPreferredWidth(120);
-    tablaInventario.getColumnModel().getColumn(9).setPreferredWidth(80);
-    tablaInventario.getColumnModel().getColumn(0).setPreferredWidth(80);
+    tablaInventario.getColumnModel().getColumn(0).setPreferredWidth(65);
+    tablaInventario.getColumnModel().getColumn(1).setPreferredWidth(140);
+    tablaInventario.getColumnModel().getColumn(2).setPreferredWidth(0);
+    tablaInventario.getColumnModel().getColumn(3).setPreferredWidth(630);
+    tablaInventario.getColumnModel().getColumn(4).setPreferredWidth(1);
+    tablaInventario.getColumnModel().getColumn(5).setPreferredWidth(60);
+    tablaInventario.getColumnModel().getColumn(6).setPreferredWidth(115);
+    tablaInventario.getColumnModel().getColumn(7).setPreferredWidth(100);
+    tablaInventario.getColumnModel().getColumn(8).setPreferredWidth(90);
+    tablaInventario.getColumnModel().getColumn(9).setPreferredWidth(90);
+    tablaInventario.getColumnModel().getColumn(10).setPreferredWidth(80);
     tablaInventario.getColumnModel().getColumn(11).setPreferredWidth(80);
-    tablaInventario.getColumnModel().getColumn(12).setPreferredWidth(80);
-    tablaInventario.getColumnModel().getColumn(13).setPreferredWidth(70);
     tablaInventario.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
     
     }

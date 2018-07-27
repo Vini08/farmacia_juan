@@ -22,13 +22,12 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.*;
-import static System_Farmacia.hacer_ventas.count;
 import FARM.mensajesSYS.VentaExitosa;
-import java.awt.Desktop;
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.io.FileOutputStream;
+import javax.swing.JTable;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 /**
  *
  * @author Vinicio
@@ -75,7 +74,6 @@ public static String clin;
           JTableHeader th; 
           jLabel3.setToolTipText(null);
           jLabel2.setToolTipText(null);
-          jTextField1.setText("");
         th = destino.getTableHeader(); 
         Font fuente = new Font("Microsoft Yi Baiti", Font.PLAIN, 21); 
         destino.setRowHeight(25);
@@ -91,7 +89,8 @@ array_tipo = Array_tip;
 array_Double = Array_Double;
 clin=cli;
 jLabel22.setText(TTV);
- DefaultTableModel modelo = (DefaultTableModel) destino.getModel();
+jTextField1.requestFocus();
+DefaultTableModel modelo = (DefaultTableModel) destino.getModel();
  Object [] fila=new Object[8]; 
     int i = 0;
     int j = 0;
@@ -109,7 +108,7 @@ jLabel22.setText(TTV);
         }   
          
          destino.setModel(modelo);
-        jTextField1.requestFocus();
+        columnas();
         }
 
     /**
@@ -898,7 +897,39 @@ public void insertProd(){
    }
 }
          
+public static void columnas(){
+    JTableHeader tableHeader = destino.getTableHeader();
+    TableColumnModel tableColumnModel = tableHeader.getColumnModel();
+    TableColumn tableColumn0 = tableColumnModel.getColumn(0);
+    tableColumn0.setHeaderValue( "CODIGO" );
+    TableColumn tableColumn1 = tableColumnModel.getColumn(1);
+    tableColumn1.setHeaderValue( "CATEGORIA" );
+    TableColumn tableColumn2 = tableColumnModel.getColumn(2);
+    tableColumn2.setHeaderValue( "PRODUCTO" );
+    TableColumn tableColumn3 = tableColumnModel.getColumn(3);
+    tableColumn3.setHeaderValue( "PRECIO" );
+    TableColumn tableColumn4 = tableColumnModel.getColumn(4);
+    tableColumn4.setHeaderValue( "DESCUENTO" );
+    TableColumn tableColumn5 = tableColumnModel.getColumn(5);
+    tableColumn5.setHeaderValue( "UNIDADES" );
+    TableColumn tableColumn6 = tableColumnModel.getColumn(6);
+    tableColumn6.setHeaderValue( "TOTAL" );
+    TableColumn tableColumn7 = tableColumnModel.getColumn(7);
+    tableColumn7.setHeaderValue( "TIPO" );
 
+    tableHeader.repaint();
+
+    destino.getColumnModel().getColumn(0).setPreferredWidth(95);
+    destino.getColumnModel().getColumn(1).setPreferredWidth(165);
+    destino.getColumnModel().getColumn(2).setPreferredWidth(590);
+    destino.getColumnModel().getColumn(3).setPreferredWidth(100);
+    destino.getColumnModel().getColumn(4).setPreferredWidth(120);
+    destino.getColumnModel().getColumn(5).setPreferredWidth(110);
+    destino.getColumnModel().getColumn(6).setPreferredWidth(110);
+    destino.getColumnModel().getColumn(7).setPreferredWidth(90);
+    destino.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+    
+    }
   
 }
 

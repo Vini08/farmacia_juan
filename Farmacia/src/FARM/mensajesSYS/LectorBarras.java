@@ -224,8 +224,9 @@ Connection cnx = null;
             n = res.getString(1);
             mayoris = res.getString(2);
             if (n.equals(nombre) ){
-                 hacer_ventas.buscarMayoristas();
+                 hacer_ventas.buscarMayoristas("");
                  hacer_ventas.jLabel13.setText("NOMBRE DE CLIENTE: "+mayoris);
+                 hacer_ventas.find.setVisible(false);
                  mayoreo=1;
                  this.dispose();
             }
