@@ -27,6 +27,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import static System_Farmacia.inventario.tablaInventario;
+import javax.swing.JTable;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -299,7 +302,7 @@ LLenarDELAL(delDia,alDia);
         });
         jScrollPane1.setViewportView(tablaVentas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 1560, 660));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1600, 660));
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/barraMensajes.png"))); // NOI18N
         jLabel20.setPreferredSize(new java.awt.Dimension(367, 70));
@@ -673,7 +676,7 @@ if(pressEnter==KeyEvent.VK_ENTER){
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "Select *from detalle_factura where codigo_factura='"+busq+"'";
+             String sql = "SELECT codigo_detalle_factura, codigo_factura, codigo_producto, producto, unidades, precio_venta, descuento, precio_total, tipo_cliente, fecha from detalle_factura where codigo_factura='"+busq+"'";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
@@ -701,12 +704,13 @@ if(pressEnter==KeyEvent.VK_ENTER){
  
  
  public void sumaT(){
-     double sumatoria1=0.0;
+   columnasDetalle();
+   double sumatoria1=0.0;
         int totalRow= tablaVentas.getRowCount();
         totalRow-=1;
         for(int i=0;i<=(totalRow);i++)
         {
-             double sumatoria= Double.parseDouble(String.valueOf(tablaVentas.getValueAt(i,8)));
+             double sumatoria= Double.parseDouble(String.valueOf(tablaVentas.getValueAt(i, 7)));
              sumatoria1+=sumatoria;
  }
    jLabel13.setText(Double.toString(sumatoria1));
@@ -731,7 +735,7 @@ DefaultTableModel modelo = new DefaultTableModel();
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "SELECT * FROM factura  where DATE(fecha) BETWEEN '"+delDia+"' AND '"+alDia+"'";
+             String sql = "SELECT *FROM factura  where DATE(fecha) BETWEEN '"+delDia+"' AND '"+alDia+"'";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
@@ -759,6 +763,76 @@ DefaultTableModel modelo = new DefaultTableModel();
                 Logger.getLogger(LoginGT.class.getName()).log(Level.SEVERE, null, ex);
             } 
             }   
+        columnasFactura();
+    }
+  
+  public static void columnasFactura(){
+    JTableHeader tableHeader = tablaVentas.getTableHeader();
+    TableColumnModel tableColumnModel = tableHeader.getColumnModel();
+    TableColumn tableColumn0 = tableColumnModel.getColumn(0);
+    tableColumn0.setHeaderValue( "CODIGO FACTURA" );
+    TableColumn tableColumn15 = tableColumnModel.getColumn(1);
+    tableColumn15.setHeaderValue( "USUARIO" );
+    TableColumn tableColumn2 = tableColumnModel.getColumn(2);
+    tableColumn2.setHeaderValue( "EFECTIVO" );
+      TableColumn tableColumn4 = tableColumnModel.getColumn(3);
+    tableColumn4.setHeaderValue( "CAMBIO" );
+    TableColumn tableColumn6 = tableColumnModel.getColumn(4);
+    tableColumn6.setHeaderValue( "TOTAL DE FACTURA" );
+    TableColumn tableColumn10 = tableColumnModel.getColumn(5);
+    tableColumn10.setHeaderValue( "FECHA DE FACTURA" );
+    TableColumn tableColumn11 = tableColumnModel.getColumn(6);
+    tableColumn11.setHeaderValue( "HORA DE FACTURA" );
+    tableHeader.repaint();
+
+    tablaVentas.getColumnModel().getColumn(0).setPreferredWidth(55);
+    tablaVentas.getColumnModel().getColumn(1).setPreferredWidth(65);
+    tablaVentas.getColumnModel().getColumn(2).setPreferredWidth(140);
+    tablaVentas.getColumnModel().getColumn(3).setPreferredWidth(100);
+    tablaVentas.getColumnModel().getColumn(4).setPreferredWidth(100);
+    tablaVentas.getColumnModel().getColumn(5).setPreferredWidth(90);
+    tablaVentas.getColumnModel().getColumn(6).setPreferredWidth(90);
+    tablaVentas.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+    
+    }
+
+public static void columnasDetalle(){
+    JTableHeader tableHeader = tablaVentas.getTableHeader();
+    TableColumnModel tableColumnModel = tableHeader.getColumnModel();
+    TableColumn tableColumn12 = tableColumnModel.getColumn(0);
+    tableColumn12.setHeaderValue( "C. DETALLE" );
+    TableColumn tableColumn0 = tableColumnModel.getColumn(1);
+    tableColumn0.setHeaderValue( "C. FACTURA" );
+    TableColumn tableColumn15 = tableColumnModel.getColumn(2);
+    tableColumn15.setHeaderValue( "C. PRODUCTO" );
+    TableColumn tableColumn2 = tableColumnModel.getColumn(3);
+    tableColumn2.setHeaderValue( "PRODUCTO" );
+      TableColumn tableColumn4 = tableColumnModel.getColumn(4);
+    tableColumn4.setHeaderValue( "CANT" );
+    TableColumn tableColumn6 = tableColumnModel.getColumn(5);
+    tableColumn6.setHeaderValue( "VENTA" );
+    TableColumn tableColumn10 = tableColumnModel.getColumn(6);
+    tableColumn10.setHeaderValue( "DESCUENTO" );
+    TableColumn tableColumn11 = tableColumnModel.getColumn(7);
+    tableColumn11.setHeaderValue( "TOTAL" );
+    TableColumn tableColumn14 = tableColumnModel.getColumn(8);
+    tableColumn14.setHeaderValue( "CLIENTE" );
+    TableColumn tableColumn13 = tableColumnModel.getColumn(9);
+    tableColumn13.setHeaderValue( "FECHA" );
+    tableHeader.repaint();
+
+    tablaVentas.getColumnModel().getColumn(0).setPreferredWidth(125);
+    tablaVentas.getColumnModel().getColumn(1).setPreferredWidth(125);
+    tablaVentas.getColumnModel().getColumn(2).setPreferredWidth(135);
+    tablaVentas.getColumnModel().getColumn(3).setPreferredWidth(630);
+    tablaVentas.getColumnModel().getColumn(4).setPreferredWidth(60);
+    tablaVentas.getColumnModel().getColumn(5).setPreferredWidth(80);
+    tablaVentas.getColumnModel().getColumn(6).setPreferredWidth(120);
+    tablaVentas.getColumnModel().getColumn(7).setPreferredWidth(100);
+    tablaVentas.getColumnModel().getColumn(8).setPreferredWidth(90);
+    tablaVentas.getColumnModel().getColumn(9).setPreferredWidth(130);
+    tablaVentas.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+    
     }
 }
 

@@ -875,8 +875,8 @@ try
       String query = "delete from producto where codigo_producto= ? && categoria = ? && producto= ?";
       PreparedStatement preparedStmt = cnx.prepareStatement(query);
       preparedStmt.setString(1,(String) tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 0));
-      preparedStmt.setString(2,(String) tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 1));
-      preparedStmt.setString(3, (String) tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 2));
+      preparedStmt.setString(2,(String) tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 2));
+      preparedStmt.setString(3, (String) tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 3));
 
       preparedStmt.execute();
       cnx.close();
@@ -913,7 +913,7 @@ code =  (String) tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 0)
 mark =  (String) tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 2);
 model =  (String) tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 3);
 units = (int) tablaInventario.getValueAt(tablaInventario.getSelectedRow(),6);
-PreV =  (BigDecimal) tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 9);
+PreV =  (BigDecimal) tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 11);
 
 DarBaja baja = new DarBaja(code, mark,model,units,PreV);
 baja.setVisible(true);

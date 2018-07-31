@@ -35,7 +35,7 @@ private int y;
 public static String url = "jdbc:mysql://localhost:3306/bd_farm";
 public static String user = "root";
 public static String pass = "";
-public static String sql = "SELECT codigo_producto, codigo_barra, categoria, producto, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_etiqueta, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades>0";
+public static String sql = "SELECT No, codigo_producto, codigo_barra, codigo_barra, producto,  descripcion, unidades,  precio_etiqueta, precio_venta, fecha_vencimiento, descuento, precio_mayoreo from producto where Unidades>0";
 String busqueda;
 Color grisMoved =new Color(180,180,180);
 Color grisborde =new Color(224,224,224);
@@ -614,7 +614,7 @@ y = evt.getY();         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel24MousePressed
 
     private void jLabel24MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseReleased
-LlenarTabla("SELECT codigo_producto, codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_venta, precio_mayoreo,precio_etiqueta, descuento, porciones from producto where Unidades>=0");  
+LlenarTabla("SELECT No, codigo_producto, codigo_barra,  producto,  descripcion, unidades,  precio_etiqueta, precio_venta, fecha_vencimiento, descuento, precio_mayoreo from producto where Unidades>=0");  
 jTextField1.setText("");// TODO add your handling code here:
     }//GEN-LAST:event_jLabel24MouseReleased
 
@@ -695,7 +695,7 @@ jLabel25.setToolTipText(null);
     }//GEN-LAST:event_jLabel26MousePressed
 
     private void jLabel26MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseReleased
-sql = "SELECT codigo_producto,  codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_etiqueta, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades =0";
+sql = "SELECT No, codigo_producto, codigo_barra,  producto,  descripcion, unidades,  precio_etiqueta, precio_venta, fecha_vencimiento, descuento, precio_mayoreo from producto where Unidades =0";
 LlenarTabla(sql);        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel26MouseReleased
 
@@ -901,7 +901,7 @@ searc=jTextField1.getText();
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "SELECT codigo_producto,  codigo_barra, categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento,  precio_venta, precio_mayoreo, precio_etiqueta, descuento, porciones from producto where codigo_producto like '"+busq+"%' or "+"producto like '"+busq+"%'"+" or "+"categoria like '"+busq+"%' or descripcion like '"+busq+"%' or codigo_barra like '"+busq+"%'";
+             String sql = "SELECT No, codigo_producto, codigo_barra,  producto,  descripcion, unidades,  precio_etiqueta, precio_venta, fecha_vencimiento, descuento, precio_mayoreo from producto where codigo_producto like '"+busq+"%' or "+"producto like '"+busq+"%'"+" or "+"categoria like '"+busq+"%' or descripcion like '"+busq+"%' or codigo_barra like '"+busq+"%'";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
@@ -929,44 +929,41 @@ searc=jTextField1.getText();
 public static void columnas(){
     JTableHeader tableHeader = tablaInventario.getTableHeader();
     TableColumnModel tableColumnModel = tableHeader.getColumnModel();
-    TableColumn tableColumn0 = tableColumnModel.getColumn(0);
+    TableColumn tableColumn12 = tableColumnModel.getColumn(0);
+    tableColumn12.setHeaderValue( "#" );
+    TableColumn tableColumn0 = tableColumnModel.getColumn(1);
     tableColumn0.setHeaderValue( "CODIGO" );
-    TableColumn tableColumn15 = tableColumnModel.getColumn(1);
+    TableColumn tableColumn15 = tableColumnModel.getColumn(2);
     tableColumn15.setHeaderValue( "CODIGO BARRA" );
-    TableColumn tableColumn1 = tableColumnModel.getColumn(2);
-    tableColumn1.setHeaderValue( "CATEGORIA" );
     TableColumn tableColumn2 = tableColumnModel.getColumn(3);
     tableColumn2.setHeaderValue( "PRODUCTO" );
       TableColumn tableColumn4 = tableColumnModel.getColumn(4);
-    tableColumn4.setHeaderValue( "DESCRIPCION" );
+    tableColumn4.setHeaderValue( "." );
     TableColumn tableColumn6 = tableColumnModel.getColumn(5);
-    tableColumn6.setHeaderValue( "CANT" );
-    TableColumn tableColumn8 = tableColumnModel.getColumn(6);
-    tableColumn8.setHeaderValue( "VENCIMIENTO" );
-    TableColumn tableColumn10 = tableColumnModel.getColumn(7);
+    tableColumn6.setHeaderValue( "CANTIDAD" );
+    TableColumn tableColumn10 = tableColumnModel.getColumn(6);
     tableColumn10.setHeaderValue( "ETIQUETA" );
-    TableColumn tableColumn11 = tableColumnModel.getColumn(8);
+    TableColumn tableColumn11 = tableColumnModel.getColumn(7);
     tableColumn11.setHeaderValue( "VENTA" );
-    TableColumn tableColumn12 = tableColumnModel.getColumn(9);
-    tableColumn12.setHeaderValue( "MAYOREO" );
-    TableColumn tableColumn13 = tableColumnModel.getColumn(10);
+    TableColumn tableColumn14 = tableColumnModel.getColumn(8);
+    tableColumn14.setHeaderValue( "VENCIMIENTO" );
+    TableColumn tableColumn13 = tableColumnModel.getColumn(9);
     tableColumn13.setHeaderValue( "DESCUENTO" );
-    TableColumn tableColumn14 = tableColumnModel.getColumn(11);
-    tableColumn14.setHeaderValue( "PORCIONES" );
+    TableColumn tableColumn17 = tableColumnModel.getColumn(10);
+    tableColumn17.setHeaderValue( "MAYOREO" );
     tableHeader.repaint();
 
-    tablaInventario.getColumnModel().getColumn(0).setPreferredWidth(65);
-    tablaInventario.getColumnModel().getColumn(1).setPreferredWidth(140);
-    tablaInventario.getColumnModel().getColumn(2).setPreferredWidth(0);
-    tablaInventario.getColumnModel().getColumn(3).setPreferredWidth(630);
-    tablaInventario.getColumnModel().getColumn(4).setPreferredWidth(1);
-    tablaInventario.getColumnModel().getColumn(5).setPreferredWidth(60);
-    tablaInventario.getColumnModel().getColumn(6).setPreferredWidth(115);
+    tablaInventario.getColumnModel().getColumn(0).setPreferredWidth(45);
+    tablaInventario.getColumnModel().getColumn(1).setPreferredWidth(65);
+    tablaInventario.getColumnModel().getColumn(2).setPreferredWidth(140);
+    tablaInventario.getColumnModel().getColumn(3).setPreferredWidth(670);
+    tablaInventario.getColumnModel().getColumn(4).setPreferredWidth(0);
+    tablaInventario.getColumnModel().getColumn(5).setPreferredWidth(90);
+    tablaInventario.getColumnModel().getColumn(6).setPreferredWidth(90);
     tablaInventario.getColumnModel().getColumn(7).setPreferredWidth(100);
-    tablaInventario.getColumnModel().getColumn(8).setPreferredWidth(90);
-    tablaInventario.getColumnModel().getColumn(9).setPreferredWidth(90);
-    tablaInventario.getColumnModel().getColumn(10).setPreferredWidth(80);
-    tablaInventario.getColumnModel().getColumn(11).setPreferredWidth(80);
+    tablaInventario.getColumnModel().getColumn(8).setPreferredWidth(115);
+    tablaInventario.getColumnModel().getColumn(9).setPreferredWidth(100);
+    tablaInventario.getColumnModel().getColumn(10).setPreferredWidth(100);
     tablaInventario.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
     
     }

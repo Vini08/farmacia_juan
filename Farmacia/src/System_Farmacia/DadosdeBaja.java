@@ -34,6 +34,7 @@ public static String user = "root";
 public static String pass = "";
 public static String auxST;
 String a ,b;
+int x,y;
 Color grisMoved =new Color(180,180,180);
 Color grisborde =new Color(224,224,224);
 Color grisPress =new Color(179,179,179);
@@ -102,9 +103,9 @@ public DadosdeBaja() {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dados de Baja");
         setBackground(new java.awt.Color(153, 153, 153));
-        setMinimumSize(new java.awt.Dimension(449, 401));
+        setMinimumSize(new java.awt.Dimension(1600, 900));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1370, 730));
+        setPreferredSize(new java.awt.Dimension(1600, 900));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -234,12 +235,20 @@ public DadosdeBaja() {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 1560, 510));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 1560, 680));
 
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/grisFondo.jpg"))); // NOI18N
         jLabel19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Yi Baiti", 0, 22), new java.awt.Color(102, 102, 102))); // NOI18N
+        jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel19MousePressed(evt);
+            }
+        });
         jLabel19.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel19MouseDragged(evt);
+            }
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 jLabel19MouseMoved(evt);
             }
@@ -466,6 +475,15 @@ public DadosdeBaja() {
    
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1KeyPressed
+
+    private void jLabel19MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseDragged
+        this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);          // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel19MouseDragged
+
+    private void jLabel19MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MousePressed
+x = evt.getX();
+y = evt.getY();        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel19MousePressed
 
     /**
      * @param args the command line arguments

@@ -83,6 +83,7 @@ private int y;
         jTextField12.setText(Integer.toString(alerta));
         jTextField13.setText(String.valueOf(price3));
         jTextArea1.setText(descriptio);
+        jLabel17.setText("");
         Date date = new SimpleDateFormat("dd/MM/yyyy").parse(fechas);
         jDateChooser1.setDate(date);
     } catch (ParseException ex) {
@@ -148,6 +149,7 @@ private int y;
         jLabel33 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nuevo Producto");
@@ -328,17 +330,22 @@ private int y;
         jLabel15.setText("PRECIO MAYOREO");
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 130, 590, 30));
 
-        jLabel17.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel17.setFont(new java.awt.Font("Microsoft Tai Le", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(0, 153, 153));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("DESCRIPCION");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 440, 580, 30));
+        jLabel17.setText("mensaje");
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 810, 460, 40));
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(153, 153, 153));
         jTextField1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.setBorder(null);
+        jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField1MouseClicked(evt);
+            }
+        });
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 460, 40));
 
         jTextField2.setEditable(false);
@@ -346,12 +353,22 @@ private int y;
         jTextField2.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField2.setBorder(null);
+        jTextField2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField2MouseClicked(evt);
+            }
+        });
         getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 460, 40));
 
         jTextField3.setBackground(new java.awt.Color(153, 153, 153));
         jTextField3.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField3.setBorder(null);
+        jTextField3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField3MouseClicked(evt);
+            }
+        });
         getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 480, 460, 40));
 
         jTextField4.setEditable(false);
@@ -359,12 +376,22 @@ private int y;
         jTextField4.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField4.setBorder(null);
+        jTextField4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField4MouseClicked(evt);
+            }
+        });
         getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, 460, 40));
 
         jTextField5.setBackground(new java.awt.Color(153, 153, 153));
         jTextField5.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField5.setBorder(null);
+        jTextField5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField5MouseClicked(evt);
+            }
+        });
         getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 80, 590, 40));
 
         jLabel23.setFont(new java.awt.Font("Microsoft Tai Le", 0, 10)); // NOI18N
@@ -383,7 +410,7 @@ private int y;
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 490, 350, 100));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 770, 390, 120));
 
         jLabel25.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(82, 82, 82));
@@ -395,12 +422,22 @@ private int y;
         jTextField6.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField6.setBorder(null);
+        jTextField6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField6MouseClicked(evt);
+            }
+        });
         getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 160, 590, 40));
 
         jTextField8.setBackground(new java.awt.Color(153, 153, 153));
         jTextField8.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField8.setBorder(null);
+        jTextField8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField8MouseClicked(evt);
+            }
+        });
         getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, 460, 40));
 
         jLabel27.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
@@ -415,13 +452,18 @@ private int y;
         jLabel30.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(82, 82, 82));
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel30.setText("CANTIDADES QUE SE DESCONTARAN");
+        jLabel30.setText("¿CUALES SERAN LOS DESCUENTOS?");
         getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 210, 590, 30));
 
         jTextField9.setBackground(new java.awt.Color(153, 153, 153));
         jTextField9.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField9.setBorder(null);
+        jTextField9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField9MouseClicked(evt);
+            }
+        });
         jTextField9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField9ActionPerformed(evt);
@@ -433,6 +475,11 @@ private int y;
         jTextField10.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField10.setBorder(null);
+        jTextField10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField10MouseClicked(evt);
+            }
+        });
         getContentPane().add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 720, 460, 40));
 
         jLabel31.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
@@ -451,6 +498,11 @@ private int y;
         jTextField11.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField11.setBorder(null);
+        jTextField11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField11MouseClicked(evt);
+            }
+        });
         jTextField11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField11ActionPerformed(evt);
@@ -462,6 +514,11 @@ private int y;
         jTextField12.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField12.setBorder(null);
+        jTextField12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField12MouseClicked(evt);
+            }
+        });
         jTextField12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField12ActionPerformed(evt);
@@ -502,6 +559,11 @@ private int y;
         jTextField13.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField13.setBorder(null);
+        jTextField13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField13MouseClicked(evt);
+            }
+        });
         jTextField13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField13ActionPerformed(evt);
@@ -521,7 +583,7 @@ private int y;
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 470, 240, 290));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 470, 590, 290));
 
         jLabel33.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(82, 82, 82));
@@ -533,6 +595,11 @@ private int y;
         jTextField7.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField7.setBorder(null);
+        jTextField7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField7MouseClicked(evt);
+            }
+        });
         getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 460, 40));
 
         jLabel20.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
@@ -540,6 +607,12 @@ private int y;
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("CATEGORIA");
         getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 460, 30));
+
+        jLabel29.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel29.setText("DESCRIPCION");
+        getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 440, 580, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -701,6 +774,58 @@ private int y;
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField13ActionPerformed
 
+    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
+jLabel17.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1MouseClicked
+
+    private void jTextField7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField7MouseClicked
+        jLabel17.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField7MouseClicked
+
+    private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
+jLabel17.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2MouseClicked
+
+    private void jTextField8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField8MouseClicked
+jLabel17.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8MouseClicked
+
+    private void jTextField4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField4MouseClicked
+jLabel17.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4MouseClicked
+
+    private void jTextField3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField3MouseClicked
+jLabel17.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3MouseClicked
+
+    private void jTextField12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField12MouseClicked
+jLabel17.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField12MouseClicked
+
+    private void jTextField13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField13MouseClicked
+jLabel17.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField13MouseClicked
+
+    private void jTextField10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField10MouseClicked
+jLabel17.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField10MouseClicked
+
+    private void jTextField5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField5MouseClicked
+jLabel17.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5MouseClicked
+
+    private void jTextField6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField6MouseClicked
+jLabel17.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6MouseClicked
+
+    private void jTextField9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField9MouseClicked
+jLabel17.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField9MouseClicked
+
+    private void jTextField11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField11MouseClicked
+jLabel17.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField11MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -770,6 +895,7 @@ private int y;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
@@ -822,13 +948,8 @@ private int y;
            cmst.setString(15,desc);
            cmst.setString(16,checks);
            cmst.execute();            
-       
+       jLabel17.setText("Los datos se modificaron correctamente.");
         conn.close();
-        this.dispose();
-        
-        datosAlmacenados v = new datosAlmacenados();
-        v.setVisible(true);
-        v.setLocationRelativeTo(null);
         
         }catch(SQLException sqlex){
          JOptionPane.showMessageDialog(this,sqlex);
