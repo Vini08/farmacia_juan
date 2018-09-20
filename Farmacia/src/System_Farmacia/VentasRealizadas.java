@@ -5,7 +5,6 @@
  */
 package System_Farmacia;
 
-import static System_Farmacia.inventario.tablaInventario;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
@@ -16,12 +15,9 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -40,11 +36,13 @@ private int x;
 private int y;
 static int w=0; 
 public boolean check=true;
+ 
+
 static String inv[]=new String[5000];
 static String GN[]=new String[5000];
-String url = "jdbc:mysql://localhost:3306/bd_farm";
-String user = "root";
-String pass = "";
+static String url = "jdbc:mysql://localhost:3306/bd_farm";
+static String user = "root";
+static String pass = "";
 int busqueda;
 Color grisMoved =new Color(180,180,180);
 Color grisborde =new Color(224,224,224);
@@ -116,10 +114,12 @@ static float invT=0;
         setTitle("Ventas Realizadas");
         setMinimumSize(new java.awt.Dimension(1600, 900));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1600, 900));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 formMouseEntered(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
             }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -131,6 +131,9 @@ static float invT=0;
             }
         });
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 formMouseMoved(evt);
             }
@@ -341,7 +344,7 @@ static float invT=0;
                 jLabel26MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 670, 240, 140));
+        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 670, 290, 140));
 
         jButton10.setBackground(new java.awt.Color(39, 39, 39));
         jButton10.setForeground(new java.awt.Color(3, 64, 124));
@@ -515,7 +518,7 @@ static float invT=0;
                 jLabel29MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, 240, 140));
+        getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, 280, 140));
 
         jButton11.setBackground(new java.awt.Color(138, 33, 33));
         jButton11.setForeground(new java.awt.Color(3, 64, 124));
@@ -767,10 +770,7 @@ LLenarDELAL(delDia,alDia);        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel28MouseExited
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
-if(check==true){
-    LlenarTabla();
-    check=false;
-}// TODO add your handling code here:
+// TODO add your handling code here:
     }//GEN-LAST:event_formMouseEntered
 
     private void tablaVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVentasMouseEntered
@@ -782,10 +782,7 @@ if(check==true){
     }//GEN-LAST:event_formWindowOpened
 
     private void tablaVentasMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVentasMouseMoved
-if(check==true){
-    LlenarTabla();
-    check=false;
-}        // TODO add your handling code here:
+       // TODO add your handling code here:
     }//GEN-LAST:event_tablaVentasMouseMoved
 
     private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
@@ -866,6 +863,15 @@ dev.setLocationRelativeTo(null);// TODO add your handling code here:
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);           // TODO add your handling code here:
+    }//GEN-LAST:event_formMouseDragged
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+x = evt.getX();
+        y = evt.getY();          // TODO add your handling code here:
+    }//GEN-LAST:event_formMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -928,7 +934,7 @@ dev.setLocationRelativeTo(null);// TODO add your handling code here:
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
+    public static javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -948,15 +954,15 @@ dev.setLocationRelativeTo(null);// TODO add your handling code here:
     private static javax.swing.JTable tablaVentas;
     // End of variables declaration//GEN-END:variables
 
- public void LlenarTabla(){
+ public static void LlenarTabla(){
         DefaultTableModel modelo = new DefaultTableModel();
         tablaVentas.setModel(modelo);
-        Connection cnx = null;
+     Connection cnx = null;
         if (cnx == null) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "Select *from factura";
+             String sql = "SELECT * FROM bd_farm.factura;";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
@@ -965,20 +971,21 @@ dev.setLocationRelativeTo(null);// TODO add your handling code here:
             modelo.addColumn(rsMd.getColumnLabel(i));
          }
          while (res.next()){
-             inv[w] = res.getString(3);
+                     inv[w] = res.getString(5);
                     Float auxo = Float.parseFloat(inv[w]);
                     invT = invT + auxo;
                     w++;
-         Object[] fila = new Object[cantidadColumnas];
-         for (int i = 0; i < cantidadColumnas; i++) {
-         fila[i]=res.getObject(i+1);
-         }
+                    Object[] fila = new Object[cantidadColumnas];
+                    for (int i = 0; i < cantidadColumnas; i++) {
+                    fila[i]=res.getObject(i+1);
+                    }
               modelo.addRow(fila);
              
              }
          
          jLabel13.setText(""+invT);
          invT = 0;
+         columnasFactura();
              } catch (ClassNotFoundException ex) {
              throw new ClassCastException(ex.getMessage());
              } catch (SQLException ex) { 
@@ -995,7 +1002,7 @@ dev.setLocationRelativeTo(null);// TODO add your handling code here:
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "Select *from detalle_factura where codigo_factura='"+busq+"'";
+             String sql = "SELECT codigo_detalle_factura, codigo_factura, codigo_producto, producto, unidades, precio_venta, descuento, precio_total, tipo_cliente, fecha from detalle_factura where codigo_factura='"+busq+"'";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
@@ -1019,7 +1026,7 @@ dev.setLocationRelativeTo(null);// TODO add your handling code here:
             } 
         sumaT();
             }
-        columnas();
+        columnasDetalle();
     }
  
  
@@ -1029,7 +1036,7 @@ dev.setLocationRelativeTo(null);// TODO add your handling code here:
         totalRow-=1;
         for(int i=0;i<=(totalRow);i++)
         {
-             double sumatoria= Double.parseDouble(String.valueOf(tablaVentas.getValueAt(i,8)));
+             double sumatoria= Double.parseDouble(String.valueOf(tablaVentas.getValueAt(i,7)));
              sumatoria1+=sumatoria;
  }
    jLabel13.setText(Double.toString(sumatoria1));
@@ -1063,7 +1070,7 @@ DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn(rsMd.getColumnLabel(i));
          }
          while (res.next()){
-             inv[w] = res.getString(3);
+             inv[w] = res.getString(5);
                     Float auxo = Float.parseFloat(inv[w]);
                     invT = invT + auxo;
                     w++;
@@ -1076,6 +1083,7 @@ DefaultTableModel modelo = new DefaultTableModel();
              }
          jLabel13.setText(""+invT);
          invT = 0;
+         columnasFactura();
              } catch (ClassNotFoundException ex) {
              throw new ClassCastException(ex.getMessage());
              } catch (SQLException ex) { 
@@ -1084,44 +1092,70 @@ DefaultTableModel modelo = new DefaultTableModel();
             }   
     }
   
-  public static void columnas(){
+ public static void columnasFactura(){
     JTableHeader tableHeader = tablaVentas.getTableHeader();
     TableColumnModel tableColumnModel = tableHeader.getColumnModel();
     TableColumn tableColumn0 = tableColumnModel.getColumn(0);
-    tableColumn0.setHeaderValue( "DETALLE" );
-    TableColumn tableColumn1 = tableColumnModel.getColumn(1);
-    tableColumn1.setHeaderValue( "FACTURA" );
+    tableColumn0.setHeaderValue( "CODIGO FACTURA" );
+    TableColumn tableColumn15 = tableColumnModel.getColumn(1);
+    tableColumn15.setHeaderValue( "USUARIO" );
     TableColumn tableColumn2 = tableColumnModel.getColumn(2);
-    tableColumn2.setHeaderValue( "CODIGO" );
-    TableColumn tableColumn3 = tableColumnModel.getColumn(3);
-    tableColumn3.setHeaderValue( "CATEGORIA" );
-    TableColumn tableColumn4 = tableColumnModel.getColumn(4);
-    tableColumn4.setHeaderValue( "PRODUCTO" );
-    TableColumn tableColumn6 = tableColumnModel.getColumn(5);
-    tableColumn6.setHeaderValue( "CANT" );
-    TableColumn tableColumn7 = tableColumnModel.getColumn(6);
-    tableColumn7.setHeaderValue( "VENTA" );
-    TableColumn tableColumn8 = tableColumnModel.getColumn(7);
-    tableColumn8.setHeaderValue( "DESCUENTO" );
-    TableColumn tableColumn9 = tableColumnModel.getColumn(8);
-    tableColumn9.setHeaderValue( "TOTAL" );
-    TableColumn tableColumn10 = tableColumnModel.getColumn(9);
-    tableColumn10.setHeaderValue( "TIPO_CLIENTE" );
-    TableColumn tableColumn11 = tableColumnModel.getColumn(10);
-    tableColumn11.setHeaderValue( "FECHA" );
+    tableColumn2.setHeaderValue( "EFECTIVO" );
+      TableColumn tableColumn4 = tableColumnModel.getColumn(3);
+    tableColumn4.setHeaderValue( "CAMBIO" );
+    TableColumn tableColumn6 = tableColumnModel.getColumn(4);
+    tableColumn6.setHeaderValue( "TOTAL DE FACTURA" );
+    TableColumn tableColumn10 = tableColumnModel.getColumn(5);
+    tableColumn10.setHeaderValue( "FECHA DE FACTURA" );
+    TableColumn tableColumn11 = tableColumnModel.getColumn(6);
+    tableColumn11.setHeaderValue( "HORA DE FACTURA" );
     tableHeader.repaint();
 
-    tablaVentas.getColumnModel().getColumn(0).setPreferredWidth(75);
-    tablaVentas.getColumnModel().getColumn(1).setPreferredWidth(80);
-    tablaVentas.getColumnModel().getColumn(2).setPreferredWidth(70);
-    tablaVentas.getColumnModel().getColumn(3).setPreferredWidth(120);
-    tablaVentas.getColumnModel().getColumn(4).setPreferredWidth(350);
-    tablaVentas.getColumnModel().getColumn(5).setPreferredWidth(50);
-    tablaVentas.getColumnModel().getColumn(6).setPreferredWidth(70);
-    tablaVentas.getColumnModel().getColumn(7).setPreferredWidth(110);
-    tablaVentas.getColumnModel().getColumn(8).setPreferredWidth(60);
-    tablaVentas.getColumnModel().getColumn(9).setPreferredWidth(120);
-    tablaVentas.getColumnModel().getColumn(10).setPreferredWidth(110);
+    tablaVentas.getColumnModel().getColumn(0).setPreferredWidth(55);
+    tablaVentas.getColumnModel().getColumn(1).setPreferredWidth(65);
+    tablaVentas.getColumnModel().getColumn(2).setPreferredWidth(140);
+    tablaVentas.getColumnModel().getColumn(3).setPreferredWidth(100);
+    tablaVentas.getColumnModel().getColumn(4).setPreferredWidth(100);
+    tablaVentas.getColumnModel().getColumn(5).setPreferredWidth(90);
+    tablaVentas.getColumnModel().getColumn(6).setPreferredWidth(90);
+    tablaVentas.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+    }
+ 
+ public static void columnasDetalle(){
+    JTableHeader tableHeader = tablaVentas.getTableHeader();
+    TableColumnModel tableColumnModel = tableHeader.getColumnModel();
+    TableColumn tableColumn12 = tableColumnModel.getColumn(0);
+    tableColumn12.setHeaderValue( "C. DETALLE" );
+    TableColumn tableColumn0 = tableColumnModel.getColumn(1);
+    tableColumn0.setHeaderValue( "C. FACTURA" );
+    TableColumn tableColumn15 = tableColumnModel.getColumn(2);
+    tableColumn15.setHeaderValue( "C. PRODUCTO" );
+    TableColumn tableColumn2 = tableColumnModel.getColumn(3);
+    tableColumn2.setHeaderValue( "PRODUCTO" );
+      TableColumn tableColumn4 = tableColumnModel.getColumn(4);
+    tableColumn4.setHeaderValue( "CANT" );
+    TableColumn tableColumn6 = tableColumnModel.getColumn(5);
+    tableColumn6.setHeaderValue( "VENTA" );
+    TableColumn tableColumn10 = tableColumnModel.getColumn(6);
+    tableColumn10.setHeaderValue( "DESCUENTO" );
+    TableColumn tableColumn11 = tableColumnModel.getColumn(7);
+    tableColumn11.setHeaderValue( "TOTAL" );
+    TableColumn tableColumn14 = tableColumnModel.getColumn(8);
+    tableColumn14.setHeaderValue( "CLIENTE" );
+    TableColumn tableColumn13 = tableColumnModel.getColumn(9);
+    tableColumn13.setHeaderValue( "FECHA" );
+    tableHeader.repaint();
+
+    tablaVentas.getColumnModel().getColumn(0).setPreferredWidth(125);
+    tablaVentas.getColumnModel().getColumn(1).setPreferredWidth(125);
+    tablaVentas.getColumnModel().getColumn(2).setPreferredWidth(135);
+    tablaVentas.getColumnModel().getColumn(3).setPreferredWidth(630);
+    tablaVentas.getColumnModel().getColumn(4).setPreferredWidth(60);
+    tablaVentas.getColumnModel().getColumn(5).setPreferredWidth(80);
+    tablaVentas.getColumnModel().getColumn(6).setPreferredWidth(120);
+    tablaVentas.getColumnModel().getColumn(7).setPreferredWidth(100);
+    tablaVentas.getColumnModel().getColumn(8).setPreferredWidth(90);
+    tablaVentas.getColumnModel().getColumn(9).setPreferredWidth(130);
     tablaVentas.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
     
     }

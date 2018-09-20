@@ -5,6 +5,9 @@
  */
 package FARM.mensajesSYS;
 
+import System_Farmacia.Devoluciones;
+import System_Farmacia.VentasRealizadas;
+import System_Farmacia.inventario;
 import com.sun.awt.AWTUtilities;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -21,26 +24,20 @@ import javax.swing.JOptionPane;
  *
  * @author Vinicio
  */
-public class confirmarDevolucion extends javax.swing.JFrame {
+public class confirmarEliminacion extends javax.swing.JFrame {
 Connection cnx,conI = null;
 static String url = "jdbc:mysql://localhost:3306/bd_farm";
 static String user = "root";
 static String pass = "";
-public static String codigoFact, codigoDetalle,codigoProduct;
-public static int unidades,sumaUnids;
-public static Double total,tt;
-public static BigDecimal total2;
-BigDecimal sumTotal ;
+static String codigo, name;
    
-public confirmarDevolucion(String cF, String cD, String cP, int uP, BigDecimal tP) {
+public confirmarEliminacion( String codPr, String nombre) {
         initComponents();
         setLocationRelativeTo(null);
         AWTUtilities.setWindowOpaque(this, false);
-        codigoFact=cF;
-        codigoDetalle=cD;
-        codigoProduct=cP;
-        unidades=uP;
-        total=tP.doubleValue();
+      codigo = codPr;
+      name = nombre;
+      jLabel8.setText(name);
     }
 
     /**
@@ -52,6 +49,7 @@ public confirmarDevolucion(String cF, String cD, String cP, int uP, BigDecimal t
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel8 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -60,8 +58,9 @@ public confirmarDevolucion(String cF, String cD, String cP, int uP, BigDecimal t
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("OK");
+        setMinimumSize(new java.awt.Dimension(718, 220));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(522, 218));
+        setPreferredSize(new java.awt.Dimension(718, 220));
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 formMouseMoved(evt);
@@ -74,23 +73,33 @@ public confirmarDevolucion(String cF, String cD, String cP, int uP, BigDecimal t
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel8.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 36)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(217, 217, 217));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel8KeyPressed(evt);
+            }
+        });
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 720, 60));
+
         jLabel5.setBackground(new java.awt.Color(153, 153, 153));
-        jLabel5.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 26)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(231, 231, 231));
+        jLabel5.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("¿Esta seguro de hacer la devolución?");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 520, 30));
+        jLabel5.setText("Eliminar Producto de Inventario");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 50));
 
         jLabel7.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(217, 217, 217));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Presione ENTER para confirmar la devolución");
+        jLabel7.setText("Si esta seguro de eliminarlo presione ENTER");
         jLabel7.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jLabel7KeyPressed(evt);
             }
         });
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 520, 50));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 720, 30));
 
         jLabel4.setBackground(new java.awt.Color(153, 153, 153));
         jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 26)); // NOI18N
@@ -102,10 +111,10 @@ public confirmarDevolucion(String cF, String cD, String cP, int uP, BigDecimal t
                 jLabel4MouseReleased(evt);
             }
         });
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 480, 30));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 680, 30));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/corinto.jpg"))); // NOI18N
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 520, 100));
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/fondomorado.jpg"))); // NOI18N
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, -1, 120));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/grisFondo.jpg"))); // NOI18N
         jLabel2.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -113,7 +122,7 @@ public confirmarDevolucion(String cF, String cD, String cP, int uP, BigDecimal t
                 jLabel2KeyPressed(evt);
             }
         });
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 220));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 220));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -131,8 +140,23 @@ this.dispose();
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
 if (evt.getKeyCode()==10){
-rollbackDevo();
+Connection cnx = null;
+try
+    {
+        Class.forName("com.mysql.jdbc.Driver");
+            cnx = DriverManager.getConnection(url, user,pass); 
+      String query = "delete from producto where codigo_producto= ? ";
+      PreparedStatement preparedStmt = cnx.prepareStatement(query);
+      preparedStmt.setString(1,codigo);
 
+      preparedStmt.execute();
+      cnx.close();
+    }
+    catch (Exception e)
+    {
+      JOptionPane.showMessageDialog(this,e);
+    } 
+this.dispose();
 }        // TODO add your handling code here:
     }//GEN-LAST:event_formKeyPressed
 
@@ -144,6 +168,10 @@ rollbackDevo();
     private void jLabel4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseReleased
 this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel4MouseReleased
+
+    private void jLabel8KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel8KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel8KeyPressed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -159,14 +187,46 @@ this.dispose();        // TODO add your handling code here:
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(confirmarDevolucion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(confirmarEliminacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(confirmarDevolucion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(confirmarEliminacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(confirmarDevolucion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(confirmarEliminacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(confirmarDevolucion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(confirmarEliminacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -203,7 +263,7 @@ this.dispose();        // TODO add your handling code here:
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new confirmarDevolucion(codigoFact,codigoDetalle,codigoProduct, unidades, total2).setVisible(true);
+                new confirmarEliminacion(name, codigo).setVisible(true);
             }
         });
     }
@@ -214,66 +274,9 @@ this.dispose();        // TODO add your handling code here:
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
 
-public void rollbackDevo(){
-      int UD;
-      Double tFactur ; 
-      //Selecciona unidad de X producto para despues sumarle lo que se va a devolver y acutalizarlo
-            try{    
-            cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "Select unidades from producto where codigo_producto='"+codigoProduct+"'";
-             Statement st = cnx.prepareStatement(sql);
-             ResultSet res = st.executeQuery(sql);
-             
-            while (res.next()){  
-            UD  = res.getInt(1);
-      conI = DriverManager.getConnection(url, user,pass);
-      String query = "update producto set unidades = ? where codigo_producto='"+codigoProduct+"'";
-      sumaUnids = UD+unidades;
-      PreparedStatement preparedStmt = conI.prepareStatement(query);
-      preparedStmt.setInt   (1, sumaUnids);
-      preparedStmt.executeUpdate();
-      
-            }
-            }
-            catch(SQLException ex){
-            JOptionPane.showMessageDialog(this,ex+" Update");
-            }
-            //elimina el producto despues de haberlo actualziado
-        try{
-        conI = DriverManager.getConnection(url, user,pass);
-        String Qury = "Delete from detalle_factura where codigo_producto='"+codigoProduct+"' && codigo_detalle_factura='"+codigoDetalle+"' && codigo_factura='"+codigoFact+"'";
-        Statement sts =  conI.createStatement();
-        sts.executeUpdate(Qury);
-        }
-        catch(SQLException ex){
-        JOptionPane.showMessageDialog(this,ex+ " Truncate");
-        }
-        //actualiza el total de la tabla factura 
-               try{    
-             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "Select total from factura where codigo_factura='"+codigoFact+"'";
-             Statement st = cnx.prepareStatement(sql);
-             ResultSet res = st.executeQuery(sql);
-             
-                while (res.next()){  
-                tFactur  = res.getDouble(1);
-                conI = DriverManager.getConnection(url, user,pass);
-                String query = "update factura set total = ? where codigo_factura='"+codigoFact+"'";
-                tt=tFactur-total;
-                PreparedStatement preparedStmt = conI.prepareStatement(query);
-                preparedStmt.setDouble   (1, tt);
-                preparedStmt.executeUpdate();
-                }
-                    datosAlmacenados vt = new datosAlmacenados();
-                    vt.setVisible(true);
-                    vt.setLocationRelativeTo(null);
-                    this.dispose();
-                }
-                catch(SQLException ex){
-                JOptionPane.showMessageDialog(this,ex+" Update");
-                }
- }
+
 
 }

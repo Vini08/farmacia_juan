@@ -35,9 +35,9 @@ Connection cnx,conI = null;
 String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
 String pass = "";
-public static String sqlINV =     "SELECT No, codigo_producto, codigo_barra,  producto,  descripcion, unidades,  precio_etiqueta, precio_venta, fecha_vencimiento, descuento, precio_mayoreo from producto where Unidades>=0";
-public static String sqlAGO =     "SELECT No, codigo_producto, codigo_barra,  producto,  descripcion, unidades,  precio_etiqueta, precio_venta, fecha_vencimiento, descuento, precio_mayoreo from producto where Unidades=0";
-public static String sqlPORAGOT = "SELECT No, codigo_producto, codigo_barra,  producto,  descripcion, unidades,  precio_etiqueta, precio_venta, fecha_vencimiento, descuento, precio_mayoreo from producto where Unidades<alerta_unidades";
+public static String sqlINV =     "SELECT  codigo_producto, codigo_barra,  producto,  descripcion, unidades,  precio_etiqueta, precio_venta, fecha_vencimiento, descuento, precio_mayoreo from producto where Unidades>=0";
+public static String sqlAGO =     "SELECT  codigo_producto, codigo_barra,  producto,  descripcion, unidades,  precio_etiqueta, precio_venta, fecha_vencimiento, descuento, precio_mayoreo from producto where Unidades=0";
+public static String sqlPORAGOT = "SELECT  codigo_producto, codigo_barra,  producto,  descripcion, unidades,  precio_etiqueta, precio_venta, fecha_vencimiento, descuento, precio_mayoreo from producto where Unidades<alerta_unidades";
 Color grisMoved =new Color(180,180,180);
 Color grisborde =new Color(224,224,224);
 Color grisPress =new Color(179,179,179);
@@ -55,7 +55,7 @@ String hora,minutos,segundos,ampm;
 Calendar calendario;    
 Thread h1;
 
-public static hacer_ventas Vn = new hacer_ventas(nombr);
+public static hacer_ventas Vn = new hacer_ventas();
 public static boolean controlVentana=true,controlVentana1=true,controlVentana2=true,controlVentana3=true,controlVentana4=true,controlVentana5=true,controlVentana6=true,controlVentana7=true; 
 
 public MENUusuario(String Name) {
@@ -363,6 +363,7 @@ public MENUusuario(String Name) {
         jLabel29.setForeground(new java.awt.Color(255, 255, 255));
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel29.setText("4");
+        jLabel29.setToolTipText("Productos Agotados");
         jLabel29.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jLabel29MouseReleased(evt);
@@ -579,7 +580,7 @@ public MENUusuario(String Name) {
         jLabel19.setForeground(new java.awt.Color(68, 68, 68));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel19.setText("12:34:45");
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 60, 130, 20));
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 60, 120, 20));
 
         jButton15.setBackground(new java.awt.Color(3, 64, 124));
         jButton15.setForeground(new java.awt.Color(3, 64, 124));
@@ -751,7 +752,6 @@ Border thickBorder = new LineBorder(ColorSalida, 54);
     private void jLabel23MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseReleased
 if(controlVentana1==true){
 Vn.cdp=nombr;
-hacer_ventas.test2=1;
 Vn.setVisible(true);
 Vn.setLocationRelativeTo(null);
 hacer_ventas.find.requestFocus();
@@ -962,15 +962,8 @@ this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + e
     }//GEN-LAST:event_jLabel20MouseReleased
 
     private void jLabel18MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseReleased
-porAgotarse S = new porAgotarse();
-if(controlVentana2==true){
-S.setVisible(true);
-S.setLocationRelativeTo(null);       
-controlVentana2=false;
-}
-else if(controlVentana2==false){
-S.toFront();
-}      // TODO add your handling code here:
+
+     // TODO add your handling code here:
     }//GEN-LAST:event_jLabel18MouseReleased
 
     private void jLabel35MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseReleased
@@ -1089,7 +1082,6 @@ if( numAtajo==KeyEvent.VK_F1 && controlVentana1==true){
 Vn.cdp=nombr;
 Vn.setVisible(true);
 Vn.setLocationRelativeTo(null);
-hacer_ventas.test2=1;
 hacer_ventas.find.requestFocus();
 controlVentana1=false;
 }

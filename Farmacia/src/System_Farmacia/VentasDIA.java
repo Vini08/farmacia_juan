@@ -26,7 +26,6 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import static System_Farmacia.inventario.tablaInventario;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
@@ -156,23 +155,23 @@ LLenarDELAL(delDia,alDia);
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("Q");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 810, 40, 70));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 800, 40, 70));
 
         jLabel13.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 58)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 810, 290, 70));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 800, 290, 70));
 
         jLabel10.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 58)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(191, 191, 191));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Total Venta ");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 810, 300, 70));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 800, 300, 70));
 
         jLabel75.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel75.setForeground(new java.awt.Color(102, 102, 102));
         jLabel75.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 2), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(102, 102, 102))); // NOI18N
-        getContentPane().add(jLabel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 810, 660, 70));
+        getContentPane().add(jLabel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 800, 660, 80));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setForeground(new java.awt.Color(102, 102, 102));
@@ -302,7 +301,7 @@ LLenarDELAL(delDia,alDia);
         });
         jScrollPane1.setViewportView(tablaVentas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1600, 660));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1600, 670));
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/barraMensajes.png"))); // NOI18N
         jLabel20.setPreferredSize(new java.awt.Dimension(367, 70));
@@ -718,7 +717,7 @@ if(pressEnter==KeyEvent.VK_ENTER){
  }
  
   public void LLenarDELAL(String delDia,String alDia){
-     tablaVentas.getColumnModel().getColumn(0).setPreferredWidth(90);
+tablaVentas.getColumnModel().getColumn(0).setPreferredWidth(90);
 tablaVentas.getColumnModel().getColumn(1).setPreferredWidth(100);
 tablaVentas.getColumnModel().getColumn(2).setPreferredWidth(150);
 tablaVentas.getColumnModel().getColumn(3).setPreferredWidth(200);
@@ -744,7 +743,7 @@ DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn(rsMd.getColumnLabel(i));
          }
          while (res.next()){
-             inv[w] = res.getString(3);
+             inv[w] = res.getString(5);
                     Float auxo = Float.parseFloat(inv[w]);
                     invT = invT + auxo;
                     w++;

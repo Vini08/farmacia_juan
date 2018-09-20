@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -28,7 +29,7 @@ import javax.swing.border.LineBorder;
  * @author Vinicio
  */
 public class AdminEditarProdcut extends javax.swing.JFrame {
-public static String sql = "SELECT codigo_producto, codigo_barra,  categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_venta, precio_mayoreo,precio_etiqueta, descuento, porciones from producto where Unidades>=0";
+public static String sql = "SELECT codigo_producto, codigo_barra,  categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_etiqueta, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades>=0";
 public static String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
 String pass = "";
@@ -47,7 +48,7 @@ public static int unit,alerta,alertP;
 Connection cnx;
 private int x;
 private int y;
-    public AdminEditarProdcut(String u, String codes, String br, String marks,String models,int unitss,String provvs,BigDecimal price10s, BigDecimal price1s,BigDecimal price2s,BigDecimal price3s,String pors,String descu,int alerts, String Dates, String descripc) {
+    public AdminEditarProdcut(String u, String codes, String br, String marks,String models,int unitss,String provvs,BigDecimal priceC, BigDecimal priceE,BigDecimal priceV,BigDecimal priceM,String pors,String descu,int alerts, String Dates, String descripc) {
     try {
         initComponents();
         jTextField1.requestFocus();
@@ -60,10 +61,10 @@ private int y;
         model=models;
         unit=unitss;
         provv=provvs;
-        price0=price10s;
-        price1=price1s;
-        price2=price2s;
-        price3=price3s;
+        price0=priceC;
+        price1=priceE;
+        price2=priceV;
+        price3=priceM;
         porcions=pors;
         Descuento=descu;
         alerta=alerts;
@@ -73,16 +74,16 @@ private int y;
         jTextField2.setText(mark);
         jTextField7.setText(codebr);
         jTextField3.setText(Integer.toString(unit));
-        jTextField4.setText(provv);
-        jTextField5.setText(String.valueOf(price1));
-        jTextField6.setText(String.valueOf(price2));
+        jTextField5.setText(String.valueOf(price2));
+        jTextField6.setText(String.valueOf(price3));
         jTextField8.setText(model);
         jTextField9.setText(String.valueOf(Descuento));
         jTextField10.setText(String.valueOf(price0));
         jTextField11.setText(String.valueOf(porcions));
         jTextField12.setText(Integer.toString(alerta));
-        jTextField13.setText(String.valueOf(price3));
+        jTextField13.setText(String.valueOf(price1));
         jTextArea1.setText(descriptio);
+        llenar_combo_Proveedor();
         jLabel17.setText("");
         Date date = new SimpleDateFormat("dd/MM/yyyy").parse(fechas);
         jDateChooser1.setDate(date);
@@ -123,7 +124,6 @@ private int y;
         jLabel17 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
@@ -150,6 +150,7 @@ private int y;
         jTextField7 = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nuevo Producto");
@@ -330,11 +331,12 @@ private int y;
         jLabel15.setText("PRECIO MAYOREO");
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 130, 590, 30));
 
-        jLabel17.setFont(new java.awt.Font("Microsoft Tai Le", 1, 18)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel17.setFont(new java.awt.Font("Microsoft Tai Le", 1, 22)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(0, 102, 153));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("mensaje");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 810, 460, 40));
+        jLabel17.setText("Los datos se almacenaron correctamente");
+        jLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 204)));
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 770, 590, 40));
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(153, 153, 153));
@@ -371,18 +373,6 @@ private int y;
         });
         getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 480, 460, 40));
 
-        jTextField4.setEditable(false);
-        jTextField4.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField4.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
-        jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField4.setBorder(null);
-        jTextField4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField4MouseClicked(evt);
-            }
-        });
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, 460, 40));
-
         jTextField5.setBackground(new java.awt.Color(153, 153, 153));
         jTextField5.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -410,7 +400,7 @@ private int y;
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 770, 390, 120));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 820, 590, 70));
 
         jLabel25.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(82, 82, 82));
@@ -583,7 +573,7 @@ private int y;
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 470, 590, 290));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 480, 590, 280));
 
         jLabel33.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(82, 82, 82));
@@ -612,7 +602,29 @@ private int y;
         jLabel29.setForeground(new java.awt.Color(82, 82, 82));
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel29.setText("DESCRIPCION");
-        getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 440, 580, 30));
+        getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 450, 580, 30));
+
+        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-----------" }));
+        jComboBox2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox2MouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jComboBox2MouseReleased(evt);
+            }
+        });
+        jComboBox2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox2ItemStateChanged(evt);
+            }
+        });
+        jComboBox2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jComboBox2KeyReleased(evt);
+            }
+        });
+        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, 460, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -714,8 +726,8 @@ private int y;
         codeBR = jTextField7.getText();
         nameP=jTextField2.getText();
         catP=jTextField8.getText();
-        provP = jTextField4.getText();
-        preC=Double.parseDouble(jTextField10.getText());
+        provP = String.valueOf(jComboBox2.getSelectedItem());
+        preC = Double.parseDouble(jTextField10.getText());
         precV = Double.parseDouble(jTextField5.getText());
         preM = Double.parseDouble(jTextField6.getText());
         preE = Double.parseDouble(jTextField13.getText());
@@ -736,7 +748,6 @@ private int y;
             check="-";
         ModificarProd(unids, codeBR, provP, preC, precV, preM, preE, codP, catP, nameP, Descuento, sehace, alertP, fechas,descr,check);
        inventario.test=1;
-       hacer_ventas.test2=1;
        inventario.LlenarTabla(sql);
         Por_agotarse("SELECT count(codigo_producto)as cuantos FROM producto where Unidades<alerta_unidades");
         
@@ -790,10 +801,6 @@ jLabel17.setText("");        // TODO add your handling code here:
 jLabel17.setText("");        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField8MouseClicked
 
-    private void jTextField4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField4MouseClicked
-jLabel17.setText("");        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4MouseClicked
-
     private void jTextField3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField3MouseClicked
 jLabel17.setText("");        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3MouseClicked
@@ -825,6 +832,22 @@ jLabel17.setText("");        // TODO add your handling code here:
     private void jTextField11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField11MouseClicked
 jLabel17.setText("");        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField11MouseClicked
+
+    private void jComboBox2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2MouseClicked
+
+    private void jComboBox2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox2MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2MouseReleased
+
+    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ItemStateChanged
+
+    private void jComboBox2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBox2KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2KeyReleased
 
     /**
      * @param args the command line arguments
@@ -874,6 +897,7 @@ jLabel17.setText("");        // TODO add your handling code here:
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
+    private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -915,7 +939,6 @@ jLabel17.setText("");        // TODO add your handling code here:
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
@@ -972,4 +995,26 @@ jLabel17.setText("");        // TODO add your handling code here:
         }
         catch(SQLException ex){JOptionPane.showMessageDialog(this,ex);}
        }
+   
+   public void llenar_combo_Proveedor() {
+        try {
+            DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel();
+            Class.forName("com.mysql.jdbc.Driver");
+            cnx = DriverManager.getConnection(url, user,pass);
+            Statement st = (Statement) cnx.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = st.executeQuery("SELECT * FROM proveedor");
+            modeloCombo.addElement(provv);//es el primer registro q mostrara el combo
+            jComboBox2.setModel(modeloCombo);//con esto agregamos al objeto al jcombobox
+            while (rs.next()) {
+                modeloCombo.addElement(rs.getObject("proveedor"));
+                jComboBox2.setModel(modeloCombo);
+            }
+ 
+            st.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,ex);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this,ex);
+        }
+    }
 }

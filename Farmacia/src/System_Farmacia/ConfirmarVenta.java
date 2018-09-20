@@ -72,6 +72,7 @@ public static String clin;
         initComponents();
          setLocationRelativeTo(null);
           JTableHeader th; 
+          jTextField1.setText("");
           jLabel3.setToolTipText(null);
           jLabel2.setToolTipText(null);
         th = destino.getTableHeader(); 
@@ -283,6 +284,11 @@ DefaultTableModel modelo = (DefaultTableModel) destino.getModel();
 
         jLabel24.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 30)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel24.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel24KeyPressed(evt);
+            }
+        });
         getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 610, 200, 60));
 
         jLabel16.setFont(new java.awt.Font("Microsoft Tai Le", 1, 30)); // NOI18N
@@ -660,8 +666,19 @@ if(pressEnter==KeyEvent.VK_ENTER){
     operacion= efectivo-total;
     jLabel24.setText(String.valueOf(operacion));
 }
-}                // TODO add your handling code here:
+}     
+if(pressEnter==65535){
+if(!jLabel24.getText().isEmpty()){
+insertProd();    
+} 
+else
+JOptionPane.showMessageDialog(this,"Debe ingresar efectivo y presionar el botón Operar");
+}// TODO add your handling code here:
     }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jLabel24KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel24KeyPressed
+       // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel24KeyPressed
 
     /**
      * @param args the command line arguments
@@ -837,6 +854,7 @@ public void insertProd(){
         //ventas.llenarCtipo();
         count=1;
         hacer_ventas.jLabel5.setText("");
+        hacer_ventas.jLabel16.setText("");
      }
      while(origin.getRowCount() > 0)
      {
@@ -844,9 +862,10 @@ public void insertProd(){
         //ventas.llenarCtipo();
         count=1;
         hacer_ventas.jLabel5.setText("");
-        hacer_ventas.find.requestFocus();
+        hacer_ventas.jLabel16.setText("");
         hacer_ventas.find.setText("");
-     }
+        hacer_ventas.find.requestFocus();
+        }
     // pdf();     
             }
           }
@@ -866,9 +885,6 @@ public void insertProd(){
         {
             JOptionPane.showMessageDialog(this,e);
         }
-      VentaExitosa vt = new VentaExitosa();
-      vt.setVisible(true);
-      vt.setLocationRelativeTo(null);
       
       for (int i = 0; i <array_String.length; i++) {
       if(array_String[i][0].equals("8832")){

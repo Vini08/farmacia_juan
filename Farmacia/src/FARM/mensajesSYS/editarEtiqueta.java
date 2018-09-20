@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package System_Farmacia;
+package FARM.mensajesSYS;
 
+import System_Farmacia.*;
 import FARM.mensajesSYS.datosAlmacenados;
 import static System_Farmacia.MENUadmin.fechaGlobal;
 import com.sun.awt.AWTUtilities;
@@ -14,34 +15,35 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.CallableStatement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Vinicio
  */
-public class DarBaja extends javax.swing.JFrame {
+public class editarEtiqueta extends javax.swing.JFrame {
 
                
 String url = "jdbc:mysql://localhost:3306/bd_farm";
 String user = "root";
 String pass = ""; 
-public static String sqlINV = "SELECT codigo_producto, codigo_barra,  categoria, producto, proveedor, descripcion, unidades, alerta_unidades, fecha_vencimiento, precio_compra, precio_etiqueta, precio_venta, precio_mayoreo, descuento, porciones from producto where Unidades>=0";
-
-public static  String codigo, categoria, producto;
-public static int unidades, newUnits;
-public static BigDecimal precio_compra, totalBaja;
-    public DarBaja(String codig,String categ, String produc, int unid, BigDecimal preC) {
+public static String sqlINV =    "SELECT  codigo_producto, codigo_barra,  producto,  descripcion, unidades,  precio_etiqueta, precio_venta, fecha_vencimiento, descuento, precio_mayoreo from producto where Unidades>=0";
+private int x;
+private int y;
+public static  String codigo,  producto;
+public static BigDecimal precio_etiq;
+    public editarEtiqueta(String codig, String produc, BigDecimal preC) {
         initComponents();
         setLocationRelativeTo(null);
         codigo=codig;
-        categoria=categ;
         producto=produc;
-        unidades=unid;
-        precio_compra=preC;
+        precio_etiq=preC;
 
-        jLabel5.setText("Producto: "+producto);
-        }
+        jLabel8.setText("Producto: "+producto);;
+    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,7 +55,12 @@ public static BigDecimal precio_compra, totalBaja;
     private void initComponents() {
 
         jLabel7 = new javax.swing.JLabel();
+        jTextField13 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
         jTextField12 = new javax.swing.JTextField();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -61,8 +68,9 @@ public static BigDecimal precio_compra, totalBaja;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dar de Baja");
-        setMinimumSize(new java.awt.Dimension(519, 260));
+        setMinimumSize(new java.awt.Dimension(686, 260));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(686, 260));
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 formMouseMoved(evt);
@@ -89,7 +97,33 @@ public static BigDecimal precio_compra, totalBaja;
                 jLabel7KeyPressed(evt);
             }
         });
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 50, 50));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 50, 40));
+
+        jTextField13.setBackground(new java.awt.Color(153, 153, 153));
+        jTextField13.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
+        jTextField13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField13.setBorder(null);
+        jTextField13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField13ActionPerformed(evt);
+            }
+        });
+        jTextField13.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField13KeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField13KeyTyped(evt);
+            }
+        });
+        getContentPane().add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 260, 40));
+
+        jLabel10.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel10.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(231, 231, 231));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Codigo Barra");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 260, 30));
 
         jTextField12.setBackground(new java.awt.Color(153, 153, 153));
         jTextField12.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
@@ -108,23 +142,51 @@ public static BigDecimal precio_compra, totalBaja;
                 jTextField12KeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 370, 40));
+        getContentPane().add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 130, 40));
+
+        jDateChooser1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
+        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 230, 40));
+
+        jLabel9.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel9.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(231, 231, 231));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Fecha Vencimiento");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, 230, 30));
+
+        jLabel8.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel8.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 22)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(231, 231, 231));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Producto:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 680, 30));
 
         jLabel5.setBackground(new java.awt.Color(153, 153, 153));
-        jLabel5.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(231, 231, 231));
+        jLabel5.setFont(new java.awt.Font("MS PGothic", 1, 31)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 517, 60));
+        jLabel5.setText("Editar Producto");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel5MousePressed(evt);
+            }
+        });
+        jLabel5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel5MouseDragged(evt);
+            }
+        });
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 50));
 
         jLabel6.setBackground(new java.awt.Color(153, 153, 153));
         jLabel6.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(231, 231, 231));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("¿Cuántas unidades dará de baja?");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 517, -1));
+        jLabel6.setText("Precio Etiqueta");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 130, 30));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/indicac.png"))); // NOI18N
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 520, 140));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 690, 140));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/grisFondo.jpg"))); // NOI18N
         jLabel2.setMinimumSize(new java.awt.Dimension(519, 608));
@@ -133,7 +195,7 @@ public static BigDecimal precio_compra, totalBaja;
                 jLabel2KeyPressed(evt);
             }
         });
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 260));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 260));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -165,20 +227,44 @@ public static BigDecimal precio_compra, totalBaja;
 
     private void jTextField12KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField12KeyPressed
     int key = evt.getKeyCode();
-        if((key==KeyEvent.VK_ENTER) && !jTextField12.getText().isEmpty())
+        if((key==KeyEvent.VK_ENTER) && !jTextField12.getText().isEmpty() && !jTextField13.getText().isEmpty())
         {
-        int bajas = Integer.parseInt(jTextField12.getText());
-            newUnits = unidades- bajas;
-            totalBaja = precio_compra.multiply(new BigDecimal(bajas));
-            regBaja(codigo,categoria,producto,bajas, fechaGlobal, newUnits, precio_compra, totalBaja);
-
-            this.dispose();
+         String codiBarra = jTextField13.getText().toString();
+         String precio = jTextField12.getText().toString();
+         BigDecimal money = new BigDecimal(precio.replaceAll(",", ""));
+         String formato = jDateChooser1.getDateFormatString();
+         Date date = jDateChooser1.getDate();
+         SimpleDateFormat sdf = new SimpleDateFormat(formato);
+         String fechaE = String.valueOf(sdf.format(date));
+         editEtiqueta(codigo,codiBarra,money,fechaE);
+        this.dispose();
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField12KeyPressed
 
     private void jTextField12KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField12KeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField12KeyTyped
+
+    private void jLabel5MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseDragged
+        this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel5MouseDragged
+
+    private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
+ x = evt.getX();
+        y = evt.getY();         // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel5MousePressed
+
+    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField13ActionPerformed
+
+    private void jTextField13KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField13KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField13KeyPressed
+
+    private void jTextField13KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField13KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField13KeyTyped
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -194,14 +280,46 @@ public static BigDecimal precio_compra, totalBaja;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DarBaja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(editarEtiqueta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DarBaja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(editarEtiqueta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DarBaja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(editarEtiqueta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DarBaja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(editarEtiqueta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -238,44 +356,42 @@ public static BigDecimal precio_compra, totalBaja;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DarBaja(codigo,categoria,producto, unidades, precio_compra).setVisible(true);
+                new editarEtiqueta(codigo,producto, precio_etiq).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField13;
     // End of variables declaration//GEN-END:variables
 
    
    
-   public void regBaja(String codB,String  cat,String nam, int unid, String fech, int news, BigDecimal PC, BigDecimal ttotal)
+   public void editEtiqueta(String code,String codeBarra, BigDecimal preEtiqueta, String fecha)
    {      
        try {            
        Connection conn = DriverManager.getConnection(url, user, pass);
-       CallableStatement proc = conn.prepareCall(" CALL registrar_baja(?, ?, ?, ?, ?, ?, ?, ?) ");
+       CallableStatement proc = conn.prepareCall(" CALL editar_etiqueta(?,?,?,?) ");
             //se cargan los parametros de entrada
-            proc.setString(1, codB);
-            proc.setString(2, cat);
-            proc.setString(3, nam);
-            proc.setInt(4, unid);
-            proc.setString(5, fech);
-            proc.setInt(6, news);
-            proc.setBigDecimal(7, PC);
-            proc.setBigDecimal(8, ttotal);
+            proc.setString(1, code);
+            proc.setString(2, codeBarra);
+            proc.setBigDecimal(3, preEtiqueta);
+            proc.setString(4, fecha);
             // Se ejecuta el procedimiento almacenado
             proc.execute(); 
-            
-        this.dispose();
-        datosAlmacenados v = new datosAlmacenados();
-        v.setVisible(true);
-        v.setLocationRelativeTo(null);
-        inventario.LlenarTabla(sqlINV);
+      Inventario2.LlenarTabla(sqlINV);
+      this.dispose();
+        
         } catch (SQLException ex) { 
         JOptionPane.showMessageDialog(this,ex);
     } 

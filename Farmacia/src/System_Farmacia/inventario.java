@@ -5,6 +5,7 @@
  */
 package System_Farmacia;
 
+import FARM.mensajesSYS.confirmarEliminacion;
 import java.awt.Color;
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -46,7 +47,7 @@ Color ColorSalida =new Color(0,102,204);
 Color ColorSalida2 =new Color(2,72,142);
 String auxUser, searc;
 Border thickBorde = new LineBorder(Color.WHITE, 4);
-public static String code, codebr, mark, model, provv, usua, porcions, descu,sqlINV, dates, descrip;
+public static String code,codeElim, codebr, nameElim, mark, model, provv, usua, porcions, descu,sqlINV, dates, descrip;
 public static BigDecimal price0,price1,price2,price3;  
 BigDecimal PreV,totalBaja;
 public static int  test=0,alertsunits;
@@ -104,6 +105,7 @@ DefaultTableModel dm;
         jButton13 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         jPopupMenu1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -280,7 +282,7 @@ DefaultTableModel dm;
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "codigo", "codigo_barra", "categoria", "producto", "proveedor", "descripcion", "cant", "alertas", "vencimiento", "Precio compra", "precio_venta", "precio_mayoreo", "precio_etiqueta", "descuento", "porciones"
+                "codigo", "codigo_barra", "categoria", "producto", "proveedor", "descripcion", "cant", "alertas", "vencimiento", "Precio compra", "precio_etiqueta", "precio_venta", "precio_mayoreo", "descuento", "porciones"
             }
         ));
         tablaInventario.setComponentPopupMenu(jPopupMenu1);
@@ -519,7 +521,7 @@ DefaultTableModel dm;
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1530, 45, -1, 20));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 45, -1, 20));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/azulBarra.jpg"))); // NOI18N
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -533,6 +535,14 @@ DefaultTableModel dm;
             }
         });
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 40));
+
+        jButton4.setText("UNITS");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1530, 45, -1, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -867,25 +877,11 @@ jLabel3.setForeground(Color.gray);        // TODO add your handling code here:
     }//GEN-LAST:event_tablaInventarioMouseEntered
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-Connection cnx = null;
-try
-    {
-        Class.forName("com.mysql.jdbc.Driver");
-            cnx = DriverManager.getConnection(url, user,pass); 
-      String query = "delete from producto where codigo_producto= ? && categoria = ? && producto= ?";
-      PreparedStatement preparedStmt = cnx.prepareStatement(query);
-      preparedStmt.setString(1,(String) tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 0));
-      preparedStmt.setString(2,(String) tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 2));
-      preparedStmt.setString(3, (String) tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 3));
-
-      preparedStmt.execute();
-      cnx.close();
-      LlenarTabla(sqlINV);  
-    }
-    catch (Exception e)
-    {
-      JOptionPane.showMessageDialog(this,e);
-    } 
+codeElim =  (String) tablaInventario.getValueAt(tablaInventario.getSelectedRow(), 0);
+nameElim=  (String) tablaInventario.getValueAt(tablaInventario.getSelectedRow(),3);
+        confirmarEliminacion elim = new confirmarEliminacion(codeElim, nameElim);
+        elim.setVisible(true);
+        elim.setLocationRelativeTo(null);
            // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -928,6 +924,28 @@ baja.setLocationRelativeTo(null);
     private void jLabel9MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseDragged
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel9MouseDragged
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+ 
+         Connection cnx = null;
+        if (cnx == null) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            cnx = DriverManager.getConnection(url, user,pass);
+             String sql = "Select count(codigo_producto) from bd_farm.producto";
+             Statement st = cnx.prepareStatement(sql);
+             ResultSet res = st.executeQuery(sql);      
+             while (res.next()){
+             JOptionPane.showMessageDialog(this, res.getString(1));
+             }
+             } catch (ClassNotFoundException ex) {
+             JOptionPane.showMessageDialog(this, ex);
+             } catch (SQLException ex) { 
+             JOptionPane.showMessageDialog(this, ex);
+            } 
+            }  
+           // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -986,6 +1004,7 @@ baja.setLocationRelativeTo(null);
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel24;
@@ -1101,9 +1120,9 @@ public static void columnas(){
     TableColumn tableColumn6 = tableColumnModel.getColumn(6);
     tableColumn6.setHeaderValue( "CANT" );
     TableColumn tableColumn7 = tableColumnModel.getColumn(7);
-    tableColumn7.setHeaderValue( "." );
+    tableColumn7.setHeaderValue( "ALERTA" );
     TableColumn tableColumn8 = tableColumnModel.getColumn(8);
-    tableColumn8.setHeaderValue( "VENCIMIENTO" );
+    tableColumn8.setHeaderValue( "VENCE" );
     TableColumn tableColumn9 = tableColumnModel.getColumn(9);
     tableColumn9.setHeaderValue( "COMPRA" );
     TableColumn tableColumn10 = tableColumnModel.getColumn(10);

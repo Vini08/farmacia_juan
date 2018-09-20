@@ -129,6 +129,9 @@ public boolean check=true;
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 formMouseEntered(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -139,6 +142,9 @@ public boolean check=true;
             }
         });
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 formMouseMoved(evt);
             }
@@ -803,6 +809,15 @@ LlenarTabla();      // TODO add your handling code here:
     private void tablaPRODUCTOsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPRODUCTOsMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_tablaPRODUCTOsMouseEntered
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);         // TODO add your handling code here:
+    }//GEN-LAST:event_formMouseDragged
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+x = evt.getX();
+                y = evt.getY();          // TODO add your handling code here:
+    }//GEN-LAST:event_formMousePressed
 
     /**
      * @param args the command line arguments

@@ -148,7 +148,6 @@ public MENUadmin(String Name) {
         setTitle("menú");
         setMinimumSize(new java.awt.Dimension(1600, 900));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1600, 900));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -760,7 +759,7 @@ public MENUadmin(String Name) {
         jLabel19.setForeground(new java.awt.Color(68, 68, 68));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel19.setText("12:34:45");
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 60, 130, 20));
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 60, 120, 20));
 
         jLabel39.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 17)); // NOI18N
         jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -1047,10 +1046,9 @@ Border thickBorder = new LineBorder(ColorSalida, 54);
     }//GEN-LAST:event_jLabel23MousePressed
 
     private void jLabel23MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseReleased
-hacer_ventas Vn = new hacer_ventas(nombr);
+hacer_ventas Vn = new hacer_ventas();
 if(controlVentana1==true){
 Vn.cdp=nombr;
-hacer_ventas.test2=1;
 Vn.setVisible(true);
 Vn.setLocationRelativeTo(null);
 hacer_ventas.find.requestFocus();
@@ -1623,11 +1621,10 @@ jLabel38.setToolTipText(null);
     public void atajos(int numAtajo){
 
 if( numAtajo==KeyEvent.VK_F1 && controlVentana1==true){
-hacer_ventas Vn = new hacer_ventas(nombr);
+hacer_ventas Vn = new hacer_ventas();
 Vn.cdp=nombr;
 Vn.setVisible(true);
 Vn.setLocationRelativeTo(null);
-hacer_ventas.test2=1;
 hacer_ventas.find.requestFocus();
 controlVentana1=false;
 }

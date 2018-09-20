@@ -5,6 +5,9 @@
  */
 package FARM.mensajesSYS;
 
+import System_Farmacia.Devoluciones;
+import System_Farmacia.VentasRealizadas;
+import System_Farmacia.inventario;
 import com.sun.awt.AWTUtilities;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -219,6 +222,7 @@ this.dispose();        // TODO add your handling code here:
 public void rollbackDevo(){
       int UD;
       Double tFactur ; 
+     
       //Selecciona unidad de X producto para despues sumarle lo que se va a devolver y acutalizarlo
             try{    
             cnx = DriverManager.getConnection(url, user,pass);
@@ -228,19 +232,19 @@ public void rollbackDevo(){
              
             while (res.next()){  
             UD  = res.getInt(1);
-      conI = DriverManager.getConnection(url, user,pass);
-      String query = "update producto set unidades = ? where codigo_producto='"+codigoProduct+"'";
-      sumaUnids = UD+unidades;
-      PreparedStatement preparedStmt = conI.prepareStatement(query);
-      preparedStmt.setInt   (1, sumaUnids);
-      preparedStmt.executeUpdate();
-      
+            conI = DriverManager.getConnection(url, user,pass);
+            String query = "update producto set unidades = ? where codigo_producto='"+codigoProduct+"'";
+            sumaUnids = UD+unidades;
+            PreparedStatement preparedStmt = conI.prepareStatement(query);
+            preparedStmt.setInt   (1, sumaUnids);
+            preparedStmt.executeUpdate();
+
             }
             }
             catch(SQLException ex){
             JOptionPane.showMessageDialog(this,ex+" Update");
             }
-            //elimina el producto despues de haberlo actualziado
+            //elimina el detalle factura despues de haberlo actualziado
         try{
         conI = DriverManager.getConnection(url, user,pass);
         String Qury = "Delete from detalle_factura where codigo_producto='"+codigoProduct+"' && codigo_detalle_factura='"+codigoDetalle+"' && codigo_factura='"+codigoFact+"'";
@@ -250,30 +254,20 @@ public void rollbackDevo(){
         catch(SQLException ex){
         JOptionPane.showMessageDialog(this,ex+ " Truncate");
         }
-        //actualiza el total de la tabla factura 
-               try{    
-             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "Select total from factura where codigo_factura='"+codigoFact+"'";
-             Statement st = cnx.prepareStatement(sql);
-             ResultSet res = st.executeQuery(sql);
-             
-                while (res.next()){  
-                tFactur  = res.getDouble(1);
-                conI = DriverManager.getConnection(url, user,pass);
-                String query = "update factura set total = ? where codigo_factura='"+codigoFact+"'";
-                tt=tFactur-total;
-                PreparedStatement preparedStmt = conI.prepareStatement(query);
-                preparedStmt.setDouble   (1, tt);
-                preparedStmt.executeUpdate();
-                }
-                    datosAlmacenados vt = new datosAlmacenados();
-                    vt.setVisible(true);
-                    vt.setLocationRelativeTo(null);
-                    this.dispose();
-                }
-                catch(SQLException ex){
-                JOptionPane.showMessageDialog(this,ex+" Update");
-                }
+        
+        //elimina la factura completa
+         try{
+                    conI = DriverManager.getConnection(url, user,pass);
+                    String Qury = "Delete from bd_farm.factura where codigo_factura='"+codigoFact+"'";
+                    Statement sts =  conI.createStatement();
+                    sts.executeUpdate(Qury);
+                    }
+                    catch(SQLException ex){
+                    JOptionPane.showMessageDialog(this,ex+ " Truncate");
+                    }  
+               VentasRealizadas.LlenarTabla();
+               Devoluciones.LlenarTabla();
+               this.dispose();
  }
 
 }

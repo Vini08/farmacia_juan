@@ -455,7 +455,6 @@ hora = (jTextField5.getText());
    
    recordatorio(name,tipo,telef,asunto,costo,fecha,hora);
        
-       hacer_ventas.test2=1;
 jTextField1.setText("");
 jTextField2.setText("");
 jTextField3.setText("");

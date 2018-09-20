@@ -36,8 +36,8 @@ import javax.swing.table.TableColumnModel;
  */
 public class hacer_ventas extends javax.swing.JFrame implements Runnable{
  
- public static int test2=1;
 public static Double sumaT;
+double sumaE;
 Connection cnx,conI = null;
 static String url = "jdbc:mysql://localhost:3306/bd_farm";
 static String user = "root";
@@ -49,12 +49,12 @@ ArrayList<String> descuentos = new ArrayList<>();
 ArrayList<String> porciones = new ArrayList<>();
 ArrayList<String> Auxiliar = new ArrayList<>();
 int UD;
-String auxST,autr ;
+String auxST,autr,auxE ;
 public String cdp, Cliente;
 private int x;
 private int y;
 public static String busq, DESCRPart,cod_prod,categor,product, tipoVent;
-Double PreV, PreMay, descu,totalVenta,descuentoPersn;
+Double PreV, PreMay, PreETI, descu,totalVenta,descuentoPersn, totalEtiqueta;
 int cantidad, unidadesDeseadas = 0, auxBT=0,auxBTNar=0;
 String totalV, unit;
 Color CBTNFocus =new Color(243,98,1);
@@ -81,21 +81,20 @@ Border thickBorde = new LineBorder(Color.WHITE, 4);
 Border bordePlano= new LineBorder(ColorPlanoBT, 4);
 public static String[][] array_String;
 public static String[][] array_Tipo;
-public static String NN;
 public static Double[][] array_Double; 
 ArrayList<Integer> units = new ArrayList<>();
 Thread h1;   
 String hora,minutos,segundos,ampm,horaMenu;
 
-public hacer_ventas(String N) {
+public hacer_ventas() {
         initComponents();
-         setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
         h1 = new Thread(this);
         h1.start();
         find.requestFocus();
         jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
-        NN=cdp;
+      
         JTableHeader th1,th2; 
         th1 = tablaADD.getTableHeader(); 
         Font fuente1 = new Font("Microsoft Yi Baiti", Font.PLAIN, 22); 
@@ -109,6 +108,9 @@ public hacer_ventas(String N) {
         jLabel14.setVisible(false);
         jLabel6.setVisible(false);
         jLabel5.setVisible(false);
+        jLabel15.setVisible(false);
+        jLabel9.setVisible(false);
+        jLabel16.setVisible(false); 
         jLabel3.setToolTipText(null);
         jLabel41.setToolTipText(null);
         jLabel39.setToolTipText(null);
@@ -158,6 +160,9 @@ public hacer_ventas(String N) {
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaADD = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         lcd = new javax.swing.JTextField();
@@ -469,7 +474,7 @@ public hacer_ventas(String N) {
 
             },
             new String [] {
-                "Codigo", "Categoria", "Producto", "Precio", "Descuento", "Unidades", "Total", "Tipo Cliente", "#"
+                "Codigo", "Categoria", "Producto", "Precio", "Descuento", "Unidades", "Total", "Tipo Cliente", "#", "Etiqueta"
             }
         ));
         tablaADD.setRowHeight(22);
@@ -495,16 +500,34 @@ public hacer_ventas(String N) {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 1600, 300));
 
-        jLabel5.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 40)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 32)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(252, 110, 16));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Total Etiqueta");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 840, 190, 50));
+
+        jLabel15.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 32)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(249, 212, 115));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel15.setText("Q");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 840, 40, 50));
+
+        jLabel16.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 32)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(249, 212, 115));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 840, 200, 50));
+
+        jLabel5.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 44)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(249, 212, 115));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 840, 310, 50));
+        jLabel5.setText("12333.23");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1390, 840, 210, 50));
 
-        jLabel6.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 40)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 44)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 102, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Total Venta ");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 840, 240, 50));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 840, 280, 50));
 
         lcd.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
         lcd.setForeground(new java.awt.Color(102, 102, 102));
@@ -526,11 +549,11 @@ public hacer_ventas(String N) {
         });
         getContentPane().add(lcd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 490, 40, 30));
 
-        jLabel14.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 40)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 44)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(249, 212, 115));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("Q");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 840, 40, 50));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 840, 40, 50));
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 0, 19)); // NOI18N
         jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -551,7 +574,7 @@ public hacer_ventas(String N) {
                 jLabel38MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 850, 210, 30));
+        getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 850, 210, 30));
 
         find.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
         find.setForeground(new java.awt.Color(102, 102, 102));
@@ -575,7 +598,7 @@ public hacer_ventas(String N) {
                 findKeyReleased(evt);
             }
         });
-        getContentPane().add(find, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 50, 210, 30));
+        getContentPane().add(find, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 50, 240, 30));
 
         buscarMay.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
         buscarMay.setForeground(new java.awt.Color(102, 102, 102));
@@ -623,7 +646,7 @@ public hacer_ventas(String N) {
                 jButton9ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 850, 210, 30));
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 850, 210, 30));
 
         jLabel39.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -713,7 +736,7 @@ public hacer_ventas(String N) {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 1600, 390));
 
-        jLabel13.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 22)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(80, 191, 136));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 500, 50));
@@ -979,7 +1002,9 @@ if(tablaADD.getSelectedRow() >= 0){
              int rw = tablaADD.getSelectedRow();
              modelo.removeRow(rw );
              jLabel5.setText("");
+             jLabel16.setText("");
              sumaT = 0.0;
+             sumaE=0.0;
            int totalRow= tablaADD.getRowCount();
         for(int i=0;i<(totalRow);i++)
         {
@@ -991,6 +1016,16 @@ if(tablaADD.getSelectedRow() >= 0){
         jLabel5.setVisible(true); 
         jLabel5.setText(auxST);
         }
+         for(int c=0;c<totalRow;c++)
+                                    {                                  
+                                    double sumatoriaE= Double.parseDouble(String.valueOf(tablaADD.getValueAt(c,9)));
+                                    sumaE= sumaE + sumatoriaE;
+                                    auxE = Double.toString(sumaE);
+                                    jLabel15.setVisible(true);
+                                    jLabel9.setVisible(true);
+                                    jLabel16.setVisible(true); 
+                                    jLabel16.setText(auxE);
+                                    }
         LlenarTabla();
         find.setText("");
         find.requestFocus();
@@ -1143,7 +1178,11 @@ if(cant>0){
     lcd.setText(Integer.toString(cant));
 }
 evt.consume();
-}        // TODO add your handling code here:
+}    
+if(evt.isControlDown()){
+find.setText("");
+find.requestFocus();
+}// TODO add your handling code here:
     }//GEN-LAST:event_lcdKeyPressed
 
     private void lcdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lcdKeyReleased
@@ -1155,7 +1194,7 @@ evt.consume();
     }//GEN-LAST:event_jLabel41MousePressed
 
     private void jLabel41MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel41MouseReleased
-LectorBarras lec = new LectorBarras(NN, WIDTH);
+LectorBarras lec = new LectorBarras();
 lec.setVisible(true);
 lec.setLocationRelativeTo(null);// TODO add your handling code here:
     }//GEN-LAST:event_jLabel41MouseReleased
@@ -1199,6 +1238,11 @@ if(cant>0){
 }
 evt.consume();
 }
+if(evt.isControlDown()){
+find.setText("");
+find.requestFocus();
+}
+
 // TODO add your handling code here:
     }//GEN-LAST:event_tablaPRODUCTOSKeyPressed
 
@@ -1302,7 +1346,7 @@ search= buscarMay.getText();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new hacer_ventas(NN).setVisible(true);
+                new hacer_ventas().setVisible(true);
             }
         });
     }
@@ -1322,6 +1366,8 @@ search= buscarMay.getText();
     private javax.swing.JLabel jLabel12;
     public static javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    public static javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -1338,6 +1384,7 @@ search= buscarMay.getText();
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1431,7 +1478,7 @@ public void cargarMayo(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento,descripcion, precio_etiqueta, precio_mayoreo, lll from producto where unidades>0 ";
+             String sql = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento,descripcion, precio_etiqueta, precio_mayoreo, lll from bd_farm.producto where precio_mayoreo > 0.00 ";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
@@ -1463,7 +1510,7 @@ public void cargarMayo(){
 
 public void LlenarTabla(){
             
-    String Query = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento, descripcion, precio_etiqueta, precio_venta, lll from producto where unidades>0 ";
+    String Query = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento, descripcion, precio_etiqueta, precio_venta, lll from producto ";
         DefaultTableModel modelo = new DefaultTableModel();
         tablaPRODUCTOS.setModel(modelo);
         Connection cnx = null;
@@ -1511,10 +1558,11 @@ cod_prod = tablaPRODUCTOS.getModel().getValueAt(row, 0).toString();
 categor = tablaPRODUCTOS.getModel().getValueAt(row, 1).toString();
 product = tablaPRODUCTOS.getModel().getValueAt(row, 2).toString();
 PreV = Double.parseDouble(tablaPRODUCTOS.getModel().getValueAt(row, 8).toString());
+PreETI = Double.parseDouble(tablaPRODUCTOS.getModel().getValueAt(row, 7).toString());
 int cantidadTablaBusqueda = Integer.parseInt(tablaPRODUCTOS.getModel().getValueAt(row, 4).toString());
 autr = tablaPRODUCTOS.getModel().getValueAt(row, 9).toString();
 DefaultTableModel modelo = (DefaultTableModel) tablaADD.getModel();
-Object [] fila=new Object[9]; 
+Object [] fila=new Object[10]; 
 cantidadMAyor m= new cantidadMAyor();
 unit = lcd.getText();
 cantidad = cantidadTablaBusqueda;
@@ -1554,15 +1602,16 @@ try{
                  //si tiene autorizado descuento
                    while(h<porciones.size()){
                     if(autr.equals("-") &&  porciones.get(h).equals(unit) && jLabel13.getText().isEmpty()){
-                        Auxiliar.add(porciones.get(h));
+                         Auxiliar.add(porciones.get(h));
                         tipoVent = "Normal";
                         cantT1++;
                         descuentoPersn=(Double.parseDouble(descuentos.get(h)));
                         totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV) - descuentoPersn);
-                       operacion1 = cantidad - unidadesDeseadas;
-                       units.add(operacion1);
+                        totalEtiqueta = (Double.valueOf(unidadesDeseadas)*PreETI);
+                        operacion1 = cantidad - unidadesDeseadas;
+                        units.add(operacion1);
                         tablaADD.setRowHeight(25);
-                        fila = new Object[9];
+                        fila = new Object[10];
                         fila[0]=cod_prod;
                         fila[1]=categor; 
                         fila[2]=product; 
@@ -1572,7 +1621,9 @@ try{
                         fila[6]=totalVenta; 
                         fila[7]=tipoVent;  
                         fila[8]=cantT1; 
-                         sumaT = 0.0;
+                        fila[9]=totalEtiqueta; 
+                        sumaE = 0.0;
+                        sumaT = 0.0;
                         try{
                         Connection conex = DriverManager.getConnection(url, user, pass);
                         String Qury = "INSERT INTO tabla_aux(codigo_producto,codigo_barra,categoria,producto,proveedor,descripcion,ubicacion,unidades, alerta_unidades,fecha_vencimiento,precio_compra,precio_venta,precio_mayoreo,precio_etiqueta,descuento,autorizy,porciones,cant) SELECT codigo_producto,codigo_barra,categoria,producto,proveedor,descripcion,ubicacion,unidades, alerta_unidades,fecha_vencimiento,precio_compra,precio_venta,precio_mayoreo,precio_etiqueta,descuento,lll,porciones,"+cantT1+" from producto where codigo_producto='"+cod_prod+"' && producto='"+product+"'";
@@ -1584,7 +1635,7 @@ try{
                         modelo.addRow(fila); 
                                  tablaADD.setModel(modelo);
                                  lcd.setText("0");
-                                totalRow= tablaADD.getRowCount();
+                                    totalRow= tablaADD.getRowCount();
                                     for(int ii=0;ii<totalRow;ii++)
                                     {
                                     double sumatoria= Double.parseDouble(String.valueOf(tablaADD.getValueAt(ii,6)));
@@ -1593,8 +1644,19 @@ try{
                                     jLabel14.setVisible(true);
                                     jLabel6.setVisible(true);
                                     jLabel5.setVisible(true); 
-                                    jLabel5.setText(auxST);
+                                    jLabel5.setText(auxST);                                    
                                     }
+                                    for(int c=0;c<totalRow;c++)
+                                    {                                  
+                                    double sumatoriaE= Double.parseDouble(String.valueOf(tablaADD.getValueAt(c,9)));
+                                    sumaE= sumaE + sumatoriaE;
+                                    auxE = Double.toString(sumaE);
+                                    jLabel15.setVisible(true);
+                                    jLabel9.setVisible(true);
+                                    jLabel16.setVisible(true); 
+                                    jLabel16.setText(auxE);
+                                    }
+                                      
                                     cant=0;
                         }catch(SQLException es){
                         JOptionPane.showMessageDialog(this, es);
@@ -1610,10 +1672,11 @@ try{
                         tipoVent = "Mayorista";
                         cantT1++;
                         totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV));
-                       operacion1 = cantidad - unidadesDeseadas;
-                       units.add(operacion1);
+                        totalEtiqueta = (Double.valueOf(unidadesDeseadas)*PreETI);
+                        operacion1 = cantidad - unidadesDeseadas;
+                        units.add(operacion1);
                         tablaADD.setRowHeight(25);
-                        fila = new Object[9];
+                        fila = new Object[10];
                         fila[0]=cod_prod;
                         fila[1]=categor; 
                         fila[2]=product; 
@@ -1623,6 +1686,8 @@ try{
                         fila[6]=totalVenta; 
                         fila[7]=tipoVent;  
                         fila[8]=cantT1; 
+                        fila[9]=totalEtiqueta; 
+                         sumaE = 0.0;
                          sumaT = 0.0;
                         try{
                             find.setFocusable(false);
@@ -1639,7 +1704,7 @@ try{
                                 totalRow= tablaADD.getRowCount();
                                     for(int ii=0;ii<totalRow;ii++)
                                     {
-                                        find.setFocusable(false);
+                                    find.setFocusable(false);
                                     double sumatoria= Double.parseDouble(String.valueOf(tablaADD.getValueAt(ii,6)));
                                     sumaT= sumaT + sumatoria;
                                     auxST = Double.toString(sumaT);
@@ -1649,7 +1714,18 @@ try{
                                     jLabel5.setText(auxST);
                                     jLabel13.requestFocus();
                                     }
+                                    for(int c=0;c<totalRow;c++)
+                                    {                                  
+                                    double sumatoriaE= Double.parseDouble(String.valueOf(tablaADD.getValueAt(c,9)));
+                                   sumaE= sumaE + sumatoriaE;
+                                    auxE = Double.toString(sumaE);
+                                    jLabel15.setVisible(true);
+                                    jLabel9.setVisible(true);
+                                    jLabel16.setVisible(true); 
+                                    jLabel16.setText(auxE);
+                                    }
                                     cant=0;
+                                    // cuando entra con codigo de vender limpia la table y se cargan los precios de mayorista 
                                     cargarMayo();
                         }catch(SQLException es){
                         JOptionPane.showMessageDialog(this, es);
@@ -1660,10 +1736,11 @@ try{
                         tipoVent = "Normal";
                         cantT1++;
                         totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV));
-                       operacion1 = cantidad - unidadesDeseadas;
-                       units.add(operacion1);
+                        totalEtiqueta = (Double.valueOf(unidadesDeseadas)*PreETI);
+                        operacion1 = cantidad - unidadesDeseadas;
+                        units.add(operacion1);
                         tablaADD.setRowHeight(25);
-                        fila = new Object[9];
+                        fila = new Object[10];
                         fila[0]=cod_prod;
                         fila[1]=categor; 
                         fila[2]=product; 
@@ -1673,6 +1750,8 @@ try{
                         fila[6]=totalVenta; 
                         fila[7]=tipoVent;  
                         fila[8]=cantT1;
+                        fila[9]=totalEtiqueta; 
+                         sumaE = 0.0;
                          sumaT = 0.0;
                         try{
                         Connection conex = DriverManager.getConnection(url, user, pass);
@@ -1696,6 +1775,16 @@ try{
                                     jLabel5.setVisible(true); 
                                     jLabel5.setText(auxST);
                                     }
+                                     for(int c=0;c<totalRow;c++)
+                                    {                                  
+                                    double sumatoriaE= Double.parseDouble(String.valueOf(tablaADD.getValueAt(c,9)));
+                                   sumaE= sumaE + sumatoriaE;
+                                    auxE = Double.toString(sumaE);
+                                    jLabel15.setVisible(true);
+                                    jLabel9.setVisible(true);
+                                    jLabel16.setVisible(true); 
+                                    jLabel16.setText(auxE);
+                                    }
                                     cant=0;
                         }catch(SQLException es){
                         JOptionPane.showMessageDialog(this, es);
@@ -1707,10 +1796,11 @@ try{
                         tipoVent = "Normal";
                         cantT1++;
                         totalVenta = ((Double.valueOf(unidadesDeseadas)*PreV));
-                       operacion1 = cantidad - unidadesDeseadas;
-                       units.add(operacion1);
+                        totalEtiqueta = (Double.valueOf(unidadesDeseadas)*PreETI);
+                        operacion1 = cantidad - unidadesDeseadas;
+                        units.add(operacion1);
                         tablaADD.setRowHeight(25);
-                        fila = new Object[9];
+                        fila = new Object[10];
                         fila[0]=cod_prod;
                         fila[1]=categor; 
                         fila[2]=product; 
@@ -1720,6 +1810,8 @@ try{
                         fila[6]=totalVenta; 
                         fila[7]=tipoVent;  
                         fila[8]=cantT1;
+                        fila[9]=totalEtiqueta; 
+                         sumaE = 0.0;
                          sumaT = 0.0;
                         try{
                         Connection conex = DriverManager.getConnection(url, user, pass);
@@ -1742,6 +1834,16 @@ try{
                                     jLabel6.setVisible(true);
                                     jLabel5.setVisible(true); 
                                     jLabel5.setText(auxST);
+                                    }
+                                     for(int c=0;c<totalRow;c++)
+                                    {                                  
+                                    double sumatoriaE= Double.parseDouble(String.valueOf(tablaADD.getValueAt(c,9)));
+                                    sumaE= sumaE + sumatoriaE;
+                                    auxE = Double.toString(sumaE);
+                                    jLabel15.setVisible(true);
+                                    jLabel9.setVisible(true);
+                                    jLabel16.setVisible(true); 
+                                    jLabel16.setText(auxE);
                                     }
                                     cant=0;
                         }catch(SQLException es){
@@ -1781,7 +1883,7 @@ else
     TableColumn tableColumn4 = tableColumnModel.getColumn(4);
     tableColumn4.setHeaderValue( "UNIDADES" );
     TableColumn tableColumn5 = tableColumnModel.getColumn(5);
-    tableColumn5.setHeaderValue( "VENCIMIENTO" );
+    tableColumn5.setHeaderValue( "VENCE" );
     TableColumn tableColumn6 = tableColumnModel.getColumn(6);
     tableColumn6.setHeaderValue( "." );
     TableColumn tableColumn7 = tableColumnModel.getColumn(7);
@@ -1805,18 +1907,20 @@ else
     
     JTableHeader tableHeader2 = tablaADD.getTableHeader();
     TableColumnModel tableColumnModeAdd = tableHeader2.getColumnModel();
+    TableColumn tableColumnAdd1 = tableColumnModeAdd.getColumn(1);
+    tableColumnAdd1.setHeaderValue( " " );
     TableColumn tableColumnAdd = tableColumnModeAdd.getColumn(5);
-    tableColumnAdd.setHeaderValue( "Cant" );
-   
-    tablaADD.getColumnModel().getColumn(0).setPreferredWidth(65);
-    tablaADD.getColumnModel().getColumn(1).setPreferredWidth(170);
-    tablaADD.getColumnModel().getColumn(2).setPreferredWidth(620);
+    tableColumnAdd.setHeaderValue( "Unidades" );
+    tablaADD.getColumnModel().getColumn(0).setPreferredWidth(85);
+    tablaADD.getColumnModel().getColumn(1).setPreferredWidth(0);
+    tablaADD.getColumnModel().getColumn(2).setPreferredWidth(780);
     tablaADD.getColumnModel().getColumn(3).setPreferredWidth(60);
     tablaADD.getColumnModel().getColumn(4).setPreferredWidth(70);
     tablaADD.getColumnModel().getColumn(5).setPreferredWidth(60);
     tablaADD.getColumnModel().getColumn(6).setPreferredWidth(70);
     tablaADD.getColumnModel().getColumn(7).setPreferredWidth(90);
     tablaADD.getColumnModel().getColumn(8).setPreferredWidth(5);
+    tablaADD.getColumnModel().getColumn(8).setPreferredWidth(70);
     }
     
     
@@ -1829,7 +1933,7 @@ else
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento,descripcion, precio_etiqueta, precio_venta, lll from producto where unidades>0 && codigo_producto like '"+busq+"%' or codigo_barra like '"+busq+"%' or "+"producto like '"+busq+"%'"+" or "+"categoria like '"+busq+"%' or descripcion like '"+busq+"%' ";
+             String sql = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento,descripcion, precio_etiqueta, precio_venta, lll from producto where  codigo_producto like '"+busq+"%' or codigo_barra like '"+busq+"%' or "+"producto like '"+busq+"%'"+" or "+"categoria like '"+busq+"%' or descripcion like '"+busq+"%' ";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
@@ -1863,7 +1967,7 @@ else
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cnx = DriverManager.getConnection(url, user,pass);
-             String sql = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento,descripcion, precio_etiqueta, precio_mayoreo, lll from bd_farm.producto where unidades>0 && codigo_producto like '"+busque+"%' or codigo_barra like '"+busque+"%' or "+"producto like '"+busque+"%'"+" or "+"categoria like '"+busque+"%' or descripcion like '"+busque+"%' ";
+             String sql = "SELECT codigo_producto, categoria, producto, ubicacion, unidades, fecha_vencimiento,descripcion, precio_etiqueta, precio_mayoreo, lll from bd_farm.producto where precio_mayoreo != 0.00 and (codigo_producto like '"+busque+"%' or codigo_barra like '"+busque+"%' or "+"producto like '"+busque+"%'"+" or "+"categoria like '"+busque+"%' or descripcion like '"+busque+"%') ";
              Statement st = cnx.prepareStatement(sql);
              ResultSet res = st.executeQuery(sql);
              ResultSetMetaData rsMd = res.getMetaData();
@@ -1880,8 +1984,6 @@ else
              }
               buscarMay.requestFocus();
          columnas();
-         tablaPRODUCTOS.setColumnSelectionInterval(0,0);
-         tablaPRODUCTOS.setRowSelectionInterval(0,0);
              } catch (ClassNotFoundException ex) {
              throw new ClassCastException(ex.getMessage());
              } catch (SQLException ex) { 

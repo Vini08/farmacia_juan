@@ -480,7 +480,6 @@ Connection cnx,conI = null;
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
        ModificarProd(Integer.parseInt(jTextField3.getText()),jTextField1.getText(),jTextField2.getText(),jTextField8.getText(), new BigDecimal(jTextField10.getText()),new BigDecimal(jTextField5.getText()),new BigDecimal(jTextField6.getText()),Integer.parseInt(jTextField7.getText()));
        inventario.test=1;
-       hacer_ventas.test2=1;
         Por_agotarse("SELECT count(codigo_producto)as cuantos FROM producto where Unidades<alerta_unidades");
         LlenarTabla("SELECT codigo_producto, categoria, producto,proveedor,unidades,alerta_unidades,precio_compra,precio_venta,precio_mayoreo FROM producto where Unidades<alerta_unidades");
 jTextField1.setText("");

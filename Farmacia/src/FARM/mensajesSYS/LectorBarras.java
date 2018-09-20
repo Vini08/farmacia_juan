@@ -29,7 +29,7 @@ String pass = "";
 int nvl;
 public static String mayoris;
 public  static int mayoreo=0;
-    public LectorBarras(String n,int units) {
+    public LectorBarras() {
         initComponents();
         setLocationRelativeTo(null);
         AWTUtilities.setWindowOpaque(this, false);
@@ -194,7 +194,7 @@ inicia();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LectorBarras(mayoris,unit).setVisible(true);
+                new LectorBarras().setVisible(true);
             }
         });
     }
@@ -225,7 +225,7 @@ Connection cnx = null;
             mayoris = res.getString(2);
             if (n.equals(nombre) ){
                  hacer_ventas.buscarMayoristas("");
-                 hacer_ventas.jLabel13.setText("NOMBRE DE CLIENTE: "+mayoris);
+                 hacer_ventas.jLabel13.setText("Nombre Mayorista: "+mayoris);
                  hacer_ventas.find.setVisible(false);
                  mayoreo=1;
                  this.dispose();

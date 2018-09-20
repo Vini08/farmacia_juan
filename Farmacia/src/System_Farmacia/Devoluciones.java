@@ -38,9 +38,9 @@ public boolean check=true;
 public static String codeF, codeD,codeP;
 static String inv[]=new String[5000];
 static String GN[]=new String[5000];
-String url = "jdbc:mysql://localhost:3306/bd_farm";
-String user = "root";
-String pass = "";
+static String url = "jdbc:mysql://localhost:3306/bd_farm";
+static String user = "root";
+static String pass = "";
 int busqueda;
 Color grisMoved =new Color(180,180,180);
 Color grisborde =new Color(224,224,224);
@@ -116,7 +116,7 @@ public static BigDecimal total;
         jPopupMenu2.add(jMenuItem2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Ventas Realizadas");
+        setTitle("Devoluciones");
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1600, 900));
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -781,6 +781,11 @@ if(pressEnter==KeyEvent.VK_ENTER){
     }//GEN-LAST:event_tablaDEVSKeyPressed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+unidad=0;
+codeD="";
+codeF="";
+codeP="";
+total= BigDecimal.ZERO;        
 codeD = (String) tablaDEVS.getModel().getValueAt(tablaDEVS.getSelectedRow(), 0).toString();
 codeF = (String) tablaDEVS.getModel().getValueAt(tablaDEVS.getSelectedRow(), 1).toString();
 codeP = (String) tablaDEVS.getModel().getValueAt(tablaDEVS.getSelectedRow(), 2).toString();
@@ -868,7 +873,7 @@ conf.setLocationRelativeTo(null);// TODO add your handling code here:
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
+    public static javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
@@ -889,7 +894,8 @@ conf.setLocationRelativeTo(null);// TODO add your handling code here:
     private static javax.swing.JTable tablaDEVS;
     // End of variables declaration//GEN-END:variables
 
- public void LlenarTabla(){
+ public static void LlenarTabla(){
+     jLabel13.setText("");
         DefaultTableModel modelo = new DefaultTableModel();
         tablaDEVS.setModel(modelo);
         Connection cnx = null;
@@ -906,7 +912,7 @@ conf.setLocationRelativeTo(null);// TODO add your handling code here:
             modelo.addColumn(rsMd.getColumnLabel(i));
          }
          while (res.next()){
-             inv[w] = res.getString(3);
+             inv[w] = res.getString(5);
                     Float auxo = Float.parseFloat(inv[w]);
                     invT = invT + auxo;
                     w++;

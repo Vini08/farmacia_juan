@@ -47,9 +47,7 @@ public LoginGT() {
         h1 = new Thread(this);
         h1.start();
      
-       jButton1.setBorder(thickBorde);
         jButton3.setBorder(thickBorde);
-         jButton6.setBorder(thickBorde);
          name.requestFocus();
     }
 
@@ -58,32 +56,28 @@ public LoginGT() {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton11 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         name = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         passw = new javax.swing.JPasswordField();
         jButton2 = new javax.swing.JButton();
         ms = new javax.swing.JLabel();
         reloj = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("inicio");
         setIconImages(null);
-        setMinimumSize(new java.awt.Dimension(319, 430));
+        setMinimumSize(new java.awt.Dimension(379, 520));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(357, 598));
+        setPreferredSize(new java.awt.Dimension(379, 520));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -103,80 +97,6 @@ public LoginGT() {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Microsoft Tai Le", 0, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(123, 123, 123));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("-");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel2MousePressed(evt);
-            }
-        });
-        jLabel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel2MouseMoved(evt);
-            }
-        });
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 40, 40));
-
-        jLabel4.setBackground(new java.awt.Color(153, 153, 153));
-        jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(231, 231, 231));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("LOGIN");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 40));
-
-        jButton11.setBackground(new java.awt.Color(3, 64, 124));
-        jButton11.setForeground(new java.awt.Color(3, 64, 124));
-        jButton11.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton11.setFocusPainted(false);
-        jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton11MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton11MouseReleased(evt);
-            }
-        });
-        jButton11.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton11MouseMoved(evt);
-            }
-        });
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 40));
-
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setForeground(new java.awt.Color(102, 102, 102));
-        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton1.setFocusPainted(false);
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton1MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton1MouseReleased(evt);
-            }
-        });
-        jButton1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton1MouseMoved(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 40, 40));
-
         jLabel3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(123, 123, 123));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -195,7 +115,7 @@ public LoginGT() {
                 jLabel3MouseMoved(evt);
             }
         });
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 40, 40));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, 40, 40));
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -218,42 +138,19 @@ public LoginGT() {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 40, 40));
-
-        jButton6.setBackground(new java.awt.Color(255, 255, 255));
-        jButton6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton6.setFocusPainted(false);
-        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton6MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton6MouseReleased(evt);
-            }
-        });
-        jButton6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton6MouseMoved(evt);
-            }
-        });
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 40, 40));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, 40, 40));
 
         jLabel6.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 48)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/log_loggin.png"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 360, 80));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 320, 70));
 
-        jLabel7.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 26)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(20, 108, 197));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Usuario");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 350, 50));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 370, 50));
 
         name.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
         name.setForeground(new java.awt.Color(102, 102, 102));
@@ -269,26 +166,13 @@ public LoginGT() {
                 nameKeyPressed(evt);
             }
         });
-        getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 220, 50));
+        getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 220, 50));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/user.png"))); // NOI18N
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 40, 50));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 40, 50));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/usuario_1.png"))); // NOI18N
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 60, -1));
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel8MousePressed(evt);
-            }
-        });
-        jLabel8.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jLabel8MouseDragged(evt);
-            }
-        });
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 367, 40));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 60, -1));
 
         passw.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
         passw.setForeground(new java.awt.Color(102, 102, 102));
@@ -304,7 +188,7 @@ public LoginGT() {
                 passwKeyPressed(evt);
             }
         });
-        getContentPane().add(passw, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 220, 50));
+        getContentPane().add(passw, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 220, 50));
 
         jButton2.setBackground(new java.awt.Color(3, 64, 124));
         jButton2.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
@@ -317,26 +201,40 @@ public LoginGT() {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 180, 60));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, 200, 60));
 
         ms.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 14)); // NOI18N
         ms.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(ms, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 360, 40));
+        getContentPane().add(ms, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 380, 40));
 
-        reloj.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 18)); // NOI18N
-        reloj.setForeground(new java.awt.Color(187, 187, 187));
+        reloj.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
+        reloj.setForeground(new java.awt.Color(207, 207, 207));
         reloj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(reloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 360, 40));
+        getContentPane().add(reloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 380, 40));
 
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/azulBarra.jpg"))); // NOI18N
         jLabel18.setPreferredSize(new java.awt.Dimension(367, 70));
-        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 360, 80));
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 380, 160));
 
-        jLabel10.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 26)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 26)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(20, 108, 197));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Contraseña");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 360, 50));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 370, 50));
+
+        jLabel8.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 26)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(20, 108, 197));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
+        jLabel8.setText("Usuario");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 40, 30));
+
+        jLabel11.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 26)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(20, 108, 197));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/blanco.jpg"))); // NOI18N
+        jLabel11.setText("Usuario");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 20, 70));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -353,39 +251,12 @@ public void run(){
 }
 
 
-    private void jButton1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseMoved
-Border thickBorder = new LineBorder(grisborde, 54);
-        jButton1.setBorder(thickBorder);
-        jButton3.setBorder(thickBorde);
-        jLabel2.setForeground(Color.BLACK);
-        jLabel3.setForeground(ColorFont);
-               // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseMoved
-
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
 Border thickBorder = new LineBorder(Color.WHITE, 5);
-        jButton1.setBorder(thickBorder);
         jButton3.setBorder(thickBorder);
-        jButton6.setBorder(thickBorder);
-        jLabel2.setForeground(ColorFont);
         jLabel3.setForeground(ColorFont);
         
     }//GEN-LAST:event_formMouseMoved
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
-Border thickBorder = new LineBorder(grisPress, 54);
-        jButton1.setBorder(thickBorder);        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MousePressed
-
-    private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
-     Border thickBorder = new LineBorder(grisborde, 54);
-        jButton1.setBorder(thickBorder);
-            // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseReleased
 
     private void jButton3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MousePressed
         // TODO add your handling code here:
@@ -398,8 +269,7 @@ Border thickBorder = new LineBorder(grisPress, 54);
     private void jButton3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseMoved
 Border thickBorder = new LineBorder(Color.BLUE, 54);
         jButton3.setBorder(thickBorder);  
-        jButton1.setBorder(thickBorde);
-        jLabel3.setForeground(Color.WHITE);
+         jLabel3.setForeground(Color.WHITE);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3MouseMoved
 
@@ -407,33 +277,15 @@ Border thickBorder = new LineBorder(Color.BLUE, 54);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-this.setExtendedState(ICONIFIED);        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel2MouseClicked
-
-    private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
-Border thickBorder = new LineBorder(grisPress, 54);
-        jButton1.setBorder(thickBorder);         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel2MousePressed
-
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
 Border thickBorder = new LineBorder(ColorSalida2, 54);
         jButton3.setBorder(thickBorder);         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel3MousePressed
 
-    private void jLabel2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseMoved
-Border thickBorder = new LineBorder(grisborde, 54);
-        jButton1.setBorder(thickBorder); 
-        jButton3.setBorder(thickBorde);
-jLabel3.setForeground(ColorFont);// TODO add your handling code here:
-    }//GEN-LAST:event_jLabel2MouseMoved
-
     private void jLabel3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseMoved
 Border thickBorder = new LineBorder(ColorSalida, 54);
         jButton3.setBorder(thickBorder); 
-        jButton1.setBorder(thickBorde);
         jLabel3.setToolTipText(null);
-jLabel2.setForeground(ColorFont);
 jLabel3.setForeground(Color.WHITE);// TODO add your handling code here:
     }//GEN-LAST:event_jLabel3MouseMoved
 
@@ -447,22 +299,6 @@ jLabel3.setForeground(Color.WHITE);// TODO add your handling code here:
     private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameActionPerformed
-
-    private void jButton6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6MousePressed
-
-    private void jButton6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6MouseReleased
-
-    private void jButton6MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6MouseMoved
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 inicia();
@@ -485,31 +321,6 @@ ms.setText("");        // TODO add your handling code here:
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
       // TODO add your handling code here:
     }//GEN-LAST:event_formWindowGainedFocus
-
-    private void jButton11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11MousePressed
-
-    private void jButton11MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11MouseReleased
-
-    private void jButton11MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11MouseMoved
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11ActionPerformed
-
-    private void jLabel8MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseDragged
-this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel8MouseDragged
-
-    private void jLabel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MousePressed
-x = evt.getX();
-                y = evt.getY();        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel8MousePressed
 
     private void nameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyPressed
 if(evt.getKeyCode()==10){
@@ -554,16 +365,12 @@ passw.requestFocus();
 
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
