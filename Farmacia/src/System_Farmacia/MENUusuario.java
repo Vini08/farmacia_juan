@@ -74,7 +74,7 @@ public MENUusuario(String Name) {
         jLabel7.setText(nombr);
         jLabel19.setText(hora + ":" + minutos + ":" + segundos);
         conteoAgotados("SELECT count(codigo_producto)as cuantos FROM producto where Unidades=0");
-        conteoPORagotar("SELECT count(codigo_producto)as cuantos FROM producto where Unidades<alerta_unidades");
+        conteoPORagotar("SELECT count(codigo_producto)as cuantos FROM producto where Unidades<alerta_unidades and unidades!=0");
         conteoRECORDATORY("SELECT count(codigo) as conteo FROM bd_farm.recordatorios ");
         conteoPedidos("SELECT count(codigo_pedido) as conteo FROM bd_farm.pedidos ");
    jLabel28.setToolTipText(null);
@@ -418,7 +418,7 @@ public MENUusuario(String Name) {
         getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(1383, 10, 50, 40));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/notify.png"))); // NOI18N
-        jLabel4.setToolTipText("");
+        jLabel4.setToolTipText("Productos por Agotarse");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 10, -1, 50));
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/notificacion.png"))); // NOI18N

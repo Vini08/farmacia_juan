@@ -19,6 +19,9 @@ import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -58,6 +61,8 @@ Connection cnx,conI = null;
         jTextField7.setText("");
         jTextField8.setText("");
         jTextField10.setText("");
+        jTextField10.setVisible(false);
+        columnas();
     }
 
     /**
@@ -93,7 +98,6 @@ Connection cnx,conI = null;
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jTextField10 = new javax.swing.JTextField();
-        jLabel31 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jTextField7 = new javax.swing.JTextField();
@@ -105,7 +109,15 @@ Connection cnx,conI = null;
         setMinimumSize(new java.awt.Dimension(1600, 900));
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1600, 900));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+        });
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 formMouseMoved(evt);
             }
@@ -218,7 +230,7 @@ Connection cnx,conI = null;
         jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(231, 231, 231));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("EDITAR PRODUCTO AGOTADOS");
+        jLabel4.setText("EDITAR PRODUCTOS POR AGOTARSE");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 40));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/AZUL.png"))); // NOI18N
@@ -231,7 +243,7 @@ Connection cnx,conI = null;
         jLabel7.setForeground(new java.awt.Color(82, 82, 82));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("PRECIO DE VENTA");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 820, 280, 30));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 740, 280, 30));
 
         jLabel13.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(82, 82, 82));
@@ -249,13 +261,13 @@ Connection cnx,conI = null;
         jLabel15.setForeground(new java.awt.Color(82, 82, 82));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("PRECIO MAYOREO");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 660, 320, 30));
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 820, 280, 30));
 
         jLabel17.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(114, 77, 77));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("UNIDADES");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 740, 320, 30));
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 660, 320, 30));
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(153, 153, 153));
@@ -275,7 +287,7 @@ Connection cnx,conI = null;
         jTextField3.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField3.setBorder(null);
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 770, 320, 40));
+        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 690, 320, 40));
 
         jTextField4.setEditable(false);
         jTextField4.setBackground(new java.awt.Color(153, 153, 153));
@@ -288,7 +300,7 @@ Connection cnx,conI = null;
         jTextField5.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField5.setBorder(null);
-        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 850, 280, 40));
+        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 770, 280, 40));
 
         jButton5.setBackground(new java.awt.Color(92, 42, 42));
         jButton5.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
@@ -313,7 +325,7 @@ Connection cnx,conI = null;
         jTextField6.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField6.setBorder(null);
-        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 690, 320, 40));
+        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 850, 280, 40));
 
         jTextField8.setEditable(false);
         jTextField8.setBackground(new java.awt.Color(153, 153, 153));
@@ -335,13 +347,7 @@ Connection cnx,conI = null;
         jTextField10.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField10.setBorder(null);
-        getContentPane().add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 770, 280, 40));
-
-        jLabel31.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        jLabel31.setForeground(new java.awt.Color(82, 82, 82));
-        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel31.setText("PRECIO COMPRA");
-        getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 740, 280, 30));
+        getContentPane().add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 850, 20, 40));
 
         jTable1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 20)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -372,13 +378,13 @@ Connection cnx,conI = null;
         jTextField7.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 21)); // NOI18N
         jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField7.setBorder(null);
-        getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 850, 320, 40));
+        getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 770, 320, 40));
 
         jLabel18.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(114, 77, 77));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("ALERTA DE UNIDADES");
-        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 820, 320, 30));
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 740, 320, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -480,8 +486,8 @@ Connection cnx,conI = null;
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
        ModificarProd(Integer.parseInt(jTextField3.getText()),jTextField1.getText(),jTextField2.getText(),jTextField8.getText(), new BigDecimal(jTextField10.getText()),new BigDecimal(jTextField5.getText()),new BigDecimal(jTextField6.getText()),Integer.parseInt(jTextField7.getText()));
        inventario.test=1;
-        Por_agotarse("SELECT count(codigo_producto)as cuantos FROM producto where Unidades<alerta_unidades");
-        LlenarTabla("SELECT codigo_producto, categoria, producto,proveedor,unidades,alerta_unidades,precio_compra,precio_venta,precio_mayoreo FROM producto where Unidades<alerta_unidades");
+        Por_agotarse("SELECT count(codigo_producto)as cuantos FROM producto where Unidades<alerta_unidades and unidades!=0");
+        LlenarTabla("SELECT codigo_producto, categoria, producto,proveedor,unidades,alerta_unidades,precio_compra,precio_venta,precio_mayoreo FROM producto where Unidades<alerta_unidades and unidades!=0");
 jTextField1.setText("");
 jTextField2.setText("");
 jTextField3.setText("");
@@ -492,9 +498,6 @@ jTextField7.setText("");
 jTextField8.setText("");
 jTextField10.setText("");
 
-        datosAlmacenados v = new datosAlmacenados();
-        v.setVisible(true);
-        v.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jLabel29MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel29MouseDragged
@@ -533,6 +536,15 @@ alerts = ((int) jTable1.getValueAt(jTable1.getSelectedRow(), 5));
 
 // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        setLocation(this.getLocation().x + evt.getX()-x, this.getLocation().y + evt.getY() - y);        // TODO add your handling code here:
+    }//GEN-LAST:event_formMouseDragged
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+x = evt.getX();
+                y = evt.getY();        // TODO add your handling code here:
+    }//GEN-LAST:event_formMousePressed
 
     /**
      * @param args the command line arguments
@@ -648,7 +660,6 @@ alerts = ((int) jTable1.getValueAt(jTable1.getSelectedRow(), 5));
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -709,7 +720,11 @@ alerts = ((int) jTable1.getValueAt(jTable1.getSelectedRow(), 5));
  
  
   public void LlenarTabla(String Query){
-        DefaultTableModel modelo = new DefaultTableModel();
+          DefaultTableModel modelo = new DefaultTableModel(){
+      public boolean isCellEditable(int rowIndex, int mColIndex) {
+        return false;
+      }
+    };
         jTable1.setModel(modelo);
         Connection cnx = null;
         if (cnx == null) {
@@ -739,4 +754,39 @@ alerts = ((int) jTable1.getValueAt(jTable1.getSelectedRow(), 5));
             } 
             }   
     }
+  
+  public static void columnas(){
+    JTableHeader tableHeader = jTable1.getTableHeader();
+    TableColumnModel tableColumnModel = tableHeader.getColumnModel();
+    TableColumn tableColumn0 = tableColumnModel.getColumn(0);
+    tableColumn0.setHeaderValue( "CODIGO" );
+    TableColumn tableColumn1 = tableColumnModel.getColumn(1);
+    tableColumn1.setHeaderValue( "CATEGORIA" );
+    TableColumn tableColumn2 = tableColumnModel.getColumn(2);
+    tableColumn2.setHeaderValue( "PRODUCTO" );
+    TableColumn tableColumn3 = tableColumnModel.getColumn(3);
+    tableColumn3.setHeaderValue( "PROVEEDOR" );
+    TableColumn tableColumn4 = tableColumnModel.getColumn(4);
+    tableColumn4.setHeaderValue( "UNIDADES" );
+    TableColumn tableColumn5 = tableColumnModel.getColumn(5);
+    tableColumn5.setHeaderValue( "ALERTA" );
+    TableColumn tableColumn6 = tableColumnModel.getColumn(6);
+    tableColumn6.setHeaderValue( "." );
+    TableColumn tableColumn7 = tableColumnModel.getColumn(7);
+    tableColumn7.setHeaderValue( "PRECIO VENTA" );
+    TableColumn tableColumn8 = tableColumnModel.getColumn(8);
+    tableColumn8.setHeaderValue( "PRECIO MAYOREO" );
+
+    jTable1.getColumnModel().getColumn(0).setPreferredWidth(85);
+    jTable1.getColumnModel().getColumn(1).setPreferredWidth(150);
+    jTable1.getColumnModel().getColumn(2).setPreferredWidth(760);
+    jTable1.getColumnModel().getColumn(3).setPreferredWidth(200);
+    jTable1.getColumnModel().getColumn(4).setPreferredWidth(90);
+    jTable1.getColumnModel().getColumn(5).setPreferredWidth(90);
+    jTable1.getColumnModel().getColumn(6).setPreferredWidth(1);
+    jTable1.getColumnModel().getColumn(7).setPreferredWidth(150);
+    jTable1.getColumnModel().getColumn(8).setPreferredWidth(150);
+    
+    tableHeader.repaint();
+  }
 }

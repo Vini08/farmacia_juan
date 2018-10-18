@@ -742,7 +742,15 @@ public hacer_ventas() {
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 500, 50));
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/grisFondo.jpg"))); // NOI18N
+        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel17MousePressed(evt);
+            }
+        });
         jLabel17.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel17MouseDragged(evt);
+            }
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 jLabel17MouseMoved(evt);
             }
@@ -1308,6 +1316,15 @@ confirmarVenta();
 search= buscarMay.getText();
         buscarMayoristas(search);         // TODO add your handling code here:
     }//GEN-LAST:event_buscarMayKeyReleased
+
+    private void jLabel17MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MousePressed
+ x = evt.getX();
+        y = evt.getY();        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel17MousePressed
+
+    private void jLabel17MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseDragged
+this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);         // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel17MouseDragged
 
     /**
      * @param args the command line arguments
@@ -2023,7 +2040,9 @@ else
         CV.setVisible(true);
         CV.setLocationRelativeTo(null);
         }
+        
     }
+    
  public void calcula () {        
 Calendar calendario = new GregorianCalendar();
 Date fechaHoraActual = new Date();

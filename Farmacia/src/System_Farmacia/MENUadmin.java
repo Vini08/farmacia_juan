@@ -79,7 +79,7 @@ public MENUadmin(String Name) {
         jLabel19.setText(hora + ":" + minutos + ":" + segundos);
        
         conteoAgotados("SELECT count(codigo_producto)as cuantos FROM producto where Unidades=0");
-        conteoPORagotar("SELECT count(codigo_producto)as cuantos FROM producto where Unidades<alerta_unidades");
+        conteoPORagotar("SELECT count(codigo_producto)as cuantos FROM producto where Unidades<alerta_unidades and unidades!=0");
         conteoRECORDATORY("SELECT count(codigo) as conteo FROM bd_farm.recordatorios ");
         conteoPedidos("SELECT count(codigo_pedido) as conteo FROM bd_farm.pedidos ");
         jLabel28.setToolTipText(null);
@@ -362,6 +362,7 @@ public MENUadmin(String Name) {
         jLabel29.setForeground(new java.awt.Color(255, 255, 255));
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel29.setText("4");
+        jLabel29.setToolTipText("Productos Agotados");
         jLabel29.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jLabel29MouseReleased(evt);
@@ -415,7 +416,7 @@ public MENUadmin(String Name) {
         getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(1312, 20, 50, 20));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/notify.png"))); // NOI18N
-        jLabel4.setToolTipText("");
+        jLabel4.setToolTipText("Productos por Agotarse");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 10, -1, 50));
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/notificacion.png"))); // NOI18N
@@ -1411,7 +1412,7 @@ S.toFront();
     }//GEN-LAST:event_jLabel18MouseReleased
 
     private void jLabel18MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseMoved
-    conteoPORagotar("SELECT count(codigo_producto)as cuantos FROM producto where Unidades<alerta_unidades");
+    conteoPORagotar("SELECT count(codigo_producto)as cuantos FROM producto where Unidades<alerta_unidades and unidades!=0");
             // TODO add your handling code here:
     }//GEN-LAST:event_jLabel18MouseMoved
 

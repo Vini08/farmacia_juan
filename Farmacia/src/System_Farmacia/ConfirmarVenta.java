@@ -667,13 +667,7 @@ if(pressEnter==KeyEvent.VK_ENTER){
     jLabel24.setText(String.valueOf(operacion));
 }
 }     
-if(pressEnter==65535){
-if(!jLabel24.getText().isEmpty()){
-insertProd();    
-} 
-else
-JOptionPane.showMessageDialog(this,"Debe ingresar efectivo y presionar el botón Operar");
-}// TODO add your handling code here:
+// TODO add your handling code here:
     }//GEN-LAST:event_jTextField1KeyPressed
 
     private void jLabel24KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel24KeyPressed
@@ -764,9 +758,9 @@ public void insertProd(){
             //---------------------------------------------------------------------------------------------------
             //--------------inserto en factura ------------------------------------------------------------------
             try {
-                Connection conn = DriverManager.getConnection(url, user, pass);
+                Connection conns = DriverManager.getConnection(url, user, pass);
                 String sql = "INSERT INTO factura (codigo_factura, usuario, total,efectivo,cambio,fecha,hora) values (NULL, ?, ?, ?, ?, ?, ?)";
-                PreparedStatement stmt = conn.prepareStatement(sql);
+                PreparedStatement stmt = conns.prepareStatement(sql);
                 
                 stmt.setString(1,usrs);
                 stmt.setString(2, TTV);
@@ -777,10 +771,15 @@ public void insertProd(){
                  stmt.setString(6,MENUadmin.horaMenu);
                 }
                 if(LoginGT.boot==1){
-                stmt.setString(6,MENUusuario.horaMenu);}
+                stmt.setString(6,MENUusuario.horaMenu);
+                }
                 
                 
-                stmt.executeUpdate();   
+                stmt.executeUpdate(); 
+                TTV="";
+                efectivo=0.0;
+                operacion=0.0;
+                conns.close();
             } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,ex);
             }
@@ -845,7 +844,7 @@ public void insertProd(){
       
       hacer_ventas.count=2;
   
-            this.dispose();
+            
           DefaultTableModel dm = (DefaultTableModel)hacer_ventas.tablaADD.getModel();
           DefaultTableModel origin = (DefaultTableModel)hacer_ventas.tablaPRODUCTOS.getModel();
      while(dm.getRowCount() > 0)
@@ -910,7 +909,8 @@ public void insertProd(){
             }
      
     }
-   }
+   }  
+      this.dispose();
 }
          
 public static void columnas(){

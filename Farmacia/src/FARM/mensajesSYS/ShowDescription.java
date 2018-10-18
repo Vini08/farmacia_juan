@@ -10,6 +10,7 @@ import System_Farmacia.LoginGT;
 import System_Farmacia.hacer_ventas;
 import com.sun.awt.AWTUtilities;
 import java.awt.event.KeyEvent;
+import javax.swing.JScrollPane;
 /**
  *
  * @author Vinicio
@@ -24,7 +25,7 @@ public class ShowDescription extends javax.swing.JFrame {
                 jTextArea1.setText(hacer_ventas.DESCRPart);
                 }
                 if(LoginGT.boot==1){
-                jTextArea1.setText(Inventario2.DESCRPart);
+                jTextArea1.setText(hacer_ventas.DESCRPart);
                 }
         jTextArea1.setLineWrap(true);
         jTextArea1.setWrapStyleWord(true);
@@ -40,11 +41,11 @@ public class ShowDescription extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jTextArea1 = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Descripción");
@@ -71,11 +72,6 @@ public class ShowDescription extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 50, 50));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
-        jTextArea1.setRows(5);
-        getContentPane().add(jTextArea1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 440, 400));
-
         jLabel4.setBackground(new java.awt.Color(153, 153, 153));
         jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 26)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(231, 231, 231));
@@ -86,6 +82,12 @@ public class ShowDescription extends javax.swing.JFrame {
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/fondoverde.jpg"))); // NOI18N
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 50));
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 460, 420));
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/indicac.png"))); // NOI18N
         jLabel2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -93,7 +95,6 @@ public class ShowDescription extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 520));
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
