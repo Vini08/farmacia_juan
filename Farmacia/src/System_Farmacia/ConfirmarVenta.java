@@ -25,9 +25,18 @@ import com.itextpdf.text.*;
 import FARM.mensajesSYS.VentaExitosa;
 import java.awt.event.KeyEvent;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import paquete_impresion.printnow;
 /**
  *
  * @author Vinicio
@@ -41,6 +50,8 @@ String pass = "";
 int cant, lastID;
 private int x;
 private int y;
+int hora, minutos, segundos;
+int j,i;    
 private static double efectivo, total,operacion;
 FileOutputStream ficheroPdf;
 String destPDf;
@@ -62,6 +73,7 @@ BaseColor TipoC = new BaseColor(134,134,134);
 Border thickBorde = new LineBorder(Color.WHITE, 4);
 public static String TTV, usrs;      
 public static String[][] array_String;
+public static String[][] cocapro;
 public static String[][] array_tipo;
 public static Double[][] array_Double; 
 public static int count, oFF;
@@ -132,10 +144,12 @@ DefaultTableModel modelo = (DefaultTableModel) destino.getModel();
         jLabel16 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jLabel38 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
         jLabel35 = new javax.swing.JLabel();
@@ -274,13 +288,13 @@ DefaultTableModel modelo = (DefaultTableModel) destino.getModel();
         jLabel36.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 30)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(23, 23, 23));
         jLabel36.setText("Cambio:");
-        getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 610, 190, 60));
+        getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 570, 190, 60));
 
         jLabel19.setFont(new java.awt.Font("Microsoft Tai Le", 1, 30)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 102, 0));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel19.setText("Q");
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 610, 30, 60));
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 570, 30, 60));
 
         jLabel24.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 30)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -289,13 +303,13 @@ DefaultTableModel modelo = (DefaultTableModel) destino.getModel();
                 jLabel24KeyPressed(evt);
             }
         });
-        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 610, 200, 60));
+        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 570, 200, 60));
 
         jLabel16.setFont(new java.awt.Font("Microsoft Tai Le", 1, 30)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 102, 0));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel16.setText("Q");
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 490, 30, 60));
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 450, 30, 60));
 
         jLabel4.setBackground(new java.awt.Color(153, 153, 153));
         jLabel4.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 20)); // NOI18N
@@ -308,7 +322,7 @@ DefaultTableModel modelo = (DefaultTableModel) destino.getModel();
         jLabel15.setForeground(new java.awt.Color(23, 23, 23));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel15.setText("Efectivo:");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 560, 110, -1));
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 520, 110, -1));
 
         jTextField1.setBackground(new java.awt.Color(153, 153, 153));
         jTextField1.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 28)); // NOI18N
@@ -319,7 +333,15 @@ DefaultTableModel modelo = (DefaultTableModel) destino.getModel();
                 jTextField1KeyPressed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 550, 200, 60));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 510, 200, 60));
+
+        jButton4.setText("jButton4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 690, -1, -1));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/grisFondo.jpg"))); // NOI18N
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 40));
@@ -347,7 +369,16 @@ DefaultTableModel modelo = (DefaultTableModel) destino.getModel();
         jLabel14.setForeground(new java.awt.Color(255, 102, 0));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("Q");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 550, 30, 60));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 510, 30, 60));
+
+        jButton2.setFont(new java.awt.Font("Microsoft Yi Baiti", 0, 24)); // NOI18N
+        jButton2.setText("Imprimir Ticket");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(773, 693, 260, 60));
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -406,11 +437,11 @@ DefaultTableModel modelo = (DefaultTableModel) destino.getModel();
         jLabel18.setForeground(new java.awt.Color(23, 23, 23));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("Datos de pago");
-        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 440, 190, 40));
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 400, 190, 40));
 
         jLabel22.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 30)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 490, 200, 60));
+        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 450, 200, 60));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/solid-orange-background.jpg"))); // NOI18N
         jLabel7.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -438,10 +469,10 @@ DefaultTableModel modelo = (DefaultTableModel) destino.getModel();
         jLabel32.setForeground(new java.awt.Color(23, 23, 23));
         jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel32.setText("Total a pagar:");
-        getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 490, -1, 60));
+        getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 450, -1, 60));
 
         jLabel31.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(64, 64, 64), 1, true));
-        getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 480, 1320, 220));
+        getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 440, 1320, 220));
 
         jLabel33.setFont(new java.awt.Font("Microsoft Yi Baiti", 1, 28)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(32, 32, 32));
@@ -674,6 +705,61 @@ if(pressEnter==KeyEvent.VK_ENTER){
        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel24KeyPressed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+  Calendar calendario = new GregorianCalendar();
+  SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+  String fecha = sdf.format(new Date());
+  System.out.println(fecha);
+  hora =calendario.get(Calendar.HOUR_OF_DAY);
+  minutos = calendario.get(Calendar.MINUTE);
+  segundos = calendario.get(Calendar.SECOND);
+  String hour = hora+":"+minutos+":"+segundos;
+  String Header="",coprocapre="",prod="";
+    
+    
+     //pasa los codigos a un solo string y los productos los limita a 7
+     for (i = 0; i <array_String.length; i++) {
+     String firstNam = array_String[i][2].substring(0,7);
+     prod =firstNam;
+     coprocapre =coprocapre+array_String[i][0]+"  "+prod+"    "+array_Double[i][2]+"    "+array_Double[i][0]+"\n;";
+     }
+     
+     Header =
+         "****** F A R M A E T I C A *********;"+
+          "Farmacia y Clinica de Naturopatía;" +
+          "         Ticket de Venta     ;"
+          +"V.N.  0023  ;"
+          + "Fecha: "+fecha+" Hora: "+hour+"\n;"
+          + "---------------------------------\n;"
+          + "          DESCRIPCION            \n;"
+          + "Cod   Producto   Cant   Precio\n;"
+          + coprocapre
+          + "---------------------------------\n;"
+          + "DESCUENTO TOTAL: 34.23\n;"
+          + "TOTAL A PAGAR: 78.23\n;"
+          + "EFECTIVO: 100.00\n;"
+          + "VUELTO: 34.23\n;"
+          + "                                 \n;"
+          
+          + "      ¡Gracias por su compra!\n;"
+          + "   Reserve su cita al 4031-0887\n;"
+          ;
+    System.out.printf(Header);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+String Header="",cd="";
+    
+     for (i = 0; i <array_String.length; i++) {
+   String firstNam = array_String[i][2].substring(0,7);
+     cd =cd+firstNam+"\n;";
+     
+    }
+     JOptionPane.showMessageDialog(this,cd);
+System.out.printf(cd);
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -719,7 +805,9 @@ if(pressEnter==KeyEvent.VK_ENTER){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTable destino;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
